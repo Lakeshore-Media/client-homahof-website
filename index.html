@@ -115,7 +115,7 @@
       max-width: 1440px;
       margin: 0 auto;
       padding: 0 48px;
-      height: 72px;
+      height: 84px;
       display: flex;
       align-items: center;
       gap: 32px;
@@ -126,16 +126,16 @@
       gap: 12px;
       flex-shrink: 0;
     }
-    .nav-brand img { height: 44px; width: auto; }
+    .nav-brand img { height: 68px; width: auto; }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 30px;
       margin-left: auto;
     }
     .nav-links a {
       font-family: var(--sans);
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 400;
       color: var(--brown2);
       transition: color 0.2s;
@@ -331,7 +331,7 @@
     }
     .youtube-player {
       aspect-ratio: 16/9;
-      background: #1a0e04;
+      background: #0a0a0a;
       border-radius: 12px;
       position: relative;
       overflow: hidden;
@@ -340,35 +340,53 @@
     .youtube-thumb {
       position: absolute;
       inset: 0;
-      background-image: url('Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg');
+      background-image: url('Archivbilder/Sommertreffen/imgi_3_a-sommertreffen.jpg');
       background-size: cover;
-      background-position: center;
-      opacity: 0.6;
-      transition: opacity 0.3s;
+      background-position: center top;
+      opacity: 0.85;
+      transition: opacity 0.3s, transform 0.4s;
     }
-    .youtube-player:hover .youtube-thumb { opacity: 0.65; }
+    .youtube-player:hover .youtube-thumb { opacity: 0.95; transform: scale(1.02); }
+    .youtube-thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);
+    }
     .youtube-play {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background: var(--gold);
+      width: 72px;
+      height: 50px;
+      border-radius: 12px;
+      background: #FF0000;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: transform 0.25s, background 0.25s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
-    .youtube-player:hover .youtube-play { transform: translate(-50%, -50%) scale(1.08); background: var(--gold2); }
+    .youtube-player:hover .youtube-play { transform: translate(-50%, -50%) scale(1.1); background: #CC0000; }
     .youtube-play::after {
       content: '';
-      border-left: 22px solid white;
-      border-top: 13px solid transparent;
-      border-bottom: 13px solid transparent;
-      margin-left: 4px;
+      border-left: 24px solid white;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      margin-left: 5px;
     }
+    .youtube-caption {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      right: 20px;
+      color: white;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 400;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+    .youtube-caption strong { display: block; font-size: 17px; font-weight: 500; margin-bottom: 3px; }
     .youtube-iframe-wrap { display: none; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; }
     .youtube-iframe-wrap iframe { width: 100%; height: 100%; border: none; }
     .youtube-text .section-title { font-size: 40px; }
@@ -998,6 +1016,7 @@
       <a href="#youtube">Medien</a>
       <a href="#newsletter">Shop</a>
     </div>
+    <a href="design-explorer.html" target="_blank" class="btn nav-cta" style="font-size:13px;padding:9px 18px;background:transparent;border:1.5px solid var(--border);color:var(--brown2);border-radius:var(--btn-radius);">Design ↗</a>
     <a href="#spenden" class="btn btn-gold nav-cta" style="font-size: 14.5px;padding:10px 22px;">Spenden</a>
     <div class="nav-burger" aria-label="Menü">
       <span></span><span></span><span></span>
@@ -1056,10 +1075,15 @@
     <div class="fade-in">
       <div class="youtube-player" id="ytPlayer">
         <div class="youtube-thumb"></div>
+        <div class="youtube-thumb-overlay"></div>
         <div class="youtube-play"></div>
+        <div class="youtube-caption">
+          <strong>Agnihotra – Vedische Feuerzeremonie</strong>
+          Homa-Hof Heiligenberg · YouTube-Kanal
+        </div>
       </div>
       <div class="youtube-iframe-wrap" id="ytIframe">
-        <iframe src="" allowfullscreen allow="autoplay"></iframe>
+        <iframe src="" allowfullscreen allow="autoplay; encrypted-media" title="Homa-Hof Heiligenberg YouTube"></iframe>
       </div>
     </div>
     <div class="youtube-text fade-in" style="transition-delay:0.15s">
@@ -1371,7 +1395,16 @@
   const ytIframe = document.getElementById('ytIframe');
   if (ytPlayer) {
     ytPlayer.addEventListener('click', () => {
-        window.open('https://www.youtube.com/c/homahofheiligenberg', '_blank');
+      // Video-ID eintragen sobald bekannt: z.B. 'dQw4w9WgXcQ'
+      // Aktuell: Kanal-Playlist (Channel ID sobald verfügbar ersetzen)
+      const videoId = ''; // ← konkrete Video-ID hier eintragen
+      const channelId = 'homahofheiligenberg';
+      const src = videoId
+        ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`
+        : `https://www.youtube-nocookie.com/embed?listType=user_uploads&list=${channelId}&autoplay=1&rel=0`;
+      ytIframe.querySelector('iframe').src = src;
+      ytPlayer.style.display = 'none';
+      ytIframe.style.display = 'block';
     });
   }
 </script>
