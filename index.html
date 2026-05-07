@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homa-Hof Heiligenberg – Europäisches Zentrum für Agnihotra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Raleway:wght@200;300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--brown); background: var(--cream); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* === DESIGN SYSTEM === */
+    :root {
+      --cream: #FFFCF5;
+      --cream2: #FFF8EC;
+      --cream3: #FFF0D4;
+      --gold: #C07818;
+      --gold2: #E8A020;
+      --gold-light: #F5D88A;
+      --brown: #2A1505;
+      --brown2: #5A3A18;
+      --brown3: #8A6030;
+      --border: #EDD9A8;
+      --border2: #F5E8C0;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', system-ui, sans-serif;
+      --btn-radius: 50px;
+      --dark-bg: linear-gradient(135deg, #2A1505 0%, #4A2A0A 100%);
+    }
+
+    /* === UTILITIES === */
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 45px;
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: var(--btn-radius);
+      font-family: var(--sans);
+      font-size: 15.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: white;
+      border: 2px solid var(--gold);
+    }
+    .btn-gold:hover { background: var(--brown2); border-color: var(--brown2); }
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+    }
+    .btn-outline-dark:hover { background: var(--gold); color: white; }
+
+    /* === SCROLL ANIMATION === */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* === NAVIGATION === */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,252,245,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border2);
+      transition: box-shadow 0.3s ease;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(42,21,5,0.1); }
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .nav-brand img { height: 44px; width: auto; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-left: auto;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--brown2);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { margin-left: 16px; }
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      margin-left: auto;
+      padding: 4px;
+    }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; }
+
+    /* === HERO === */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('Archivbilder/Sommertreffen/imgi_3_a-sommertreffen.jpg');
+      background-size: cover;
+      background-position: center top;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(42,21,5,.72) 0%, rgba(42,21,5,.35) 55%, transparent 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 120px 32px 80px;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold-light);
+      flex-shrink: 0;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: 72px;
+      font-weight: 300;
+      line-height: 1.1;
+      color: white;
+      max-width: 600px;
+      margin-bottom: 24px;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      max-width: 500px;
+      margin-bottom: 36px;
+    }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-badge {
+      position: absolute;
+      bottom: 60px;
+      right: 60px;
+      background: rgba(42,21,5,0.85);
+      border: 1px solid rgba(245,216,138,0.3);
+      border-radius: 12px;
+      padding: 20px 28px;
+      text-align: center;
+      z-index: 2;
+    }
+    .hero-badge-year {
+      font-family: var(--serif);
+      font-size: 54px;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .hero-badge-label {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,216,138,0.7);
+      margin-top: 4px;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-scroll span {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.4);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    /* === STATS STRIP === */
+    #stats {
+      background: var(--cream3);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 0;
+    }
+    .stats-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 12px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-value {
+      font-family: var(--serif);
+      font-size: 31px;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--brown2);
+      text-transform: uppercase;
+    }
+
+    /* === YOUTUBE === */
+    #youtube {
+      background: var(--cream2);
+      padding: 100px 0;
+    }
+    .youtube-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .youtube-player {
+      aspect-ratio: 16/9;
+      background: #1a0e04;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .youtube-thumb {
+      position: absolute;
+      inset: 0;
+      background-image: url('Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    .youtube-player:hover .youtube-thumb { opacity: 0.65; }
+    .youtube-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s, background 0.25s;
+    }
+    .youtube-player:hover .youtube-play { transform: translate(-50%, -50%) scale(1.08); background: var(--gold2); }
+    .youtube-play::after {
+      content: '';
+      border-left: 22px solid white;
+      border-top: 13px solid transparent;
+      border-bottom: 13px solid transparent;
+      margin-left: 4px;
+    }
+    .youtube-iframe-wrap { display: none; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; }
+    .youtube-iframe-wrap iframe { width: 100%; height: 100%; border: none; }
+    .youtube-text .section-title { font-size: 40px; }
+    .youtube-text p { font-family: var(--sans); font-size: 17px; color: var(--brown2); line-height: 1.8; margin-bottom: 28px; }
+    .youtube-links { display: flex; flex-direction: column; gap: 12px; }
+    .youtube-link {
+      font-family: var(--sans);
+      font-size: 15.5px;
+      font-weight: 500;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .youtube-link:hover { gap: 10px; }
+
+    /* === FEATURE CARDS === */
+    #features {
+      background: var(--cream);
+      padding: 100px 0;
+    }
+    .features-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .features-header { text-align: center; margin-bottom: 56px; }
+    .features-header .eyebrow { justify-content: center; }
+    .features-header .eyebrow::before { display: none; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(42,21,5,0.12);
+    }
+    .card:hover .card-img img { transform: scale(1.04); }
+    .card-img { height: 220px; overflow: hidden; position: relative; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .card-body { padding: 24px; }
+    .card-tag {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(192,120,24,0.08);
+      padding: 4px 10px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .card-text {
+      font-family: var(--sans);
+      font-size: 15.5px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .card-link {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 10px; }
+
+    /* === NEXT EVENT === */
+    #event {
+      background: var(--cream2);
+      padding: 80px 0;
+    }
+    .event-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .event-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+    .event-date-block { text-align: center; min-width: 90px; }
+    .event-day {
+      font-family: var(--serif);
+      font-size: 58px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .event-month {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brown2);
+      margin-top: 4px;
+    }
+    .event-divider {
+      width: 1px;
+      height: 80px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+    .event-type-badge {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(192,120,24,0.08);
+      padding: 4px 10px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .event-title {
+      font-family: var(--serif);
+      font-size: 29px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 10px;
+    }
+    .event-desc {
+      font-family: var(--sans);
+      font-size: 15.5px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.75;
+    }
+    .event-actions { display: flex; flex-direction: column; gap: 14px; align-items: flex-end; white-space: nowrap; }
+    .event-all-link {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: gap 0.2s;
+    }
+    .event-all-link:hover { gap: 8px; }
+
+    /* === ABOUT === */
+    #about {
+      background: var(--cream);
+      padding: 100px 0;
+    }
+    .about-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .about-header { text-align: center; margin-bottom: 56px; }
+    .about-header .eyebrow { justify-content: center; }
+    .about-header .eyebrow::before { display: none; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .about-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border2);
+      background: white;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .about-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,21,5,0.12); }
+    .about-card:hover .about-img img { transform: scale(1.04); }
+    .about-img { position: relative; height: 220px; overflow: hidden; }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .about-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(42,21,5,0.5) 100%);
+    }
+    .about-body { padding: 24px; }
+
+    /* === TESTIMONIALS === */
+    #testimonials {
+      background: var(--cream3);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 100px 0;
+    }
+    .testimonials-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .testimonials-header { text-align: center; margin-bottom: 56px; }
+    .testimonials-header .eyebrow { justify-content: center; }
+    .testimonials-header .eyebrow::before { display: none; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: white;
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 36px 28px 28px;
+      position: relative;
+    }
+    .testimonial-quote {
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      font-family: var(--serif);
+      font-size: 72px;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .testimonial-text {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--brown);
+      line-height: 1.8;
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+    .testimonial-divider { height: 1px; background: var(--border2); margin-bottom: 20px; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(192,120,24,0.12);
+      border: 1px solid var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--brown);
+    }
+    .testimonial-location {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--brown3);
+    }
+
+    /* === SPENDEN === */
+    #spenden {
+      background: var(--dark-bg);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #spenden::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,120,24,0.06);
+    }
+    #spenden::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -60px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,120,24,0.06);
+    }
+    .spenden-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      position: relative;
+      z-index: 2;
+    }
+    .spenden-eyebrow {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .spenden-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold-light);
+    }
+    .spenden-title {
+      font-family: var(--serif);
+      font-size: 45px;
+      font-weight: 300;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .spenden-text {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .spenden-bullets {
+      list-style: none;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .spenden-bullets li {
+      font-family: var(--sans);
+      font-size: 15.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .spenden-bullets li::before {
+      content: '✦';
+      color: var(--gold-light);
+      font-size: 11px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .spenden-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .spenden-bank {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(245,216,138,0.2);
+      border-radius: 12px;
+      padding: 36px;
+      align-self: center;
+    }
+    .spenden-bank-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: white;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(245,216,138,0.2);
+    }
+    .bank-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 14px;
+    }
+    .bank-label {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245,216,138,0.6);
+    }
+    .bank-value {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.88);
+      text-align: right;
+    }
+
+    /* === NEWSLETTER === */
+    #newsletter {
+      background: var(--cream2);
+      border-top: 1px solid var(--border2);
+      padding: 80px 0;
+    }
+    .newsletter-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 48px;
+      text-align: center;
+    }
+    .newsletter-inner .eyebrow { justify-content: center; }
+    .newsletter-inner .eyebrow::before { display: none; }
+    .newsletter-inner .section-title { font-size: 40px; margin-bottom: 14px; }
+    .newsletter-inner p {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+    .newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto 14px; }
+    .newsletter-input {
+      flex: 1;
+      padding: 12px 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--btn-radius);
+      font-family: var(--sans);
+      font-size: 15.5px;
+      color: var(--brown);
+      background: white;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-input:focus { border-color: var(--gold); }
+    .newsletter-input::placeholder { color: var(--brown3); }
+    .newsletter-note {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--brown3);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: #2A1505;
+      padding: 72px 0 0;
+    }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 48px;
+    }
+    .footer-brand-name {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+    }
+    .footer-tagline {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .footer-social { display: flex; gap: 14px; }
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-icon:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .footer-col-title {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-contact-item {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .footer-contact-item a { transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--gold-light); }
+    .footer-divider {
+      max-width: 1440px;
+      margin: 56px auto 0;
+      padding: 0 48px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-bottom {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-copy {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: var(--gold-light); }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .nav-inner { padding: 0 20px; }
+
+      .hero-content { padding: 100px 28px 80px; }
+      .hero-title { font-size: 43px; }
+      .hero-badge { bottom: 20px; right: 20px; }
+      .hero-badge-year { font-size: 36px; }
+
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+      .stat-item:nth-child(4) { border-right: none; border-top: 1px solid var(--border); }
+
+      .youtube-inner { grid-template-columns: 1fr; gap: 36px; }
+
+      .features-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      .event-box {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .event-divider { display: none; }
+      .event-date-block { display: flex; gap: 14px; align-items: baseline; }
+      .event-day { font-size: 40px; }
+      .event-actions { align-items: flex-start; }
+
+      .spenden-inner { grid-template-columns: 1fr; gap: 40px; }
+      .spenden-title { font-size: 36px; }
+
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-radius: var(--btn-radius); }
+
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+      .footer-legal { justify-content: center; }
+
+      .section-title { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg Logo">
+    </a>
+    <div class="nav-links">
+      <a href="#features">Die Basis</a>
+      <a href="#features">Heilige Feuer</a>
+      <a href="#features">Wissen</a>
+      <a href="#about">Am Hof</a>
+      <a href="#spenden">Mitmachen</a>
+      <a href="#youtube">Medien</a>
+      <a href="#newsletter">Shop</a>
+    </div>
+    <a href="#spenden" class="btn btn-gold nav-cta" style="font-size: 14.5px;padding:10px 22px;">Spenden</a>
+    <div class="nav-burger" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Europäisches Zentrum für Agnihotra</div>
+    <h1 class="hero-title">Heilige Feuer zur <em>Heilung der Welt</em></h1>
+    <p class="hero-sub">Vedische Feuerzeremonien am Bodensee – für Heilung, Stille und Wohlergehen aller Lebewesen. Kostenlos erlernen, für alle Menschen.</p>
+    <div class="hero-buttons">
+      <a href="#event" class="btn btn-gold">Nächste Veranstaltung</a>
+      <a href="#features" class="btn btn-outline">Was ist Agnihotra?</a>
+    </div>
+  </div>
+  <div class="hero-badge">
+    <div class="hero-badge-year">1988</div>
+    <div class="hero-badge-label">gegründet</div>
+  </div>
+  <div class="hero-scroll">
+    <span>Entdecken</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-value">35+</div>
+      <div class="stat-label">Jahre Agnihotra</div>
+    </div>
+    <div class="stat-item fade-in" style="transition-delay:0.1s">
+      <div class="stat-value">kostenlos</div>
+      <div class="stat-label">Wissen weitergeben</div>
+    </div>
+    <div class="stat-item fade-in" style="transition-delay:0.2s">
+      <div class="stat-value">täglich</div>
+      <div class="stat-label">Feuerzeremonien</div>
+    </div>
+    <div class="stat-item fade-in" style="transition-delay:0.3s">
+      <div class="stat-value">weltweit</div>
+      <div class="stat-label">Gemeinschaft</div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUTUBE -->
+<section id="youtube">
+  <div class="youtube-inner">
+    <div class="fade-in">
+      <div class="youtube-player" id="ytPlayer">
+        <div class="youtube-thumb"></div>
+        <div class="youtube-play"></div>
+      </div>
+      <div class="youtube-iframe-wrap" id="ytIframe">
+        <iframe src="" allowfullscreen allow="autoplay"></iframe>
+      </div>
+    </div>
+    <div class="youtube-text fade-in" style="transition-delay:0.15s">
+      <div class="eyebrow">YouTube-Kanal</div>
+      <h2 class="section-title">Erlebe die Kraft des <em>Feuers</em></h2>
+      <p>Tauche ein in die Welt der vedischen Feuerzeremonien. Auf unserem YouTube-Kanal findest du Anleitungen, Erfahrungsberichte und Einblicke in den Hof-Alltag – authentisch, bewegend und lebensnah.</p>
+      <div class="youtube-links">
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="youtube-link">Kanal abonnieren →</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg/videos" target="_blank" rel="noopener" class="youtube-link">Alle Videos ansehen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE CARDS -->
+<section id="features">
+  <div class="features-inner">
+    <div class="features-header">
+      <div class="eyebrow">Was uns bewegt</div>
+      <h2 class="section-title">Ein Ort, eine Praxis, eine <em>Gemeinschaft</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="card fade-in">
+        <div class="card-img">
+          <img src="Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg" alt="Agnihotra Feuerzeremonie">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Wissen</span>
+          <h3 class="card-title">Was ist Agnihotra?</h3>
+          <p class="card-text">Eine Feuerzeremonie mit universeller Wirksamkeit – einfach zu erlernen, täglich zu praktizieren.</p>
+          <a href="#" class="card-link">Mehr erfahren →</a>
+        </div>
+      </div>
+      <div class="card fade-in" style="transition-delay:0.1s">
+        <div class="card-img">
+          <img src="Archivbilder/Der Homa-Hof - ein Kraftort/imgi_12_5yagna-pavillonA066D3AC-F34B-B354-452C-D533B35D55DA.jpg" alt="Der Homa-Hof Yagna Pavillon">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Der Ort</span>
+          <h3 class="card-title">Der Homa-Hof</h3>
+          <p class="card-text">Seit 1988 ein Kraftort im Hinterland des Bodensees – licht- und liebevoll, offen für alle Interessierten.</p>
+          <a href="#" class="card-link">Den Hof entdecken →</a>
+        </div>
+      </div>
+      <div class="card fade-in" style="transition-delay:0.2s">
+        <div class="card-img">
+          <img src="Archivbilder/Die Hof-Gemeinschaft/imgi_3_a-gemeinschaft.jpg" alt="Veranstaltungen und Gemeinschaft">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Erleben</span>
+          <h3 class="card-title">Veranstaltungen & Seminare</h3>
+          <p class="card-text">Agnihotra-Einführungen, Seminare und Agnihotra-Abende – das Wissen um das heilige Feuer direkt erleben.</p>
+          <a href="#event" class="card-link">Alle Veranstaltungen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT EVENT -->
+<section id="event">
+  <div class="event-inner">
+    <div class="eyebrow fade-in">Nächste Veranstaltung</div>
+    <div class="event-box fade-in">
+      <div class="event-date-block">
+        <div class="event-day">17</div>
+        <div class="event-month">Mai 2026</div>
+      </div>
+      <div class="event-divider"></div>
+      <div class="event-info">
+        <span class="event-type-badge">Agnihotra-Einführung</span>
+        <h3 class="event-title">Agnihotra-Einführungsabend</h3>
+        <p class="event-desc">Erlebe die vedische Feuerzeremonie live und lerne alles Wichtige für die eigene Praxis. Der Abend ist offen für alle – Vorkenntnisse sind nicht erforderlich.</p>
+      </div>
+      <div class="event-actions">
+        <a href="#" class="btn btn-gold">Jetzt anmelden</a>
+        <a href="#" class="event-all-link">Alle Veranstaltungen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-header">
+      <div class="eyebrow">Über uns</div>
+      <h2 class="section-title">Menschen, Geschichte und <em>Vision</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-card fade-in">
+        <div class="about-img">
+          <img src="Archivbilder/Der Homa-Hof - ein Kraftort/imgi_10_2homa-hofBF783608-7913-79BE-63E5-36FC24647467.jpg" alt="Homa-Hof Heiligenberg">
+          <div class="about-img-overlay"></div>
+        </div>
+        <div class="about-body">
+          <span class="card-tag">Gemeinschaft</span>
+          <h3 class="card-title">Homa-Hof e.V.</h3>
+          <p class="card-text">Aktive Mitglieder, Idealisten und Freunde des heiligen Feuers – die Homa-Hof-Familie trägt gemeinsam die Vision für eine heilende Welt.</p>
+          <a href="#" class="card-link">Über den Verein →</a>
+        </div>
+      </div>
+      <div class="about-card fade-in" style="transition-delay:0.1s">
+        <div class="about-img">
+          <img src="Archivbilder/Horst Heigl - Initiator/imgi_3_Horst-Schweden.jpg" alt="Horst Heigl">
+          <div class="about-img-overlay"></div>
+        </div>
+        <div class="about-body">
+          <span class="card-tag">Initiator</span>
+          <h3 class="card-title">Horst Heigl</h3>
+          <p class="card-text">Erster hauptberuflicher Hatha-Yoga-Lehrer Deutschlands und Gründer des Homa-Hofs 1988 – ein Leben im Dienst des heiligen Feuers.</p>
+          <a href="#" class="card-link">Mehr über Horst Heigl →</a>
+        </div>
+      </div>
+      <div class="about-card fade-in" style="transition-delay:0.2s">
+        <div class="about-img">
+          <img src="Archivbilder/Ökologie/imgi_3_a-oekologie.jpg" alt="Unsere Vision – Natur und Feuer">
+          <div class="about-img-overlay"></div>
+        </div>
+        <div class="about-body">
+          <span class="card-tag">Ausblick</span>
+          <h3 class="card-title">Unsere Vision</h3>
+          <p class="card-text">Glück, Wohlergehen und Gesundheit für alle Lebewesen in einer gesunden Umwelt – durch die heilende Kraft des Agnihotra-Feuers.</p>
+          <a href="#" class="card-link">Die Vision lesen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header">
+      <div class="eyebrow">Erfahrungsberichte</div>
+      <h2 class="section-title">Was Besucher <em>berichten</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Die Stille und Wärme des Ortes hat mich sofort berührt. Agnihotra hat meinen Alltag verändert – ich praktiziere jetzt täglich.</p>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Maria S.</div>
+            <div class="testimonial-location">München</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in" style="transition-delay:0.1s">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Ein Ort, der wirklich Kraft gibt. Das Seminar hat mir gezeigt, wie einfach und tiefgreifend diese Praxis ist.</p>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">T</div>
+          <div>
+            <div class="testimonial-name">Thomas K.</div>
+            <div class="testimonial-location">Zürich</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in" style="transition-delay:0.2s">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Seit ich Agnihotra praktiziere, ist in meinem Garten alles anders. Die Pflanzen, die Bienen – alles blüht auf.</p>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Andrea F.</div>
+            <div class="testimonial-location">Freiburg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPENDEN -->
+<section id="spenden">
+  <div class="spenden-inner">
+    <div class="fade-in">
+      <div class="spenden-eyebrow">Unterstütze uns</div>
+      <h2 class="spenden-title">Deine Spende hält das <em style="font-style:italic;color:var(--gold-light)">Feuer am Leben</em></h2>
+      <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein. Alle Angebote sind kostenlos – ermöglicht durch Menschen, die diese Arbeit mit ihrem Herzen unterstützen.</p>
+      <ul class="spenden-bullets">
+        <li>Tägliche Agnihotra-Zeremonien am Hof</li>
+        <li>Kostenlose Einführungsabende und Seminare</li>
+        <li>Pflege und Erhalt des Kraftorts Heiligenberg</li>
+      </ul>
+      <div class="spenden-buttons">
+        <a href="#" class="btn btn-gold">Jetzt per PayPal spenden</a>
+        <a href="#" class="btn btn-outline">Banküberweisung</a>
+      </div>
+    </div>
+    <div class="spenden-bank fade-in" style="transition-delay:0.15s">
+      <div class="spenden-bank-title">Bankverbindung</div>
+      <div class="bank-row">
+        <span class="bank-label">Empfänger</span>
+        <span class="bank-value">Homa-Hof Heiligenberg e.V.</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-label">IBAN</span>
+        <span class="bank-value">DE XX XXXX XXXX XXXX XXXX XX</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-label">BIC</span>
+        <span class="bank-value">XXXXXXXXXXXXXXX</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-label">Bank</span>
+        <span class="bank-value">Sparkasse Bodensee</span>
+      </div>
+      <div class="bank-row" style="margin-bottom:0">
+        <span class="bank-label">Verwendungszweck</span>
+        <span class="bank-value">Spende Homa-Hof</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="newsletter">
+  <div class="newsletter-inner">
+    <div class="eyebrow fade-in">Newsletter</div>
+    <h2 class="section-title fade-in">Bleib <em>informiert</em></h2>
+    <p class="fade-in">Veranstaltungen, Neuigkeiten und Impulse aus dem Homa-Hof – direkt in dein Postfach. Kostenlos und jederzeit kündbar.</p>
+    <form class="newsletter-form fade-in" onsubmit="return false;">
+      <input type="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse">
+      <button type="submit" class="btn btn-gold">Abonnieren</button>
+    </form>
+    <p class="newsletter-note fade-in">Kein Spam. Jederzeit abmeldbar. Datenschutzkonform.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">Homa-Hof Heiligenberg</div>
+      <p class="footer-tagline">Europäisches Zentrum für Agnihotra –<br>ein Ort des heiligen Feuers und der Stille.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-icon">f</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="social-icon" style="font-size: 11px">YT</a>
+        <a href="https://www.instagram.com/agnihotraforfuture/" target="_blank" rel="noopener" class="social-icon" style="font-size: 11px">IG</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#">Die Basis</a></li>
+        <li><a href="#">Heilige Feuer</a></li>
+        <li><a href="#">Wissen & Nutzen</a></li>
+        <li><a href="#">Am Hof</a></li>
+        <li><a href="#">Mitmachen</a></li>
+        <li><a href="#">Medien</a></li>
+        <li><a href="#">Shop</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Erleben</div>
+      <ul class="footer-links">
+        <li><a href="#">Veranstaltungen</a></li>
+        <li><a href="#">Seminare</a></li>
+        <li><a href="#">Besucherhinweise</a></li>
+        <li><a href="#">Anfahrt</a></li>
+        <li><a href="#">Übernachtung</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <div class="footer-contact-item">Oberhaslach 6<br>88633 Heiligenberg</div>
+      <div class="footer-contact-item"><a href="tel:+4975529387600">+49 (0)7552 938760</a></div>
+      <div class="footer-contact-item"><a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></div>
+      <div class="footer-contact-item" style="margin-top:16px;font-size: 13.5px;color:rgba(255,255,255,0.35)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
+    <div class="footer-legal">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll fade-in via IntersectionObserver
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // YouTube player click
+  const ytPlayer = document.getElementById('ytPlayer');
+  const ytIframe = document.getElementById('ytIframe');
+  if (ytPlayer) {
+    ytPlayer.addEventListener('click', () => {
+        window.open('https://www.youtube.com/c/homahofheiligenberg', '_blank');
+    });
+  }
+</script>
+
+<!-- DESIGN SWITCHER -->
+<style>
+  #ds-wrap {
+    position: fixed;
+    bottom: 28px;
+    left: 28px;
+    z-index: 500;
+    font-family: 'Jost', system-ui, sans-serif;
+  }
+  #ds-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid #D8D4C8;
+    border-radius: 20px;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 500;
+    color: #1A1A14;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+    letter-spacing: 0.03em;
+    transition: box-shadow 0.2s;
+  }
+  #ds-toggle:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+  #ds-toggle svg { width: 14px; height: 14px; flex-shrink: 0; }
+  #ds-panel {
+    display: none;
+    position: absolute;
+    bottom: 48px;
+    left: 0;
+    background: white;
+    border: 1px solid #E0DDD8;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+    min-width: 230px;
+  }
+  #ds-panel.open { display: block; }
+  .ds-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9A9890;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #F0EDE4;
+  }
+  .ds-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border: 1.5px solid transparent;
+    margin-bottom: 3px;
+  }
+  .ds-pill:last-child { margin-bottom: 0; }
+  .ds-pill:hover { background: #F5F3EE; }
+  .ds-pill.active { border-color: #D8D4C8; background: #F5F3EE; }
+  .ds-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .ds-name {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #1A1A14;
+    flex: 1;
+  }
+  .ds-id {
+    font-size: 11px;
+    color: #9A9890;
+    font-family: monospace;
+  }
+  * { transition: color 0.35s ease, background-color 0.35s ease, border-color 0.35s ease; }
+</style>
+
+<div id="ds-wrap">
+  <button id="ds-toggle" onclick="toggleDS()">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="8" cy="8" r="6.5"/><circle cx="8" cy="8" r="2"/>
+    </svg>
+    Design
+  </button>
+  <div id="ds-panel">
+    <div class="ds-label">Richtung wählen</div>
+    <div id="ds-pills"></div>
+  </div>
+</div>
+
+<script>
+const DS_THEMES = {
+  A: {
+    name: 'Sonnenwärme',
+    dot: '#C07818',
+    vars: {
+      '--cream':'#FFFCF5','--cream2':'#FFF8EC','--cream3':'#FFF0D4',
+      '--gold':'#C07818','--gold2':'#E8A020','--gold-light':'#F5D88A',
+      '--brown':'#2A1505','--brown2':'#5A3A18','--brown3':'#8A6030',
+      '--border':'#EDD9A8','--border2':'#F5E8C0',
+      '--serif':"'Cormorant Garamond', Georgia, serif",
+      '--sans':"'Jost', system-ui, sans-serif",
+      '--btn-radius':'50px',
+      '--dark-bg':'linear-gradient(135deg,#2A1505 0%,#4A2A0A 100%)'
+    }
+  },
+  B: {
+    name: 'Vedisch-Editorial',
+    dot: '#1A0A00',
+    vars: {
+      '--cream':'#FDFAF4','--cream2':'#F5EDD8','--cream3':'#EDE5CC',
+      '--gold':'#C07818','--gold2':'#D49020','--gold-light':'#D9C8A0',
+      '--brown':'#1A0A00','--brown2':'#8B7050','--brown3':'#A09070',
+      '--border':'#D9C8A0','--border2':'#E8DCC0',
+      '--serif':"'Playfair Display', Georgia, serif",
+      '--sans':"'Jost', system-ui, sans-serif",
+      '--btn-radius':'3px',
+      '--dark-bg':'linear-gradient(135deg,#1A0A00 0%,#2A1800 100%)'
+    }
+  },
+  C: {
+    name: 'Naturstein & Licht',
+    dot: '#7A5030',
+    vars: {
+      '--cream':'#F9F6F0','--cream2':'#EDE5D8','--cream3':'#E5DDD0',
+      '--gold':'#7A5030','--gold2':'#C07818','--gold-light':'#C8B090',
+      '--brown':'#3D2810','--brown2':'#6A4828','--brown3':'#8A6040',
+      '--border':'#C8B090','--border2':'#D8C8A8',
+      '--serif':"'DM Serif Display', Georgia, serif",
+      '--sans':"'Jost', system-ui, sans-serif",
+      '--btn-radius':'6px',
+      '--dark-bg':'linear-gradient(135deg,#3D2810 0%,#5A3A20 100%)'
+    }
+  },
+  D: {
+    name: 'Kupfer Modern',
+    dot: '#B84010',
+    vars: {
+      '--cream':'#FBF7F2','--cream2':'#F2EBE0','--cream3':'#E8E0D8',
+      '--gold':'#B84010','--gold2':'#E8A020','--gold-light':'#D4B898',
+      '--brown':'#1A0A00','--brown2':'#5A3018','--brown3':'#8A6040',
+      '--border':'#D4B898','--border2':'#E4C8A8',
+      '--serif':"'Raleway', system-ui, sans-serif",
+      '--sans':"'Jost', system-ui, sans-serif",
+      '--btn-radius':'3px',
+      '--dark-bg':'linear-gradient(135deg,#1A0A00 0%,#3A1808 100%)'
+    }
+  },
+  E: {
+    name: 'Zen Minimal',
+    dot: '#4A6840',
+    vars: {
+      '--cream':'#FAFAF7','--cream2':'#F0EDE4','--cream3':'#E8E4D8',
+      '--gold':'#4A6840','--gold2':'#C07818','--gold-light':'#D8D4C8',
+      '--brown':'#1A1A14','--brown2':'#8A8A78','--brown3':'#A0A090',
+      '--border':'#D8D4C8','--border2':'#E4E0D4',
+      '--serif':"'Cormorant Garamond', Georgia, serif",
+      '--sans':"'Raleway', system-ui, sans-serif",
+      '--btn-radius':'4px',
+      '--dark-bg':'linear-gradient(135deg,#1A1A14 0%,#2A2A20 100%)'
+    }
+  }
+};
+
+let activeTheme = 'A';
+
+function applyTheme(id) {
+  const t = DS_THEMES[id];
+  const root = document.documentElement;
+  Object.entries(t.vars).forEach(([k, v]) => root.style.setProperty(k, v));
+  activeTheme = id;
+  document.querySelectorAll('.ds-pill').forEach(p => p.classList.toggle('active', p.dataset.id === id));
+}
+
+function toggleDS() {
+  document.getElementById('ds-panel').classList.toggle('open');
+}
+
+// Build pills
+const pillContainer = document.getElementById('ds-pills');
+Object.entries(DS_THEMES).forEach(([id, t]) => {
+  const pill = document.createElement('div');
+  pill.className = 'ds-pill' + (id === activeTheme ? ' active' : '');
+  pill.dataset.id = id;
+  pill.innerHTML = `<div class="ds-dot" style="background:${t.dot}"></div><span class="ds-name">${t.name}</span><span class="ds-id">${id}</span>`;
+  pill.onclick = () => { applyTheme(id); };
+  pillContainer.appendChild(pill);
+});
+
+// Close panel on outside click
+document.addEventListener('click', e => {
+  if (!document.getElementById('ds-wrap').contains(e.target)) {
+    document.getElementById('ds-panel').classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
