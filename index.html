@@ -21,13 +21,14 @@
       --gold: #C07818;
       --gold2: #E8A020;
       --gold-light: #F5D88A;
+      --copper: #B84010;
       --brown: #2A1505;
       --brown2: #5A3A18;
       --brown3: #8A6030;
       --border: #EDD9A8;
       --border2: #F5E8C0;
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans: 'Jost', system-ui, sans-serif;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', system-ui, sans-serif;
       --btn-radius: 50px;
       --dark-bg: linear-gradient(135deg, #2A1505 0%, #4A2A0A 100%);
     }
@@ -74,11 +75,11 @@
       transition: all 0.25s ease;
     }
     .btn-gold {
-      background: var(--gold);
+      background: var(--copper);
       color: white;
-      border: 2px solid var(--gold);
+      border: 2px solid var(--copper);
     }
-    .btn-gold:hover { background: var(--brown2); border-color: var(--brown2); }
+    .btn-gold:hover { background: #8A2A08; border-color: #8A2A08; }
     .btn-outline {
       background: transparent;
       color: white;
@@ -91,6 +92,30 @@
       border: 2px solid var(--gold);
     }
     .btn-outline-dark:hover { background: var(--gold); color: white; }
+
+    /* === ORNAMENT === */
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .ornament-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+    .ornament-mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--copper);
+      opacity: 0.45;
+    }
+    .ornament-wrap { padding: 18px 0; }
 
     /* === SCROLL ANIMATION === */
     .fade-in {
@@ -1030,6 +1055,9 @@
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Europäisches Zentrum für Agnihotra</div>
+    <svg viewBox="0 0 18 26" fill="currentColor" style="width:20px;height:28px;margin-bottom:16px;display:block;color:rgba(245,216,138,0.55)">
+      <path d="M9 0C9 0 6 4 6 8c0 1 .3 2 .3 2S4 8.5 4 11c0 4.5 2.2 7.5 5 8.8-.7-2.2-.2-4.5 1.2-5.8.3 2.5 1 5.5 2 7 1.8-2.2 3-5 3-7.5 0-1.8-.6-3.2-1.5-4.2.4-1.5 1-4-.2-6.3 0 0-.6 2.5-1.8 3.8C11.2 5 9 0 9 0z"/>
+    </svg>
     <h1 class="hero-title">Heilige Feuer zur <em>Heilung der Welt</em></h1>
     <p class="hero-sub">Vedische Feuerzeremonien am Bodensee – für Heilung, Stille und Wohlergehen aller Lebewesen. Kostenlos erlernen, für alle Menschen.</p>
     <div class="hero-buttons">
@@ -1213,6 +1241,19 @@
     </div>
   </div>
 </section>
+
+<!-- ORNAMENT -->
+<div class="ornament-wrap" style="background:var(--cream)">
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <div class="ornament-mark">
+      <svg viewBox="0 0 14 20" fill="currentColor" style="width:11px;height:16px"><path d="M7 0C7 0 4.5 3 4.5 6c0 .8.3 1.5.3 1.5S3 6.5 3 8.5c0 3.5 1.7 5.8 4 6.8-.5-1.7-.2-3.5 1-4.5.2 2 .8 4.2 1.5 5.5 1.4-1.7 2.5-4 2.5-6s-.5-3-1.2-3.8c.3-1.2.8-3-.2-5 0 0-.5 2-1.5 3C7.5 3.5 7 0 7 0z"/></svg>
+      <svg viewBox="0 0 8 8" fill="currentColor" style="width:5px;height:5px"><rect x="2" y="0" width="4" height="4" transform="rotate(45 4 4)"/></svg>
+      <svg viewBox="0 0 14 20" fill="currentColor" style="width:11px;height:16px"><path d="M7 0C7 0 4.5 3 4.5 6c0 .8.3 1.5.3 1.5S3 6.5 3 8.5c0 3.5 1.7 5.8 4 6.8-.5-1.7-.2-3.5 1-4.5.2 2 .8 4.2 1.5 5.5 1.4-1.7 2.5-4 2.5-6s-.5-3-1.2-3.8c.3-1.2.8-3-.2-5 0 0-.5 2-1.5 3C7.5 3.5 7 0 7 0z"/></svg>
+    </div>
+    <div class="ornament-line"></div>
+  </div>
+</div>
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
@@ -1512,14 +1553,15 @@
 const DS_THEMES = {
   A: {
     name: 'Sonnenwärme',
-    dot: '#C07818',
+    dot: '#B84010',
     vars: {
       '--cream':'#FFFCF5','--cream2':'#FFF8EC','--cream3':'#FFF0D4',
       '--gold':'#C07818','--gold2':'#E8A020','--gold-light':'#F5D88A',
+      '--copper':'#B84010',
       '--brown':'#2A1505','--brown2':'#5A3A18','--brown3':'#8A6030',
       '--border':'#EDD9A8','--border2':'#F5E8C0',
-      '--serif':"'Cormorant Garamond', Georgia, serif",
-      '--sans':"'Jost', system-ui, sans-serif",
+      '--serif':"'Playfair Display', Georgia, serif",
+      '--sans':"'Raleway', system-ui, sans-serif",
       '--btn-radius':'50px',
       '--dark-bg':'linear-gradient(135deg,#2A1505 0%,#4A2A0A 100%)'
     }
