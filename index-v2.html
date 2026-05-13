@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homa-Hof Heiligenberg – Europäisches Zentrum für Agnihotra</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+:root{
+  --bg:#0E0703;
+  --bg1:#160B05;
+  --bg2:#1E0E07;
+  --surface:rgba(255,255,255,0.04);
+  --text:#F0E6D6;
+  --muted:rgba(240,230,214,0.45);
+  --copper:#B84010;
+  --copper-bg:rgba(184,64,16,0.12);
+  --gold:#C07818;
+  --gold-light:#F5D88A;
+  --border:rgba(240,230,214,0.09);
+  --border2:rgba(240,230,214,0.16);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Raleway',system-ui,sans-serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(32px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.r.in{opacity:1;transform:none}
+
+/* EYEBROW */
+.eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--copper);flex-shrink:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s var(--ease)}
+nav.scrolled{background:rgba(14,7,3,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1440px;margin:0 auto;padding:0 48px;height:74px;display:flex;align-items:center;gap:28px}
+.nav-logo img{height:50px;width:auto}
+.nav-links{display:flex;align-items:center;gap:26px;margin-left:auto}
+.nav-links a{font-family:var(--sans);font-size:13px;font-weight:400;letter-spacing:.04em;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:auto}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--text);border-radius:2px}
+
+/* BTN */
+.btn{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.08em;padding:11px 24px;border-radius:50px;transition:all .25s var(--ease);cursor:pointer;border:none}
+.btn-copper{background:var(--copper);color:#fff}
+.btn-copper:hover{background:#8A2A08;transform:translateY(-1px)}
+.btn-copper:active{transform:scale(.98)}
+.btn-ghost{background:transparent;color:rgba(240,230,214,.7);border:1px solid var(--border2)}
+.btn-ghost:hover{color:var(--text);border-color:rgba(240,230,214,.3)}
+
+/* HERO */
+#hero{min-height:100dvh;display:grid;grid-template-columns:58fr 42fr;position:relative}
+.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:120px 64px 80px 80px;position:relative;z-index:2}
+.hero-right{position:relative;overflow:hidden}
+.hero-img{position:absolute;inset:0;background-image:url('Archivbilder/Sommertreffen/imgi_3_a-sommertreffen.jpg');background-size:cover;background-position:center}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,var(--bg) 0%,transparent 35%),linear-gradient(to top,var(--bg) 0%,transparent 30%)}
+.hero-index{font-family:var(--serif);font-size:13px;color:var(--muted);letter-spacing:.08em;margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.hero-index::after{content:'';display:block;width:40px;height:1px;background:var(--border2)}
+.hero-title{font-family:var(--serif);font-size:clamp(50px,6.5vw,92px);font-weight:300;line-height:1.02;color:var(--text);margin-bottom:26px;letter-spacing:-.01em}
+.hero-title em{font-style:italic;color:var(--gold-light)}
+.hero-sub{font-family:var(--sans);font-size:15px;font-weight:300;line-height:1.78;color:var(--muted);max-width:420px;margin-bottom:36px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-badge{position:absolute;bottom:72px;right:-20px;background:rgba(14,7,3,.88);border:1px solid var(--border2);border-radius:10px;padding:18px 24px;text-align:center;z-index:3;backdrop-filter:blur(8px)}
+.hero-badge-year{font-family:var(--serif);font-size:44px;font-weight:300;color:var(--gold-light);line-height:1}
+.hero-badge-label{font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.hero-scroll{position:absolute;bottom:40px;right:48px;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--sans);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);z-index:2;display:flex;align-items:center;gap:10px}
+.hero-scroll::after{content:'';display:block;width:1px;height:32px;background:rgba(240,230,214,.2)}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--copper);padding:13px 0;overflow:hidden}
+.marquee-track{display:flex;width:max-content;animation:marquee 30s linear infinite}
+.marquee-item{display:flex;align-items:center;gap:28px;padding:0 28px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.88);white-space:nowrap}
+.marquee-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.45);flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* INTRO */
+.intro-section{padding:120px 0;background:var(--bg);border-bottom:1px solid var(--border)}
+.intro-inner{max-width:1440px;margin:0 auto;padding:0 80px;display:grid;grid-template-columns:26fr 74fr;gap:0;align-items:start}
+.intro-num{font-family:var(--serif);font-size:156px;font-weight:300;color:rgba(240,230,214,.05);line-height:1;letter-spacing:-.04em;user-select:none;margin-top:-16px}
+.intro-body .eyebrow{margin-bottom:20px}
+.intro-title{font-family:var(--serif);font-size:52px;font-weight:300;line-height:1.1;color:var(--text);margin-bottom:22px}
+.intro-title em{font-style:italic;color:var(--gold-light)}
+.intro-text{font-family:var(--sans);font-size:15.5px;font-weight:300;line-height:1.82;color:var(--muted);max-width:580px;margin-bottom:18px}
+.intro-link{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--copper);display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.intro-link:hover{gap:14px}
+
+/* STATS */
+.stats-section{background:var(--bg1);border-bottom:1px solid var(--border)}
+.stats-row{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-item{padding:52px 48px;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-val{font-family:var(--serif);font-size:64px;font-weight:300;color:var(--text);line-height:1;margin-bottom:8px;letter-spacing:-.02em}
+.stat-val span{color:var(--copper)}
+.stat-val.word{font-size:38px;padding-top:14px}
+.stat-lbl{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* FIRE SECTION */
+.fire-section{position:relative;height:68vh;min-height:460px;overflow:hidden}
+.fire-bg{position:absolute;inset:0;background-image:url('Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg');background-size:cover;background-position:center 30%}
+.fire-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(14,7,3,.94) 0%,rgba(14,7,3,.55) 50%,rgba(14,7,3,.18) 100%)}
+.fire-content{position:relative;z-index:2;height:100%;max-width:1440px;margin:0 auto;padding:0 80px;display:flex;flex-direction:column;justify-content:center}
+.fire-quote{font-family:var(--serif);font-size:clamp(30px,4.2vw,56px);font-weight:300;font-style:italic;color:var(--text);max-width:680px;line-height:1.28;margin-bottom:24px}
+.fire-source{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);display:flex;align-items:center;gap:14px}
+.fire-source::before{content:'';display:block;width:30px;height:1px;background:var(--copper)}
+
+/* EVENTS */
+.event-section{background:var(--bg);padding:100px 0}
+.event-inner{max-width:1440px;margin:0 auto;padding:0 80px}
+.event-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:48px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.event-header-title{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--text)}
+.event-all{font-family:var(--sans);font-size:12.5px;font-weight:500;letter-spacing:.06em;color:var(--copper);display:flex;align-items:center;gap:8px;transition:gap .2s}
+.event-all:hover{gap:14px}
+.event-row{display:grid;grid-template-columns:180px 1fr auto;gap:56px;align-items:start;padding:44px 0;border-bottom:1px solid var(--border)}
+.event-row:last-child{border-bottom:none}
+.event-day{font-family:var(--serif);font-size:84px;font-weight:300;color:var(--copper);line-height:1;letter-spacing:-.03em}
+.event-month{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.event-tag{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);background:var(--copper-bg);border:1px solid rgba(184,64,16,.2);padding:4px 12px;border-radius:50px;margin-bottom:12px}
+.event-title{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--text);margin-bottom:10px;line-height:1.25}
+.event-desc{font-family:var(--sans);font-size:14.5px;font-weight:300;color:var(--muted);line-height:1.75}
+.event-cta{display:flex;flex-direction:column;gap:10px;align-items:flex-end;padding-top:8px}
+
+/* MEDIEN */
+.medien-section{background:var(--bg1);border-top:1px solid var(--border);padding:100px 0}
+.medien-inner{max-width:1440px;margin:0 auto;padding:0 80px;display:grid;grid-template-columns:2fr 1fr;gap:64px;align-items:center}
+.yt-player{aspect-ratio:16/9;border-radius:8px;overflow:hidden;position:relative;cursor:pointer;background:#000}
+.yt-thumb{position:absolute;inset:0;background-image:url('Archivbilder/Sommertreffen/imgi_3_a-sommertreffen.jpg');background-size:cover;background-position:center top;opacity:.72;transition:opacity .3s,transform .5s var(--ease)}
+.yt-player:hover .yt-thumb{opacity:.88;transform:scale(1.02)}
+.yt-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 50%)}
+.yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:62px;height:42px;background:#FF0000;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:transform .25s var(--ease);box-shadow:0 4px 24px rgba(0,0,0,.5)}
+.yt-player:hover .yt-play{transform:translate(-50%,-50%) scale(1.1)}
+.yt-play::after{content:'';border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:4px}
+.yt-caption{position:absolute;bottom:18px;left:22px;right:22px;color:#fff}
+.yt-caption strong{display:block;font-family:var(--sans);font-size:15px;font-weight:500;margin-bottom:2px}
+.yt-caption span{font-family:var(--sans);font-size:12.5px;font-weight:300;opacity:.7}
+.yt-iframe-wrap{display:none;aspect-ratio:16/9;border-radius:8px;overflow:hidden}
+.yt-iframe-wrap iframe{width:100%;height:100%;border:none}
+.medien-text .eyebrow{margin-bottom:18px}
+.medien-title{font-family:var(--serif);font-size:40px;font-weight:300;color:var(--text);line-height:1.2;margin-bottom:16px}
+.medien-title em{font-style:italic;color:var(--gold-light)}
+.medien-body{font-family:var(--sans);font-size:14.5px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:26px}
+.medien-links{display:flex;flex-direction:column;gap:10px}
+.medien-link{font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--gold);display:inline-flex;align-items:center;gap:6px;transition:gap .2s,color .2s}
+.medien-link:hover{gap:12px;color:var(--gold-light)}
+
+/* TESTIMONIAL */
+.testi-section{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:120px 0}
+.testi-inner{max-width:960px;margin:0 auto;padding:0 80px}
+.testi-mark{font-family:var(--serif);font-size:110px;color:rgba(184,64,16,.14);line-height:1;margin-bottom:-14px}
+.testi-quote{font-family:var(--serif);font-size:clamp(24px,3.2vw,36px);font-weight:300;font-style:italic;color:var(--text);line-height:1.55;margin-bottom:36px}
+.testi-author{display:flex;align-items:center;gap:16px}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--copper-bg);border:1px solid rgba(184,64,16,.28);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:18px;color:var(--copper);flex-shrink:0}
+.testi-name{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--text)}
+.testi-loc{font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+
+/* ÜBER UNS */
+.about-section{background:var(--bg1);padding:100px 0}
+.about-inner{max-width:1440px;margin:0 auto;padding:0 80px}
+.about-header{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:52px;padding-bottom:36px;border-bottom:1px solid var(--border)}
+.about-h-title{font-family:var(--serif);font-size:48px;font-weight:300;line-height:1.12;color:var(--text)}
+.about-h-title em{font-style:italic;color:var(--gold-light)}
+.about-h-text{font-family:var(--sans);font-size:14.5px;font-weight:300;color:var(--muted);line-height:1.8}
+.about-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px;align-items:start}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .3s}
+.about-card:hover{border-color:var(--border2)}
+.about-card-img{position:relative;overflow:hidden}
+.about-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.about-card:hover .about-card-img img{transform:scale(1.04)}
+.about-card-img-ov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(14,7,3,.65) 100%)}
+.about-card:first-child .about-card-img{height:320px}
+.about-card:not(:first-child) .about-card-img{height:200px}
+.about-body{padding:20px 22px}
+.about-tag{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);margin-bottom:8px}
+.about-title{font-family:var(--serif);font-size:21px;font-weight:300;color:var(--text);margin-bottom:7px;line-height:1.3}
+.about-text{font-family:var(--sans);font-size:13.5px;font-weight:300;color:var(--muted);line-height:1.7;margin-bottom:12px}
+.about-link{font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--gold);display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.about-link:hover{gap:10px}
+
+/* SPENDEN */
+.spenden-section{background:var(--bg);border-top:1px solid var(--border);padding:100px 0}
+.spenden-inner{max-width:1440px;margin:0 auto;padding:0 80px;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.spenden-left .eyebrow{margin-bottom:22px}
+.spenden-title{font-family:var(--serif);font-size:50px;font-weight:300;line-height:1.1;color:var(--text);margin-bottom:18px}
+.spenden-title em{font-style:italic;color:var(--gold-light)}
+.spenden-text{font-family:var(--sans);font-size:15px;font-weight:300;color:var(--muted);line-height:1.82;margin-bottom:16px}
+.spenden-ul{list-style:none;margin-bottom:32px;display:flex;flex-direction:column;gap:10px}
+.spenden-ul li{font-family:var(--sans);font-size:14px;font-weight:300;color:var(--muted);display:flex;align-items:flex-start;gap:14px}
+.spenden-ul li::before{content:'';display:block;width:16px;height:1px;background:var(--copper);flex-shrink:0;margin-top:11px}
+.spenden-btns{display:flex;gap:10px;flex-wrap:wrap}
+.bank-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:34px}
+.bank-panel-title{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--text);margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.bank-row{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid rgba(240,230,214,.05)}
+.bank-row:last-child{border-bottom:none;margin-bottom:0}
+.bank-lbl{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.bank-val{font-family:var(--sans);font-size:13.5px;font-weight:300;color:rgba(240,230,214,.82);text-align:right}
+
+/* NEWSLETTER */
+.nl-section{background:var(--bg1);border-top:1px solid var(--border);padding:80px 0}
+.nl-inner{max-width:520px;margin:0 auto;padding:0 48px;text-align:center}
+.nl-inner .eyebrow{justify-content:center;margin-bottom:16px}
+.nl-inner .eyebrow::before{display:none}
+.nl-title{font-family:var(--serif);font-size:38px;font-weight:300;color:var(--text);margin-bottom:10px}
+.nl-title em{font-style:italic;color:var(--gold-light)}
+.nl-sub{font-family:var(--sans);font-size:14.5px;font-weight:300;color:var(--muted);line-height:1.75;margin-bottom:26px}
+.nl-form{display:flex;gap:9px;max-width:400px;margin:0 auto 12px}
+.nl-input{flex:1;padding:11px 18px;border:1px solid var(--border2);border-radius:50px;font-family:var(--sans);font-size:14px;color:var(--text);background:rgba(255,255,255,.04);outline:none;transition:border-color .2s}
+.nl-input:focus{border-color:var(--copper)}
+.nl-input::placeholder{color:var(--muted)}
+.nl-note{font-family:var(--sans);font-size:12px;color:var(--muted)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 0}
+.footer-inner{max-width:1440px;margin:0 auto;padding:0 80px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:48px}
+.footer-logo img{height:40px;width:auto;margin-bottom:14px}
+.footer-tag{font-family:var(--sans);font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;margin-bottom:22px}
+.footer-social{display:flex;gap:10px}
+.social-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);transition:border-color .2s,color .2s}
+.social-btn:hover{border-color:var(--copper);color:var(--copper)}
+.footer-col-title{font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,230,214,.22);margin-bottom:16px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-family:var(--sans);font-size:14px;font-weight:300;color:var(--muted);transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.footer-contact{font-family:var(--sans);font-size:13.5px;font-weight:300;color:var(--muted);line-height:1.8}
+.footer-contact a{transition:color .2s}
+.footer-contact a:hover{color:var(--text)}
+.footer-bottom{max-width:1440px;margin:48px auto 0;padding:18px 80px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footer-copy{font-family:var(--sans);font-size:12px;font-weight:300;color:rgba(240,230,214,.22)}
+.footer-legal{display:flex;gap:18px}
+.footer-legal a{font-family:var(--sans);font-size:12px;font-weight:300;color:rgba(240,230,214,.22);transition:color .2s}
+.footer-legal a:hover{color:var(--muted)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .nav-burger{display:flex}
+  .nav-inner{padding:0 20px}
+  #hero{grid-template-columns:1fr;min-height:100dvh}
+  .hero-left{padding:100px 24px 64px}
+  .hero-right,.hero-badge,.hero-scroll{display:none}
+  .intro-inner{grid-template-columns:1fr;padding:0 24px}
+  .intro-num{font-size:72px}
+  .intro-title{font-size:34px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .stat-item:nth-child(2){border-right:none}
+  .stat-item:nth-child(3){border-right:1px solid var(--border);border-top:1px solid var(--border)}
+  .stat-item:nth-child(4){border-right:none;border-top:1px solid var(--border)}
+  .stat-item{padding:28px 20px}
+  .stat-val{font-size:42px}
+  .fire-content{padding:0 24px}
+  .event-inner{padding:0 24px}
+  .event-row{grid-template-columns:1fr;gap:16px}
+  .event-day{font-size:56px}
+  .event-cta{align-items:flex-start}
+  .medien-inner{grid-template-columns:1fr;padding:0 24px}
+  .testi-inner{padding:0 24px}
+  .about-inner{padding:0 24px}
+  .about-header{grid-template-columns:1fr;gap:16px}
+  .about-grid{grid-template-columns:1fr}
+  .about-card:first-child .about-card-img{height:220px}
+  .about-h-title{font-size:34px}
+  .spenden-inner{grid-template-columns:1fr;gap:48px;padding:0 24px}
+  .spenden-title{font-size:34px}
+  .nl-inner{padding:0 24px}
+  .nl-form{flex-direction:column}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:28px;padding:0 24px}
+  .footer-bottom{padding:18px 24px;flex-direction:column;text-align:center}
+  .intro-section,.event-section,.medien-section,.testi-section,.about-section,.spenden-section,.nl-section{padding:72px 0}
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg"></a>
+    <div class="nav-links">
+      <a href="#intro">Agnihotra</a>
+      <a href="#event">Veranstaltungen</a>
+      <a href="#about">Der Hof</a>
+      <a href="#medien">Medien</a>
+      <a href="#spenden">Mitmachen</a>
+    </div>
+    <a href="index.html" class="btn btn-ghost nav-cta" style="font-size:12px;padding:8px 16px;margin-left:auto">Version 1 ↗</a>
+    <a href="#spenden" class="btn btn-copper nav-cta">Spenden</a>
+    <div class="nav-burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-index r">01 / 06</div>
+    <div class="eyebrow r" style="transition-delay:.1s;margin-bottom:22px">Europäisches Zentrum für Agnihotra</div>
+    <h1 class="hero-title r" style="transition-delay:.18s">Heilige Feuer<br>zur <em>Heilung</em><br>der Welt</h1>
+    <p class="hero-sub r" style="transition-delay:.28s">Vedische Feuerzeremonien am Bodensee – für Heilung, Stille und Wohlergehen aller Lebewesen. Kostenlos erlernen, für alle Menschen.</p>
+    <div class="hero-btns r" style="transition-delay:.36s">
+      <a href="#event" class="btn btn-copper">Nächste Veranstaltung</a>
+      <a href="#intro" class="btn btn-ghost">Was ist Agnihotra?</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img" id="heroImg"></div>
+    <div class="hero-img-overlay"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-year">1988</div>
+      <div class="hero-badge-label">gegründet</div>
+    </div>
+  </div>
+  <div class="hero-scroll">Entdecken</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Vedische Feuerzeremonien<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Agnihotra für alle<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Heiligenberg am Bodensee<div class="marquee-dot"></div></div>
+    <div class="marquee-item">seit 1988<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Täglich Feuerzeremonien<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Kostenlos · Für alle<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Europäisches Zentrum<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Wissen weitergeben<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Vedische Feuerzeremonien<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Agnihotra für alle<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Heiligenberg am Bodensee<div class="marquee-dot"></div></div>
+    <div class="marquee-item">seit 1988<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Täglich Feuerzeremonien<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Kostenlos · Für alle<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Europäisches Zentrum<div class="marquee-dot"></div></div>
+    <div class="marquee-item">Wissen weitergeben<div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro-section" id="intro">
+  <div class="intro-inner">
+    <div class="intro-num r">01</div>
+    <div class="intro-body">
+      <div class="eyebrow r" style="transition-delay:.1s">Wissen &amp; Praxis</div>
+      <h2 class="intro-title r" style="transition-delay:.15s;margin-top:16px">Was ist <em>Agnihotra?</em></h2>
+      <p class="intro-text r" style="transition-delay:.2s">Agnihotra ist eine vedische Feuerzeremonie – ein uraltes Ritual, das täglich bei Sonnenauf- und Sonnenuntergang vollzogen wird. Kupfergefäß, Kuhfladen, Reis, Ghee und ein genaues Timing: mehr braucht es nicht.</p>
+      <p class="intro-text r" style="transition-delay:.25s">Wissenschaftliche Studien belegen eine reinigende Wirkung auf Luft, Wasser und Erde. Praktizierende berichten von innerer Stille, Heilung und einer vertieften Verbindung mit dem Leben.</p>
+      <a href="#" class="intro-link r" style="transition-delay:.3s">Mehr über Agnihotra erfahren →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-row">
+    <div class="stat-item r">
+      <div class="stat-val">35<span>+</span></div>
+      <div class="stat-lbl">Jahre Agnihotra am Bodensee</div>
+    </div>
+    <div class="stat-item r" style="transition-delay:.08s">
+      <div class="stat-val word">täglich</div>
+      <div class="stat-lbl">Feuerzeremonien am Hof</div>
+    </div>
+    <div class="stat-item r" style="transition-delay:.16s">
+      <div class="stat-val">100<span>%</span></div>
+      <div class="stat-lbl">Kostenlos – Wissen für alle</div>
+    </div>
+    <div class="stat-item r" style="transition-delay:.24s">
+      <div class="stat-val word">weltweit</div>
+      <div class="stat-lbl">Agnihotra-Gemeinschaft</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIRE -->
+<section class="fire-section">
+  <div class="fire-bg"></div>
+  <div class="fire-overlay"></div>
+  <div class="fire-content">
+    <p class="fire-quote r">„Das Feuer reinigt alles. Agnihotra ist die Medizin für diese Zeit."</p>
+    <div class="fire-source r" style="transition-delay:.2s">Vasant Paranjpe – Homa-Therapie</div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="event-section" id="event">
+  <div class="event-inner">
+    <div class="event-header r">
+      <h2 class="event-header-title">Nächste Veranstaltungen</h2>
+      <a href="#" class="event-all">Alle Termine →</a>
+    </div>
+    <div class="event-row r" style="transition-delay:.08s">
+      <div class="event-date">
+        <div class="event-day">17</div>
+        <div class="event-month">Mai 2026</div>
+      </div>
+      <div>
+        <span class="event-tag">Agnihotra-Einführung</span>
+        <h3 class="event-title">Agnihotra-Einführungsabend</h3>
+        <p class="event-desc">Erlebe die vedische Feuerzeremonie live und lerne alles Wichtige für die eigene Praxis. Offen für alle – keine Vorkenntnisse erforderlich.</p>
+      </div>
+      <div class="event-cta">
+        <a href="#" class="btn btn-copper">Jetzt anmelden</a>
+      </div>
+    </div>
+    <div class="event-row r" style="transition-delay:.16s">
+      <div class="event-date">
+        <div class="event-day">08</div>
+        <div class="event-month">Jun 2026</div>
+      </div>
+      <div>
+        <span class="event-tag">Seminar</span>
+        <h3 class="event-title">Homa-Seminar: Agnihotra &amp; Gesundheit</h3>
+        <p class="event-desc">Zwei Tage intensives Erleben: Zeremonien, Vorträge und Austausch. Übernachtungsmöglichkeit am Hof vorhanden.</p>
+      </div>
+      <div class="event-cta">
+        <a href="#" class="btn btn-ghost">Details ansehen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIEN -->
+<section class="medien-section" id="medien">
+  <div class="medien-inner">
+    <div class="r">
+      <div class="yt-player" id="ytPlayer">
+        <div class="yt-thumb"></div>
+        <div class="yt-overlay"></div>
+        <div class="yt-play"></div>
+        <div class="yt-caption">
+          <strong>Agnihotra – Vedische Feuerzeremonie</strong>
+          <span>Homa-Hof Heiligenberg · YouTube-Kanal</span>
+        </div>
+      </div>
+      <div class="yt-iframe-wrap" id="ytIframe">
+        <iframe src="" allowfullscreen allow="autoplay; encrypted-media" title="Homa-Hof Heiligenberg YouTube"></iframe>
+      </div>
+    </div>
+    <div class="medien-text r" style="transition-delay:.15s">
+      <div class="eyebrow">YouTube-Kanal</div>
+      <h2 class="medien-title">Erlebe die Kraft des <em>Feuers</em></h2>
+      <p class="medien-body">Authentische Einblicke, Anleitungen und Erfahrungsberichte – lebensnah und bewegend.</p>
+      <div class="medien-links">
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="medien-link">Kanal abonnieren →</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg/videos" target="_blank" rel="noopener" class="medien-link">Alle Videos ansehen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testi-section">
+  <div class="testi-inner">
+    <div class="testi-mark r">"</div>
+    <p class="testi-quote r" style="transition-delay:.1s">Die Stille und Wärme des Ortes hat mich sofort berührt. Agnihotra hat meinen Alltag verändert – ich praktiziere jetzt täglich, bei Sonnenauf- und Sonnenuntergang.</p>
+    <div class="testi-author r" style="transition-delay:.2s">
+      <div class="testi-avatar">M</div>
+      <div>
+        <div class="testi-name">Maria S.</div>
+        <div class="testi-loc">München</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÜBER UNS -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-header">
+      <h2 class="about-h-title r">Menschen, Geschichte<br>und <em>Vision</em></h2>
+      <p class="about-h-text r" style="transition-delay:.1s">Seit 1988 ein Kraftort im Hinterland des Bodensees – licht- und liebevoll, offen für alle, getragen von einer lebendigen Gemeinschaft.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card r">
+        <div class="about-card-img">
+          <img src="Archivbilder/Der Homa-Hof - ein Kraftort/imgi_10_2homa-hofBF783608-7913-79BE-63E5-36FC24647467.jpg" alt="Homa-Hof Heiligenberg">
+          <div class="about-card-img-ov"></div>
+        </div>
+        <div class="about-body">
+          <div class="about-tag">Gemeinschaft</div>
+          <h3 class="about-title">Homa-Hof e.V.</h3>
+          <p class="about-text">Aktive Mitglieder, Idealisten und Freunde des heiligen Feuers – gemeinsam für eine heilende Welt.</p>
+          <a href="#" class="about-link">Über den Verein →</a>
+        </div>
+      </div>
+      <div class="about-card r" style="transition-delay:.1s">
+        <div class="about-card-img">
+          <img src="Archivbilder/Horst Heigl - Initiator/imgi_3_Horst-Schweden.jpg" alt="Horst Heigl">
+          <div class="about-card-img-ov"></div>
+        </div>
+        <div class="about-body">
+          <div class="about-tag">Initiator</div>
+          <h3 class="about-title">Horst Heigl</h3>
+          <p class="about-text">Gründer des Homa-Hofs 1988 – ein Leben im Dienst des heiligen Feuers.</p>
+          <a href="#" class="about-link">Mehr erfahren →</a>
+        </div>
+      </div>
+      <div class="about-card r" style="transition-delay:.2s">
+        <div class="about-card-img">
+          <img src="Archivbilder/Ökologie/imgi_3_a-oekologie.jpg" alt="Unsere Vision">
+          <div class="about-card-img-ov"></div>
+        </div>
+        <div class="about-body">
+          <div class="about-tag">Ausblick</div>
+          <h3 class="about-title">Unsere Vision</h3>
+          <p class="about-text">Gesundheit und Glück für alle Lebewesen durch die heilende Kraft des Agnihotra-Feuers.</p>
+          <a href="#" class="about-link">Die Vision →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPENDEN -->
+<section class="spenden-section" id="spenden">
+  <div class="spenden-inner">
+    <div class="spenden-left">
+      <div class="eyebrow r">Unterstütze uns</div>
+      <h2 class="spenden-title r" style="transition-delay:.1s">Deine Spende hält das <em>Feuer am Leben</em></h2>
+      <p class="spenden-text r" style="transition-delay:.15s">Der Homa-Hof ist ein gemeinnütziger Verein. Alle Angebote sind kostenlos – ermöglicht durch Menschen, die diese Arbeit mit ihrem Herzen unterstützen.</p>
+      <ul class="spenden-ul r" style="transition-delay:.2s">
+        <li>Tägliche Agnihotra-Zeremonien am Hof</li>
+        <li>Kostenlose Einführungsabende und Seminare</li>
+        <li>Pflege und Erhalt des Kraftorts Heiligenberg</li>
+      </ul>
+      <div class="spenden-btns r" style="transition-delay:.25s">
+        <a href="#" class="btn btn-copper">Jetzt per PayPal spenden</a>
+        <a href="#" class="btn btn-ghost">Banküberweisung</a>
+      </div>
+    </div>
+    <div class="r" style="transition-delay:.15s">
+      <div class="bank-panel">
+        <div class="bank-panel-title">Bankverbindung</div>
+        <div class="bank-row"><span class="bank-lbl">Empfänger</span><span class="bank-val">Homa-Hof Heiligenberg e.V.</span></div>
+        <div class="bank-row"><span class="bank-lbl">IBAN</span><span class="bank-val">DE XX XXXX XXXX XXXX XXXX XX</span></div>
+        <div class="bank-row"><span class="bank-lbl">BIC</span><span class="bank-val">XXXXXXXXXXXXXXX</span></div>
+        <div class="bank-row"><span class="bank-lbl">Bank</span><span class="bank-val">Sparkasse Bodensee</span></div>
+        <div class="bank-row"><span class="bank-lbl">Verwendung</span><span class="bank-val">Spende Homa-Hof</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl-section">
+  <div class="nl-inner">
+    <div class="eyebrow r">Newsletter</div>
+    <h2 class="nl-title r" style="transition-delay:.1s">Bleib <em>informiert</em></h2>
+    <p class="nl-sub r" style="transition-delay:.15s">Veranstaltungen, Neuigkeiten und Impulse aus dem Homa-Hof – direkt in dein Postfach.</p>
+    <form class="nl-form r" style="transition-delay:.2s" onsubmit="return false;">
+      <input type="email" class="nl-input" placeholder="Deine E-Mail-Adresse">
+      <button type="submit" class="btn btn-copper">Abonnieren</button>
+    </form>
+    <p class="nl-note r" style="transition-delay:.25s">Kein Spam. Jederzeit abmeldbar.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg"></div>
+      <p class="footer-tag">Europäisches Zentrum für Agnihotra –<br>ein Ort des heiligen Feuers und der Stille.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-btn">f</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="social-btn" style="font-size:9px">YT</a>
+        <a href="https://www.instagram.com/agnihotraforfuture/" target="_blank" rel="noopener" class="social-btn" style="font-size:9px">IG</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#">Agnihotra</a></li>
+        <li><a href="#">Veranstaltungen</a></li>
+        <li><a href="#">Der Hof</a></li>
+        <li><a href="#">Medien</a></li>
+        <li><a href="#">Shop</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Erleben</div>
+      <ul class="footer-links">
+        <li><a href="#">Seminare</a></li>
+        <li><a href="#">Besucherhinweise</a></li>
+        <li><a href="#">Anfahrt</a></li>
+        <li><a href="#">Übernachtung</a></li>
+        <li><a href="#">Spenden</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <div class="footer-contact">
+        Oberhaslach 6<br>88633 Heiligenberg<br><br>
+        <a href="tel:+4975529387600">+49 (0)7552 938760</a><br>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
+    <div class="footer-legal">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  // Mobile nav
+  (function() {
+    var burger = document.querySelector('.nav-burger');
+    var nav = document.getElementById('main-nav');
+    if (!burger || !nav) return;
+    burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
+    document.addEventListener('click', function(e) {
+      if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
+    });
+  })();
+}, {passive:true});
+
+const revEls = document.querySelectorAll('.r');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+  });
+}, {threshold: 0.1});
+revEls.forEach(el => obs.observe(el));
+
+const heroImg = document.getElementById('heroImg');
+if (heroImg) {
+  window.addEventListener('scroll', () => {
+    heroImg.style.transform = `translateY(${window.scrollY * 0.28}px)`;
+  }, {passive:true});
+}
+
+const ytPlayer = document.getElementById('ytPlayer');
+const ytIframe = document.getElementById('ytIframe');
+if (ytPlayer) {
+  ytPlayer.addEventListener('click', () => {
+    ytIframe.querySelector('iframe').src = 'https://www.youtube-nocookie.com/embed/YooTri0mQSc?autoplay=1&rel=0&modestbranding=1';
+    ytPlayer.style.display = 'none';
+    ytIframe.style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>

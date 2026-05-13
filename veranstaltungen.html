@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veranstaltungen – Homa-Hof Heiligenberg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Raleway:wght@200;300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--brown); background: var(--cream); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --cream:      #FFFCF5;
+      --cream2:     #FFF8EC;
+      --gold:       #C07818;
+      --gold-light: #F5D88A;
+      --copper:     #B84010;
+      --brown:      #2A1505;
+      --brown2:     #5A3A18;
+      --border:     #EDD9A8;
+      --border2:    #F5E8C0;
+      --serif:      'Playfair Display', Georgia, serif;
+      --sans:       'Raleway', system-ui, sans-serif;
+      --btn-radius: 50px;
+    }
+
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,252,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border2); transition: box-shadow 0.3s ease; }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(42,21,5,0.1); }
+    .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; height: 84px; display: flex; align-items: center; gap: 32px; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-brand img { height: 68px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 30px; margin-left: auto; }
+    .nav-links a { font-family: var(--sans); font-size: 17px; font-weight: 400; color: var(--brown2); transition: color 0.2s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta { margin-left: 16px; }
+    .btn { display: inline-block; padding: 12px 28px; border-radius: var(--btn-radius); font-family: var(--sans); font-size: 15.5px; font-weight: 500; letter-spacing: 0.04em; cursor: pointer; transition: all 0.25s ease; }
+    .btn-gold { background: var(--copper); color: white; border: 2px solid var(--copper); }
+    .btn-gold:hover { background: #8A2A08; border-color: #8A2A08; }
+    .btn-outline-dark { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+    .btn-outline-dark:hover { background: var(--gold); color: white; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 4px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+
+    /* HERO */
+    .subpage-hero { min-height: 380px; padding-top: 84px; position: relative; display: flex; align-items: center; overflow: hidden; }
+    .subpage-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center 30%; }
+    .subpage-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(42,21,5,.75) 0%, rgba(42,21,5,.4) 55%, transparent 100%); }
+    .subpage-hero-content { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; padding: 60px 48px; width: 100%; }
+    .hero-eyebrow { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold-light); flex-shrink: 0; }
+    .subpage-hero-content h1 { font-family: var(--serif); font-size: 58px; font-weight: 300; line-height: 1.15; color: white; max-width: 580px; margin-bottom: 16px; }
+    .subpage-hero-content h1 em { font-style: italic; color: var(--gold-light); }
+    .subpage-hero-content p { font-family: var(--sans); font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.82); max-width: 460px; }
+
+    /* FILTER BAR */
+    .filter-bar-wrap {
+      position: sticky;
+      top: 84px;
+      z-index: 50;
+      background: rgba(255,252,245,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border2);
+    }
+    .filter-bar {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .filter-chip {
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      border: 1.5px solid var(--border);
+      color: var(--brown2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: transparent;
+      white-space: nowrap;
+    }
+    .filter-chip:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-chip.active { background: var(--copper); border-color: var(--copper); color: white; }
+    .filter-bar-right { margin-left: auto; }
+    .ical-link { font-family: var(--sans); font-size: 13px; color: var(--brown2); display: flex; align-items: center; gap: 6px; opacity: 0.7; transition: opacity 0.2s; }
+    .ical-link:hover { opacity: 1; }
+
+    /* TIMELINE */
+    .timeline-wrap { max-width: 1100px; margin: 0 auto; padding: 60px 48px 100px; }
+
+    .month-group { margin-bottom: 60px; }
+    .month-divider {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .month-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .month-label {
+      font-family: var(--sans);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .event-row {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 0 28px;
+      align-items: start;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border2);
+      transition: background 0.15s ease;
+    }
+    .event-row:first-of-type { border-top: 1px solid var(--border2); }
+    .event-row[data-cat].hidden { display: none; }
+
+    .event-date {
+      text-align: center;
+      padding-top: 2px;
+    }
+    .event-day-num {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .event-weekday {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown2);
+      margin-top: 3px;
+    }
+    .event-body { min-width: 0; }
+    .event-badge {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 8px;
+    }
+    .badge-seminar { background: rgba(184,64,16,0.1); color: var(--copper); }
+    .badge-hof     { background: rgba(192,120,24,0.1); color: var(--gold); }
+    .badge-online  { background: rgba(42,21,5,0.07);   color: var(--brown2); }
+
+    .event-title {
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+    .event-meta {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--brown2);
+    }
+    .event-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.7;
+      margin-top: 8px;
+      max-width: 540px;
+    }
+    .event-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding-top: 4px; white-space: nowrap; }
+    .event-time {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--brown2);
+      letter-spacing: 0.04em;
+    }
+    .event-cta {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--copper);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+    }
+    .event-cta:hover { gap: 7px; }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 0;
+      color: var(--brown2);
+      font-family: var(--sans);
+      font-size: 15px;
+      display: none;
+    }
+
+    /* FOOTER */
+    footer { background: var(--brown); padding: 64px 0 32px; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px; }
+    .footer-tagline { font-family: var(--sans); font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-icon { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); font-family: var(--sans); font-size: 13px; font-weight: 500; transition: all 0.2s; }
+    .social-icon:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .footer-col-title { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-contact-item { font-family: var(--sans); font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.65); margin-bottom: 12px; }
+    .footer-contact-item a { transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--gold-light); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 40px 48px 28px; max-width: calc(1440px - 96px); margin-left: auto; margin-right: auto; }
+    .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--gold-light); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .nav-inner { padding: 0 20px; }
+      #main-nav.nav-open .nav-links {
+        display: flex; flex-direction: column; position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--cream); z-index: 98;
+        align-items: center; justify-content: center; gap: 32px; padding-bottom: 48px;
+      }
+      #main-nav.nav-open .nav-links a { font-size: 22px; color: var(--brown); font-weight: 300; }
+      #main-nav.nav-open .nav-cta { display: inline-flex !important; }
+      #main-nav.nav-open .nav-burger { position: relative; z-index: 99; }
+      #main-nav.nav-open .nav-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      #main-nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      #main-nav.nav-open .nav-burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+      .subpage-hero-content { padding: 40px 24px; }
+      .subpage-hero-content h1 { font-size: 38px; }
+      .filter-bar { padding: 0 20px; gap: 8px; overflow-x: auto; }
+      .filter-bar-right { display: none; }
+      .timeline-wrap { padding: 40px 24px 80px; }
+      .event-row { grid-template-columns: 60px 1fr; }
+      .event-actions { display: none; }
+      .event-meta::after { content: attr(data-time); display: block; margin-top: 4px; font-size: 13px; opacity: 0.75; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; padding: 0 24px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg Logo">
+    </a>
+    <div class="nav-links">
+      <a href="die-basis.html">Die Basis</a>
+      <a href="heilige-feuer.html">Heilige Feuer</a>
+      <a href="wissen.html">Wissen</a>
+      <a href="am-hof.html">Am Hof</a>
+      <a href="mitmachen.html">Mitmachen</a>
+      <a href="medien.html">Medien</a>
+      <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
+    </div>
+    <a href="mitmachen.html#spenden" class="btn btn-gold nav-cta" style="font-size:14.5px;padding:10px 22px;">Spenden</a>
+    <div class="nav-burger" aria-label="Menü"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="subpage-hero">
+  <div class="subpage-hero-bg" style="background-image:url('Archivbilder/Die Hof-Gemeinschaft/imgi_3_a-gemeinschaft.jpg')"></div>
+  <div class="subpage-hero-overlay"></div>
+  <div class="subpage-hero-content">
+    <div class="hero-eyebrow">Am Hof</div>
+    <h1>Veranstaltungen &amp; <em>Seminare</em></h1>
+    <p>Agnihotra erlernen, erleben, vertiefen – alle Termine am Homa-Hof Heiligenberg und online.</p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar-wrap">
+  <div class="filter-bar">
+    <button class="filter-chip active" data-filter="all">Alle</button>
+    <button class="filter-chip" data-filter="seminar">Seminare</button>
+    <button class="filter-chip" data-filter="hof">Am Hof</button>
+    <button class="filter-chip" data-filter="online">Online &amp; Welt</button>
+    <div class="filter-bar-right">
+      <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen/kalender-export.html" class="ical-link" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        iCal Export
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-wrap">
+
+  <!-- MAI 2026 -->
+  <div class="month-group" id="month-mai">
+    <div class="month-divider">
+      <div class="month-divider-line"></div>
+      <span class="month-label">Mai 2026</span>
+      <div class="month-divider-line"></div>
+    </div>
+
+    <div class="event-row fade-in" data-cat="hof">
+      <div class="event-date">
+        <div class="event-day-num">17</div>
+        <div class="event-weekday">So</div>
+      </div>
+      <div class="event-body">
+        <span class="event-badge badge-hof">Am Hof</span>
+        <div class="event-title">Geburtstag von Shree</div>
+        <div class="event-meta" data-time="14:00 – 21:15 Uhr">Homa-Hof Heiligenberg · Eintritt frei</div>
+        <div class="event-desc">Ein besonderer Tag der Gemeinschaft und Freude am Hof – alle sind herzlich willkommen.</div>
+      </div>
+      <div class="event-actions">
+        <span class="event-time">14:00 – 21:15</span>
+        <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html" target="_blank" rel="noopener" class="event-cta">Mehr Info →</a>
+      </div>
+    </div>
+
+    <div class="event-row fade-in" data-cat="seminar" style="transition-delay:.07s">
+      <div class="event-date">
+        <div class="event-day-num">23</div>
+        <div class="event-weekday">Sa</div>
+      </div>
+      <div class="event-body">
+        <span class="event-badge badge-seminar">Seminar</span>
+        <div class="event-title">Agnihotra erlernen</div>
+        <div class="event-meta" data-time="18:50 – 21:10 Uhr">Homa-Hof Heiligenberg · Kostenlos</div>
+        <div class="event-desc">Einführungsabend für alle, die die vedische Feuerzeremonie kennenlernen möchten. Keine Vorkenntnisse erforderlich.</div>
+      </div>
+      <div class="event-actions">
+        <span class="event-time">18:50 – 21:10</span>
+        <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html" target="_blank" rel="noopener" class="event-cta">Anmelden →</a>
+      </div>
+    </div>
+
+    <div class="event-row fade-in" data-cat="seminar" style="transition-delay:.14s">
+      <div class="event-date">
+        <div class="event-day-num">30</div>
+        <div class="event-weekday">Sa</div>
+      </div>
+      <div class="event-body">
+        <span class="event-badge badge-seminar">Seminar</span>
+        <div class="event-title">Agnihotra-Einführungsabend</div>
+        <div class="event-meta" data-time="18:50 – 21:00 Uhr">Homa-Hof Heiligenberg · Kostenlos</div>
+        <div class="event-desc">Regelmäßiger Einführungsabend – Feuerzeremonie live erleben und alle Fragen stellen.</div>
+      </div>
+      <div class="event-actions">
+        <span class="event-time">18:50 – 21:00</span>
+        <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html" target="_blank" rel="noopener" class="event-cta">Anmelden →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JUNI 2026 -->
+  <div class="month-group" id="month-juni">
+    <div class="month-divider">
+      <div class="month-divider-line"></div>
+      <span class="month-label">Juni 2026</span>
+      <div class="month-divider-line"></div>
+    </div>
+
+    <div class="event-row fade-in" data-cat="seminar">
+      <div class="event-date">
+        <div class="event-day-num">20</div>
+        <div class="event-weekday">Sa</div>
+      </div>
+      <div class="event-body">
+        <span class="event-badge badge-seminar">Seminar</span>
+        <div class="event-title">Agnihotra-Seminar am Homa-Hof</div>
+        <div class="event-meta" data-time="16:00 – 21:30 Uhr">Homa-Hof Heiligenberg</div>
+        <div class="event-desc">Intensiveres Seminar rund um Agnihotra – Praxis, Hintergrundwissen und Gemeinschaft. Anmeldung erbeten.</div>
+      </div>
+      <div class="event-actions">
+        <span class="event-time">16:00 – 21:30</span>
+        <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html" target="_blank" rel="noopener" class="event-cta">Anmelden →</a>
+      </div>
+    </div>
+
+    <div class="event-row fade-in" data-cat="seminar" style="transition-delay:.07s">
+      <div class="event-date">
+        <div class="event-day-num">27</div>
+        <div class="event-weekday">Sa</div>
+      </div>
+      <div class="event-body">
+        <span class="event-badge badge-seminar">Seminar</span>
+        <div class="event-title">Agnihotra erlernen</div>
+        <div class="event-meta" data-time="18:50 – 21:10 Uhr">Homa-Hof Heiligenberg · Kostenlos</div>
+        <div class="event-desc">Einführungsabend für alle Interessierten – Vorkenntnisse nicht erforderlich.</div>
+      </div>
+      <div class="event-actions">
+        <span class="event-time">18:50 – 21:10</span>
+        <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html" target="_blank" rel="noopener" class="event-cta">Anmelden →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JULI 2026 -->
+  <div class="month-group" id="month-juli">
+    <div class="month-divider">
+      <div class="month-divider-line"></div>
+      <span class="month-label">Juli 2026</span>
+      <div class="month-divider-line"></div>
+    </div>
+
+    <div class="event-row fade-in" data-cat="hof">
+      <div class="event-date">
+        <div class="event-day-num">5</div>
+        <div class="event-weekday">So</div>
+      </div>
+      <div class="event-body">
+        <span class="event-badge badge-hof">Am Hof</span>
+        <div class="event-title">Sommerfest am Homa-Hof</div>
+        <div class="event-meta" data-time="14:00 – 21:00 Uhr">Homa-Hof Heiligenberg · Eintritt frei</div>
+        <div class="event-desc">Gemeinsames Feiern mit Agnihotra, Musik und Begegnung. Alle sind willkommen.</div>
+      </div>
+      <div class="event-actions">
+        <span class="event-time">14:00 – 21:00</span>
+        <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html" target="_blank" rel="noopener" class="event-cta">Mehr Info →</a>
+      </div>
+    </div>
+
+    <div class="event-row fade-in" data-cat="seminar" style="transition-delay:.07s">
+      <div class="event-date">
+        <div class="event-day-num">18</div>
+        <div class="event-weekday">Sa</div>
+      </div>
+      <div class="event-body">
+        <span class="event-badge badge-seminar">Seminar</span>
+        <div class="event-title">Agnihotra erlernen</div>
+        <div class="event-meta" data-time="18:50 – 21:10 Uhr">Homa-Hof Heiligenberg · Kostenlos</div>
+        <div class="event-desc">Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.</div>
+      </div>
+      <div class="event-actions">
+        <span class="event-time">18:50 – 21:10</span>
+        <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html" target="_blank" rel="noopener" class="event-cta">Anmelden →</a>
+      </div>
+    </div>
+
+    <div class="event-row fade-in" data-cat="online" style="transition-delay:.14s">
+      <div class="event-date">
+        <div class="event-day-num">25</div>
+        <div class="event-weekday">Sa</div>
+      </div>
+      <div class="event-body">
+        <span class="event-badge badge-online">Online</span>
+        <div class="event-title">Agnihotra-Vortrag online</div>
+        <div class="event-meta" data-time="19:00 – 21:00 Uhr">Zoom · Kostenlos</div>
+        <div class="event-desc">Online-Vortrag über die Wirkung von Agnihotra – mit Fragen und Antworten.</div>
+      </div>
+      <div class="event-actions">
+        <span class="event-time">19:00 – 21:00</span>
+        <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html" target="_blank" rel="noopener" class="event-cta">Anmelden →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" id="empty-state">
+    Keine Veranstaltungen in dieser Kategorie gefunden.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg" style="height:58px;width:auto;margin-bottom:16px;opacity:0.92;display:block">
+      <p class="footer-tagline">Europäisches Zentrum für Agnihotra –<br>ein Ort des heiligen Feuers und der Stille.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-icon">f</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">YT</a>
+        <a href="https://www.instagram.com/agnihotraforfuture/" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">IG</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="die-basis.html">Die Basis</a></li>
+        <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
+        <li><a href="wissen.html">Wissen &amp; Nutzen</a></li>
+        <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="mitmachen.html">Mitmachen</a></li>
+        <li><a href="medien.html">Medien</a></li>
+        <li><a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Erleben</div>
+      <ul class="footer-links">
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
+        <li><a href="am-hof.html">Seminare</a></li>
+        <li><a href="am-hof.html">Besucherhinweise</a></li>
+        <li><a href="am-hof.html">Anfahrt</a></li>
+        <li><a href="am-hof.html">Übernachtung</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <div class="footer-contact-item" style="display:flex;align-items:flex-start;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:4px;opacity:.55"><path d="M8 1C5.5 1 3.5 3 3.5 5.5c0 3.5 4.5 9 4.5 9s4.5-5.5 4.5-9C12.5 3 10.5 1 8 1z"/><circle cx="8" cy="5.5" r="1.5"/></svg>
+        <span>Oberhaslach 6<br>88633 Heiligenberg</span>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;opacity:.55"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
+        <a href="tel:+4975529387600">+49 (0)7552 938760</a>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </div>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
+    <div class="footer-legal">
+      <a href="https://www.homa-hof-heiligenberg.de/impressum.html" target="_blank" rel="noopener">Impressum</a>
+      <a href="https://www.homa-hof-heiligenberg.de/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  var nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile nav
+  (function() {
+    var burger = document.querySelector('.nav-burger');
+    if (!burger) return;
+    burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
+  })();
+
+  // Category filter
+  (function() {
+    var chips = document.querySelectorAll('.filter-chip');
+    var rows  = document.querySelectorAll('.event-row[data-cat]');
+    var empty = document.getElementById('empty-state');
+
+    chips.forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        chips.forEach(function(c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+
+        var f = chip.dataset.filter;
+        var visible = 0;
+
+        rows.forEach(function(row) {
+          var show = (f === 'all' || row.dataset.cat === f);
+          row.classList.toggle('hidden', !show);
+          if (show) visible++;
+        });
+
+        // Hide month groups that are fully empty
+        document.querySelectorAll('.month-group').forEach(function(group) {
+          var hasVisible = Array.from(group.querySelectorAll('.event-row')).some(function(r) {
+            return !r.classList.contains('hidden');
+          });
+          group.style.display = hasVisible ? '' : 'none';
+        });
+
+        empty.style.display = visible === 0 ? 'block' : 'none';
+      });
+    });
+  })();
+
+  // Fade-in on scroll
+  var fadeEls = document.querySelectorAll('.fade-in');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(function(el) { observer.observe(el); });
+</script>
+
+</body>
+</html>

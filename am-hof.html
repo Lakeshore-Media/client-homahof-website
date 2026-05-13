@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Am Hof – Homa-Hof Heiligenberg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Raleway:wght@200;300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--brown); background: var(--cream); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --cream: #FFFCF5;
+      --cream2: #FFF8EC;
+      --cream3: #FFF0D4;
+      --gold: #C07818;
+      --gold2: #E8A020;
+      --gold-light: #F5D88A;
+      --copper: #B84010;
+      --brown: #2A1505;
+      --brown2: #5A3A18;
+      --brown3: #8A6030;
+      --border: #EDD9A8;
+      --border2: #F5E8C0;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', system-ui, sans-serif;
+      --btn-radius: 50px;
+      --dark-bg: linear-gradient(135deg, #2A1505 0%, #4A2A0A 100%);
+    }
+
+    .eyebrow { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .section-title { font-family: var(--serif); font-size: 45px; font-weight: 300; line-height: 1.2; color: var(--brown); margin-bottom: 20px; }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .btn { display: inline-block; padding: 12px 28px; border-radius: var(--btn-radius); font-family: var(--sans); font-size: 15.5px; font-weight: 500; letter-spacing: 0.04em; cursor: pointer; transition: all 0.25s ease; }
+    .btn-gold { background: var(--copper); color: white; border: 2px solid var(--copper); }
+    .btn-gold:hover { background: #8A2A08; border-color: #8A2A08; }
+    .btn-outline-dark { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+    .btn-outline-dark:hover { background: var(--gold); color: white; }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,252,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border2); transition: box-shadow 0.3s ease; }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(42,21,5,0.1); }
+    .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; height: 84px; display: flex; align-items: center; gap: 32px; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-brand img { height: 68px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 30px; margin-left: auto; }
+    .nav-links a { font-family: var(--sans); font-size: 17px; font-weight: 400; color: var(--brown2); transition: color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { margin-left: 16px; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 4px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+
+    .subpage-hero { min-height: 420px; padding-top: 84px; position: relative; display: flex; align-items: center; overflow: hidden; }
+    .subpage-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .subpage-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(42,21,5,.72) 0%, rgba(42,21,5,.35) 55%, transparent 100%); }
+    .subpage-hero-content { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; padding: 60px 48px; width: 100%; }
+    .hero-eyebrow { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold-light); flex-shrink: 0; }
+    .subpage-hero-content h1 { font-family: var(--serif); font-size: 58px; font-weight: 300; line-height: 1.15; color: white; max-width: 600px; margin-bottom: 16px; }
+    .subpage-hero-content h1 em { font-style: italic; color: var(--gold-light); }
+    .subpage-hero-content p { font-family: var(--sans); font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.82); max-width: 480px; }
+
+    .section-wrap { padding: 100px 0; }
+    .section-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+    .section-text { font-family: var(--sans); font-size: 17px; font-weight: 300; color: var(--brown2); line-height: 1.85; margin-bottom: 28px; }
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .eyebrow { justify-content: center; }
+    .section-header.center .eyebrow::before { display: none; }
+
+    /* Event Cards */
+    .events-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .event-card {
+      background: white;
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .event-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(42,21,5,0.1); }
+    .event-date-block { text-align: center; min-width: 80px; flex-shrink: 0; }
+    .event-day { font-family: var(--serif); font-size: 52px; font-weight: 300; color: var(--gold); line-height: 1; }
+    .event-month { font-family: var(--sans); font-size: 13px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown2); margin-top: 4px; }
+    .event-info { flex: 1; }
+    .event-badge {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(192,120,24,0.08);
+      padding: 4px 10px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .event-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
+    .event-desc { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); line-height: 1.7; margin-bottom: 16px; }
+    .event-link { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--gold); display: inline-flex; align-items: center; gap: 5px; transition: gap 0.2s; }
+    .event-link:hover { gap: 8px; }
+
+    /* Form */
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+    .form-label { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--brown2); }
+    .form-input, .form-textarea, .form-select { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown); background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px 18px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--gold); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-note { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: var(--brown3); margin-top: 12px; }
+
+    /* Info blocks */
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+    .info-block { background: white; border: 1px solid var(--border2); border-radius: 12px; padding: 28px; }
+    .info-icon { font-size: 28px; margin-bottom: 14px; }
+    .info-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
+    .info-text { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
+
+    /* Map */
+    .map-wrap { border-radius: 12px; overflow: hidden; margin-top: 32px; }
+    .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+
+    /* Address block */
+    .address-block { background: white; border: 1px solid var(--border2); border-radius: 12px; padding: 32px; margin-bottom: 24px; }
+    .address-label { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brown3); margin-bottom: 8px; }
+    .address-text { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--brown); line-height: 1.5; }
+
+    /* Camping cards */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .camp-card { background: white; border: 1px solid var(--border2); border-radius: 12px; overflow: hidden; padding: 32px; }
+    .camp-icon { font-size: 36px; margin-bottom: 16px; }
+    .camp-title { font-family: var(--serif); font-size: 24px; font-weight: 400; color: var(--brown); margin-bottom: 10px; }
+    .camp-text { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); line-height: 1.75; }
+    .camp-price { display: inline-block; margin-top: 16px; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); background: rgba(192,120,24,0.08); padding: 4px 10px; border-radius: 50px; }
+
+    footer { background: #2A1505; padding: 72px 0 0; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px; }
+    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 14px; }
+    .social-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s; }
+    .social-icon:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-contact-item { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); line-height: 1.7; margin-bottom: 8px; }
+    .footer-contact-item a { transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--gold-light); }
+    .footer-divider { max-width: 1440px; margin: 56px auto 0; padding: 0 48px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-copy { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--gold-light); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      #main-nav.nav-open .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--cream);
+        z-index: 98;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding-bottom: 48px;
+      }
+      #main-nav.nav-open .nav-links a { font-size: 22px; color: var(--brown); font-weight: 300; }
+      #main-nav.nav-open .nav-cta { display: inline-flex !important; }
+      #main-nav.nav-open .nav-burger { position: relative; z-index: 99; }
+      #main-nav.nav-open .nav-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      #main-nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      #main-nav.nav-open .nav-burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+      .nav-inner { padding: 0 20px; }
+      .two-col, .events-grid, .info-grid { grid-template-columns: 1fr !important; }
+      .subpage-hero-content { padding: 40px 20px; }
+      .subpage-hero-content h1 { font-size: 38px; }
+      .section-inner { padding: 0 20px; }
+      .section-wrap { padding: 60px 0; }
+      .section-title { font-size: 34px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg Logo">
+    </a>
+    <div class="nav-links">
+      <a href="die-basis.html">Die Basis</a>
+      <a href="heilige-feuer.html">Heilige Feuer</a>
+      <a href="wissen.html">Wissen</a>
+      <a href="am-hof.html" style="color:var(--gold)">Am Hof</a>
+      <a href="mitmachen.html">Mitmachen</a>
+      <a href="medien.html">Medien</a>
+      <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
+    </div>
+    <a href="mitmachen.html#spenden" class="btn btn-gold nav-cta" style="font-size:14.5px;padding:10px 22px;">Spenden</a>
+    <div class="nav-burger" aria-label="Menü"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<section class="subpage-hero">
+  <div class="subpage-hero-bg" style="background-image:url('Archivbilder/Besucherhinweise/imgi_3_a-besucher.jpg')"></div>
+  <div class="subpage-hero-overlay"></div>
+  <div class="subpage-hero-content">
+    <div class="hero-eyebrow">Besuchen & Erleben</div>
+    <h1>Am <em>Hof</em></h1>
+    <p>Veranstaltungen, Besucherhinweise, Anfahrt und Übernachtungsmöglichkeiten auf dem Homa-Hof.</p>
+  </div>
+</section>
+
+<!-- A: VERANSTALTUNGEN -->
+<section class="section-wrap" id="veranstaltungen">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="eyebrow">Termine 2026</div>
+      <h2 class="section-title">Veranstaltungen & <em>Seminare</em></h2>
+    </div>
+    <div class="events-grid">
+      <div class="event-card fade-in">
+        <div class="event-date-block">
+          <div class="event-day">21</div>
+          <div class="event-month">Juni 2026</div>
+        </div>
+        <div class="event-info">
+          <span class="event-badge">Seminar</span>
+          <h3 class="event-title">Agnihotra-Basisseminar</h3>
+          <p class="event-desc">Einführung in Theorie und Praxis der vedischen Feuerzeremonie. Für alle Interessierten offen.</p>
+          <a href="#anmeldung" class="event-link">Anmelden →</a>
+        </div>
+      </div>
+      <div class="event-card fade-in" style="transition-delay:0.1s">
+        <div class="event-date-block">
+          <div class="event-day">18</div>
+          <div class="event-month">Juli 2026</div>
+        </div>
+        <div class="event-info">
+          <span class="event-badge">Sommertreffen</span>
+          <h3 class="event-title">Internationales Sommertreffen</h3>
+          <p class="event-desc">Gemeinschaft, Feuer, Vorträge und Begegnungen – das jährliche Herzstück am Homa-Hof.</p>
+          <a href="#anmeldung" class="event-link">Anmelden →</a>
+        </div>
+      </div>
+      <div class="event-card fade-in" style="transition-delay:0.15s">
+        <div class="event-date-block">
+          <div class="event-day">9</div>
+          <div class="event-month">Aug 2026</div>
+        </div>
+        <div class="event-info">
+          <span class="event-badge">Abend</span>
+          <h3 class="event-title">Agnihotra-Abend</h3>
+          <p class="event-desc">Offene Feuerzeremonie für alle – erlebe Agnihotra live ohne Voranmeldung.</p>
+          <a href="#anmeldung" class="event-link">Anmelden →</a>
+        </div>
+      </div>
+      <div class="event-card fade-in" style="transition-delay:0.25s">
+        <div class="event-date-block">
+          <div class="event-day">13</div>
+          <div class="event-month">Sep 2026</div>
+        </div>
+        <div class="event-info">
+          <span class="event-badge">Seminar</span>
+          <h3 class="event-title">Vertiefungsseminar Agnihotra</h3>
+          <p class="event-desc">Für Fortgeschrittene – Vertiefung der Praxis und Feinheiten des Fünffachen Pfads.</p>
+          <a href="#anmeldung" class="event-link">Anmelden →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B: ANMELDEFORMULAR -->
+<section class="section-wrap" id="anmeldung" style="background:var(--cream2);">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="eyebrow">Anmeldung</div>
+      <h2 class="section-title">Online <em>anmelden</em></h2>
+    </div>
+    <form style="max-width:680px;" onsubmit="return false;" class="fade-in">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="vorname">Vorname</label>
+          <input class="form-input" type="text" id="vorname" name="vorname" placeholder="Dein Vorname">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="nachname">Nachname</label>
+          <input class="form-input" type="text" id="nachname" name="nachname" placeholder="Dein Nachname">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">E-Mail</label>
+        <input class="form-input" type="email" id="email" name="email" placeholder="deine@email.de">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="veranstaltung">Veranstaltung</label>
+        <select class="form-select" id="veranstaltung" name="veranstaltung">
+          <option value="">Bitte wählen …</option>
+          <option value="basisseminar">21.–22. Juni 2026 – Agnihotra-Basisseminar</option>
+          <option value="sommertreffen">18.–20. Juli 2026 – Internationales Sommertreffen</option>
+          <option value="agnihotraabend">9. August 2026 – Agnihotra-Abend</option>
+          <option value="vertiefungsseminar">13.–14. September 2026 – Vertiefungsseminar</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="nachricht">Nachricht (optional)</label>
+        <textarea class="form-textarea" id="nachricht" name="nachricht" placeholder="Deine Fragen oder Hinweise …"></textarea>
+      </div>
+      <button type="submit" class="btn btn-gold">Anmeldung absenden</button>
+      <p class="form-note">Wir melden uns innerhalb von 2 Werktagen.</p>
+    </form>
+  </div>
+</section>
+
+<!-- C: BESUCHERHINWEISE -->
+<section class="section-wrap" id="besucherhinweise">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="eyebrow">Besuch planen</div>
+      <h2 class="section-title">Hinweise für <em>Besucher</em></h2>
+    </div>
+    <div style="margin-bottom:48px;border-radius:12px;overflow:hidden;max-height:320px;" class="fade-in">
+      <img src="Archivbilder/Veranstaltungen/imgi_3_a-seminar2017_1800x562.jpg" alt="Veranstaltungen Homa-Hof" style="width:100%;height:320px;object-fit:cover;display:block;" loading="lazy">
+    </div>
+    <div class="info-grid fade-in">
+      <div class="info-block">
+        <div class="info-icon">🕐</div>
+        <div class="info-title">Öffnungszeiten</div>
+        <p class="info-text">Hofladen täglich 12 – 14:30 Uhr geöffnet. Zu Veranstaltungen zusätzliche Zeiten – bitte vorab anfragen.</p>
+      </div>
+      <div class="info-block">
+        <div class="info-icon">🚗</div>
+        <div class="info-title">Parken</div>
+        <p class="info-text">Kostenloses Parken auf dem Hofgelände möglich. Ausgeschilderter Parkplatz direkt am Eingang.</p>
+      </div>
+      <div class="info-block">
+        <div class="info-icon">🌿</div>
+        <div class="info-title">Was mitbringen</div>
+        <p class="info-text">Bequeme, am besten naturfarbene Kleidung, offenes Herz und Neugier auf das heilige Feuer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- D: ANFAHRT -->
+<section class="section-wrap" id="anfahrt" style="background:var(--cream2);">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="eyebrow">Anfahrt</div>
+      <h2 class="section-title">So findet ihr <em>uns</em></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:40px;align-items:start;" class="fade-in">
+      <div>
+        <div class="address-block">
+          <div class="address-label">Adresse</div>
+          <div class="address-text">Oberhaslach 6<br>88633 Heiligenberg</div>
+        </div>
+        <a href="https://maps.google.com/?q=Oberhaslach+6,+88633+Heiligenberg" target="_blank" class="btn btn-outline-dark">In Google Maps öffnen →</a>
+      </div>
+      <div class="map-wrap">
+        <iframe src="https://maps.google.com/maps?q=Homa-Hof+Heiligenberg,+Oberhaslach+6,+88633+Heiligenberg&z=15&output=embed" loading="lazy" title="Karte Homa-Hof Heiligenberg" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- E: ÜBERNACHTUNG -->
+<section class="section-wrap" id="uebernachtung">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="eyebrow">Übernachten</div>
+      <h2 class="section-title">Übernachtungs&shy;<em>möglichkeiten</em></h2>
+    </div>
+    <div class="two-col fade-in">
+      <div class="camp-card">
+        <div class="camp-icon">🚐</div>
+        <h3 class="camp-title">Wohnwagen & Camper</h3>
+        <p class="camp-text">Stellplatz auf dem Hofgelände, direkt neben den Veranstaltungsflächen. Strom und Wasser nach Verfügbarkeit.</p>
+        <span class="camp-price">Preis auf Anfrage</span>
+      </div>
+      <div class="camp-card">
+        <div class="camp-icon">⛺</div>
+        <h3 class="camp-title">Zelt-Camping</h3>
+        <p class="camp-text">Naturnah auf der Hofwiese – einschlafen mit Blick in den Sternenhimmel über dem Bodensee.</p>
+        <span class="camp-price">Preis auf Anfrage</span>
+      </div>
+    </div>
+    <p class="section-text" style="margin-top:24px;">Für Anfragen zur Übernachtung bitte direkt Kontakt aufnehmen: <a href="mailto:info@homa-hof-heiligenberg.de" style="color:var(--gold)">info@homa-hof-heiligenberg.de</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg" style="height:58px;width:auto;margin-bottom:16px;opacity:0.92;display:block">
+      <p class="footer-tagline">Europäisches Zentrum für Agnihotra –<br>ein Ort des heiligen Feuers und der Stille.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-icon">f</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">YT</a>
+        <a href="https://www.instagram.com/agnihotraforfuture/" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">IG</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="die-basis.html">Die Basis</a></li>
+        <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
+        <li><a href="wissen.html">Wissen & Nutzen</a></li>
+        <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="mitmachen.html">Mitmachen</a></li>
+        <li><a href="medien.html">Medien</a></li>
+        <li><a href="https://homa-hof-shop.de" target="_blank">Shop</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Erleben</div>
+      <ul class="footer-links">
+        <li><a href="#veranstaltungen">Veranstaltungen</a></li>
+        <li><a href="#anmeldung">Anmeldung</a></li>
+        <li><a href="#besucherhinweise">Besucherhinweise</a></li>
+        <li><a href="#anfahrt">Anfahrt</a></li>
+        <li><a href="#uebernachtung">Übernachtung</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <div class="footer-contact-item" style="display:flex;align-items:flex-start;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:4px;opacity:.55"><path d="M8 1C5.5 1 3.5 3 3.5 5.5c0 3.5 4.5 9 4.5 9s4.5-5.5 4.5-9C12.5 3 10.5 1 8 1z"/><circle cx="8" cy="5.5" r="1.5"/></svg>
+        <span>Oberhaslach 6<br>88633 Heiligenberg</span>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;opacity:.55"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
+        <a href="tel:+4975529387600">+49 (0)7552 938760</a>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.45)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
+    <div class="footer-legal">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  // Mobile nav
+  (function() {
+    var burger = document.querySelector('.nav-burger');
+    var nav = document.getElementById('main-nav');
+    if (!burger || !nav) return;
+    burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
+    document.addEventListener('click', function(e) {
+      if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
+    });
+  })();
+  });
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

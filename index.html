@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homa-Hof Heiligenberg – Europäisches Zentrum für Agnihotra</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Raleway:wght@200;300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.163.0/build/three.module.js" } }</script>
   <style>
     /* === RESET & BASE === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -176,7 +177,7 @@
       margin-left: auto;
       padding: 4px;
     }
-    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
 
     /* === HERO === */
     #hero {
@@ -198,6 +199,22 @@
       inset: 0;
       background: linear-gradient(to right, rgba(42,21,5,.72) 0%, rgba(42,21,5,.35) 55%, transparent 100%);
     }
+    #fire-shader-wrap {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 80vh;
+      z-index: 1;
+      pointer-events: none;
+    }
+    #fire-shader-wrap canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    @media (max-width: 768px) { #fire-shader-wrap { display: none; } }
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -232,7 +249,7 @@
       font-weight: 300;
       line-height: 1.1;
       color: white;
-      max-width: 600px;
+      max-width: 760px;
       margin-bottom: 24px;
     }
     .hero-title em { font-style: italic; color: var(--gold-light); }
@@ -286,10 +303,10 @@
     }
     .hero-scroll span {
       font-family: var(--sans);
-      font-size: 12.5px;
-      letter-spacing: 0.1em;
+      font-size: 15px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.85);
     }
     .hero-scroll-line {
       width: 1px;
@@ -300,6 +317,34 @@
     @keyframes scrollPulse {
       0%, 100% { opacity: 0.3; }
       50% { opacity: 0.8; }
+    }
+
+    /* === HERO TICKER === */
+    .hero-ticker {
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      vertical-align: bottom;
+      height: 1.1em;
+    }
+    .hero-ticker-word {
+      position: absolute;
+      top: 0; left: 0;
+      white-space: nowrap;
+      font-style: italic;
+      color: var(--gold-light);
+      transform: translateY(108%);
+      opacity: 0;
+    }
+    .hero-ticker-word.active {
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+    .hero-ticker-word.out {
+      transform: translateY(-108%);
+      opacity: 0;
+      transition: transform 0.32s cubic-bezier(0.55, 0, 0.9, 0.45), opacity 0.18s ease;
     }
 
     /* === STATS STRIP === */
@@ -625,8 +670,6 @@
     /* === TESTIMONIALS === */
     #testimonials {
       background: var(--cream3);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
       padding: 100px 0;
     }
     .testimonials-inner {
@@ -900,7 +943,7 @@
       font-family: var(--sans);
       font-size: 14.5px;
       font-weight: 300;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.72);
       line-height: 1.7;
       margin-bottom: 24px;
     }
@@ -926,7 +969,7 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.55);
       margin-bottom: 20px;
     }
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -934,7 +977,7 @@
       font-family: var(--sans);
       font-size: 15px;
       font-weight: 300;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.78);
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--gold-light); }
@@ -942,7 +985,7 @@
       font-family: var(--sans);
       font-size: 15px;
       font-weight: 300;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.78);
       line-height: 1.7;
       margin-bottom: 8px;
     }
@@ -983,6 +1026,24 @@
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none; }
       .nav-burger { display: flex; }
+      #main-nav.nav-open .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--cream);
+        z-index: 98;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding-bottom: 48px;
+      }
+      #main-nav.nav-open .nav-links a { font-size: 22px; color: var(--brown); font-weight: 300; }
+      #main-nav.nav-open .nav-cta { display: inline-flex !important; }
+      #main-nav.nav-open .nav-burger { position: relative; z-index: 99; }
+      #main-nav.nav-open .nav-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      #main-nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      #main-nav.nav-open .nav-burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
       .nav-inner { padding: 0 20px; }
 
       .hero-content { padding: 100px 28px 80px; }
@@ -1022,6 +1083,7 @@
 
       .section-title { font-size: 34px; }
     }
+
   </style>
 </head>
 <body>
@@ -1029,19 +1091,18 @@
 <!-- NAVIGATION -->
 <nav id="main-nav">
   <div class="nav-inner">
-    <a href="#" class="nav-brand">
+    <a href="index.html" class="nav-brand">
       <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg Logo">
     </a>
     <div class="nav-links">
-      <a href="#features">Die Basis</a>
-      <a href="#features">Heilige Feuer</a>
-      <a href="#features">Wissen</a>
-      <a href="#about">Am Hof</a>
-      <a href="#spenden">Mitmachen</a>
-      <a href="#youtube">Medien</a>
-      <a href="#newsletter">Shop</a>
+      <a href="die-basis.html">Die Basis</a>
+      <a href="heilige-feuer.html">Heilige Feuer</a>
+      <a href="wissen.html">Wissen</a>
+      <a href="am-hof.html">Am Hof</a>
+      <a href="mitmachen.html">Mitmachen</a>
+      <a href="medien.html">Medien</a>
+      <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
     </div>
-    <a href="design-explorer.html" target="_blank" class="btn nav-cta" style="font-size:13px;padding:9px 18px;background:transparent;border:1.5px solid var(--border);color:var(--brown2);border-radius:var(--btn-radius);">Design ↗</a>
     <a href="#spenden" class="btn btn-gold nav-cta" style="font-size: 14.5px;padding:10px 22px;">Spenden</a>
     <div class="nav-burger" aria-label="Menü">
       <span></span><span></span><span></span>
@@ -1053,12 +1114,10 @@
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
+  <div id="fire-shader-wrap" aria-hidden="true"><canvas id="fire-c"></canvas></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Europäisches Zentrum für Agnihotra</div>
-    <svg viewBox="0 0 18 26" fill="currentColor" style="width:20px;height:28px;margin-bottom:16px;display:block;color:rgba(245,216,138,0.55)">
-      <path d="M9 0C9 0 6 4 6 8c0 1 .3 2 .3 2S4 8.5 4 11c0 4.5 2.2 7.5 5 8.8-.7-2.2-.2-4.5 1.2-5.8.3 2.5 1 5.5 2 7 1.8-2.2 3-5 3-7.5 0-1.8-.6-3.2-1.5-4.2.4-1.5 1-4-.2-6.3 0 0-.6 2.5-1.8 3.8C11.2 5 9 0 9 0z"/>
-    </svg>
-    <h1 class="hero-title">Heilige Feuer zur <em>Heilung der Welt</em></h1>
+    <h1 class="hero-title">Heilige Feuer zur <em>Heilung der <span class="hero-ticker" aria-live="polite"><span class="hero-ticker-word">Welt</span><span class="hero-ticker-word">Menschen</span><span class="hero-ticker-word">Natur</span><span class="hero-ticker-word">Erde</span></span></em></h1>
     <p class="hero-sub">Vedische Feuerzeremonien am Bodensee – für Heilung, Stille und Wohlergehen aller Lebewesen. Kostenlos erlernen, für alle Menschen.</p>
     <div class="hero-buttons">
       <a href="#event" class="btn btn-gold">Nächste Veranstaltung</a>
@@ -1142,7 +1201,7 @@
           <span class="card-tag">Wissen</span>
           <h3 class="card-title">Was ist Agnihotra?</h3>
           <p class="card-text">Eine Feuerzeremonie mit universeller Wirksamkeit – einfach zu erlernen, täglich zu praktizieren.</p>
-          <a href="#" class="card-link">Mehr erfahren →</a>
+          <a href="heilige-feuer.html" class="card-link">Mehr erfahren →</a>
         </div>
       </div>
       <div class="card fade-in" style="transition-delay:0.1s">
@@ -1153,7 +1212,7 @@
           <span class="card-tag">Der Ort</span>
           <h3 class="card-title">Der Homa-Hof</h3>
           <p class="card-text">Seit 1988 ein Kraftort im Hinterland des Bodensees – licht- und liebevoll, offen für alle Interessierten.</p>
-          <a href="#" class="card-link">Den Hof entdecken →</a>
+          <a href="die-basis.html" class="card-link">Den Hof entdecken →</a>
         </div>
       </div>
       <div class="card fade-in" style="transition-delay:0.2s">
@@ -1164,7 +1223,7 @@
           <span class="card-tag">Erleben</span>
           <h3 class="card-title">Veranstaltungen & Seminare</h3>
           <p class="card-text">Agnihotra-Einführungen, Seminare und Agnihotra-Abende – das Wissen um das heilige Feuer direkt erleben.</p>
-          <a href="#event" class="card-link">Alle Veranstaltungen →</a>
+          <a href="veranstaltungen.html" class="card-link">Alle Veranstaltungen →</a>
         </div>
       </div>
     </div>
@@ -1187,8 +1246,8 @@
         <p class="event-desc">Erlebe die vedische Feuerzeremonie live und lerne alles Wichtige für die eigene Praxis. Der Abend ist offen für alle – Vorkenntnisse sind nicht erforderlich.</p>
       </div>
       <div class="event-actions">
-        <a href="#" class="btn btn-gold">Jetzt anmelden</a>
-        <a href="#" class="event-all-link">Alle Veranstaltungen →</a>
+        <a href="am-hof.html" class="btn btn-gold">Jetzt anmelden</a>
+        <a href="veranstaltungen.html" class="event-all-link">Alle Veranstaltungen →</a>
       </div>
     </div>
   </div>
@@ -1211,7 +1270,7 @@
           <span class="card-tag">Gemeinschaft</span>
           <h3 class="card-title">Homa-Hof e.V.</h3>
           <p class="card-text">Aktive Mitglieder, Idealisten und Freunde des heiligen Feuers – die Homa-Hof-Familie trägt gemeinsam die Vision für eine heilende Welt.</p>
-          <a href="#" class="card-link">Über den Verein →</a>
+          <a href="mitmachen.html" class="card-link">Über den Verein →</a>
         </div>
       </div>
       <div class="about-card fade-in" style="transition-delay:0.1s">
@@ -1223,7 +1282,7 @@
           <span class="card-tag">Initiator</span>
           <h3 class="card-title">Horst Heigl</h3>
           <p class="card-text">Erster hauptberuflicher Hatha-Yoga-Lehrer Deutschlands und Gründer des Homa-Hofs 1988 – ein Leben im Dienst des heiligen Feuers.</p>
-          <a href="#" class="card-link">Mehr über Horst Heigl →</a>
+          <a href="die-basis.html" class="card-link">Mehr über Horst Heigl →</a>
         </div>
       </div>
       <div class="about-card fade-in" style="transition-delay:0.2s">
@@ -1235,27 +1294,19 @@
           <span class="card-tag">Ausblick</span>
           <h3 class="card-title">Unsere Vision</h3>
           <p class="card-text">Glück, Wohlergehen und Gesundheit für alle Lebewesen in einer gesunden Umwelt – durch die heilende Kraft des Agnihotra-Feuers.</p>
-          <a href="#" class="card-link">Die Vision lesen →</a>
+          <a href="die-basis.html" class="card-link">Die Vision lesen →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ORNAMENT -->
-<div class="ornament-wrap" style="background:var(--cream)">
-  <div class="ornament">
-    <div class="ornament-line"></div>
-    <div class="ornament-mark">
-      <svg viewBox="0 0 14 20" fill="currentColor" style="width:11px;height:16px"><path d="M7 0C7 0 4.5 3 4.5 6c0 .8.3 1.5.3 1.5S3 6.5 3 8.5c0 3.5 1.7 5.8 4 6.8-.5-1.7-.2-3.5 1-4.5.2 2 .8 4.2 1.5 5.5 1.4-1.7 2.5-4 2.5-6s-.5-3-1.2-3.8c.3-1.2.8-3-.2-5 0 0-.5 2-1.5 3C7.5 3.5 7 0 7 0z"/></svg>
-      <svg viewBox="0 0 8 8" fill="currentColor" style="width:5px;height:5px"><rect x="2" y="0" width="4" height="4" transform="rotate(45 4 4)"/></svg>
-      <svg viewBox="0 0 14 20" fill="currentColor" style="width:11px;height:16px"><path d="M7 0C7 0 4.5 3 4.5 6c0 .8.3 1.5.3 1.5S3 6.5 3 8.5c0 3.5 1.7 5.8 4 6.8-.5-1.7-.2-3.5 1-4.5.2 2 .8 4.2 1.5 5.5 1.4-1.7 2.5-4 2.5-6s-.5-3-1.2-3.8c.3-1.2.8-3-.2-5 0 0-.5 2-1.5 3C7.5 3.5 7 0 7 0z"/></svg>
-    </div>
-    <div class="ornament-line"></div>
-  </div>
-</div>
-
 <!-- TESTIMONIALS -->
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFFCF5;display:block">
+  <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
+    <path d="M0,54 L0,30 C360,54 720,6 1080,30 C1260,42 1370,36 1440,28 L1440,54 Z" fill="#FFF0D4"/>
+  </svg>
+</div>
 <section id="testimonials">
   <div class="testimonials-inner">
     <div class="testimonials-header">
@@ -1304,6 +1355,11 @@
 </section>
 
 <!-- SPENDEN -->
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFF0D4;display:block">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:80px">
+    <path d="M0,80 L0,48 C280,8 560,78 840,42 C1060,16 1260,62 1440,34 L1440,80 Z" fill="#2A1505"/>
+  </svg>
+</div>
 <section id="spenden">
   <div class="spenden-inner">
     <div class="fade-in">
@@ -1316,8 +1372,8 @@
         <li>Pflege und Erhalt des Kraftorts Heiligenberg</li>
       </ul>
       <div class="spenden-buttons">
-        <a href="#" class="btn btn-gold">Jetzt per PayPal spenden</a>
-        <a href="#" class="btn btn-outline">Banküberweisung</a>
+        <a href="https://www.paypal.com/donate?token=1MHMFxSMzRT4OpxzvqDtVyehrzfJ_zi0qyjKyY9okUBJ-a1qcU87KHd3I95R8C1ZNNk_0QMMyuiLWHyr&locale.x=DE" target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
+        <a href="#spenden" class="btn btn-outline">Banküberweisung</a>
       </div>
     </div>
     <div class="spenden-bank fade-in" style="transition-delay:0.15s">
@@ -1328,15 +1384,15 @@
       </div>
       <div class="bank-row">
         <span class="bank-label">IBAN</span>
-        <span class="bank-value">DE XX XXXX XXXX XXXX XXXX XX</span>
+        <span class="bank-value">DE39 6905 1725 0002 0423 56</span>
       </div>
       <div class="bank-row">
         <span class="bank-label">BIC</span>
-        <span class="bank-value">XXXXXXXXXXXXXXX</span>
+        <span class="bank-value">SOLADES1SAL</span>
       </div>
       <div class="bank-row">
         <span class="bank-label">Bank</span>
-        <span class="bank-value">Sparkasse Bodensee</span>
+        <span class="bank-value">Sparkasse Salem-Heiligenberg</span>
       </div>
       <div class="bank-row" style="margin-bottom:0">
         <span class="bank-label">Verwendungszweck</span>
@@ -1364,7 +1420,7 @@
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-brand-name">Homa-Hof Heiligenberg</div>
+      <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg" style="height:58px;width:auto;margin-bottom:16px;opacity:0.92;display:block">
       <p class="footer-tagline">Europäisches Zentrum für Agnihotra –<br>ein Ort des heiligen Feuers und der Stille.</p>
       <div class="footer-social">
         <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-icon">f</a>
@@ -1375,48 +1431,102 @@
     <div>
       <div class="footer-col-title">Navigation</div>
       <ul class="footer-links">
-        <li><a href="#">Die Basis</a></li>
-        <li><a href="#">Heilige Feuer</a></li>
-        <li><a href="#">Wissen & Nutzen</a></li>
-        <li><a href="#">Am Hof</a></li>
-        <li><a href="#">Mitmachen</a></li>
-        <li><a href="#">Medien</a></li>
-        <li><a href="#">Shop</a></li>
+        <li><a href="die-basis.html">Die Basis</a></li>
+        <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
+        <li><a href="wissen.html">Wissen & Nutzen</a></li>
+        <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="mitmachen.html">Mitmachen</a></li>
+        <li><a href="medien.html">Medien</a></li>
+        <li><a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Erleben</div>
       <ul class="footer-links">
-        <li><a href="#">Veranstaltungen</a></li>
-        <li><a href="#">Seminare</a></li>
-        <li><a href="#">Besucherhinweise</a></li>
-        <li><a href="#">Anfahrt</a></li>
-        <li><a href="#">Übernachtung</a></li>
+        <li><a href="am-hof.html">Veranstaltungen</a></li>
+        <li><a href="am-hof.html">Seminare</a></li>
+        <li><a href="am-hof.html">Besucherhinweise</a></li>
+        <li><a href="am-hof.html">Anfahrt</a></li>
+        <li><a href="am-hof.html">Übernachtung</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Kontakt</div>
-      <div class="footer-contact-item">Oberhaslach 6<br>88633 Heiligenberg</div>
-      <div class="footer-contact-item"><a href="tel:+4975529387600">+49 (0)7552 938760</a></div>
-      <div class="footer-contact-item"><a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></div>
-      <div class="footer-contact-item" style="margin-top:16px;font-size: 13.5px;color:rgba(255,255,255,0.35)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
+      <div class="footer-contact-item" style="display:flex;align-items:flex-start;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:4px;opacity:.55"><path d="M8 1C5.5 1 3.5 3 3.5 5.5c0 3.5 4.5 9 4.5 9s4.5-5.5 4.5-9C12.5 3 10.5 1 8 1z"/><circle cx="8" cy="5.5" r="1.5"/></svg>
+        <span>Oberhaslach 6<br>88633 Heiligenberg</span>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;opacity:.55"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
+        <a href="tel:+4975529387600">+49 (0)7552 938760</a>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.45)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
     </div>
   </div>
   <div class="footer-divider"></div>
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
     <div class="footer-legal">
-      <a href="#">Impressum</a>
-      <a href="#">Datenschutz</a>
+      <a href="https://www.homa-hof-heiligenberg.de/impressum.html" target="_blank" rel="noopener">Impressum</a>
+      <a href="https://www.homa-hof-heiligenberg.de/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>
     </div>
   </div>
 </footer>
 
 <script>
+
+  // Hero word ticker
+  (function() {
+    var ticker = document.querySelector('.hero-ticker');
+    if (!ticker) return;
+    var words = ticker.querySelectorAll('.hero-ticker-word');
+    var current = 0;
+
+    function sizeContainer() {
+      words.forEach(function(w) {
+        w.style.cssText = 'position:absolute;visibility:hidden;transform:translateY(0);opacity:1;transition:none';
+      });
+      var maxW = 0;
+      words.forEach(function(w) { if (w.scrollWidth > maxW) maxW = w.scrollWidth; });
+      ticker.style.width = maxW + 'px';
+      words.forEach(function(w) { w.style.cssText = ''; });
+    }
+
+    var ready = document.fonts ? document.fonts.ready : Promise.resolve();
+    ready.then(function() {
+      sizeContainer();
+      words[0].classList.add('active');
+
+      setInterval(function() {
+        var prev = current;
+        current = (current + 1) % words.length;
+        words[prev].classList.remove('active');
+        words[prev].classList.add('out');
+        setTimeout(function() { words[prev].classList.remove('out'); }, 600);
+        words[current].classList.add('active');
+      }, 1800);
+    });
+  })();
+
   // Nav scroll effect
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
+  // Mobile nav
+  (function() {
+    var burger = document.querySelector('.nav-burger');
+    var nav = document.getElementById('main-nav');
+    if (!burger || !nav) return;
+    burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
+    document.addEventListener('click', function(e) {
+      if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
+    });
+  })();
   });
 
   // Scroll fade-in via IntersectionObserver
@@ -1450,211 +1560,122 @@
   }
 </script>
 
-<!-- DESIGN SWITCHER -->
-<style>
-  #ds-wrap {
-    position: fixed;
-    bottom: 28px;
-    left: 28px;
-    z-index: 500;
-    font-family: 'Jost', system-ui, sans-serif;
-  }
-  #ds-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: white;
-    border: 1px solid #D8D4C8;
-    border-radius: 20px;
-    padding: 9px 18px;
-    font-size: 13px;
-    font-family: 'Jost', system-ui, sans-serif;
-    font-weight: 500;
-    color: #1A1A14;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.14);
-    letter-spacing: 0.03em;
-    transition: box-shadow 0.2s;
-  }
-  #ds-toggle:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
-  #ds-toggle svg { width: 14px; height: 14px; flex-shrink: 0; }
-  #ds-panel {
-    display: none;
-    position: absolute;
-    bottom: 48px;
-    left: 0;
-    background: white;
-    border: 1px solid #E0DDD8;
-    border-radius: 14px;
-    padding: 16px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.14);
-    min-width: 230px;
-  }
-  #ds-panel.open { display: block; }
-  .ds-label {
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #9A9890;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #F0EDE4;
-  }
-  .ds-pill {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.15s;
-    border: 1.5px solid transparent;
-    margin-bottom: 3px;
-  }
-  .ds-pill:last-child { margin-bottom: 0; }
-  .ds-pill:hover { background: #F5F3EE; }
-  .ds-pill.active { border-color: #D8D4C8; background: #F5F3EE; }
-  .ds-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    border: 1px solid rgba(0,0,0,0.08);
-  }
-  .ds-name {
-    font-size: 13.5px;
-    font-weight: 400;
-    color: #1A1A14;
-    flex: 1;
-  }
-  .ds-id {
-    font-size: 11px;
-    color: #9A9890;
-    font-family: monospace;
-  }
-  * { transition: color 0.35s ease, background-color 0.35s ease, border-color 0.35s ease; }
-</style>
+<script type="module">
+import * as THREE from 'three';
 
-<div id="ds-wrap">
-  <button id="ds-toggle" onclick="toggleDS()">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="8" cy="8" r="6.5"/><circle cx="8" cy="8" r="2"/>
-    </svg>
-    Design
-  </button>
-  <div id="ds-panel">
-    <div class="ds-label">Richtung wählen</div>
-    <div id="ds-pills"></div>
-  </div>
-</div>
+const vert = `void main() { gl_Position = vec4(position, 1.0); }`;
 
-<script>
-const DS_THEMES = {
-  A: {
-    name: 'Sonnenwärme',
-    dot: '#B84010',
-    vars: {
-      '--cream':'#FFFCF5','--cream2':'#FFF8EC','--cream3':'#FFF0D4',
-      '--gold':'#C07818','--gold2':'#E8A020','--gold-light':'#F5D88A',
-      '--copper':'#B84010',
-      '--brown':'#2A1505','--brown2':'#5A3A18','--brown3':'#8A6030',
-      '--border':'#EDD9A8','--border2':'#F5E8C0',
-      '--serif':"'Playfair Display', Georgia, serif",
-      '--sans':"'Raleway', system-ui, sans-serif",
-      '--btn-radius':'50px',
-      '--dark-bg':'linear-gradient(135deg,#2A1505 0%,#4A2A0A 100%)'
-    }
-  },
-  B: {
-    name: 'Vedisch-Editorial',
-    dot: '#1A0A00',
-    vars: {
-      '--cream':'#FDFAF4','--cream2':'#F5EDD8','--cream3':'#EDE5CC',
-      '--gold':'#C07818','--gold2':'#D49020','--gold-light':'#D9C8A0',
-      '--brown':'#1A0A00','--brown2':'#8B7050','--brown3':'#A09070',
-      '--border':'#D9C8A0','--border2':'#E8DCC0',
-      '--serif':"'Playfair Display', Georgia, serif",
-      '--sans':"'Jost', system-ui, sans-serif",
-      '--btn-radius':'3px',
-      '--dark-bg':'linear-gradient(135deg,#1A0A00 0%,#2A1800 100%)'
-    }
-  },
-  C: {
-    name: 'Naturstein & Licht',
-    dot: '#7A5030',
-    vars: {
-      '--cream':'#F9F6F0','--cream2':'#EDE5D8','--cream3':'#E5DDD0',
-      '--gold':'#7A5030','--gold2':'#C07818','--gold-light':'#C8B090',
-      '--brown':'#3D2810','--brown2':'#6A4828','--brown3':'#8A6040',
-      '--border':'#C8B090','--border2':'#D8C8A8',
-      '--serif':"'DM Serif Display', Georgia, serif",
-      '--sans':"'Jost', system-ui, sans-serif",
-      '--btn-radius':'6px',
-      '--dark-bg':'linear-gradient(135deg,#3D2810 0%,#5A3A20 100%)'
-    }
-  },
-  D: {
-    name: 'Kupfer Modern',
-    dot: '#B84010',
-    vars: {
-      '--cream':'#FBF7F2','--cream2':'#F2EBE0','--cream3':'#E8E0D8',
-      '--gold':'#B84010','--gold2':'#E8A020','--gold-light':'#D4B898',
-      '--brown':'#1A0A00','--brown2':'#5A3018','--brown3':'#8A6040',
-      '--border':'#D4B898','--border2':'#E4C8A8',
-      '--serif':"'Raleway', system-ui, sans-serif",
-      '--sans':"'Jost', system-ui, sans-serif",
-      '--btn-radius':'3px',
-      '--dark-bg':'linear-gradient(135deg,#1A0A00 0%,#3A1808 100%)'
-    }
-  },
-  E: {
-    name: 'Zen Minimal',
-    dot: '#4A6840',
-    vars: {
-      '--cream':'#FAFAF7','--cream2':'#F0EDE4','--cream3':'#E8E4D8',
-      '--gold':'#4A6840','--gold2':'#C07818','--gold-light':'#D8D4C8',
-      '--brown':'#1A1A14','--brown2':'#8A8A78','--brown3':'#A0A090',
-      '--border':'#D8D4C8','--border2':'#E4E0D4',
-      '--serif':"'Cormorant Garamond', Georgia, serif",
-      '--sans':"'Raleway', system-ui, sans-serif",
-      '--btn-radius':'4px',
-      '--dark-bg':'linear-gradient(135deg,#1A1A14 0%,#2A2A20 100%)'
-    }
-  }
-};
+const frag = `
+precision highp float;
+uniform vec2  iResolution;
+uniform float iTime;
+uniform vec2  iMouse;
 
-let activeTheme = 'A';
-
-function applyTheme(id) {
-  const t = DS_THEMES[id];
-  const root = document.documentElement;
-  Object.entries(t.vars).forEach(([k, v]) => root.style.setProperty(k, v));
-  activeTheme = id;
-  document.querySelectorAll('.ds-pill').forEach(p => p.classList.toggle('active', p.dataset.id === id));
+float hash(vec2 p) {
+  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
 }
-
-function toggleDS() {
-  document.getElementById('ds-panel').classList.toggle('open');
+float noise(vec2 p) {
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  return mix(
+    mix(hash(i),             hash(i + vec2(1,0)), u.x),
+    mix(hash(i + vec2(0,1)), hash(i + vec2(1,1)), u.x),
+    u.y
+  );
 }
-
-// Build pills
-const pillContainer = document.getElementById('ds-pills');
-Object.entries(DS_THEMES).forEach(([id, t]) => {
-  const pill = document.createElement('div');
-  pill.className = 'ds-pill' + (id === activeTheme ? ' active' : '');
-  pill.dataset.id = id;
-  pill.innerHTML = `<div class="ds-dot" style="background:${t.dot}"></div><span class="ds-name">${t.name}</span><span class="ds-id">${id}</span>`;
-  pill.onclick = () => { applyTheme(id); };
-  pillContainer.appendChild(pill);
-});
-
-// Close panel on outside click
-document.addEventListener('click', e => {
-  if (!document.getElementById('ds-wrap').contains(e.target)) {
-    document.getElementById('ds-panel').classList.remove('open');
+float fbm(vec2 p) {
+  float v = 0.0, a = 0.5;
+  for (int i = 0; i < 8; i++) {
+    v += a * noise(p);
+    p  = p * 2.1 + vec2(1.7, 9.2);
+    a *= 0.5;
   }
-});
+  return v;
+}
+float fireDensity(vec2 uv, vec2 mouse, float t) {
+  vec2 pull = normalize(mouse - uv + 0.001)
+            * smoothstep(0.6, 0.0, length(mouse - uv)) * 0.18;
+  vec2 drift = vec2(t * 0.18, -t * 1.1);
+  vec2 p = uv + pull;
+  vec2 q = vec2(
+    fbm(p * 2.2 + drift),
+    fbm(p * 2.2 + vec2(5.2, 1.3) + drift * 0.6)
+  );
+  vec2 r = vec2(
+    fbm(p * 3.0 + 3.8 * q + vec2(1.7, 9.2) + t * 0.55),
+    fbm(p * 3.0 + 3.8 * q + vec2(8.3, 2.8) - t * 0.28)
+  );
+  float raw = fbm(p * 2.8 + 4.2 * r);
+  float yFade = 1.0 - smoothstep(-0.5, 0.72, uv.y);
+  return smoothstep(0.22, 0.58, raw * yFade);
+}
+vec3 fireColor(float c) {
+  vec3 col = vec3(0.92, 0.22, 0.01);
+  col = mix(col, vec3(1.00, 0.48, 0.03), smoothstep(0.18, 0.40, c));
+  col = mix(col, vec3(1.00, 0.76, 0.14), smoothstep(0.40, 0.62, c));
+  col = mix(col, vec3(1.00, 0.93, 0.55), smoothstep(0.62, 0.80, c));
+  col = mix(col, vec3(1.00, 0.99, 0.92), smoothstep(0.80, 0.97, c));
+  return col;
+}
+void main() {
+  vec2 uv    = (gl_FragCoord.xy - 0.5 * iResolution.xy) / iResolution.y;
+  vec2 mouse = (iMouse          - 0.5 * iResolution.xy) / iResolution.y;
+  float t = iTime;
+  float c = fireDensity(uv, mouse, t);
+  /* Per-column flame height driven by slow FBM — creates tall/short variance */
+  float hNoise  = fbm(vec2(uv.x * 1.1 + t * 0.06, 2.3 + t * 0.12));
+  float peak    = 0.10 + hNoise * 0.55;           /* peaks from ~0.10 to ~0.65 */
+  float curtain = 1.0 - smoothstep(peak - 0.45, peak, uv.y);
+  c *= curtain;
+  float alpha = smoothstep(0.20, 0.72, c) * curtain * 0.36;
+  gl_FragColor = vec4(fireColor(c), alpha);
+}
+`;
+
+const wrap   = document.getElementById('fire-shader-wrap');
+const canvas = document.getElementById('fire-c');
+if (wrap && canvas) {
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+
+  const uniforms = {
+    iTime:       { value: 0 },
+    iResolution: { value: new THREE.Vector2() },
+    iMouse:      { value: new THREE.Vector2() },
+  };
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  scene.add(new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.ShaderMaterial({ vertexShader: vert, fragmentShader: frag, uniforms, transparent: true })
+  ));
+
+  function resize() {
+    const r = wrap.getBoundingClientRect();
+    renderer.setSize(r.width, r.height);
+    uniforms.iResolution.value.set(r.width, r.height);
+    uniforms.iMouse.value.set(r.width / 2, 0);
+  }
+  new ResizeObserver(resize).observe(wrap);
+  resize();
+
+  window.addEventListener('mousemove', e => {
+    const r = wrap.getBoundingClientRect();
+    uniforms.iMouse.value.set(
+      e.clientX - r.left,
+      r.height - (e.clientY - r.top)
+    );
+  }, { passive: true });
+
+  const clock = new THREE.Clock();
+  renderer.setAnimationLoop(() => {
+    uniforms.iTime.value = clock.getElapsedTime();
+    renderer.render(scene, camera);
+  });
+}
 </script>
+
 </body>
 </html>

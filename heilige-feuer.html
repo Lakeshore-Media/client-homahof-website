@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heilige Feuer – Homa-Hof Heiligenberg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Raleway:wght@200;300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--brown); background: var(--cream); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --cream: #FFFCF5;
+      --cream2: #FFF8EC;
+      --cream3: #FFF0D4;
+      --gold: #C07818;
+      --gold2: #E8A020;
+      --gold-light: #F5D88A;
+      --copper: #B84010;
+      --brown: #2A1505;
+      --brown2: #5A3A18;
+      --brown3: #8A6030;
+      --border: #EDD9A8;
+      --border2: #F5E8C0;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', system-ui, sans-serif;
+      --btn-radius: 50px;
+      --dark-bg: linear-gradient(135deg, #2A1505 0%, #4A2A0A 100%);
+    }
+
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 45px;
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: var(--btn-radius);
+      font-family: var(--sans);
+      font-size: 15.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .btn-gold { background: var(--copper); color: white; border: 2px solid var(--copper); }
+    .btn-gold:hover { background: #8A2A08; border-color: #8A2A08; }
+    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.6); }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+    .btn-outline-dark { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+    .btn-outline-dark:hover { background: var(--gold); color: white; }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,252,245,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border2);
+      transition: box-shadow 0.3s ease;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(42,21,5,0.1); }
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-brand img { height: 68px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 30px; margin-left: auto; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--brown2);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { margin-left: 16px; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 4px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+
+    .subpage-hero {
+      min-height: 420px;
+      padding-top: 84px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .subpage-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .subpage-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(42,21,5,.72) 0%, rgba(42,21,5,.35) 55%, transparent 100%);
+    }
+    .subpage-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 60px 48px;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold-light); flex-shrink: 0; }
+    .subpage-hero-content h1 {
+      font-family: var(--serif);
+      font-size: 58px;
+      font-weight: 300;
+      line-height: 1.15;
+      color: white;
+      max-width: 600px;
+      margin-bottom: 16px;
+    }
+    .subpage-hero-content h1 em { font-style: italic; color: var(--gold-light); }
+    .subpage-hero-content p {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.82);
+      max-width: 480px;
+    }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+    .col-img { border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; }
+    .col-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    .section-wrap { padding: 100px 0; }
+    .section-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+    .section-text {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .eyebrow { justify-content: center; }
+    .section-header.center .eyebrow::before { display: none; }
+
+    /* Steps grid */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .step-card {
+      background: white;
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 32px 24px;
+    }
+    .step-number {
+      font-family: var(--serif);
+      font-size: 64px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 10px;
+    }
+    .step-text {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.75;
+    }
+
+    /* Five-fold path grid */
+    .fivefold-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,21,5,0.12); }
+    .card:hover .card-img img { transform: scale(1.04); }
+    .card-img { height: 200px; overflow: hidden; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .card-body { padding: 24px; }
+    .card-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
+    .card-text { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); line-height: 1.75; }
+
+    /* Dark section */
+    .dark-section { background: var(--dark-bg); padding: 100px 0; position: relative; overflow: hidden; }
+    .dark-section .eyebrow { color: var(--gold-light); }
+    .dark-section .eyebrow::before { background: var(--gold-light); }
+    .dark-section .section-title { color: white; }
+    .dark-section .section-text { color: rgba(255,255,255,0.75); }
+
+    /* Agnihotrazeiten special section */
+    .zeiten-section {
+      position: relative;
+      padding: 80px 0 72px;
+      overflow: hidden;
+    }
+    .zeiten-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .zeiten-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(42,21,5,0.82);
+    }
+    .zeiten-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      text-align: center;
+    }
+    .zeiten-content .eyebrow { justify-content: center; color: var(--gold-light); }
+    .zeiten-content .eyebrow::before { display: none; }
+    .zeiten-content .section-title { color: white; }
+    .zeiten-content .section-text { color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 36px; }
+    .zeiten-calc-wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      margin: 44px auto 0;
+      background: #FFFCF5;
+      border-radius: 14px;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.4);
+      padding: 40px;
+      font-family: var(--sans);
+    }
+    .calc-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .calc-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .calc-full { grid-column: 1 / -1; }
+    .calc-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .calc-group label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown2);
+      font-weight: 500;
+    }
+    .calc-group input, .calc-group select {
+      padding: 10px 14px;
+      border: 1px solid rgba(42,21,5,0.2);
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--brown);
+      background: white;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .calc-group input:focus, .calc-group select:focus { border-color: var(--gold); }
+    .calc-location-wrap { position: relative; }
+    .calc-location-wrap input { padding-right: 44px; }
+    .calc-geo-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gold);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+    }
+    .calc-geo-btn:hover { color: var(--brown); }
+    .calc-hint {
+      font-size: 12px;
+      color: var(--brown2);
+      min-height: 18px;
+      margin-top: 2px;
+    }
+    .calc-hint.err { color: #b94040; }
+    .calc-results-wrap {
+      margin-top: 32px;
+      border-top: 1px solid rgba(42,21,5,0.12);
+      padding-top: 28px;
+      display: none;
+    }
+    .calc-results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .calc-results-title {
+      font-family: var(--serif);
+      font-size: 19px;
+      color: var(--brown);
+    }
+    .calc-csv-btn { font-size: 13px; padding: 8px 16px; white-space: nowrap; }
+    .calc-table-wrap { overflow-x: auto; }
+    .calc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .calc-table th {
+      text-align: left;
+      padding: 9px 14px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown2);
+      font-weight: 500;
+      border-bottom: 1px solid rgba(42,21,5,0.15);
+    }
+    .calc-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid rgba(42,21,5,0.06);
+      color: var(--brown);
+    }
+    .calc-table tr:last-child td { border-bottom: none; }
+    .calc-table tr:nth-child(even) td { background: rgba(42,21,5,0.025); }
+    .calc-time { font-weight: 600; font-size: 15px; color: var(--copper); }
+    .calc-tz-note { margin-top: 14px; font-size: 12px; color: var(--brown2); text-align: right; }
+    .calc-trunc-note { font-size: 13px; color: var(--brown2); margin-bottom: 12px; }
+    @media (max-width: 768px) {
+      .zeiten-calc-wrap { margin: 28px 16px 0; padding: 28px 20px; }
+      .calc-row, .calc-row-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Kinder teaser */
+    .kinder-section {
+      position: relative;
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .kinder-bg { position: absolute; inset: 0; background-size: cover; background-position: center top; }
+    .kinder-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(42,21,5,.8) 0%, rgba(42,21,5,.45) 60%, transparent 100%); }
+    .kinder-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 60px 48px;
+      width: 100%;
+    }
+    .kinder-content .eyebrow { color: var(--gold-light); }
+    .kinder-content .eyebrow::before { background: var(--gold-light); }
+    .kinder-content .section-title { color: white; }
+    .kinder-content .section-text { color: rgba(255,255,255,0.82); max-width: 460px; }
+
+    /* Further fires */
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+    footer { background: #2A1505; padding: 72px 0 0; }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 48px;
+    }
+    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 14px; }
+    .social-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--sans); font-size: 13.5px; font-weight: 500;
+      color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s;
+    }
+    .social-icon:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-contact-item { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); line-height: 1.7; margin-bottom: 8px; }
+    .footer-contact-item a { transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--gold-light); }
+    .footer-divider { max-width: 1440px; margin: 56px auto 0; padding: 0 48px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-copy { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--gold-light); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      #main-nav.nav-open .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--cream);
+        z-index: 98;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding-bottom: 48px;
+      }
+      #main-nav.nav-open .nav-links a { font-size: 22px; color: var(--brown); font-weight: 300; }
+      #main-nav.nav-open .nav-cta { display: inline-flex !important; }
+      #main-nav.nav-open .nav-burger { position: relative; z-index: 99; }
+      #main-nav.nav-open .nav-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      #main-nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      #main-nav.nav-open .nav-burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+      .nav-inner { padding: 0 20px; }
+      .two-col, .three-col, .fivefold-grid { grid-template-columns: 1fr !important; }
+      .two-col.reverse { direction: ltr; }
+      .subpage-hero-content { padding: 40px 20px; }
+      .subpage-hero-content h1 { font-size: 38px; }
+      .section-inner { padding: 0 20px; }
+      .section-wrap { padding: 60px 0; }
+      .section-title { font-size: 34px; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg Logo">
+    </a>
+    <div class="nav-links">
+      <a href="die-basis.html">Die Basis</a>
+      <a href="heilige-feuer.html" style="color:var(--gold)">Heilige Feuer</a>
+      <a href="wissen.html">Wissen</a>
+      <a href="am-hof.html">Am Hof</a>
+      <a href="mitmachen.html">Mitmachen</a>
+      <a href="medien.html">Medien</a>
+      <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
+    </div>
+    <a href="mitmachen.html#spenden" class="btn btn-gold nav-cta" style="font-size:14.5px;padding:10px 22px;">Spenden</a>
+    <div class="nav-burger" aria-label="Menü"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<section class="subpage-hero">
+  <div class="subpage-hero-bg" style="background-image:url('Archivbilder/Was ist Agnihotra/imgi_3_a-was ist a.jpg')"></div>
+  <div class="subpage-hero-overlay"></div>
+  <div class="subpage-hero-content">
+    <div class="hero-eyebrow">Vedische Feuerzeremonien</div>
+    <h1>Heilige <em>Feuer</em></h1>
+    <p>Agnihotra, der Fünffache Pfad und weitere heilige Feuer – Wissen und Praxis aus der vedischen Tradition.</p>
+  </div>
+</section>
+
+<!-- A: WAS IST AGNIHOTRA -->
+<section class="section-wrap">
+  <div class="section-inner">
+    <div class="two-col fade-in">
+      <div>
+        <div class="eyebrow">Grundlagen</div>
+        <h2 class="section-title">Die <em>Zeremonie</em></h2>
+        <p class="section-text">Agnihotra ist eine vedische Feuerzeremonie, die exakt zum Sonnenauf- und -untergang durchgeführt wird. In einer kleinen Kupferpyramide verbrennt man Kuhdung, Ghee und Reis – dazu wird ein kurzes Mantra gesungen. Die entstehende Asche hat heilende Eigenschaften für Mensch, Tier und Pflanze.</p>
+        <a href="#agnihotra-praxis" class="btn btn-outline-dark">Wie sie geht →</a>
+      </div>
+      <div class="col-img fade-in" style="transition-delay:0.15s">
+        <img src="Archivbilder/Was ist Agnihotra/imgi_4_Agnihotra-Winter.jpg" alt="Agnihotra im Winter" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B: AGNIHOTRA PRAXIS -->
+<section class="section-wrap" id="agnihotra-praxis" style="background:var(--cream2);">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="eyebrow">Praxis</div>
+      <h2 class="section-title">So wird Agnihotra <em>durchgeführt</em></h2>
+      <div class="col-img" style="width:100%;height:280px;margin-top:32px;border-radius:12px;overflow:hidden;">
+        <img src="Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg" alt="Agnihotra Praxis" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+      </div>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card fade-in">
+        <div class="step-number">1</div>
+        <div class="step-title">Vorbereitung</div>
+        <p class="step-text">Kupferpyramide aufstellen, Kuhdung-Stücke einlegen und Ghee sowie Reis bereitstellen.</p>
+      </div>
+      <div class="step-card fade-in" style="transition-delay:0.1s">
+        <div class="step-number">2</div>
+        <div class="step-title">Sonnenzeit</div>
+        <p class="step-text">Den exakten Zeitpunkt für Sonnenauf- oder -untergang für deinen Standort ermitteln.</p>
+      </div>
+      <div class="step-card fade-in" style="transition-delay:0.2s">
+        <div class="step-number">3</div>
+        <div class="step-title">Das Feuer</div>
+        <p class="step-text">Feuer entzünden, Ghee und Reis genau zum Zeitpunkt des Sonnenauf- oder -untergangs auflegen.</p>
+      </div>
+      <div class="step-card fade-in" style="transition-delay:0.3s">
+        <div class="step-number">4</div>
+        <div class="step-title">Das Mantra</div>
+        <p class="step-text">Mantra zur Sonnenauf- oder -untergangszeit singen – der Schlüssel zur vollständigen Zeremonie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C: DER FÜNFFACHE PFAD -->
+<section class="section-wrap">
+  <div class="section-inner">
+    <div class="section-header center fade-in">
+      <div class="eyebrow">Vertiefung</div>
+      <h2 class="section-title">Der Fünffache <em>Pfad</em></h2>
+    </div>
+    <div class="fivefold-grid">
+      <div class="card fade-in">
+        <div class="card-img">
+          <img src="Archivbilder/Der Fünffache Pfad/imgi_4_Agnihotra.jpg" alt="Yajnya" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Yajnya</h3>
+          <p class="card-text">Feueropfer zur Reinigung der Atmosphäre.</p>
+        </div>
+      </div>
+      <div class="card fade-in" style="transition-delay:0.1s">
+        <div class="card-img">
+          <img src="Archivbilder/Der Fünffache Pfad/imgi_5_Daan.jpg" alt="Daan" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Daan</h3>
+          <p class="card-text">Großzügiges Geben ohne Erwartung.</p>
+        </div>
+      </div>
+      <div class="card fade-in" style="transition-delay:0.2s">
+        <div class="card-img">
+          <img src="Archivbilder/Der Fünffache Pfad/imgi_6_Tapa.jpg" alt="Tapa" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Tapa</h3>
+          <p class="card-text">Selbstdisziplin und innere Reinigung.</p>
+        </div>
+      </div>
+      <div class="card fade-in" style="transition-delay:0.1s">
+        <div class="card-img">
+          <img src="Archivbilder/Der Fünffache Pfad/imgi_7_Karma.jpg" alt="Karma" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Karma</h3>
+          <p class="card-text">Rechtes Handeln im Alltag.</p>
+        </div>
+      </div>
+      <div class="card fade-in" style="transition-delay:0.2s">
+        <div class="card-img">
+          <img src="Archivbilder/Der Fünffache Pfad/imgi_8_Swadhyaya.jpg" alt="Swadhyaya" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Swadhyaya</h3>
+          <p class="card-text">Selbststudium und Reflexion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- D: WEITERE FEUER -->
+<section class="section-wrap" style="background:var(--cream3);">
+  <div class="section-inner">
+    <div class="section-header center fade-in">
+      <div class="eyebrow">Vertiefung</div>
+      <h2 class="section-title">Weitere <em>Heilige Feuer</em></h2>
+    </div>
+    <div class="three-col">
+      <div class="card fade-in">
+        <div class="card-img" style="height:180px;aspect-ratio:unset;">
+          <img src="Archivbilder/Weitere Feuer/imgi_4_Yajna.jpg" alt="Tryambakam Homa" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Tryambakam Homa</h3>
+          <p class="card-text">Kraftvolles Reinigungsfeuer für tiefe energetische Klärung.</p>
+        </div>
+      </div>
+      <div class="card fade-in" style="transition-delay:0.1s">
+        <div class="card-img" style="height:180px;aspect-ratio:unset;">
+          <img src="Archivbilder/Weitere Feuer/imgi_4_Yajna.jpg" alt="Om Tryambakam" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Om Tryambakam</h3>
+          <p class="card-text">Schutz und Heilung – das Feuer des dreifachen Shiva.</p>
+        </div>
+      </div>
+      <div class="card fade-in" style="transition-delay:0.2s">
+        <div class="card-img" style="height:180px;aspect-ratio:unset;">
+          <img src="Archivbilder/Weitere Feuer/imgi_4_Yajna.jpg" alt="Vyahruti Homa" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Vyahruti Homa</h3>
+          <p class="card-text">Feuer für besondere Anlässe – Reinigung und Segnung.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- E: AGNIHOTRAZEITEN -->
+<section class="zeiten-section">
+  <div class="zeiten-bg" style="background-image:url('Archivbilder/Agnihotrazeiten Main - wichtig nur ohne editor oeffnen/imgi_3_sunrise.jpg')"></div>
+  <div class="zeiten-overlay"></div>
+  <div class="zeiten-content fade-in">
+    <div class="eyebrow">Zeiten</div>
+    <h2 class="section-title">Agnihotrazeiten <em>berechnen</em></h2>
+    <p class="section-text">Die Zeiten für Sonnenauf- und -untergang variieren täglich und ortsabhängig. Berechne sie hier direkt für deinen Standort.</p>
+  </div>
+  <div class="zeiten-calc-wrap fade-in" style="transition-delay:0.2s">
+    <div class="calc-row">
+      <div class="calc-group calc-full">
+        <label for="calc-city">Ort (Stadt, Gemeinde…)</label>
+        <div class="calc-location-wrap">
+          <input type="text" id="calc-city" placeholder="z.B. München, Heiligenberg, Wien…" autocomplete="off" spellcheck="false">
+          <button class="calc-geo-btn" id="calc-geo-btn" type="button" title="Meinen Standort verwenden">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+          </button>
+        </div>
+        <div id="calc-hint" class="calc-hint"></div>
+      </div>
+    </div>
+    <div class="calc-row">
+      <div class="calc-group">
+        <label for="calc-lat">Breitengrad</label>
+        <input type="number" id="calc-lat" placeholder="47.8544" step="0.0001" min="-90" max="90">
+      </div>
+      <div class="calc-group">
+        <label for="calc-lon">Längengrad</label>
+        <input type="number" id="calc-lon" placeholder="9.3208" step="0.0001" min="-180" max="180">
+      </div>
+    </div>
+    <div class="calc-row-3">
+      <div class="calc-group">
+        <label for="calc-from">Von</label>
+        <input type="date" id="calc-from">
+      </div>
+      <div class="calc-group">
+        <label for="calc-to">Bis (max. 60 Tage)</label>
+        <input type="date" id="calc-to">
+      </div>
+      <div class="calc-group">
+        <label for="calc-tz">Zeitzone</label>
+        <select id="calc-tz">
+          <option value="Europe/Berlin">CET/CEST – Deutschland</option>
+          <option value="Europe/Vienna">CET/CEST – Österreich</option>
+          <option value="Europe/Zurich">CET/CEST – Schweiz</option>
+          <option value="Europe/London">GMT/BST – Grossbritannien</option>
+          <option value="America/New_York">EST/EDT – New York</option>
+          <option value="America/Los_Angeles">PST/PDT – Los Angeles</option>
+          <option value="Asia/Kolkata">IST – Indien</option>
+          <option value="UTC">UTC</option>
+        </select>
+      </div>
+    </div>
+    <button id="calc-btn" class="btn btn-gold">Zeiten berechnen</button>
+    <div id="calc-results-wrap" class="calc-results-wrap"></div>
+  </div>
+</section>
+
+<!-- F: KINDER -->
+<section class="kinder-section">
+  <div class="kinder-bg" style="background-image:url('Archivbilder/Kinder-Seite Aganos Welt Titel/imgi_14_aganos-background.jpg')"></div>
+  <div class="kinder-overlay"></div>
+  <div class="kinder-content fade-in">
+    <div class="eyebrow">Für Kinder</div>
+    <h2 class="section-title" style="color:white;">Agnihotra für <em style="color:var(--gold-light)">Kinder</em></h2>
+    <p class="section-text">„Aganos" ist die Welt der Agnihotra-Kinder. Mit Büchern, Spielen und Geschichten lernen Kinder die Kraft des heiligen Feuers kennen.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="images/Logo-Schrift-2025-Juhu.png" alt="Homa-Hof Heiligenberg" style="height:58px;width:auto;margin-bottom:16px;opacity:0.92;display:block">
+      <p class="footer-tagline">Europäisches Zentrum für Agnihotra –<br>ein Ort des heiligen Feuers und der Stille.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-icon">f</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">YT</a>
+        <a href="https://www.instagram.com/agnihotraforfuture/" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">IG</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="die-basis.html">Die Basis</a></li>
+        <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
+        <li><a href="wissen.html">Wissen & Nutzen</a></li>
+        <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="mitmachen.html">Mitmachen</a></li>
+        <li><a href="medien.html">Medien</a></li>
+        <li><a href="https://homa-hof-shop.de" target="_blank">Shop</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Erleben</div>
+      <ul class="footer-links">
+        <li><a href="am-hof.html#veranstaltungen">Veranstaltungen</a></li>
+        <li><a href="am-hof.html#seminare">Seminare</a></li>
+        <li><a href="am-hof.html#besucherhinweise">Besucherhinweise</a></li>
+        <li><a href="am-hof.html#anfahrt">Anfahrt</a></li>
+        <li><a href="am-hof.html#uebernachtung">Übernachtung</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <div class="footer-contact-item" style="display:flex;align-items:flex-start;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:4px;opacity:.55"><path d="M8 1C5.5 1 3.5 3 3.5 5.5c0 3.5 4.5 9 4.5 9s4.5-5.5 4.5-9C12.5 3 10.5 1 8 1z"/><circle cx="8" cy="5.5" r="1.5"/></svg>
+        <span>Oberhaslach 6<br>88633 Heiligenberg</span>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;opacity:.55"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
+        <a href="tel:+4975529387600">+49 (0)7552 938760</a>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.45)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
+    <div class="footer-legal">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  // Mobile nav
+  (function() {
+    var burger = document.querySelector('.nav-burger');
+    var nav = document.getElementById('main-nav');
+    if (!burger || !nav) return;
+    burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
+    document.addEventListener('click', function(e) {
+      if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
+    });
+  })();
+  });
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function() {
+  /* ── NOAA Sunrise/Sunset Algorithm ── */
+  function toRad(d) { return d * Math.PI / 180; }
+  function toDeg(r) { return r * 180 / Math.PI; }
+
+  function calcJD(date) {
+    var y = date.getFullYear(), m = date.getMonth() + 1, d = date.getDate();
+    var Y = y, M = m;
+    if (M <= 2) { Y--; M += 12; }
+    var A = Math.floor(Y / 100);
+    var B = 2 - A + Math.floor(A / 4);
+    return Math.floor(365.25 * (Y + 4716)) + Math.floor(30.6001 * (M + 1)) + d + B - 1524.5;
+  }
+  function calcT(jd) { return (jd - 2451545.0) / 36525.0; }
+  function geomMeanLong(t) { var L = 280.46646 + t*(36000.76983 + t*0.0003032); return ((L%360)+360)%360; }
+  function geomMeanAnom(t) { return 357.52911 + t*(35999.05029 - 0.0001537*t); }
+  function eccentricity(t) { return 0.016708634 - t*(0.000042037 + 0.0000001267*t); }
+  function sunEqCenter(t) {
+    var m = toRad(geomMeanAnom(t));
+    return Math.sin(m)*(1.914602 - t*(0.004817 + 0.000014*t))
+         + Math.sin(2*m)*(0.019993 - 0.000101*t)
+         + Math.sin(3*m)*0.000289;
+  }
+  function sunApparentLong(t) {
+    var stl = geomMeanLong(t) + sunEqCenter(t);
+    return stl - 0.00569 - 0.00478*Math.sin(toRad(125.04 - 1934.136*t));
+  }
+  function obliquityCorr(t) {
+    var secs = 21.448 - t*(46.8150 + t*(0.00059 - t*0.001813));
+    var e0 = 23 + (26 + secs/60)/60;
+    return e0 + 0.00256*Math.cos(toRad(125.04 - 1934.136*t));
+  }
+  function sunDeclination(t) {
+    return toDeg(Math.asin(Math.sin(toRad(obliquityCorr(t)))*Math.sin(toRad(sunApparentLong(t)))));
+  }
+  function eqOfTime(t) {
+    var eps = toRad(obliquityCorr(t)), l0 = toRad(geomMeanLong(t));
+    var e = eccentricity(t), m = toRad(geomMeanAnom(t));
+    var y = Math.tan(eps/2); y *= y;
+    return toDeg(y*Math.sin(2*l0) - 2*e*Math.sin(m) + 4*e*y*Math.sin(m)*Math.cos(2*l0)
+                 - 0.5*y*y*Math.sin(4*l0) - 1.25*e*e*Math.sin(2*m)) * 4;
+  }
+  function hourAngle(lat, dec) {
+    var cosH = (Math.cos(toRad(90.833)) - Math.sin(toRad(lat))*Math.sin(toRad(dec)))
+             / (Math.cos(toRad(lat))*Math.cos(toRad(dec)));
+    return (cosH > 1 || cosH < -1) ? NaN : toDeg(Math.acos(cosH));
+  }
+  function calcSunriseUTC(jd, lat, lon) {
+    var t = calcT(jd), ha = hourAngle(lat, sunDeclination(t));
+    return isNaN(ha) ? NaN : 720 - 4*(lon + ha) - eqOfTime(t);
+  }
+  function calcSunsetUTC(jd, lat, lon) {
+    var t = calcT(jd), ha = hourAngle(lat, sunDeclination(t));
+    return isNaN(ha) ? NaN : 720 - 4*(lon - ha) - eqOfTime(t);
+  }
+  function utcOffsetForDate(date, tz) {
+    try {
+      var utc = new Date(date.toLocaleString('en-US', {timeZone:'UTC'}));
+      var loc = new Date(date.toLocaleString('en-US', {timeZone:tz}));
+      return (loc - utc) / 3600000;
+    } catch(e) { return 1; }
+  }
+  function minsToTime(m) {
+    m = ((m % 1440) + 1440) % 1440;
+    var h = Math.floor(m/60), min = Math.round(m%60);
+    if (min === 60) { h++; min = 0; }
+    return ('0'+h).slice(-2) + ':' + ('0'+min).slice(-2);
+  }
+  var WD = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+  function fmtDate(d) {
+    return WD[d.getDay()] + ', ' + ('0'+d.getDate()).slice(-2) + '.'
+         + ('0'+(d.getMonth()+1)).slice(-2) + '.' + d.getFullYear();
+  }
+
+  /* ── UI ── */
+  var cityEl   = document.getElementById('calc-city');
+  var latEl    = document.getElementById('calc-lat');
+  var lonEl    = document.getElementById('calc-lon');
+  var fromEl   = document.getElementById('calc-from');
+  var toEl     = document.getElementById('calc-to');
+  var tzEl     = document.getElementById('calc-tz');
+  var btnEl    = document.getElementById('calc-btn');
+  var geoBtn   = document.getElementById('calc-geo-btn');
+  var hintEl   = document.getElementById('calc-hint');
+  var resultsEl= document.getElementById('calc-results-wrap');
+  if (!cityEl) return;
+
+  /* Default dates */
+  var today = new Date();
+  var todayStr = today.toISOString().slice(0,10);
+  var plus30 = new Date(today.getFullYear(), today.getMonth(), today.getDate()+30);
+  fromEl.value = todayStr;
+  toEl.value = plus30.toISOString().slice(0,10);
+
+  /* Auto-select timezone from browser */
+  try {
+    var bTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    var opt = tzEl.querySelector('option[value="'+bTz+'"]');
+    if (opt) opt.selected = true;
+  } catch(e){}
+
+  /* Geocoding via Nominatim */
+  var geoTimer;
+  cityEl.addEventListener('input', function() {
+    clearTimeout(geoTimer);
+    var q = cityEl.value.trim();
+    if (q.length < 3) return;
+    geoTimer = setTimeout(function() { geocode(q); }, 700);
+  });
+
+  function geocode(q) {
+    hintEl.className = 'calc-hint';
+    hintEl.textContent = 'Suche…';
+    fetch('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(q) + '&format=json&limit=1&accept-language=de')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.length) {
+          latEl.value = parseFloat(data[0].lat).toFixed(5);
+          lonEl.value = parseFloat(data[0].lon).toFixed(5);
+          hintEl.textContent = data[0].display_name.split(',').slice(0,3).join(', ');
+        } else {
+          hintEl.className = 'calc-hint err';
+          hintEl.textContent = 'Ort nicht gefunden.';
+        }
+      })
+      .catch(function() {
+        hintEl.className = 'calc-hint err';
+        hintEl.textContent = 'Netzwerkfehler bei der Ortssuche.';
+      });
+  }
+
+  /* Geolocation */
+  geoBtn.addEventListener('click', function() {
+    if (!navigator.geolocation) { hintEl.textContent = 'Geolokalisierung nicht verfügbar.'; return; }
+    hintEl.className = 'calc-hint';
+    hintEl.textContent = 'Standort wird ermittelt…';
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      latEl.value = pos.coords.latitude.toFixed(5);
+      lonEl.value = pos.coords.longitude.toFixed(5);
+      cityEl.value = '';
+      hintEl.textContent = pos.coords.latitude.toFixed(4) + '° N, ' + pos.coords.longitude.toFixed(4) + '° E';
+    }, function() {
+      hintEl.className = 'calc-hint err';
+      hintEl.textContent = 'Standortzugriff verweigert.';
+    });
+  });
+
+  /* Calculate */
+  btnEl.addEventListener('click', function() {
+    var lat = parseFloat(latEl.value);
+    var lon = parseFloat(lonEl.value);
+    if (isNaN(lat) || isNaN(lon)) {
+      hintEl.className = 'calc-hint err';
+      hintEl.textContent = 'Bitte zuerst einen Ort eingeben oder Koordinaten setzen.';
+      return;
+    }
+    var tz = tzEl.value;
+    var from = new Date(fromEl.value + 'T00:00:00');
+    var to   = new Date(toEl.value   + 'T00:00:00');
+    if (isNaN(from.getTime()) || isNaN(to.getTime())) {
+      hintEl.className = 'calc-hint err';
+      hintEl.textContent = 'Bitte Datumsbereich eingeben.';
+      return;
+    }
+    if (to < from) { hintEl.className = 'calc-hint err'; hintEl.textContent = 'Enddatum liegt vor dem Startdatum.'; return; }
+    var diffDays = Math.round((to - from) / 86400000);
+    var days = Math.min(diffDays + 1, 60);
+    var rows = [];
+    for (var i = 0; i < days; i++) {
+      var d = new Date(from.getTime() + i*86400000);
+      var jd = calcJD(d);
+      var tzOff = utcOffsetForDate(d, tz);
+      rows.push({
+        date: d,
+        sunrise: minsToTime(calcSunriseUTC(jd, lat, lon) + tzOff*60),
+        sunset:  minsToTime(calcSunsetUTC(jd, lat, lon)  + tzOff*60),
+      });
+    }
+    renderResults(rows, lat, lon, tz, diffDays >= 60);
+  });
+
+  function renderResults(rows, lat, lon, tz, truncated) {
+    var label = cityEl.value.trim() || (lat.toFixed(3) + '° N, ' + lon.toFixed(3) + '° E');
+    var csv = 'Datum,Sonnenaufgang,Sonnenuntergang\n';
+    rows.forEach(function(r) {
+      csv += r.date.toISOString().slice(0,10) + ',' + r.sunrise + ',' + r.sunset + '\n';
+    });
+    var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    var url = URL.createObjectURL(blob);
+    var html = '<div class="calc-results-header">'
+             + '<div class="calc-results-title">Zeiten für <em>' + label + '</em></div>'
+             + '<a href="' + url + '" download="agnihotrazeiten.csv" class="btn btn-outline-dark calc-csv-btn">CSV herunterladen</a>'
+             + '</div>';
+    if (truncated) html += '<p class="calc-trunc-note">Hinweis: Es werden maximal 60 Tage angezeigt.</p>';
+    html += '<div class="calc-table-wrap"><table class="calc-table"><thead><tr>'
+          + '<th>Datum</th><th>Sonnenaufgang</th><th>Sonnenuntergang</th>'
+          + '</tr></thead><tbody>';
+    rows.forEach(function(r) {
+      html += '<tr><td>' + fmtDate(r.date) + '</td>'
+            + '<td class="calc-time">' + r.sunrise + '</td>'
+            + '<td class="calc-time">' + r.sunset  + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '<p class="calc-tz-note">Zeitzone: ' + tz + ' · Lokale Zeit</p>';
+    resultsEl.innerHTML = html;
+    resultsEl.style.display = 'block';
+    setTimeout(function() { resultsEl.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+  }
+})();
+</script>
+
+</body>
+</html>
