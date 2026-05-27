@@ -1323,6 +1323,7 @@
         <a href="veranstaltungen.html" class="btn btn-gold" id="next-event-cta">Jetzt anmelden</a>
         <a href="veranstaltungen.html" class="event-all-link">Alle Veranstaltungen →</a>
       </div>
+      <img id="next-event-img" src="" alt="" style="display:none;width:220px;height:140px;object-fit:cover;border-radius:10px;flex-shrink:0;margin-left:auto">
     </div>
   </div>
 </section>
@@ -1742,6 +1743,8 @@
       if (next.link && !next.link.includes('homa-hof-heiligenberg.de')) {
         cta.href = next.link;
       }
+      const img = document.getElementById('next-event-img');
+      if (next.image && img) { img.src = next.image; img.alt = next.title; img.style.display = 'block'; }
     })
     .catch(() => {});
 </script>
