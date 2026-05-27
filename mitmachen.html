@@ -121,7 +121,12 @@
     .dark-section .eyebrow { color: var(--gold-light); }
     .dark-section .eyebrow::before { background: var(--gold-light); }
     .dark-section .section-title { color: white; }
-    .spenden-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+    #spenden::before { content:''; position:absolute; top:-120px; right:-80px; width:500px; height:500px; border-radius:50%; border:1px solid rgba(192,120,24,0.06); }
+    #spenden::after  { content:''; position:absolute; bottom:-100px; left:-60px; width:400px; height:400px; border-radius:50%; border:1px solid rgba(192,120,24,0.06); }
+    .spenden-eyebrow { font-family:var(--sans); font-size:12.5px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-light); display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .spenden-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--gold-light); }
+    .spenden-title { font-family:var(--serif); font-size:45px; font-weight:300; color:white; line-height:1.2; margin-bottom:18px; }
+    .spenden-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; position:relative; z-index:2; }
     .spenden-text { font-family: var(--sans); font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 28px; }
     .spenden-bullets { list-style: none; margin-bottom: 36px; display: flex; flex-direction: column; gap: 10px; }
     .spenden-bullets li { font-family: var(--sans); font-size: 15.5px; font-weight: 300; color: rgba(255,255,255,0.8); display: flex; align-items: flex-start; gap: 10px; }
@@ -206,6 +211,7 @@
       .section-title { font-size: 34px; }
       .form-grid { grid-template-columns: 1fr; }
       .spenden-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
+      .spenden-title { font-size: 36px !important; }
       .newsletter-form { flex-direction: column; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 20px 48px; }
       .footer-inner > div:first-child { grid-column: 1 / -1; }
@@ -256,7 +262,7 @@
       <h2 class="section-title">Teil der <em>Gemeinschaft</em></h2>
     </div>
     <div style="border-radius:16px;overflow:hidden;margin-bottom:48px;height:520px;" class="fade-in community-img">
-      <img src="images/gruppenbild-pfingsten-2026.webp" alt="Die Gemeinschaft des Homa-Hofs – Pfingsten 2026" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;" loading="lazy">
+      <img src="images/gruppenbild-pfingsten-2026.webp" alt="Die Gemeinschaft des Homa-Hofs – Pfingsten 2026" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;" loading="lazy">
     </div>
     <div class="three-col">
       <div class="membership-card fade-in">
@@ -340,8 +346,8 @@
 <section class="dark-section" id="spenden">
   <div class="spenden-inner">
     <div class="fade-in">
-      <div class="eyebrow">Unterstützen</div>
-      <h2 class="section-title">Deine Spende hält das <em style="color:var(--gold-light)">Feuer am Leben</em></h2>
+      <div class="spenden-eyebrow">Unterstütze uns</div>
+      <h2 class="spenden-title">Deine Spende hält das <em style="font-style:italic;color:var(--gold-light)">Feuer am Leben</em></h2>
       <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein – ermöglicht durch Menschen, die diese Arbeit nicht nur von Herzen, sondern vor allem tatkräftig unterstützen.</p>
       <ul class="spenden-bullets">
         <li>Tägliche Agnihotra-Zeremonien am Hof</li>
@@ -350,10 +356,10 @@
       </ul>
       <div class="spenden-buttons">
         <a href="https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE" data-paypal target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
-        <a href="#" class="btn btn-outline">Banküberweisung</a>
+        <button onclick="scrollToBank()" class="btn btn-outline" type="button">Banküberweisung</button>
       </div>
     </div>
-    <div class="spenden-bank fade-in" style="transition-delay:0.15s">
+    <div class="spenden-bank fade-in" id="bankverbindung" style="transition-delay:0.15s">
       <div class="spenden-bank-title">Bankverbindung</div>
       <div class="bank-row">
         <span class="bank-label">Empfänger</span>
@@ -361,15 +367,15 @@
       </div>
       <div class="bank-row">
         <span class="bank-label">IBAN</span>
-        <span class="bank-value">DE XX XXXX XXXX XXXX XXXX XX</span>
+        <span class="bank-value" id="iban-value" title="Klicken zum Kopieren" style="cursor:pointer" onclick="copyIBAN()">DE39 6905 1725 0002 0423 56 <span id="iban-copy-hint" style="font-size:11px;opacity:0.6;margin-left:6px">📋 kopieren</span></span>
       </div>
       <div class="bank-row">
         <span class="bank-label">BIC</span>
-        <span class="bank-value">XXXXXXXXXXXXXXX</span>
+        <span class="bank-value">SOLADES1SAL</span>
       </div>
       <div class="bank-row">
         <span class="bank-label">Bank</span>
-        <span class="bank-value">Sparkasse Bodensee</span>
+        <span class="bank-value">Sparkasse Salem-Heiligenberg</span>
       </div>
       <div class="bank-row" style="margin-bottom:0">
         <span class="bank-label">Verwendungszweck</span>
@@ -380,20 +386,25 @@
 </section>
 
 <!-- D: NEWSLETTER -->
-<section class="section-wrap" style="background:var(--cream2);border-top:1px solid var(--border2);">
+<section class="section-wrap" id="newsletter" style="background:var(--cream2);border-top:1px solid var(--border2);">
   <div class="section-inner">
     <div class="newsletter-wrap fade-in">
       <div class="eyebrow">Newsletter</div>
       <h2 class="section-title">Bleib <em>informiert</em></h2>
       <p class="section-text" style="margin-bottom:32px;">Veranstaltungen, Neuigkeiten und Impulse aus dem Homa-Hof – direkt in dein Postfach.</p>
-      <form class="newsletter-form" onsubmit="return false;">
-        <input type="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse">
-        <button type="submit" class="btn btn-gold">Abonnieren</button>
+      <form class="newsletter-form" name="newsletter-anmeldung" netlify onsubmit="submitMitmachenNewsletter(event)">
+        <input type="email" name="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse" required>
+        <button type="submit" class="btn btn-gold" id="nl-submit-btn">Abonnieren</button>
       </form>
+      <p class="newsletter-note" id="nl-success" style="display:none;color:var(--gold);font-weight:500">✓ Danke! Du bist jetzt dabei.</p>
       <p class="newsletter-note">Kein Spam. Jederzeit abmeldbar. Datenschutzkonform.</p>
     </div>
   </div>
 </section>
+
+<form name="newsletter-anmeldung" netlify hidden>
+  <input type="email" name="email">
+</form>
 
 <!-- E: TESTIMONIALS -->
 <section class="section-wrap" style="background:var(--cream3);">
@@ -535,6 +546,39 @@
     });
   }, { threshold: 0.12 });
   fadeEls.forEach(el => observer.observe(el));
+
+  function scrollToBank() {
+    var bank = document.getElementById('bankverbindung');
+    if (!bank) return;
+    bank.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    bank.style.transition = 'box-shadow 0.3s, outline 0.3s';
+    bank.style.outline = '2px solid var(--gold)';
+    bank.style.boxShadow = '0 0 0 6px rgba(192,120,24,0.15)';
+    setTimeout(function() { bank.style.outline = ''; bank.style.boxShadow = ''; }, 2000);
+  }
+
+  function copyIBAN() {
+    navigator.clipboard.writeText('DE39690517250002042356').then(function() {
+      var hint = document.getElementById('iban-copy-hint');
+      hint.textContent = '✓ kopiert';
+      setTimeout(function() { hint.textContent = '📋 kopieren'; }, 2000);
+    });
+  }
+
+  function submitMitmachenNewsletter(e) {
+    e.preventDefault();
+    var form = e.target;
+    var btn = document.getElementById('nl-submit-btn');
+    btn.disabled = true;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', email: form.querySelector('[name=email]').value }).toString()
+    }).then(function() {
+      form.style.display = 'none';
+      document.getElementById('nl-success').style.display = 'block';
+    }).catch(function() { btn.disabled = false; });
+  }
 </script>
 
 </body>
