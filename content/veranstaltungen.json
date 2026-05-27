@@ -21,14 +21,14 @@
       "price": "Kostenlos",
       "time": "18:50 – 21:10",
       "date": "2026-05-23",
+      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de",
       "desc": "Einführungsabend für alle, die die vedische Feuerzeremonie kennenlernen möchten. Keine Vorkenntnisse erforderlich.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra erlernen",
       "link": "veranstaltungen.html",
-      "recurring": true,
-      "category": "seminar",
       "image": "images/agnihotra-feuer-2017.webp",
-      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de"
+      "recurring": true,
+      "category": "seminar"
     },
     {
       "details": [],
@@ -37,14 +37,14 @@
       "price": "Kostenlos",
       "time": "18:50 – 21:00",
       "date": "2026-05-30",
+      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de",
       "desc": "Regelmäßiger Einführungsabend – Feuerzeremonie live erleben und alle Fragen stellen.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra-Einführungsabend",
       "link": "veranstaltungen.html",
-      "recurring": false,
-      "category": "seminar",
       "image": "images/agnihotra-feuer-2017.webp",
-      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de"
+      "recurring": false,
+      "category": "seminar"
     },
     {
       "details": [],
@@ -53,14 +53,14 @@
       "price": "Spendenempfehlung ~40 €",
       "time": "16:00 – 21:30",
       "date": "2026-06-20",
+      "detail": "In diesem mehrstündigen Seminar vermitteln wir ausführliches Wissen rund um Agnihotra, die Anwendung der Asche und die beobachtbaren Wirkungen.\n\nIm Lauf des Tages lernst du den Homa-Hof Heiligenberg – das Europäische Zentrum für Agnihotra – näher kennen. Wir gehen gemeinsam über das Gelände, sprechen über unsere Erfahrungen mit den Heiligen Feuern und praktizieren Agnihotra gemeinsam bei Sonnenuntergang.\n\nKosten: Die Teilnahme ist gebührenfrei. Wir freuen uns über eine Spende zur Verbreitung und Erforschung der Heiligen Feuer.\nSpendenempfehlung: ~40 €\n\nOrt: Homa-Hof Heiligenberg, Oberhaslach 6, 88633 Heiligenberg",
       "desc": "Intensiveres Seminar rund um Agnihotra – Praxis, Hintergrundwissen und Gemeinschaft. Anmeldung erbeten.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra-Seminar am Homa-Hof",
       "link": "veranstaltungen.html",
-      "recurring": false,
-      "category": "seminar",
       "image": "images/gruppenbild-pfingsten-2026.webp",
-      "detail": "In diesem mehrstündigen Seminar vermitteln wir ausführliches Wissen rund um Agnihotra, die Anwendung der Asche und die beobachtbaren Wirkungen.\n\nIm Lauf des Tages lernst du den Homa-Hof Heiligenberg – das Europäische Zentrum für Agnihotra – näher kennen. Wir gehen gemeinsam über das Gelände, sprechen über unsere Erfahrungen mit den Heiligen Feuern und praktizieren Agnihotra gemeinsam bei Sonnenuntergang.\n\nKosten: Die Teilnahme ist gebührenfrei. Wir freuen uns über eine Spende zur Verbreitung und Erforschung der Heiligen Feuer.\nSpendenempfehlung: ~40 €\n\nOrt: Homa-Hof Heiligenberg, Oberhaslach 6, 88633 Heiligenberg"
+      "recurring": false,
+      "category": "seminar"
     },
     {
       "details": [
@@ -82,14 +82,14 @@
       "price": "Kostenlos / Spende",
       "time": "09:00 – 17:00",
       "date": "2026-06-21",
+      "detail": "Ein ganztägiges Einführungsseminar, das dir alles Wesentliche über Agnihotra an die Hand gibt: Hintergrundwissen, die Wirkungen der Asche, das Mantra, die Utensilien und die tägliche Praxis.\n\nDu lernst den Homa-Hof Heiligenberg und seine Gemeinschaft kennen, gehst mit uns über das Gelände und praktizierst Agnihotra gemeinsam zum Sonnenuntergang.\n\nKosten: Kostenlos – Spende erbeten\nAnmeldung: info@homa-hof-heiligenberg.de",
       "desc": "Einführung in Theorie und Praxis der vedischen Feuerzeremonie. Für alle Interessierten offen – keine Vorkenntnisse nötig.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra-Basisseminar",
       "link": "veranstaltungen.html",
-      "recurring": false,
-      "category": "seminar",
       "image": "images/agnihotra-feuer-2017.webp",
-      "detail": "Ein ganztägiges Einführungsseminar, das dir alles Wesentliche über Agnihotra an die Hand gibt: Hintergrundwissen, die Wirkungen der Asche, das Mantra, die Utensilien und die tägliche Praxis.\n\nDu lernst den Homa-Hof Heiligenberg und seine Gemeinschaft kennen, gehst mit uns über das Gelände und praktizierst Agnihotra gemeinsam zum Sonnenuntergang.\n\nKosten: Kostenlos – Spende erbeten\nAnmeldung: info@homa-hof-heiligenberg.de"
+      "recurring": false,
+      "category": "seminar"
     },
     {
       "details": [],
@@ -98,14 +98,14 @@
       "price": "Kostenlos",
       "time": "18:50 – 21:10",
       "date": "2026-06-27",
+      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de",
       "desc": "Einführungsabend für alle Interessierten – Vorkenntnisse nicht erforderlich.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra erlernen",
       "link": "veranstaltungen.html",
-      "recurring": true,
-      "category": "seminar",
       "image": "images/agnihotra-feuer-2017.webp",
-      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de"
+      "recurring": true,
+      "category": "seminar"
     },
     {
       "details": [],
@@ -114,14 +114,14 @@
       "price": "Eintritt frei",
       "time": "14:00 – 21:00",
       "date": "2026-07-05",
+      "detail": "Ein Sommertag voller Gemeinschaft, Musik und heiligem Feuer. Agnihotra zum Sonnenuntergang, Begegnungen mit Menschen aus aller Welt und ein gemeinsames Feiern auf dem Hofgelände.\n\nBitte bringe vegetarische Verpflegung mit (kein Alkohol). Wasser steht kostenlos zur Verfügung. Festes Schuhwerk und eine Jacke für den Abend sind empfehlenswert.\n\nOrt: Homa-Hof Heiligenberg, Oberhaslach 6, 88633 Heiligenberg",
       "desc": "Gemeinsames Feiern mit Agnihotra, Musik und Begegnung. Alle sind willkommen.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Sommerfest am Homa-Hof",
       "link": "veranstaltungen.html",
-      "recurring": false,
-      "category": "hof",
       "image": "images/sommertreffen-gruppe-2026.webp",
-      "detail": "Ein Sommertag voller Gemeinschaft, Musik und heiligem Feuer. Agnihotra zum Sonnenuntergang, Begegnungen mit Menschen aus aller Welt und ein gemeinsames Feiern auf dem Hofgelände.\n\nBitte bringe vegetarische Verpflegung mit (kein Alkohol). Wasser steht kostenlos zur Verfügung. Festes Schuhwerk und eine Jacke für den Abend sind empfehlenswert.\n\nOrt: Homa-Hof Heiligenberg, Oberhaslach 6, 88633 Heiligenberg"
+      "recurring": false,
+      "category": "hof"
     },
     {
       "details": [],
@@ -130,14 +130,14 @@
       "price": "Kostenlos",
       "time": "18:50 – 21:10",
       "date": "2026-07-18",
+      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de",
       "desc": "Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra erlernen",
       "link": "veranstaltungen.html",
-      "recurring": true,
-      "category": "seminar",
       "image": "images/agnihotra-feuer-2017.webp",
-      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de"
+      "recurring": true,
+      "category": "seminar"
     },
     {
       "details": [
@@ -159,14 +159,14 @@
       "price": "Kostenlos / Spende",
       "time": "Ganztägig",
       "date": "2026-07-18",
+      "detail": "Freue dich auf interessante Vorträge, Erfahrungsaustausch und Vernetzung mit Agnihotra-Praktizierenden aus aller Welt. Der Tag steht ganz im Zeichen der Gemeinschaft und des gemeinsamen heiligen Feuers.\n\nBitte bringe deine eigenen Agnihotra-Utensilien und vegetarische Verpflegung mit (kein Alkohol). Brunnenwasser steht am Gelände kostenlos zur Verfügung. Festes Schuhwerk und eine warme Jacke sind empfehlenswert – der Hof liegt auf über 700 m Höhe.\n\nOrt: Homa-Hof Heiligenberg, Oberhaslach 6, 88633 Heiligenberg",
       "desc": "Das jährliche Herzstück am Homa-Hof: Gemeinschaft, Feuer, Vorträge und Begegnungen aus aller Welt. Mehrere Tage voller Inspiration, Heilung und Verbundenheit.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Internationales Sommertreffen",
       "link": "veranstaltungen.html",
-      "recurring": false,
-      "category": "hof",
       "image": "images/sommertreffen-gruppe-2026.webp",
-      "detail": "Freue dich auf interessante Vorträge, Erfahrungsaustausch und Vernetzung mit Agnihotra-Praktizierenden aus aller Welt. Der Tag steht ganz im Zeichen der Gemeinschaft und des gemeinsamen heiligen Feuers.\n\nBitte bringe deine eigenen Agnihotra-Utensilien und vegetarische Verpflegung mit (kein Alkohol). Brunnenwasser steht am Gelände kostenlos zur Verfügung. Festes Schuhwerk und eine warme Jacke sind empfehlenswert – der Hof liegt auf über 700 m Höhe.\n\nOrt: Homa-Hof Heiligenberg, Oberhaslach 6, 88633 Heiligenberg"
+      "recurring": false,
+      "category": "hof"
     },
     {
       "details": [],
@@ -206,9 +206,9 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra-Abend",
       "link": "veranstaltungen.html",
+      "image": "images/agnihotra-feuer-2017.webp",
       "recurring": false,
-      "category": "hof",
-      "image": "images/agnihotra-feuer-2017.webp"
+      "category": "hof"
     },
     {
       "details": [
@@ -230,14 +230,14 @@
       "price": "Kostenlos",
       "time": "18:50 – 21:10",
       "date": "2026-08-15",
+      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de",
       "desc": "Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra erlernen",
       "link": "veranstaltungen.html",
-      "recurring": true,
-      "category": "seminar",
       "image": "images/agnihotra-feuer-2017.webp",
-      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erbeten: info@homa-hof-heiligenberg.de"
+      "recurring": true,
+      "category": "seminar"
     },
     {
       "details": [
@@ -290,19 +290,9 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Vertiefungsseminar Agnihotra",
       "link": "veranstaltungen.html",
+      "image": "images/agnihotra-feuer-2017.webp",
       "recurring": false,
-      "category": "seminar",
-      "image": "images/agnihotra-feuer-2017.webp"
-    },
-    {
-      "location": "Homa-Hof Heiligenberg",
-      "badge": "spende",
-      "title": "test1",
-      "date": "2026-05-27",
-      "time": "19:00",
-      "desc": "test2",
-      "price": "Spende empfehlung 30 euro",
-      "category": "Seminar"
+      "category": "seminar"
     }
   ]
 }
