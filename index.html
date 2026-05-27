@@ -887,6 +887,61 @@
       text-align: right;
     }
 
+    /* === AKTUELLES === */
+    #aktuelles {
+      background: var(--cream);
+      padding: 100px 0;
+      border-top: 1px solid var(--border2);
+    }
+    .aktuelles-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .aktuelles-header { text-align: center; margin-bottom: 56px; }
+    .aktuelles-header .eyebrow { justify-content: center; }
+    .aktuelles-header .eyebrow::before { display: none; }
+    .aktuelles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .aktuelles-card {
+      background: var(--cream2);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .aktuelles-date {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .aktuelles-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--brown);
+      line-height: 1.35;
+    }
+    .aktuelles-body {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.75;
+    }
+    @media (max-width: 900px) {
+      .aktuelles-grid { grid-template-columns: 1fr; }
+      .aktuelles-inner { padding: 0 20px; }
+    }
+
     /* === NEWSLETTER === */
     #newsletter {
       background: var(--cream2);
@@ -1421,6 +1476,19 @@
   </div>
 </section>
 
+<!-- AKTUELLES -->
+<section id="aktuelles">
+  <div class="aktuelles-inner">
+    <div class="aktuelles-header fade-in">
+      <div class="eyebrow">Vom Hof</div>
+      <h2 class="section-title">Aktuelles & <em>Neuigkeiten</em></h2>
+    </div>
+    <div class="aktuelles-grid" id="aktuelles-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
 <form name="newsletter-anmeldung" netlify hidden>
   <input type="email" name="email">
 </form>
@@ -1634,6 +1702,27 @@
   }
 
   const MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+  fetch('content/aktuelles.json')
+    .then(r => r.json())
+    .then(data => {
+      const grid = document.getElementById('aktuelles-grid');
+      if (!grid) return;
+      const items = data.items
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 3);
+      grid.innerHTML = items.map(item => {
+        const d = new Date(item.date);
+        const dateStr = d.getDate() + '. ' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear();
+        const body = (item.body || '').replace(/\*([^*]+)\*/g, '<em>$1</em>').split('\n\n')[0];
+        return '<div class="aktuelles-card fade-in">'
+          + '<div class="aktuelles-date">' + dateStr + '</div>'
+          + '<div class="aktuelles-title">' + item.title + '</div>'
+          + '<div class="aktuelles-body">' + body + '</div>'
+          + '</div>';
+      }).join('');
+    })
+    .catch(() => {});
   fetch('content/veranstaltungen.json')
     .then(r => r.json())
     .then(data => {

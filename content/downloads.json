@@ -1,0 +1,596 @@
+{
+  "items": [
+    {
+      "title": "Agnihotra Aktuell 2026",
+      "category": "aktuell",
+      "year": "2026",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra_Aktuell-2026-01.pdf",
+      "desc": "Jahrespublikation des Homa-Hof Heiligenberg – Aktuelles aus Agnihotra und Homa-Therapie 2026"
+    },
+    {
+      "title": "Agnihotra Aktuell 2025",
+      "category": "aktuell",
+      "year": "2025",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra_Aktuell-2025-01.pdf",
+      "desc": "Jahrespublikation des Homa-Hof Heiligenberg – Aktuelles aus Agnihotra und Homa-Therapie 2025"
+    },
+    {
+      "title": "Agnihotra Aktuell 2024",
+      "category": "aktuell",
+      "year": "2024",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2024-01.pdf",
+      "desc": "Jahrespublikation des Homa-Hof Heiligenberg – Aktuelles aus Agnihotra und Homa-Therapie 2024"
+    },
+    {
+      "title": "Agnihotra Aktuell 2023",
+      "category": "aktuell",
+      "year": "2023",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2023-01.pdf",
+      "desc": "Jahrespublikation 2023"
+    },
+    {
+      "title": "Agnihotra Aktuell 2022",
+      "category": "aktuell",
+      "year": "2022",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2022-01_xs.pdf",
+      "desc": "Jahrespublikation 2022"
+    },
+    {
+      "title": "Agnihotra Aktuell 2021",
+      "category": "aktuell",
+      "year": "2021",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2021-01.pdf",
+      "desc": "Jahrespublikation 2021"
+    },
+    {
+      "title": "Agnihotra Aktuell 2020",
+      "category": "aktuell",
+      "year": "2020",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2020-01.pdf",
+      "desc": "Jahrespublikation 2020"
+    },
+    {
+      "title": "Agnihotra Aktuell 2019",
+      "category": "aktuell",
+      "year": "2019",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2019-01.pdf",
+      "desc": "Jahrespublikation 2019"
+    },
+    {
+      "title": "Agnihotra Aktuell 2018",
+      "category": "aktuell",
+      "year": "2018",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2018-01.pdf",
+      "desc": "Jahrespublikation 2018"
+    },
+    {
+      "title": "Agnihotra Aktuell 2017",
+      "category": "aktuell",
+      "year": "2017",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2017-01.pdf",
+      "desc": "Jahrespublikation 2017"
+    },
+    {
+      "title": "Agnihotra Aktuell 2016",
+      "category": "aktuell",
+      "year": "2016",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2016-01.pdf",
+      "desc": "Jahrespublikation 2016"
+    },
+    {
+      "title": "Agnihotra Aktuell 2015",
+      "category": "aktuell",
+      "year": "2015",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2015-01.pdf",
+      "desc": "Jahrespublikation 2015"
+    },
+    {
+      "title": "Agnihotra Aktuell 2014",
+      "category": "aktuell",
+      "year": "2014",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2014-01.pdf",
+      "desc": "Jahrespublikation 2014"
+    },
+    {
+      "title": "Agnihotra Aktuell 2013",
+      "category": "aktuell",
+      "year": "2013",
+      "lang": "de",
+      "file": "downloads/agnihotra-aktuell/Agnihotra-Aktuell-2013-01_compressed.pdf",
+      "desc": "Jahrespublikation 2013"
+    },
+    {
+      "title": "Agnihotra-Anleitung (Deutsch)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "de",
+      "file": "downloads/anleitungen/agnihotra-anleitung-de.pdf",
+      "desc": "Schritt-für-Schritt-Anleitung zur Durchführung des Agnihotra-Rituals"
+    },
+    {
+      "title": "Agnihotra-Mantra (Deutsch)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "de",
+      "file": "downloads/anleitungen/agnihotra-mantra-de.pdf",
+      "desc": "Die Agnihotra-Mantras mit Umschrift und Erklärung"
+    },
+    {
+      "title": "Ghee herstellen (Deutsch)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "de",
+      "file": "downloads/anleitungen/ghee-de.pdf",
+      "desc": "Anleitung zur Herstellung von geklärter Butter (Ghee) für das Agnihotra"
+    },
+    {
+      "title": "Agnihotra und Kuhdung (Deutsch)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "de",
+      "file": "downloads/anleitungen/agnihotra-kuhdung-de.pdf",
+      "desc": "Informationen über die Verwendung von Kuhdung beim Agnihotra"
+    },
+    {
+      "title": "How to perform Agnihotra (English)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "en",
+      "file": "downloads/anleitungen/agnihotra-en.pdf",
+      "desc": "Step-by-step guide to performing the Agnihotra ritual"
+    },
+    {
+      "title": "Realización del Agnihotra (Español)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "es",
+      "file": "downloads/anleitungen/agnihotra-es.pdf",
+      "desc": "Guía paso a paso para realizar el ritual Agnihotra"
+    },
+    {
+      "title": "Esecuzione dell'Agnihotra (Italiano)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "it",
+      "file": "downloads/anleitungen/agnihotra-it.pdf",
+      "desc": "Guida passo passo per eseguire il rituale Agnihotra"
+    },
+    {
+      "title": "Comment pratiquer l'Agnihotra (Français)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "fr",
+      "file": "downloads/anleitungen/agnihotra-fr.pdf",
+      "desc": "Guide étape par étape pour pratiquer le rituel Agnihotra"
+    },
+    {
+      "title": "Провеждане на Агнихотра (Bulgarski)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "bg",
+      "file": "downloads/anleitungen/agnihotra-bg.pdf",
+      "desc": "Anleitung auf Bulgarisch"
+    },
+    {
+      "title": "Provádění Agnihotry (Čeština)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "cs",
+      "file": "downloads/anleitungen/agnihotra-cs.pdf",
+      "desc": "Anleitung auf Tschechisch"
+    },
+    {
+      "title": "Izvedba Agnihotra obreda (Slovenščina)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "sl",
+      "file": "downloads/anleitungen/agnihotra-sl.pdf",
+      "desc": "Anleitung auf Slowenisch"
+    },
+    {
+      "title": "Ghid practic Agnihotra (Română)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "ro",
+      "file": "downloads/anleitungen/agnihotra-ro.pdf",
+      "desc": "Anleitung auf Rumänisch"
+    },
+    {
+      "title": "Проведение Агнихотры (Русский)",
+      "category": "anleitung",
+      "year": "",
+      "lang": "ru",
+      "file": "downloads/anleitungen/agnihotra-ru.pdf",
+      "desc": "Anleitung auf Russisch"
+    },
+    {
+      "title": "Homa-Hof Heiligenberg – Prospekt (Deutsch)",
+      "category": "flyer",
+      "year": "",
+      "lang": "de",
+      "file": "downloads/flyer/homa-hof-heiligenberg-de.pdf",
+      "desc": "Informationsbroschüre über den Homa-Hof Heiligenberg e.V. auf Deutsch"
+    },
+    {
+      "title": "Homa-Hof Heiligenberg – Brochure (English)",
+      "category": "flyer",
+      "year": "",
+      "lang": "en",
+      "file": "downloads/flyer/homa-hof-heiligenberg-en.pdf",
+      "desc": "Information brochure about Homa-Hof Heiligenberg e.V. in English"
+    },
+    {
+      "title": "Homa-Hof Heiligenberg – Prospectus (Français)",
+      "category": "flyer",
+      "year": "",
+      "lang": "fr",
+      "file": "downloads/flyer/homa-hof-heiligenberg-fr.pdf",
+      "desc": "Brochure d'information sur Homa-Hof Heiligenberg e.V. en français"
+    },
+    {
+      "title": "Agnihotra – Ozdravitev Atmosfere (Slovenščina)",
+      "category": "flyer",
+      "year": "",
+      "lang": "sl",
+      "file": "downloads/flyer/agnihotra-sl.pdf",
+      "desc": "Flyer auf Slowenisch"
+    },
+    {
+      "title": "Agnihotra – Vindecarea Atmosferei (Română)",
+      "category": "flyer",
+      "year": "",
+      "lang": "ro",
+      "file": "downloads/flyer/agnihotra-ro.pdf",
+      "desc": "Flyer auf Rumänisch"
+    },
+    {
+      "title": "Агнихотра – Изцеление за атмосферата (Bulgarski)",
+      "category": "flyer",
+      "year": "",
+      "lang": "bg",
+      "file": "downloads/flyer/agnihotra-bg.pdf",
+      "desc": "Flyer auf Bulgarisch"
+    },
+    {
+      "title": "Агнихотра для оздоровления атмосферы (Русский)",
+      "category": "flyer",
+      "year": "",
+      "lang": "ru",
+      "file": "downloads/flyer/agnihotra-ru.pdf",
+      "desc": "Flyer auf Russisch"
+    },
+    {
+      "title": "SALVE – Homa-Therapie (Dezember 2023)",
+      "category": "presse",
+      "year": "2023",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/salve-2023.pdf",
+      "desc": "Artikel im SALVE Magazin über Agnihotra und Homa-Therapie, Dezember 2023"
+    },
+    {
+      "title": "Gemeindeblatt – Ein erfülltes Leben (November 2022)",
+      "category": "presse",
+      "year": "2022",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/gemeindeblatt-2022.pdf",
+      "desc": "Artikel im Gemeindeblatt, November 2022"
+    },
+    {
+      "title": "Zappelino – Die Kraft des Feuers (Juni/Juli 2022)",
+      "category": "presse",
+      "year": "2022",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/zappelino-2022.pdf",
+      "desc": "Artikel im Zappelino Magazin über die Kraft des Feuers, Juni/Juli 2022"
+    },
+    {
+      "title": "SALVE – Agnihotra und fünffacher Pfad (Juli 2020)",
+      "category": "presse",
+      "year": "2020",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/salve-2020.pdf",
+      "desc": "Artikel im SALVE Magazin über Agnihotra, Juli 2020"
+    },
+    {
+      "title": "GartenWEden – Feuer der Reinigung (Juni 2019)",
+      "category": "presse",
+      "year": "2019",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/gartenweden-2019.pdf",
+      "desc": "Artikel in GartenWEden Ausgabe 101, Juni 2019"
+    },
+    {
+      "title": "Die Wurzel – Heilung der Atmosphäre (August 2018)",
+      "category": "presse",
+      "year": "2018",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/die-wurzel-2018.pdf",
+      "desc": "Interview mit Horst Heigl in Die Wurzel Nr. 03/2018"
+    },
+    {
+      "title": "Natürlich Gärtnern – Heilige Feuer (Juli 2018)",
+      "category": "presse",
+      "year": "2018",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/natuerlich-gaertnern-2018.pdf",
+      "desc": "Artikel in Natürlich Gärtnern, Juli 2018"
+    },
+    {
+      "title": "Kent-Depesche – 30 Jahre Homa-Hof (Juni 2018)",
+      "category": "presse",
+      "year": "2018",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/kent-depesche-2018.pdf",
+      "desc": "Artikel in der Kent-Depesche zum 30-jährigen Jubiläum, Juni 2018"
+    },
+    {
+      "title": "LebensKunst – 30 Jahre Homa-Hof (Frühjahr 2018)",
+      "category": "presse",
+      "year": "2018",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/lebenskunst-2018.pdf",
+      "desc": "Artikel im LebensKunst Magazin, Frühjahr 2018"
+    },
+    {
+      "title": "indienaktuell.de – Segen für Mensch und Natur (September 2017)",
+      "category": "presse",
+      "year": "2017",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/indienaktuell-2017.pdf",
+      "desc": "Artikel auf indienaktuell.de, September 2017"
+    },
+    {
+      "title": "Waldgartenzeitschrift – Kleines Feuer, große Wirkung (2017)",
+      "category": "presse",
+      "year": "2017",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/waldgartenzeitschrift-2017.pdf",
+      "desc": "Artikel in der Mienbacher Waldgartenzeitschrift 2017"
+    },
+    {
+      "title": "Seewoche – Kostenlose Agnihotra-Seminare (März 2016)",
+      "category": "presse",
+      "year": "2016",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/seewoche-2016.pdf",
+      "desc": "Artikel in der Seewoche, März 2016"
+    },
+    {
+      "title": "SALVE – Homa-Therapie (November 2015)",
+      "category": "presse",
+      "year": "2015",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/salve-2015.pdf",
+      "desc": "Artikel im SALVE Magazin über Homa-Therapie, November 2015"
+    },
+    {
+      "title": "Natürlich Gärtnern – Was die Erde braucht (Februar 2015)",
+      "category": "presse",
+      "year": "2015",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/natuerlich-gaertnern-2015.pdf",
+      "desc": "Artikel in Natürlich Gärtnern, Februar 2015"
+    },
+    {
+      "title": "einklang – Homa-Landwirtschaft (November 2013)",
+      "category": "presse",
+      "year": "2013",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/einklang-2013.pdf",
+      "desc": "Artikel in der spirituellen Zeitschrift einklang, November 2013"
+    },
+    {
+      "title": "Om Spirit Magazin – Ein Feuer verändert Leben (Mai 2012)",
+      "category": "presse",
+      "year": "2012",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/om-spirit-2012.pdf",
+      "desc": "Artikel im Om Spirit Magazin, Mai 2012"
+    },
+    {
+      "title": "Kent-Depesche Nr. 13 – Hilfe für uns und unsere Erde (Mai 2012)",
+      "category": "presse",
+      "year": "2012",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/kent-depesche-2012.pdf",
+      "desc": "Artikel in der Kent-Depesche Nr. 13, Mai 2012"
+    },
+    {
+      "title": "Garten Weden – Wedisches Magazin Agnihotra (April 2012)",
+      "category": "presse",
+      "year": "2012",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/gartenweden-2012.pdf",
+      "desc": "Artikel im Garten Weden Magazin, April 2012"
+    },
+    {
+      "title": "vita einfach leben – Vedisches Feuerritual (März 2012)",
+      "category": "presse",
+      "year": "2012",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/vita-2012.pdf",
+      "desc": "Artikel in vita einfach leben, März 2012"
+    },
+    {
+      "title": "Tattva Viveka – Agnihotra (März 2012)",
+      "category": "presse",
+      "year": "2012",
+      "lang": "de",
+      "file": "downloads/pressemitteilungen/tattva-viveka-2012.pdf",
+      "desc": "Artikel im Tattva Viveka Magazin, März 2012"
+    },
+    {
+      "title": "Agnihotra-Wasser: Zellbiologische Voruntersuchungen (2023)",
+      "category": "wissenschaft",
+      "year": "2023",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2023-agnihotra-wasser-zellbiologie.pdf",
+      "desc": "Förderliche Wirkeffekte von Agnihotra-Wasser – zellbiologische Voruntersuchungen mit organspezifischen Zellkulturen"
+    },
+    {
+      "title": "Agnihotra fördert die Durchblutungsaktivität (2022)",
+      "category": "wissenschaft",
+      "year": "2022",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2022-agnihotra-durchblutung.pdf",
+      "desc": "Wissenschaftliche Untersuchung zur Wirkung von Agnihotra auf die Durchblutung, 2022"
+    },
+    {
+      "title": "Corona: How Can Agnihotra Help? (2021)",
+      "category": "wissenschaft",
+      "year": "2021",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2021-corona-agnihotra-en.pdf",
+      "desc": "Research paper on the potential role of Agnihotra in supporting health during the COVID-19 pandemic"
+    },
+    {
+      "title": "Neue wissenschaftliche Studien zu Agnihotra (2019)",
+      "category": "wissenschaft",
+      "year": "2019",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2019-neue-studien-jenisch.pdf",
+      "desc": "Zusammengestellt von Johanna Jenisch, 2019"
+    },
+    {
+      "title": "Natural Farming Study (2020)",
+      "category": "wissenschaft",
+      "year": "2020",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2020-natural-farming.pdf",
+      "desc": "Study by Sumedha Thakur et al., published in Journal of Pharmacognosy and Phytochemistry, 2020"
+    },
+    {
+      "title": "Impact of Homa Organic Farming (2020)",
+      "category": "wissenschaft",
+      "year": "2020",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2020-homa-organic-farming-berk.pdf",
+      "desc": "Mitigating soil, water and other environmental crises – by Ulrich Berk, 2020"
+    },
+    {
+      "title": "Bachelor Thesis – Forest and Nature Conservation, Wageningen (2017)",
+      "category": "wissenschaft",
+      "year": "2017",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2017-bachelor-thesis-wageningen.pdf",
+      "desc": "Bachelor Thesis by Philipp Avemaria, Wageningen University, 2017"
+    },
+    {
+      "title": "Strategies of Organic Farming in Fruit Crops (2017)",
+      "category": "wissenschaft",
+      "year": "2017",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2017-strategies-organic-farming.pdf",
+      "desc": "Sandhya Bhat, K.K. Misra, Vikas Kumar Sharma, 2017"
+    },
+    {
+      "title": "Agnihotra kann Kindern helfen, die an HIV/AIDS erkrankt sind (2017)",
+      "category": "wissenschaft",
+      "year": "2017",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2017-agnihotra-hiv-aids-berk.pdf",
+      "desc": "Dr. Ulrich Berk, 2017"
+    },
+    {
+      "title": "Agnihotra-Asche neutralisiert Radioaktivität (2017)",
+      "category": "wissenschaft",
+      "year": "2017",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2017-asche-radioaktivitaet.pdf",
+      "desc": "Physik-Institut, Academy of Science Kiew, 2017"
+    },
+    {
+      "title": "Antimicrobial Activities of Cow Dung Extracts (2016)",
+      "category": "wissenschaft",
+      "year": "2016",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2016-antimicrobial-cow-dung.pdf",
+      "desc": "Against human pathogens, 2016"
+    },
+    {
+      "title": "Effects of Yadnya Fumes on SOx and NOx (2015)",
+      "category": "wissenschaft",
+      "year": "2015",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2015-yadnya-sox-nox.pdf",
+      "desc": "Abhang Pranay D., Pathade Girish, 2015"
+    },
+    {
+      "title": "Neue wissenschaftliche Studien zu Agnihotra (2015)",
+      "category": "wissenschaft",
+      "year": "2015",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2015-neue-studien-jenisch.pdf",
+      "desc": "Zusammengestellt von Johanna Jenisch, 2015"
+    },
+    {
+      "title": "Wirkung von Agnihotra auf die Gehirnwellen (2015)",
+      "category": "wissenschaft",
+      "year": "2015",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2015-agnihotra-gehirnwellen-haffelder.pdf",
+      "desc": "Günter Haffelder, 2015"
+    },
+    {
+      "title": "Beneficial Effects of Agnihotra on Environment and Agriculture (2015)",
+      "category": "wissenschaft",
+      "year": "2015",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2015-beneficial-effects-environment.pdf",
+      "desc": "Abhang Pranay, Patil Manasi, Moghe Pramod, Pune, 2015"
+    },
+    {
+      "title": "Effect of Agnihotra Energy Field on Water Purification (2015)",
+      "category": "wissenschaft",
+      "year": "2015",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2015-agnihotra-water-purification.pdf",
+      "desc": "Ulrich Berk, Shailendra Sharma, 2015"
+    },
+    {
+      "title": "Scientific Study of Somyag Yadnya (2015)",
+      "category": "wissenschaft",
+      "year": "2015",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2015-somyag-yadnya.pdf",
+      "desc": "Published in IJSR, Abhang Pranay, 2015"
+    },
+    {
+      "title": "Scientific Study of Vedic Knowledge: Agnihotra (2014)",
+      "category": "wissenschaft",
+      "year": "2014",
+      "lang": "en",
+      "file": "downloads/untersuchungen/2014-scientific-study-vedic-agnihotra.pdf",
+      "desc": "G.R. Pathade, Pranay Abhang, Fergusson College Pune, 2014"
+    },
+    {
+      "title": "Das vedische Opfer in einer neuen Öffentlichkeit (2013)",
+      "category": "wissenschaft",
+      "year": "2013",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2013-vedisches-opfer-oeffentlichkeit.pdf",
+      "desc": "In Indien und in Europa, 2013"
+    },
+    {
+      "title": "Biologisch-Dynamische Landwirtschaft vs. Homa-Landwirtschaft (2007)",
+      "category": "wissenschaft",
+      "year": "2007",
+      "lang": "de",
+      "file": "downloads/untersuchungen/2007-biodynamisch-vs-homa.pdf",
+      "desc": "Ein Vergleich spiritueller Landwirtschaft, 2007"
+    }
+  ]
+}

@@ -63,3 +63,49 @@ collections:
               - { label: Titel, name: title, widget: string }
               - { label: Datum, name: date,  widget: datetime, format: "YYYY-MM-DD" }
               - { label: Text,  name: body,  widget: markdown }
+
+  - name: downloads
+    label: Downloads
+    files:
+      - name: downloads
+        label: Downloads
+        file: content/downloads.json
+        format: json
+        fields:
+          - label: Downloads
+            name: items
+            widget: list
+            fields:
+              - { label: Titel,       name: title,    widget: string }
+              - label: Kategorie
+                name: category
+                widget: select
+                options:
+                  - { label: "Agnihotra Aktuell (Jahrbuch)",   value: aktuell }
+                  - { label: "Anleitung / Feuerpraxis",         value: anleitung }
+                  - { label: "Flyer / Prospekt",                value: flyer }
+                  - { label: "Pressebericht",                   value: presse }
+                  - { label: "Wissenschaftliche Studie",        value: wissenschaft }
+              - { label: Jahr,        name: year,     widget: string,   required: false, hint: "z.B. 2024" }
+              - label: Sprache
+                name: lang
+                widget: select
+                options:
+                  - { label: Deutsch,     value: de }
+                  - { label: English,     value: en }
+                  - { label: Français,    value: fr }
+                  - { label: Español,     value: es }
+                  - { label: Italiano,    value: it }
+                  - { label: Slovenščina, value: sl }
+                  - { label: Română,      value: ro }
+                  - { label: Bulgarski,   value: bg }
+                  - { label: Čeština,     value: cs }
+                  - { label: Русский,     value: ru }
+                default: de
+              - { label: Beschreibung, name: desc,   widget: text,    required: false }
+              - label: PDF-Datei
+                name: file
+                widget: file
+                media_folder: /downloads
+                public_folder: /downloads
+                hint: "PDF hochladen oder Pfad eingeben (z.B. downloads/anleitungen/agnihotra-anleitung-de.pdf)"
