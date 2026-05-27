@@ -474,6 +474,38 @@
     }
     .footer-legal a:hover { color: var(--gold-light); }
 
+    /* === ACCORDION === */
+    .accordion { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; max-width: 860px; margin: 0 auto; }
+    .accordion-item { border-bottom: 1px solid var(--border2); }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-trigger {
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 24px 28px; cursor: pointer; background: white;
+      transition: background 0.2s, border-left-color 0.2s;
+      border-left: 3px solid transparent;
+      user-select: none;
+    }
+    .accordion-trigger:hover { background: rgba(192,120,24,0.04); }
+    .accordion-item.open .accordion-trigger { background: rgba(192,120,24,0.06); border-left-color: var(--gold); padding-left: 25px; }
+    .accordion-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--brown); }
+    .accordion-sub { font-family: var(--sans); font-size: 13px; color: var(--brown2); font-weight: 300; margin-top: 3px; }
+    .accordion-icon { font-size: 26px; font-weight: 300; color: var(--gold); line-height: 1; flex-shrink: 0; transition: transform 0.35s ease; font-family: var(--sans); }
+    .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.55s ease, padding 0.4s ease; background: rgba(252,248,240,0.6); padding: 0 28px; }
+    .accordion-item.open .accordion-body { max-height: 3000px; padding: 28px 28px 36px; }
+
+    .pfad-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .pfad-item { padding: 18px 20px; background: white; border-radius: 8px; border: 1px solid var(--border2); }
+    .pfad-num { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .pfad-name { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
+    .pfad-text { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
+
+    .feuer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .feuer-item { padding: 20px 22px; background: white; border-radius: 8px; border: 1px solid var(--border2); }
+    .feuer-name { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
+    .feuer-text { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
+    .feuer-note { margin-top: 20px; font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: var(--brown2); font-style: italic; border-top: 1px solid var(--border2); padding-top: 16px; }
+
     /* === RESPONSIVE === */
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none; }
@@ -508,6 +540,12 @@
       .section-wrap { padding: 60px 0; }
       .section-title { font-size: 34px; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .pfad-grid, .feuer-grid { grid-template-columns: 1fr; }
+      .accordion-trigger { padding: 18px 20px; }
+      .accordion-item.open .accordion-trigger { padding-left: 17px; }
+      .accordion-title { font-size: 19px; }
+      .accordion-body { padding: 0 16px; }
+      .accordion-item.open .accordion-body { padding: 20px 16px 28px; }
       .timeline-item { display: flex; flex-direction: column; gap: 10px; padding-left: 0; }
       .timeline::before { left: 50%; transform: translateX(-50%); }
       .timeline-year { font-size: 20px; text-align: center; padding-right: 0; }
@@ -649,6 +687,81 @@
       <div class="col-img fade-in" style="transition-delay:0.15s">
         <img src="Archivbilder/Shree - Wiederbelebung der Veden/imgi_3_a-shree.jpg" alt="Shree Vasant Paranjpe" loading="lazy">
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- D: ACCORDION – FÜNFFACHER PFAD + WEITERE FEUER -->
+<section class="section-wrap" style="background:var(--cream2);">
+  <div class="section-inner">
+    <div class="section-header center fade-in">
+      <div class="eyebrow">Vertiefung</div>
+      <h2 class="section-title">Praxis & <em>Hintergrund</em></h2>
+    </div>
+    <div class="accordion fade-in">
+
+      <div class="accordion-item">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+          <div>
+            <div class="accordion-title">Der Fünffache Pfad</div>
+            <div class="accordion-sub">Yagna · Daan · Tapa · Karma · Swadhyaya</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </div>
+        <div class="accordion-body">
+          <div class="pfad-grid">
+            <div class="pfad-item">
+              <div class="pfad-num">1 · Yagna</div>
+              <div class="pfad-name">Feuerzeremonien</div>
+              <p class="pfad-text">Vedische Feuerzeremonien – allen voran Agnihotra – reinigen Atmosphäre, Wasser und Erde und stärken Körper und Geist. Die Praxis bildet das Fundament des Fünffachen Pfades.</p>
+            </div>
+            <div class="pfad-item">
+              <div class="pfad-num">2 · Daan</div>
+              <div class="pfad-name">Teilen &amp; Schenken</div>
+              <p class="pfad-text">Wer großzügig gibt – Zeit, Geld oder Können – löst innere Bindungen an Besitz. Daan lehrt: Nicht das Anhäufen, sondern das Weitergeben schafft dauerhaftes Wohlergehen.</p>
+            </div>
+            <div class="pfad-item">
+              <div class="pfad-num">3 · Tapa</div>
+              <div class="pfad-name">Selbstdisziplin</div>
+              <p class="pfad-text">Bewusstes Handeln auch bei inneren Widerständen stärkt die Lebenskraft. Ehrliche Sprache, Yoga, Gebet und Meditation unterstützen den Energiefluss und klären den Geist.</p>
+            </div>
+            <div class="pfad-item">
+              <div class="pfad-num">4 · Karma</div>
+              <div class="pfad-name">Rechtes Handeln</div>
+              <p class="pfad-text">Jeder Gedanke und jede Handlung zieht eine entsprechende Reaktion nach sich. Wer selbstlos und wahrheitsgemäß handelt, gestaltet sein Schicksal bewusst.</p>
+            </div>
+            <div class="pfad-item" style="grid-column: 1 / -1;">
+              <div class="pfad-num">5 · Swadhyaya</div>
+              <div class="pfad-name">Selbststudium</div>
+              <p class="pfad-text">„Wer bin ich? Was ist die Wahrheit?" – diese Fragen führen zur tiefsten Erkenntnis. Meditation, Stille und die Beobachtung der eigenen Gedanken und Gefühle öffnen den Weg zu innerer Befreiung.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+          <div>
+            <div class="accordion-title">Weitere Heilige Feuer</div>
+            <div class="accordion-sub">Vyahruti Homa · OM Tryambakam Homa</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </div>
+        <div class="accordion-body">
+          <div class="feuer-grid">
+            <div class="feuer-item">
+              <div class="feuer-name">Vyahruti Homa</div>
+              <p class="feuer-text">Dieses Feuer harmonisiert die Atmosphäre und die drei vedischen Ebenen – Erde, Luft und den Raum darüber. Es dauert nur etwa fünf Minuten und eignet sich besonders für Neuanfänge: vor Reisen, Feiern, gemeinsamem Arbeiten oder dem Beginn einer neuen Lebensphase.</p>
+            </div>
+            <div class="feuer-item">
+              <div class="feuer-name">OM Tryambakam Homa</div>
+              <p class="feuer-text">Das „Mantra der Befreiung" begleitet dieses Heilungsfeuer für Mensch und Natur. Es kann einzeln oder in der Gruppe praktiziert werden – für beliebige Dauer. In Homa-Zentren brennt es täglich mindestens vier Stunden; bei Voll- und Neumond wird es oft auf 24 Stunden ausgedehnt.</p>
+            </div>
+          </div>
+          <p class="feuer-note">Beide Feuer sind kein Ersatz für Agnihotra, sondern vertiefen und ergänzen dessen Wirkung. Grundlage ist eine regelmäßige Agnihotra-Praxis.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -816,6 +929,13 @@
       document.body.appendChild(ov);
     });
   });
+
+  function toggleAccordion(trigger) {
+    var item = trigger.parentElement;
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.accordion-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
 </script>
 
 </body>
