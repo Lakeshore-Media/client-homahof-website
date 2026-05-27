@@ -477,9 +477,12 @@
         if (ev.link) html += '<a href="' + ev.link + '" class="event-cta"' + linkAttr + '>' + (ev.linkText || 'Mehr Info →') + '</a>';
         html += '</div></div>';
 
-        if (ev.details && ev.details.length) {
+        var hasDetail = (ev.details && ev.details.length) || ev.detail || ev.image;
+        if (hasDetail) {
           html += '<div class="event-detail"><div class="event-detail-inner">';
-          ev.details.forEach(function(d) {
+          if (ev.image) html += '<div style="width:100%;margin-bottom:12px;border-radius:10px;overflow:hidden;max-height:280px"><img src="' + ev.image + '" alt="' + ev.title + '" style="width:100%;height:280px;object-fit:cover;display:block" loading="lazy"></div>';
+          if (ev.detail) html += '<div style="width:100%;white-space:pre-line">' + ev.detail + '</div>';
+          if (ev.details) ev.details.forEach(function(d) {
             html += '<div class="event-detail-item"><div class="event-detail-label">' + d.label + '</div><div>' + d.value + '</div></div>';
           });
           html += '</div></div>';
