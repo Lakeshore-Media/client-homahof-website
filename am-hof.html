@@ -238,7 +238,93 @@
       .footer-inner > div:first-child { grid-column: 1 / -1; }
       .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
       .footer-divider { margin: 0 20px; }
+      .spenden-inner { grid-template-columns: 1fr !important; gap: 40px !important; padding: 0 20px !important; }
+      .spenden-title { font-size: 36px !important; }
     }
+  </style>
+  <style>
+    /* === SPENDEN === */
+    #spenden {
+      background: var(--dark-bg);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #spenden::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,120,24,0.06);
+    }
+    #spenden::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -60px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,120,24,0.06);
+    }
+    .spenden-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      position: relative;
+      z-index: 2;
+    }
+    .spenden-eyebrow {
+      font-family: var(--sans); font-size: 12.5px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold-light);
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .spenden-eyebrow::before {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--gold-light);
+    }
+    .spenden-title {
+      font-family: var(--serif); font-size: 45px; font-weight: 300;
+      color: white; line-height: 1.2; margin-bottom: 18px;
+    }
+    .spenden-text {
+      font-family: var(--sans); font-size: 17px; font-weight: 300;
+      color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 28px;
+    }
+    .spenden-bullets { list-style: none; margin-bottom: 36px; display: flex; flex-direction: column; gap: 10px; }
+    .spenden-bullets li {
+      font-family: var(--sans); font-size: 15.5px; font-weight: 300;
+      color: rgba(255,255,255,0.8); display: flex; align-items: flex-start; gap: 10px;
+    }
+    .spenden-bullets li::before { content: '✦'; color: var(--gold-light); font-size: 11px; margin-top: 4px; flex-shrink: 0; }
+    .spenden-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .spenden-bank {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(245,216,138,0.2);
+      border-radius: 12px; padding: 36px; align-self: center;
+    }
+    .spenden-bank-title {
+      font-family: var(--serif); font-size: 22px; font-weight: 400;
+      color: white; margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 1px solid rgba(245,216,138,0.2);
+    }
+    .bank-row { display: flex; justify-content: space-between; gap: 24px; margin-bottom: 14px; }
+    .bank-label {
+      font-family: var(--sans); font-size: 12.5px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,216,138,0.6);
+    }
+    .bank-value {
+      font-family: var(--sans); font-size: 14.5px; font-weight: 400;
+      color: rgba(255,255,255,0.88); text-align: right;
+    }
+    .btn-outline-spenden {
+      background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4);
+      padding: 11px 26px; font-size: 14.5px;
+    }
+    .btn-outline-spenden:hover { border-color: white; background: rgba(255,255,255,0.08); }
   </style>
   <script src="js/site-config.js"></script>
 </head>
@@ -259,7 +345,7 @@
       <a href="medien.html">Medien</a>
       <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
     </div>
-    <a href="mitmachen.html#spenden" class="btn btn-gold nav-cta" style="font-size:14.5px;padding:10px 22px;">Spenden</a>
+    <a href="#spenden" class="btn btn-gold nav-cta" style="font-size:14.5px;padding:10px 22px;">Spenden</a>
     <div class="nav-burger" aria-label="Menü"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -417,6 +503,49 @@
   </div>
 </section>
 
+<!-- SPENDEN -->
+<section id="spenden">
+  <div class="spenden-inner">
+    <div class="fade-in">
+      <div class="spenden-eyebrow">Unterstütze uns</div>
+      <h2 class="spenden-title">Deine Spende hält das <em style="font-style:italic;color:var(--gold-light)">Feuer am Leben</em></h2>
+      <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein – ermöglicht durch Menschen, die diese Arbeit nicht nur von Herzen, sondern vor allem tatkräftig unterstützen.</p>
+      <ul class="spenden-bullets">
+        <li>Tägliche Agnihotra-Zeremonien am Hof</li>
+        <li>Einführungsabende und Seminare – nicht immer kostenlos</li>
+        <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
+      </ul>
+      <div class="spenden-buttons">
+        <a href="https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE" data-paypal target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
+        <button onclick="scrollToBank()" class="btn btn-outline-spenden" type="button">Banküberweisung</button>
+      </div>
+    </div>
+    <div class="spenden-bank fade-in" id="bankverbindung" style="transition-delay:0.15s">
+      <div class="spenden-bank-title">Bankverbindung</div>
+      <div class="bank-row">
+        <span class="bank-label">Empfänger</span>
+        <span class="bank-value">Homa-Hof Heiligenberg e.V.</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-label">IBAN</span>
+        <span class="bank-value" id="iban-value" title="Klicken zum Kopieren" style="cursor:pointer" onclick="copyIBAN()">DE39 6905 1725 0002 0423 56 <span id="iban-copy-hint" style="font-size:11px;opacity:0.6;margin-left:6px">📋 kopieren</span></span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-label">BIC</span>
+        <span class="bank-value">SOLADES1SAL</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-label">Bank</span>
+        <span class="bank-value">Sparkasse Salem-Heiligenberg</span>
+      </div>
+      <div class="bank-row" style="margin-bottom:0">
+        <span class="bank-label">Verwendungszweck</span>
+        <span class="bank-value">Spende Homa-Hof</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFFCF5;display:block">
   <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
     <path d="M0,54 L0,30 C360,54 720,6 1080,30 C1260,42 1370,36 1440,28 L1440,54 Z" fill="#2A1505"/>
@@ -488,17 +617,17 @@
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
   (function() {
     var burger = document.querySelector('.nav-burger');
-    var nav = document.getElementById('main-nav');
-    if (!burger || !nav) return;
+    if (!burger) return;
     burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
     document.addEventListener('click', function(e) {
       if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
     });
   })();
-  });
 
   var MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
   var CAT_LABELS = { seminar: 'Seminar', hof: 'Am Hof', online: 'Online' };
@@ -654,6 +783,24 @@
       }).join('');
     })
     .catch(function() {});
+
+  function scrollToBank() {
+    var bank = document.getElementById('bankverbindung');
+    if (!bank) return;
+    bank.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    bank.style.transition = 'box-shadow 0.3s, outline 0.3s';
+    bank.style.outline = '2px solid var(--gold)';
+    bank.style.boxShadow = '0 0 0 6px rgba(192,120,24,0.15)';
+    setTimeout(function() { bank.style.outline = ''; bank.style.boxShadow = ''; }, 2000);
+  }
+
+  function copyIBAN() {
+    navigator.clipboard.writeText('DE39690517250002042356').then(function() {
+      var hint = document.getElementById('iban-copy-hint');
+      hint.textContent = '✓ kopiert';
+      setTimeout(function() { hint.textContent = '📋 kopieren'; }, 2000);
+    });
+  }
 </script>
 
 
