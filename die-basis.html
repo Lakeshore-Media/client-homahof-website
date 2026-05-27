@@ -495,13 +495,17 @@
     .accordion-item.open .accordion-body { max-height: 3000px; padding: 28px 28px 36px; }
 
     .pfad-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .pfad-item { padding: 18px 20px; background: white; border-radius: 8px; border: 1px solid var(--border2); }
+    .pfad-item { background: white; border-radius: 8px; border: 1px solid var(--border2); overflow: hidden; }
+    .pfad-item-img { width: 100%; height: 130px; object-fit: cover; display: block; }
+    .pfad-item-body { padding: 14px 16px 16px; }
     .pfad-num { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
     .pfad-name { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
     .pfad-text { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
 
     .feuer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .feuer-item { padding: 20px 22px; background: white; border-radius: 8px; border: 1px solid var(--border2); }
+    .feuer-item { background: white; border-radius: 8px; border: 1px solid var(--border2); overflow: hidden; }
+    .feuer-item-img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .feuer-item-body { padding: 18px 20px 20px; }
     .feuer-name { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
     .feuer-text { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
     .feuer-note { margin-top: 20px; font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: var(--brown2); font-style: italic; border-top: 1px solid var(--border2); padding-top: 16px; }
@@ -541,6 +545,8 @@
       .section-title { font-size: 34px; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .pfad-grid, .feuer-grid { grid-template-columns: 1fr; }
+      .pfad-item[style*="grid-column"] { flex-direction: column !important; }
+      .pfad-item[style*="grid-column"] img { width: 100% !important; height: 130px; }
       .accordion-trigger { padding: 18px 20px; }
       .accordion-item.open .accordion-trigger { padding-left: 17px; }
       .accordion-title { font-size: 19px; }
@@ -711,29 +717,44 @@
         <div class="accordion-body">
           <div class="pfad-grid">
             <div class="pfad-item">
-              <div class="pfad-num">1 · Yagna</div>
-              <div class="pfad-name">Feuerzeremonien</div>
-              <p class="pfad-text">Vedische Feuerzeremonien – allen voran Agnihotra – reinigen Atmosphäre, Wasser und Erde und stärken Körper und Geist. Die Praxis bildet das Fundament des Fünffachen Pfades.</p>
+              <img class="pfad-item-img" src="Archivbilder/Der Fünffache Pfad/imgi_4_Agnihotra.jpg" alt="Yagna" loading="lazy">
+              <div class="pfad-item-body">
+                <div class="pfad-num">1 · Yagna</div>
+                <div class="pfad-name">Feuerzeremonien</div>
+                <p class="pfad-text">Vedische Feuerzeremonien – allen voran Agnihotra – reinigen Atmosphäre, Wasser und Erde und stärken Körper und Geist. Die Praxis bildet das Fundament des Fünffachen Pfades.</p>
+              </div>
             </div>
             <div class="pfad-item">
-              <div class="pfad-num">2 · Daan</div>
-              <div class="pfad-name">Teilen &amp; Schenken</div>
-              <p class="pfad-text">Wer großzügig gibt – Zeit, Geld oder Können – löst innere Bindungen an Besitz. Daan lehrt: Nicht das Anhäufen, sondern das Weitergeben schafft dauerhaftes Wohlergehen.</p>
+              <img class="pfad-item-img" src="Archivbilder/Der Fünffache Pfad/imgi_5_Daan.jpg" alt="Daan" loading="lazy">
+              <div class="pfad-item-body">
+                <div class="pfad-num">2 · Daan</div>
+                <div class="pfad-name">Teilen &amp; Schenken</div>
+                <p class="pfad-text">Wer großzügig gibt – Zeit, Geld oder Können – löst innere Bindungen an Besitz. Daan lehrt: Nicht das Anhäufen, sondern das Weitergeben schafft dauerhaftes Wohlergehen.</p>
+              </div>
             </div>
             <div class="pfad-item">
-              <div class="pfad-num">3 · Tapa</div>
-              <div class="pfad-name">Selbstdisziplin</div>
-              <p class="pfad-text">Bewusstes Handeln auch bei inneren Widerständen stärkt die Lebenskraft. Ehrliche Sprache, Yoga, Gebet und Meditation unterstützen den Energiefluss und klären den Geist.</p>
+              <img class="pfad-item-img" src="Archivbilder/Der Fünffache Pfad/imgi_6_Tapa.jpg" alt="Tapa" loading="lazy">
+              <div class="pfad-item-body">
+                <div class="pfad-num">3 · Tapa</div>
+                <div class="pfad-name">Selbstdisziplin</div>
+                <p class="pfad-text">Bewusstes Handeln auch bei inneren Widerständen stärkt die Lebenskraft. Ehrliche Sprache, Yoga, Gebet und Meditation unterstützen den Energiefluss und klären den Geist.</p>
+              </div>
             </div>
             <div class="pfad-item">
-              <div class="pfad-num">4 · Karma</div>
-              <div class="pfad-name">Rechtes Handeln</div>
-              <p class="pfad-text">Jeder Gedanke und jede Handlung zieht eine entsprechende Reaktion nach sich. Wer selbstlos und wahrheitsgemäß handelt, gestaltet sein Schicksal bewusst.</p>
+              <img class="pfad-item-img" src="Archivbilder/Der Fünffache Pfad/imgi_7_Karma.jpg" alt="Karma" loading="lazy">
+              <div class="pfad-item-body">
+                <div class="pfad-num">4 · Karma</div>
+                <div class="pfad-name">Rechtes Handeln</div>
+                <p class="pfad-text">Jeder Gedanke und jede Handlung zieht eine entsprechende Reaktion nach sich. Wer selbstlos und wahrheitsgemäß handelt, gestaltet sein Schicksal bewusst.</p>
+              </div>
             </div>
-            <div class="pfad-item" style="grid-column: 1 / -1;">
-              <div class="pfad-num">5 · Swadhyaya</div>
-              <div class="pfad-name">Selbststudium</div>
-              <p class="pfad-text">„Wer bin ich? Was ist die Wahrheit?" – diese Fragen führen zur tiefsten Erkenntnis. Meditation, Stille und die Beobachtung der eigenen Gedanken und Gefühle öffnen den Weg zu innerer Befreiung.</p>
+            <div class="pfad-item" style="grid-column:1/-1;display:flex;flex-direction:row;align-items:stretch;">
+              <img style="width:220px;flex-shrink:0;object-fit:cover;display:block;" src="Archivbilder/Der Fünffache Pfad/imgi_8_Swadhyaya.jpg" alt="Swadhyaya" loading="lazy">
+              <div class="pfad-item-body" style="flex:1;">
+                <div class="pfad-num">5 · Swadhyaya</div>
+                <div class="pfad-name">Selbststudium</div>
+                <p class="pfad-text">„Wer bin ich? Was ist die Wahrheit?" – diese Fragen führen zur tiefsten Erkenntnis. Meditation, Stille und die Beobachtung der eigenen Gedanken und Gefühle öffnen den Weg zu innerer Befreiung.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -750,18 +771,27 @@
         <div class="accordion-body">
           <div class="feuer-grid">
             <div class="feuer-item">
-              <div class="feuer-name">Vyahruti Homa</div>
-              <p class="feuer-text">Dieses Feuer harmonisiert die Atmosphäre und die drei vedischen Ebenen – Erde, Luft und den Raum darüber. Es dauert nur etwa fünf Minuten und eignet sich besonders für Neuanfänge: vor Reisen, Feiern, gemeinsamem Arbeiten oder dem Beginn einer neuen Lebensphase.</p>
+              <img class="feuer-item-img" src="images/stills/agnihotra-zwei-gefaesse-sonnenuntergang.webp" alt="Vyahruti Homa" loading="lazy">
+              <div class="feuer-item-body">
+                <div class="feuer-name">Vyahruti Homa</div>
+                <p class="feuer-text">Dieses Feuer harmonisiert die Atmosphäre und die drei vedischen Ebenen – Erde, Luft und den Raum darüber. Es dauert nur etwa fünf Minuten und eignet sich besonders für Neuanfänge: vor Reisen, Feiern oder dem Beginn einer neuen Lebensphase.</p>
+              </div>
             </div>
             <div class="feuer-item">
-              <div class="feuer-name">OM Tryambakam Homa</div>
-              <p class="feuer-text">Das „Mantra der Befreiung" begleitet dieses Heilungsfeuer für Mensch und Natur. Es kann einzeln oder in der Gruppe praktiziert werden – für beliebige Dauer. In Homa-Zentren brennt es täglich mindestens vier Stunden; bei Voll- und Neumond wird es oft auf 24 Stunden ausgedehnt.</p>
+              <img class="feuer-item-img" src="images/stills/zeremonie-innen-gruppe-sitzen.webp" alt="OM Tryambakam Homa" loading="lazy">
+              <div class="feuer-item-body">
+                <div class="feuer-name">OM Tryambakam Homa</div>
+                <p class="feuer-text">Das „Mantra der Befreiung" trägt Heilung und Segen für Mensch und Natur. Es kann einzeln oder in der Gruppe praktiziert werden. In Homa-Zentren brennt es täglich mindestens vier Stunden; bei Voll- und Neumond oft 24 Stunden.</p>
+              </div>
             </div>
           </div>
           <p class="feuer-note">Beide Feuer sind kein Ersatz für Agnihotra, sondern vertiefen und ergänzen dessen Wirkung. Grundlage ist eine regelmäßige Agnihotra-Praxis.</p>
         </div>
       </div>
 
+    </div>
+    <div style="text-align:center;margin-top:36px;">
+      <a href="heilige-feuer.html" class="btn btn-outline-dark">Mehr über die Heiligen Feuer →</a>
     </div>
   </div>
 </section>
