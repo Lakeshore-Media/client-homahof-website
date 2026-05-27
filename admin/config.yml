@@ -62,6 +62,7 @@ collections:
             fields:
               - { label: Titel, name: title, widget: string }
               - { label: Datum, name: date,  widget: datetime, format: "YYYY-MM-DD" }
+              - { label: Beitragsbild, name: image, widget: image, required: false, hint: "Empfohlen: 800×500 px, JPG oder WebP" }
               - { label: Text,  name: body,  widget: markdown }
 
   - name: downloads

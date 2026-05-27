@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aktuelles – Homa-Hof Heiligenberg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--brown); background: var(--cream); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --cream: #FFFCF5;
+      --cream2: #FFF8EC;
+      --cream3: #FFF0D4;
+      --gold: #C07818;
+      --gold-light: #F5D88A;
+      --copper: #B84010;
+      --brown: #2A1505;
+      --brown2: #5A3A18;
+      --brown3: #8A6030;
+      --border: #EDD9A8;
+      --border2: #F5E8C0;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', system-ui, sans-serif;
+      --btn-radius: 50px;
+    }
+
+    #main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,252,245,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border2);
+      transition: box-shadow 0.3s;
+    }
+    #main-nav.scrolled { box-shadow: 0 2px 24px rgba(42,21,5,0.1); }
+    .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: 72px; display: flex; align-items: center; gap: 40px; }
+    .nav-brand img { height: 44px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; margin-left: auto; }
+    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--brown2); letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--btn-radius); font-family: var(--sans); font-weight: 500; letter-spacing: 0.03em; cursor: pointer; transition: all 0.22s; border: none; }
+    .btn-gold { background: var(--gold); color: white; padding: 11px 26px; font-size: 14.5px; }
+    .btn-gold:hover { background: var(--copper); }
+    .nav-cta { font-size: 14.5px; padding: 10px 22px; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: all 0.3s; }
+
+    .article-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 40px 100px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.03em;
+      margin-bottom: 40px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--copper); }
+    .article-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 48px;
+    }
+    .article-eyebrow {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .article-date {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--brown3);
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+    .article-title {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+    .article-divider {
+      border: none;
+      border-top: 1px solid var(--border2);
+      margin-bottom: 40px;
+    }
+    .article-body p {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+    .article-body strong { font-weight: 500; color: var(--brown); }
+    .article-body em { font-style: italic; color: var(--brown); }
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--brown);
+      margin: 36px 0 14px;
+    }
+    .article-loading {
+      padding: 80px 0;
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--brown3);
+    }
+    .article-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border2);
+    }
+    .article-nav a {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--gold);
+      transition: color 0.2s;
+    }
+    .article-nav a:hover { color: var(--copper); }
+
+    footer { background: #2A1505; padding: 60px 0 0; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px 48px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 48px; }
+    .footer-tagline { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.65; margin-top: 8px; }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .social-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65); transition: all 0.2s; }
+    .social-icon:hover { background: rgba(255,255,255,0.1); color: white; }
+    .footer-col-title { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-family: var(--sans); font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-contact-item { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.65); margin-bottom: 10px; line-height: 1.5; }
+    .footer-contact-item a { color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--gold-light); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 0 48px; }
+    .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-copy { font-family: var(--sans); font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-family: var(--sans); font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--gold-light); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .nav-inner { padding: 0 20px; height: 64px; }
+      .nav-brand img { height: 40px; }
+      #main-nav.nav-open .nav-links {
+        display: flex; flex-direction: column; position: fixed;
+        top: 64px; left: 0; right: 0; bottom: 0;
+        background: var(--cream); border-top: 1px solid var(--border2);
+        z-index: 98; align-items: center; justify-content: flex-start;
+        padding: 40px 20px 60px; gap: 28px; overflow-y: auto;
+      }
+      #main-nav.nav-open .nav-links a { font-size: 20px; color: var(--brown); font-weight: 300; }
+      #main-nav.nav-open .nav-cta { display: inline-flex !important; margin-top: 8px; }
+      #main-nav.nav-open .nav-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      #main-nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      #main-nav.nav-open .nav-burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+      .article-wrap { padding: 90px 20px 60px; }
+      .article-img { height: 240px; }
+      .article-title { font-size: 30px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 20px 48px; }
+      .footer-inner > div:first-child { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
+      .footer-divider { margin: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="images/Logo-Schrift-2025-Juhu.webp" alt="Homa-Hof Heiligenberg Logo">
+    </a>
+    <div class="nav-links">
+      <a href="die-basis.html">Die Basis</a>
+      <a href="heilige-feuer.html">Heilige Feuer</a>
+      <a href="wissen.html">Wissen</a>
+      <a href="am-hof.html">Am Hof</a>
+      <a href="veranstaltungen.html">Veranstaltungen</a>
+      <a href="mitmachen.html">Mitmachen</a>
+      <a href="medien.html">Medien</a>
+      <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
+    </div>
+    <a href="mitmachen.html#spenden" class="btn btn-gold nav-cta">Spenden</a>
+    <div class="nav-burger" aria-label="Menü"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main>
+  <div class="article-wrap" id="article-wrap">
+    <div class="article-loading">Beitrag wird geladen …</div>
+  </div>
+</main>
+
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFFCF5">
+  <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:40px">
+    <path d="M0,40 L0,22 C360,40 720,4 1080,22 C1260,31 1370,26 1440,20 L1440,40 Z" fill="#2A1505"/>
+  </svg>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="images/Logo-Schrift-2025-Juhu.webp" alt="Homa-Hof Heiligenberg" style="height:58px;width:auto;margin-bottom:16px;opacity:0.92;display:block">
+      <p class="footer-tagline">Europäisches Zentrum für Agnihotra –<br>ein Ort des heiligen Feuers und der Stille.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-icon">f</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">YT</a>
+        <a href="https://www.instagram.com/agnihotraforfuture/" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">IG</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="die-basis.html">Die Basis</a></li>
+        <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
+        <li><a href="wissen.html">Wissen & Nutzen</a></li>
+        <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
+        <li><a href="mitmachen.html">Mitmachen</a></li>
+        <li><a href="medien.html">Medien</a></li>
+        <li><a href="https://homa-hof-shop.de" target="_blank">Shop</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Aktuelles</div>
+      <ul class="footer-links" id="footer-aktuelles">
+        <li><a href="index.html#aktuelles">Alle Beiträge</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <div class="footer-contact-item" style="display:flex;align-items:flex-start;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:4px;opacity:.55"><path d="M8 1C5.5 1 3.5 3 3.5 5.5c0 3.5 4.5 9 4.5 9s4.5-5.5 4.5-9C12.5 3 10.5 1 8 1z"/><circle cx="8" cy="5.5" r="1.5"/></svg>
+        <span>Oberhaslach 6<br>88633 Heiligenberg</span>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;opacity:.55"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
+        <a href="tel:+4975529387600">+49 (0)7552 938760</a>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
+    <div class="footer-legal">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  (function() {
+    var burger = document.querySelector('.nav-burger');
+    if (!burger) return;
+    burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
+    document.addEventListener('click', function(e) {
+      if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
+    });
+  })();
+
+  const MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+  function mdToHtml(md) {
+    return (md || '')
+      .split('\n\n')
+      .map(function(block) {
+        if (/^## /.test(block)) return '<h2>' + block.replace(/^## /, '') + '</h2>';
+        var p = block
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+          .replace(/\n/g, '<br>');
+        return '<p>' + p + '</p>';
+      })
+      .join('');
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var targetId = parseInt(params.get('id') || '0', 10);
+
+  fetch('content/aktuelles.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var items = data.items.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+      var item = items[targetId];
+      if (!item) { window.location = 'index.html#aktuelles'; return; }
+
+      document.title = item.title + ' – Homa-Hof Heiligenberg';
+
+      var d = new Date(item.date);
+      var dateStr = d.getDate() + '. ' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear();
+
+      var prevLink = targetId > 0
+        ? '<a href="aktuelles-beitrag.html?id=' + (targetId - 1) + '">← Neuerer Beitrag</a>'
+        : '<span></span>';
+      var nextLink = targetId < items.length - 1
+        ? '<a href="aktuelles-beitrag.html?id=' + (targetId + 1) + '">Älterer Beitrag →</a>'
+        : '<span></span>';
+
+      var wrap = document.getElementById('article-wrap');
+      wrap.innerHTML =
+        '<a href="index.html#aktuelles" class="back-link">← Alle Beiträge</a>'
+        + (item.image ? '<img src="' + item.image + '" alt="' + item.title + '" class="article-img">' : '')
+        + '<div class="article-eyebrow">Vom Hof</div>'
+        + '<div class="article-date">' + dateStr + '</div>'
+        + '<h1 class="article-title">' + item.title + '</h1>'
+        + '<hr class="article-divider">'
+        + '<div class="article-body">' + mdToHtml(item.body) + '</div>'
+        + '<div class="article-nav">' + prevLink + nextLink + '</div>';
+
+      // populate footer aktuelles links
+      var footerList = document.getElementById('footer-aktuelles');
+      if (footerList) {
+        footerList.innerHTML = '<li><a href="index.html#aktuelles">Alle Beiträge</a></li>'
+          + items.slice(0, 3).map(function(it, i) {
+            return '<li><a href="aktuelles-beitrag.html?id=' + i + '">' + it.title.substring(0, 32) + (it.title.length > 32 ? '…' : '') + '</a></li>';
+          }).join('');
+      }
+    })
+    .catch(function() {
+      document.getElementById('article-wrap').innerHTML =
+        '<a href="index.html#aktuelles" class="back-link">← Alle Beiträge</a>'
+        + '<p style="color:var(--brown3);font-family:var(--sans);font-weight:300">Beitrag konnte nicht geladen werden.</p>';
+    });
+</script>
+
+</body>
+</html>

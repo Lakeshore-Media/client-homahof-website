@@ -907,13 +907,42 @@
       gap: 24px;
     }
     .aktuelles-card {
-      background: var(--cream2);
+      background: white;
       border: 1px solid var(--border2);
       border-radius: 12px;
-      padding: 32px 28px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .aktuelles-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,21,5,0.12); }
+    .aktuelles-card-img {
+      height: 200px;
+      overflow: hidden;
+      background: var(--cream3);
+      flex-shrink: 0;
+    }
+    .aktuelles-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .aktuelles-card:hover .aktuelles-card-img img { transform: scale(1.04); }
+    .aktuelles-card-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+      background: linear-gradient(135deg, var(--cream3) 0%, var(--cream2) 100%);
+    }
+    .aktuelles-card-body {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
     }
     .aktuelles-date {
       font-family: var(--sans);
@@ -926,7 +955,7 @@
     .aktuelles-title {
       font-family: var(--serif);
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 400;
       color: var(--brown);
       line-height: 1.35;
     }
@@ -936,6 +965,15 @@
       font-weight: 300;
       color: var(--brown2);
       line-height: 1.75;
+      flex: 1;
+    }
+    .aktuelles-link {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.03em;
+      margin-top: 4px;
     }
     @media (max-width: 900px) {
       .aktuelles-grid { grid-template-columns: 1fr; }
@@ -1721,15 +1759,22 @@
       const items = data.items
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 3);
-      grid.innerHTML = items.map(item => {
+      grid.innerHTML = items.map((item, idx) => {
         const d = new Date(item.date);
         const dateStr = d.getDate() + '. ' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear();
-        const body = (item.body || '').replace(/\*([^*]+)\*/g, '<em>$1</em>').split('\n\n')[0];
-        return '<div class="aktuelles-card fade-in visible">'
+        const body = (item.body || '').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>').split('\n\n')[0];
+        const imgHtml = item.image
+          ? '<div class="aktuelles-card-img"><img src="' + item.image + '" alt="' + item.title + '" loading="lazy"></div>'
+          : '<div class="aktuelles-card-img"><div class="aktuelles-card-placeholder">🔥</div></div>';
+        return '<a href="aktuelles-beitrag.html?id=' + idx + '" class="aktuelles-card fade-in visible">'
+          + imgHtml
+          + '<div class="aktuelles-card-body">'
           + '<div class="aktuelles-date">' + dateStr + '</div>'
           + '<div class="aktuelles-title">' + item.title + '</div>'
           + '<div class="aktuelles-body">' + body + '</div>'
-          + '</div>';
+          + '<span class="aktuelles-link">Weiterlesen →</span>'
+          + '</div>'
+          + '</a>';
       }).join('');
     })
     .catch(() => {});
