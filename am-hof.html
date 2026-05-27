@@ -59,6 +59,7 @@
     .subpage-hero { min-height: 420px; padding-top: 84px; position: relative; display: flex; align-items: center; overflow: hidden; }
     .subpage-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
     .subpage-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(42,21,5,.72) 0%, rgba(42,21,5,.35) 55%, transparent 100%); }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
     .subpage-hero-content { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; padding: 60px 48px; width: 100%; }
     .hero-eyebrow { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
     .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold-light); flex-shrink: 0; }
@@ -75,39 +76,26 @@
     .section-header.center .eyebrow::before { display: none; }
 
     /* Event Cards */
-    .events-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    .event-card {
-      background: white;
-      border: 1px solid var(--border2);
-      border-radius: 12px;
-      padding: 32px;
-      display: flex;
-      gap: 28px;
-      align-items: flex-start;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .event-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(42,21,5,0.1); }
-    .event-date-block { text-align: center; min-width: 80px; flex-shrink: 0; }
-    .event-day { font-family: var(--serif); font-size: 52px; font-weight: 300; color: var(--gold); line-height: 1; }
-    .event-month { font-family: var(--sans); font-size: 13px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown2); margin-top: 4px; }
-    .event-info { flex: 1; }
-    .event-badge {
-      display: inline-block;
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(192,120,24,0.08);
-      padding: 4px 10px;
-      border-radius: 50px;
-      margin-bottom: 10px;
-    }
-    .event-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
-    .event-desc { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); line-height: 1.7; margin-bottom: 16px; }
-    .event-link { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--gold); display: inline-flex; align-items: center; gap: 5px; transition: gap 0.2s; }
-    .event-link:hover { gap: 8px; }
+    .am-event-list { border-top: 1px solid var(--border2); }
+    .am-event-row { display: grid; grid-template-columns: 72px 1fr minmax(auto,160px); gap: 0 20px; padding: 20px 0; border-bottom: 1px solid var(--border2); cursor: pointer; transition: background 0.15s; align-items: center; }
+    .am-event-row:hover { background: rgba(192,120,24,0.03); }
+    .event-date-block { text-align: center; }
+    .event-day { font-family: var(--serif); font-size: 38px; font-weight: 300; color: var(--gold); line-height: 1; }
+    .event-month { font-family: var(--sans); font-size: 11.5px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown2); margin-top: 4px; }
+    .event-badge { display: inline-block; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: rgba(192,120,24,0.08); padding: 4px 10px; border-radius: 50px; margin-bottom: 8px; }
+    .event-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brown); margin-bottom: 4px; }
+    .event-desc { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
+    .event-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .event-time { font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--brown3); }
+    .event-cta { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--gold); white-space: nowrap; transition: color 0.2s; }
+    .event-cta:hover { color: var(--copper); }
+    .am-event-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0; }
+    .am-event-detail.open { max-height: 400px; padding: 12px 0 20px; }
+    .am-event-detail-inner { font-family: var(--sans); font-size: 14px; color: var(--brown2); border-top: 1px solid var(--border2); padding-top: 14px; display: flex; flex-wrap: wrap; gap: 24px; }
+    .event-detail-item { display: flex; flex-direction: column; gap: 3px; }
+    .event-detail-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brown3); }
+    .am-event-downloads { width: 100%; margin-top: 4px; display: flex; flex-direction: column; gap: 4px; }
+    .am-event-downloads a { color: var(--gold); font-size: 14px; }
 
     /* Form */
     .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
@@ -144,11 +132,11 @@
 
     footer { background: #2A1505; padding: 72px 0 0; }
     .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px; }
-    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 24px; }
+    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 24px; }
     .footer-social { display: flex; gap: 14px; }
     .social-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s; }
     .social-icon:hover { border-color: var(--gold-light); color: var(--gold-light); }
-    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 20px; }
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-links a { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold-light); }
@@ -157,9 +145,9 @@
     .footer-contact-item a:hover { color: var(--gold-light); }
     .footer-divider { max-width: 1440px; margin: 56px auto 0; padding: 0 48px; border-top: 1px solid rgba(255,255,255,0.1); }
     .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-    .footer-copy { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); }
+    .footer-copy { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); }
     .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-legal a { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--gold-light); }
 
     @media (max-width: 768px) {
@@ -184,7 +172,9 @@
       #main-nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
       #main-nav.nav-open .nav-burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
       .nav-inner { padding: 0 20px; }
-      .two-col, .events-grid, .info-grid { grid-template-columns: 1fr !important; }
+      .two-col, .info-grid { grid-template-columns: 1fr !important; }
+      .am-event-row { grid-template-columns: 56px 1fr; }
+      .event-actions { grid-column: 2; flex-direction: row; justify-content: space-between; align-items: center; padding-top: 8px; }
       .subpage-hero-content { padding: 40px 20px; }
       .subpage-hero-content h1 { font-size: 38px; }
       .section-inner { padding: 0 20px; }
@@ -219,6 +209,10 @@
 
 <section class="subpage-hero">
   <div class="subpage-hero-bg" style="background-image:url('Archivbilder/Besucherhinweise/imgi_3_a-besucher.jpg')"></div>
+  <video class="hero-video" autoplay muted loop playsinline poster="images/stills/drohne-gesamthof-feld-umgebung.png">
+    <source src="videos/Loop_HomaHof_amHof.webm" type="video/webm">
+    <source src="videos/Loop_HomaHof_amHof.mp4" type="video/mp4">
+  </video>
   <div class="subpage-hero-overlay"></div>
   <div class="subpage-hero-content">
     <div class="hero-eyebrow">Besuchen & Erleben</div>
@@ -234,8 +228,9 @@
       <div class="eyebrow">Termine 2026</div>
       <h2 class="section-title">Veranstaltungen & <em>Seminare</em></h2>
     </div>
-    <div class="events-grid">
-      <div class="event-card fade-in">
+    <div class="am-event-list">
+
+      <div class="am-event-row fade-in">
         <div class="event-date-block">
           <div class="event-day">21</div>
           <div class="event-month">Juni 2026</div>
@@ -244,10 +239,25 @@
           <span class="event-badge">Seminar</span>
           <h3 class="event-title">Agnihotra-Basisseminar</h3>
           <p class="event-desc">Einführung in Theorie und Praxis der vedischen Feuerzeremonie. Für alle Interessierten offen.</p>
-          <a href="#anmeldung" class="event-link">Anmelden →</a>
+        </div>
+        <div class="event-actions">
+          <span class="event-time">09:00 – 17:00</span>
+          <a href="veranstaltungen.html" class="event-cta" onclick="event.stopPropagation()">Mehr Infos →</a>
         </div>
       </div>
-      <div class="event-card fade-in" style="transition-delay:0.1s">
+      <div class="am-event-detail">
+        <div class="am-event-detail-inner">
+          <div class="event-detail-item"><span class="event-detail-label">Ort</span>Homa-Hof Heiligenberg</div>
+          <div class="event-detail-item"><span class="event-detail-label">Dauer</span>Ganztägig</div>
+          <div class="event-detail-item"><span class="event-detail-label">Beitrag</span>Kostenlos / Spende</div>
+          <div class="am-event-downloads">
+            <span class="event-detail-label">Downloads</span>
+            <a href="medien.html#downloads">Anleitungen &amp; Unterlagen →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="am-event-row fade-in" style="transition-delay:0.08s">
         <div class="event-date-block">
           <div class="event-day">18</div>
           <div class="event-month">Juli 2026</div>
@@ -256,10 +266,25 @@
           <span class="event-badge">Sommertreffen</span>
           <h3 class="event-title">Internationales Sommertreffen</h3>
           <p class="event-desc">Gemeinschaft, Feuer, Vorträge und Begegnungen – das jährliche Herzstück am Homa-Hof.</p>
-          <a href="#anmeldung" class="event-link">Anmelden →</a>
+        </div>
+        <div class="event-actions">
+          <span class="event-time">Ganztägig</span>
+          <a href="veranstaltungen.html" class="event-cta" onclick="event.stopPropagation()">Mehr Infos →</a>
         </div>
       </div>
-      <div class="event-card fade-in" style="transition-delay:0.15s">
+      <div class="am-event-detail">
+        <div class="am-event-detail-inner">
+          <div class="event-detail-item"><span class="event-detail-label">Ort</span>Homa-Hof Heiligenberg</div>
+          <div class="event-detail-item"><span class="event-detail-label">Dauer</span>Mehrere Tage</div>
+          <div class="event-detail-item"><span class="event-detail-label">Beitrag</span>Kostenlos / Spende</div>
+          <div class="am-event-downloads">
+            <span class="event-detail-label">Downloads</span>
+            <a href="medien.html#downloads">Anleitungen &amp; Unterlagen →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="am-event-row fade-in" style="transition-delay:0.16s">
         <div class="event-date-block">
           <div class="event-day">9</div>
           <div class="event-month">Aug 2026</div>
@@ -268,10 +293,25 @@
           <span class="event-badge">Abend</span>
           <h3 class="event-title">Agnihotra-Abend</h3>
           <p class="event-desc">Offene Feuerzeremonie für alle – erlebe Agnihotra live ohne Voranmeldung.</p>
-          <a href="#anmeldung" class="event-link">Anmelden →</a>
+        </div>
+        <div class="event-actions">
+          <span class="event-time">20:00 – 21:30</span>
+          <a href="veranstaltungen.html" class="event-cta" onclick="event.stopPropagation()">Mehr Infos →</a>
         </div>
       </div>
-      <div class="event-card fade-in" style="transition-delay:0.25s">
+      <div class="am-event-detail">
+        <div class="am-event-detail-inner">
+          <div class="event-detail-item"><span class="event-detail-label">Ort</span>Homa-Hof Heiligenberg</div>
+          <div class="event-detail-item"><span class="event-detail-label">Dauer</span>1,5 Stunden</div>
+          <div class="event-detail-item"><span class="event-detail-label">Beitrag</span>Kostenlos</div>
+          <div class="am-event-downloads">
+            <span class="event-detail-label">Downloads</span>
+            <a href="medien.html#downloads">Anleitungen &amp; Unterlagen →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="am-event-row fade-in" style="transition-delay:0.24s">
         <div class="event-date-block">
           <div class="event-day">13</div>
           <div class="event-month">Sep 2026</div>
@@ -280,9 +320,24 @@
           <span class="event-badge">Seminar</span>
           <h3 class="event-title">Vertiefungsseminar Agnihotra</h3>
           <p class="event-desc">Für Fortgeschrittene – Vertiefung der Praxis und Feinheiten des Fünffachen Pfads.</p>
-          <a href="#anmeldung" class="event-link">Anmelden →</a>
+        </div>
+        <div class="event-actions">
+          <span class="event-time">09:00 – 17:00</span>
+          <a href="veranstaltungen.html" class="event-cta" onclick="event.stopPropagation()">Mehr Infos →</a>
         </div>
       </div>
+      <div class="am-event-detail">
+        <div class="am-event-detail-inner">
+          <div class="event-detail-item"><span class="event-detail-label">Ort</span>Homa-Hof Heiligenberg</div>
+          <div class="event-detail-item"><span class="event-detail-label">Dauer</span>Ganztägig</div>
+          <div class="event-detail-item"><span class="event-detail-label">Beitrag</span>Kostenlos / Spende</div>
+          <div class="am-event-downloads">
+            <span class="event-detail-label">Downloads</span>
+            <a href="medien.html#downloads">Anleitungen &amp; Unterlagen →</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -337,13 +392,13 @@
       <h2 class="section-title">Hinweise für <em>Besucher</em></h2>
     </div>
     <div style="margin-bottom:48px;border-radius:12px;overflow:hidden;max-height:320px;" class="fade-in">
-      <img src="Archivbilder/Veranstaltungen/imgi_3_a-seminar2017_1800x562.jpg" alt="Veranstaltungen Homa-Hof" style="width:100%;height:320px;object-fit:cover;display:block;" loading="lazy">
+      <img src="images/stills/drohne-gesamthof-feld-umgebung.png" alt="Homa-Hof Heiligenberg – Luftaufnahme" style="width:100%;height:320px;object-fit:cover;display:block;" loading="lazy">
     </div>
     <div class="info-grid fade-in">
       <div class="info-block">
         <div class="info-icon">🕐</div>
         <div class="info-title">Öffnungszeiten</div>
-        <p class="info-text">Hofladen täglich 12 – 14:30 Uhr geöffnet. Zu Veranstaltungen zusätzliche Zeiten – bitte vorab anfragen.</p>
+        <p class="info-text">Hofladen Freitag und Samstag von 15 bis 18 Uhr geöffnet. Zu Veranstaltungen zusätzliche Zeiten – bitte vorab anfragen. Außerhalb dieser Zeiten bitten wir um vorherige Kontaktaufnahme per Telefon oder E-Mail.</p>
       </div>
       <div class="info-block">
         <div class="info-icon">🚗</div>
@@ -353,7 +408,7 @@
       <div class="info-block">
         <div class="info-icon">🌿</div>
         <div class="info-title">Was mitbringen</div>
-        <p class="info-text">Bequeme, am besten naturfarbene Kleidung, offenes Herz und Neugier auf das heilige Feuer.</p>
+        <p class="info-text">Bequeme Kleidung und Schuhe für Feld und Wiese, eine zusätzliche Jacke und ein offenes Herz.</p>
       </div>
     </div>
   </div>
@@ -402,10 +457,15 @@
         <span class="camp-price">Preis auf Anfrage</span>
       </div>
     </div>
-    <p class="section-text" style="margin-top:24px;">Für Anfragen zur Übernachtung bitte direkt Kontakt aufnehmen: <a href="mailto:info@homa-hof-heiligenberg.de" style="color:var(--gold)">info@homa-hof-heiligenberg.de</a></p>
+    <p class="section-text" style="margin-top:24px;">Für Anfragen zur Übernachtung bitte direkt Kontakt aufnehmen: <a href="mailto:willkommen@homa-hof-heiligenberg.de" style="color:var(--gold)">willkommen@homa-hof-heiligenberg.de</a></p>
   </div>
 </section>
 
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFFCF5;display:block">
+  <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
+    <path d="M0,54 L0,30 C360,54 720,6 1080,30 C1260,42 1370,36 1440,28 L1440,54 Z" fill="#2A1505"/>
+  </svg>
+</div>
 <footer>
   <div class="footer-inner">
     <div>
@@ -424,6 +484,7 @@
         <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
         <li><a href="wissen.html">Wissen & Nutzen</a></li>
         <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
         <li><a href="mitmachen.html">Mitmachen</a></li>
         <li><a href="medien.html">Medien</a></li>
         <li><a href="https://homa-hof-shop.de" target="_blank">Shop</a></li>
@@ -453,7 +514,7 @@
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
         <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
       </div>
-      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.45)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.65)">Hofladen<br>Fr. und Sa. 15 – 18 Uhr</div>
     </div>
   </div>
   <div class="footer-divider"></div>
@@ -481,6 +542,15 @@
       if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
     });
   })();
+  });
+
+  document.querySelectorAll('.am-event-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const detail = row.nextElementSibling;
+      if (detail && detail.classList.contains('am-event-detail')) {
+        detail.classList.toggle('open');
+      }
+    });
   });
 
   const fadeEls = document.querySelectorAll('.fade-in');

@@ -122,7 +122,7 @@
     .dark-section .eyebrow::before { background: var(--gold-light); }
     .dark-section .section-title { color: white; }
     .spenden-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-    .spenden-text { font-family: var(--sans); font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.8; margin-bottom: 28px; }
+    .spenden-text { font-family: var(--sans); font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 28px; }
     .spenden-bullets { list-style: none; margin-bottom: 36px; display: flex; flex-direction: column; gap: 10px; }
     .spenden-bullets li { font-family: var(--sans); font-size: 15.5px; font-weight: 300; color: rgba(255,255,255,0.8); display: flex; align-items: flex-start; gap: 10px; }
     .spenden-bullets li::before { content: '✦'; color: var(--gold-light); font-size: 11px; margin-top: 4px; flex-shrink: 0; }
@@ -155,11 +155,11 @@
 
     footer { background: #2A1505; padding: 72px 0 0; }
     .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px; }
-    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 24px; }
+    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 24px; }
     .footer-social { display: flex; gap: 14px; }
     .social-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s; }
     .social-icon:hover { border-color: var(--gold-light); color: var(--gold-light); }
-    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 20px; }
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-links a { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold-light); }
@@ -168,9 +168,9 @@
     .footer-contact-item a:hover { color: var(--gold-light); }
     .footer-divider { max-width: 1440px; margin: 56px auto 0; padding: 0 48px; border-top: 1px solid rgba(255,255,255,0.1); }
     .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-    .footer-copy { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); }
+    .footer-copy { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); }
     .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-legal a { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--gold-light); }
 
     @media (max-width: 768px) {
@@ -247,24 +247,28 @@
       <div class="eyebrow">Mitglied werden</div>
       <h2 class="section-title">Teil der <em>Gemeinschaft</em></h2>
     </div>
+    <div style="border-radius:16px;overflow:hidden;margin-bottom:48px;max-height:420px;" class="fade-in">
+      <img src="images/Gruppenbild_neu_Pfingsten 2026.png" alt="Die Gemeinschaft des Homa-Hofs – Pfingsten 2026" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" loading="lazy">
+    </div>
     <div class="three-col">
       <div class="membership-card fade-in">
-        <div class="membership-icon">🔥</div>
-        <span class="membership-type">Aktives Mitglied</span>
-        <h3 class="membership-title">Leben & Wirken</h3>
-        <p class="membership-text">Du lebst am Hof und praktizierst täglich Agnihotra. Du trägst die Gemeinschaft aktiv mit – durch Arbeit, Praxis und Präsenz.</p>
+        <div class="membership-icon">✉️</div>
+        <span class="membership-type">Freunde des Hofs</span>
+        <h3 class="membership-title">Verbunden bleiben</h3>
+        <p class="membership-text">Bleib auf dem Laufenden – mit dem Newsletter des Homa-Hofs. Veranstaltungen, Impulse und Neuigkeiten direkt in dein Postfach.</p>
+        <a href="#newsletter" class="btn btn-outline-dark" style="margin-top:1rem;font-size:13px;">Newsletter abonnieren →</a>
       </div>
       <div class="membership-card fade-in" style="transition-delay:0.1s">
         <div class="membership-icon">🌱</div>
         <span class="membership-type">Fördermitglied</span>
         <h3 class="membership-title">Unterstützen</h3>
-        <p class="membership-text">Du unterstützt die Arbeit des Hofs finanziell. Ab 5 €/Monat. Deine Spende hält das Feuer am Leben und die Türen offen.</p>
+        <p class="membership-text">Du unterstützt die Arbeit des Hofs finanziell. Ab 2,50 €/Monat. Deine Spende hält das Feuer am Leben und die Türen offen.</p>
       </div>
       <div class="membership-card fade-in" style="transition-delay:0.2s">
-        <div class="membership-icon">🤝</div>
-        <span class="membership-type">Freunde des Hofs</span>
-        <h3 class="membership-title">Verbunden bleiben</h3>
-        <p class="membership-text">Du besuchst uns, nimmst an Veranstaltungen teil und bist mit dem Hof im Herzen verbunden – ohne feste Verpflichtungen.</p>
+        <div class="membership-icon">🔥</div>
+        <span class="membership-type">Aktives Mitglied</span>
+        <h3 class="membership-title">Leben & Wirken</h3>
+        <p class="membership-text">Du trägst die Gemeinschaft aktiv mit – durch Mitarbeit, Praxis und Präsenz.</p>
       </div>
     </div>
   </div>
@@ -275,7 +279,7 @@
   <div class="section-inner">
     <div class="section-header fade-in">
       <div class="eyebrow">Beitreten</div>
-      <h2 class="section-title">Jetzt <em>Mitglied</em> werden</h2>
+      <h2 class="section-title">Jetzt <em>Förder</em>mitglied werden</h2>
     </div>
     <form style="max-width:680px;" onsubmit="return false;" class="fade-in">
       <div class="form-grid">
@@ -305,10 +309,9 @@
       <div class="form-group">
         <label class="form-label">Mitgliedschaftsart</label>
         <div class="radio-group">
-          <label class="radio-option"><input type="radio" name="art" value="aktiv"> Aktives Mitglied</label>
-          <label class="radio-option"><input type="radio" name="art" value="foerder"> Fördermitglied (ab 5 €/Monat)</label>
-          <label class="radio-option"><input type="radio" name="art" value="freunde"> Freunde des Hofs</label>
+          <label class="radio-option"><input type="radio" name="art" value="foerder" checked> Fördermitglied (ab 2,50 €/Monat)</label>
         </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--brown3);">Den Mitgliedsantrag kannst du hier herunterladen und ausgefüllt einsenden: <a href="#" style="color:var(--gold);">Antrag herunterladen (PDF)</a></p>
       </div>
       <div class="form-group">
         <label class="form-label" for="m-nachricht">Nachricht (optional)</label>
@@ -331,11 +334,11 @@
     <div class="fade-in">
       <div class="eyebrow">Unterstützen</div>
       <h2 class="section-title">Deine Spende hält das <em style="color:var(--gold-light)">Feuer am Leben</em></h2>
-      <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein. Alle Angebote sind kostenlos – ermöglicht durch Menschen, die diese Arbeit mit ihrem Herzen unterstützen.</p>
+      <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein – ermöglicht durch Menschen, die diese Arbeit nicht nur von Herzen, sondern vor allem tatkräftig unterstützen.</p>
       <ul class="spenden-bullets">
-        <li>Tägliche Agnihotra-Praxis am Hof</li>
-        <li>Pflege der Hofanlagen und Gärten</li>
-        <li>Kostenlose Seminare für Einsteiger</li>
+        <li>Tägliche Agnihotra-Zeremonien am Hof</li>
+        <li>Einführungsabende und Seminare – nicht immer kostenlos</li>
+        <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
       </ul>
       <div class="spenden-buttons">
         <a href="https://www.paypal.com/donate?token=1MHMFxSMzRT4OpxzvqDtVyehrzfJ_zi0qyjKyY9okUBJ-a1qcU87KHd3I95R8C1ZNNk_0QMMyuiLWHyr&locale.x=DE" target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
@@ -432,6 +435,11 @@
   </div>
 </section>
 
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFFCF5;display:block">
+  <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
+    <path d="M0,54 L0,30 C360,54 720,6 1080,30 C1260,42 1370,36 1440,28 L1440,54 Z" fill="#2A1505"/>
+  </svg>
+</div>
 <footer>
   <div class="footer-inner">
     <div>
@@ -450,6 +458,7 @@
         <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
         <li><a href="wissen.html">Wissen & Nutzen</a></li>
         <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
         <li><a href="mitmachen.html">Mitmachen</a></li>
         <li><a href="medien.html">Medien</a></li>
         <li><a href="https://homa-hof-shop.de" target="_blank">Shop</a></li>
@@ -478,7 +487,7 @@
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
         <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
       </div>
-      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.45)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.65)">Hofladen<br>Fr. und Sa. 15 – 18 Uhr</div>
     </div>
   </div>
   <div class="footer-divider"></div>

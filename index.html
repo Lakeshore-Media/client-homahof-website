@@ -199,6 +199,7 @@
       inset: 0;
       background: linear-gradient(to right, rgba(42,21,5,.72) 0%, rgba(42,21,5,.35) 55%, transparent 100%);
     }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
     #fire-shader-wrap {
       position: absolute;
       left: 0;
@@ -514,7 +515,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold);
-      background: rgba(192,120,24,0.08);
+      background: rgba(192,120,24,0.15);
       padding: 4px 10px;
       border-radius: 50px;
       display: inline-block;
@@ -598,7 +599,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold);
-      background: rgba(192,120,24,0.08);
+      background: rgba(192,120,24,0.15);
       padding: 4px 10px;
       border-radius: 50px;
       display: inline-block;
@@ -808,7 +809,7 @@
       font-family: var(--sans);
       font-size: 17px;
       font-weight: 300;
-      color: rgba(255,255,255,0.72);
+      color: rgba(255,255,255,0.85);
       line-height: 1.8;
       margin-bottom: 28px;
     }
@@ -943,7 +944,7 @@
       font-family: var(--sans);
       font-size: 14.5px;
       font-weight: 300;
-      color: rgba(255,255,255,0.72);
+      color: rgba(255,255,255,0.85);
       line-height: 1.7;
       margin-bottom: 24px;
     }
@@ -969,7 +970,7 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.85);
       margin-bottom: 20px;
     }
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -1008,16 +1009,16 @@
     }
     .footer-copy {
       font-family: var(--sans);
-      font-size: 13.5px;
+      font-size: 14.5px;
       font-weight: 300;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.65);
     }
     .footer-legal { display: flex; gap: 20px; }
     .footer-legal a {
       font-family: var(--sans);
-      font-size: 13.5px;
+      font-size: 14.5px;
       font-weight: 300;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.65);
       transition: color 0.2s;
     }
     .footer-legal a:hover { color: var(--gold-light); }
@@ -1099,6 +1100,7 @@
       <a href="heilige-feuer.html">Heilige Feuer</a>
       <a href="wissen.html">Wissen</a>
       <a href="am-hof.html">Am Hof</a>
+      <a href="veranstaltungen.html">Veranstaltungen</a>
       <a href="mitmachen.html">Mitmachen</a>
       <a href="medien.html">Medien</a>
       <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
@@ -1113,6 +1115,10 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
+  <video class="hero-video" autoplay muted loop playsinline poster="images/stills/agnihotra-flamme-sonnenuntergang-03.png">
+    <source src="videos/Loop_HomaHof_Agnihotra_Feld.webm" type="video/webm">
+    <source src="videos/Loop_HomaHof_Agnihotra_Feld.mp4" type="video/mp4">
+  </video>
   <div class="hero-overlay"></div>
   <div id="fire-shader-wrap" aria-hidden="true"><canvas id="fire-c"></canvas></div>
   <div class="hero-content">
@@ -1142,8 +1148,8 @@
       <div class="stat-label">Jahre Agnihotra</div>
     </div>
     <div class="stat-item fade-in" style="transition-delay:0.1s">
-      <div class="stat-value">kostenlos</div>
-      <div class="stat-label">Wissen weitergeben</div>
+      <div class="stat-value">gemeinschaftlich</div>
+      <div class="stat-label">Gemeinsam wirken</div>
     </div>
     <div class="stat-item fade-in" style="transition-delay:0.2s">
       <div class="stat-value">täglich</div>
@@ -1195,7 +1201,7 @@
     <div class="features-grid">
       <div class="card fade-in">
         <div class="card-img">
-          <img src="Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg" alt="Agnihotra Feuerzeremonie">
+          <img src="images/stills/agnihotra-vorbereitung-tisch-wiese.png" alt="Agnihotra – Heiliges Feuer, Vorbereitung">
         </div>
         <div class="card-body">
           <span class="card-tag">Wissen</span>
@@ -1206,7 +1212,7 @@
       </div>
       <div class="card fade-in" style="transition-delay:0.1s">
         <div class="card-img">
-          <img src="Archivbilder/Der Homa-Hof - ein Kraftort/imgi_12_5yagna-pavillonA066D3AC-F34B-B354-452C-D533B35D55DA.jpg" alt="Der Homa-Hof Yagna Pavillon">
+          <img src="images/stills/drohne-gesamthof-fruehjahr.png" alt="Der Homa-Hof Heiligenberg – Luftaufnahme Frühjahr">
         </div>
         <div class="card-body">
           <span class="card-tag">Der Ort</span>
@@ -1217,7 +1223,7 @@
       </div>
       <div class="card fade-in" style="transition-delay:0.2s">
         <div class="card-img">
-          <img src="Archivbilder/Die Hof-Gemeinschaft/imgi_3_a-gemeinschaft.jpg" alt="Veranstaltungen und Gemeinschaft">
+          <img src="Archivbilder/Veranstaltungen/imgi_3_a-seminar2017_1800x562.jpg" alt="Veranstaltungen und Seminare">
         </div>
         <div class="card-body">
           <span class="card-tag">Erleben</span>
@@ -1269,7 +1275,7 @@
         <div class="about-body">
           <span class="card-tag">Gemeinschaft</span>
           <h3 class="card-title">Homa-Hof e.V.</h3>
-          <p class="card-text">Aktive Mitglieder, Idealisten und Freunde des heiligen Feuers – die Homa-Hof-Familie trägt gemeinsam die Vision für eine heilende Welt.</p>
+          <p class="card-text">Aktive Mitglieder, Idealisten und Freunde des Heiligen Feuers – die Homa-Hof-Familie trägt gemeinsam die Vision für eine heile Welt.</p>
           <a href="mitmachen.html" class="card-link">Über den Verein →</a>
         </div>
       </div>
@@ -1287,13 +1293,13 @@
       </div>
       <div class="about-card fade-in" style="transition-delay:0.2s">
         <div class="about-img">
-          <img src="Archivbilder/Ökologie/imgi_3_a-oekologie.jpg" alt="Unsere Vision – Natur und Feuer">
+          <img src="images/stills/drohne-garten-feld-teich.png" alt="Unsere Vision – Biogarten und Teich">
           <div class="about-img-overlay"></div>
         </div>
         <div class="about-body">
           <span class="card-tag">Ausblick</span>
           <h3 class="card-title">Unsere Vision</h3>
-          <p class="card-text">Glück, Wohlergehen und Gesundheit für alle Lebewesen in einer gesunden Umwelt – durch die heilende Kraft des Agnihotra-Feuers.</p>
+          <p class="card-text">Glück, Wohlergehen und Frieden für alle Lebewesen in einer gesunden Umwelt – durch die heilsame Kraft des Agnihotra-Feuers.</p>
           <a href="die-basis.html" class="card-link">Die Vision lesen →</a>
         </div>
       </div>
@@ -1365,11 +1371,11 @@
     <div class="fade-in">
       <div class="spenden-eyebrow">Unterstütze uns</div>
       <h2 class="spenden-title">Deine Spende hält das <em style="font-style:italic;color:var(--gold-light)">Feuer am Leben</em></h2>
-      <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein. Alle Angebote sind kostenlos – ermöglicht durch Menschen, die diese Arbeit mit ihrem Herzen unterstützen.</p>
+      <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein – ermöglicht durch Menschen, die diese Arbeit nicht nur von Herzen, sondern vor allem tatkräftig unterstützen.</p>
       <ul class="spenden-bullets">
         <li>Tägliche Agnihotra-Zeremonien am Hof</li>
-        <li>Kostenlose Einführungsabende und Seminare</li>
-        <li>Pflege und Erhalt des Kraftorts Heiligenberg</li>
+        <li>Einführungsabende und Seminare – nicht immer kostenlos</li>
+        <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
       </ul>
       <div class="spenden-buttons">
         <a href="https://www.paypal.com/donate?token=1MHMFxSMzRT4OpxzvqDtVyehrzfJ_zi0qyjKyY9okUBJ-a1qcU87KHd3I95R8C1ZNNk_0QMMyuiLWHyr&locale.x=DE" target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
@@ -1406,7 +1412,7 @@
 <section id="newsletter">
   <div class="newsletter-inner">
     <div class="eyebrow fade-in">Newsletter</div>
-    <h2 class="section-title fade-in">Bleib <em>informiert</em></h2>
+    <h2 class="section-title fade-in">Impulse vom <em>Homa-Hof</em></h2>
     <p class="fade-in">Veranstaltungen, Neuigkeiten und Impulse aus dem Homa-Hof – direkt in dein Postfach. Kostenlos und jederzeit kündbar.</p>
     <form class="newsletter-form fade-in" onsubmit="return false;">
       <input type="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse">
@@ -1417,6 +1423,11 @@
 </section>
 
 <!-- FOOTER -->
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFFCF5;display:block">
+  <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
+    <path d="M0,54 L0,30 C360,54 720,6 1080,30 C1260,42 1370,36 1440,28 L1440,54 Z" fill="#2A1505"/>
+  </svg>
+</div>
 <footer>
   <div class="footer-inner">
     <div>
@@ -1435,6 +1446,7 @@
         <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
         <li><a href="wissen.html">Wissen & Nutzen</a></li>
         <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
         <li><a href="mitmachen.html">Mitmachen</a></li>
         <li><a href="medien.html">Medien</a></li>
         <li><a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a></li>
@@ -1464,7 +1476,7 @@
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
         <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
       </div>
-      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.45)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.65)">Hofladen<br>Fr. und Sa. 15 – 18 Uhr</div>
     </div>
   </div>
   <div class="footer-divider"></div>

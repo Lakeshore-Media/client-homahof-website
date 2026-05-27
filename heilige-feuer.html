@@ -134,6 +134,7 @@
       inset: 0;
       background: linear-gradient(to right, rgba(42,21,5,.72) 0%, rgba(42,21,5,.35) 55%, transparent 100%);
     }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
     .subpage-hero-content {
       position: relative;
       z-index: 2;
@@ -441,7 +442,7 @@
       grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
       gap: 48px;
     }
-    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 24px; }
+    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 24px; }
     .footer-social { display: flex; gap: 14px; }
     .social-icon {
       width: 36px; height: 36px; border-radius: 50%;
@@ -451,7 +452,7 @@
       color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s;
     }
     .social-icon:hover { border-color: var(--gold-light); color: var(--gold-light); }
-    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 20px; }
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-links a { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold-light); }
@@ -460,9 +461,9 @@
     .footer-contact-item a:hover { color: var(--gold-light); }
     .footer-divider { max-width: 1440px; margin: 56px auto 0; padding: 0 48px; border-top: 1px solid rgba(255,255,255,0.1); }
     .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-    .footer-copy { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); }
+    .footer-copy { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); }
     .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-legal a { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--gold-light); }
 
     @media (max-width: 768px) {
@@ -512,6 +513,7 @@
       <a href="heilige-feuer.html" style="color:var(--gold)">Heilige Feuer</a>
       <a href="wissen.html">Wissen</a>
       <a href="am-hof.html">Am Hof</a>
+      <a href="veranstaltungen.html">Veranstaltungen</a>
       <a href="mitmachen.html">Mitmachen</a>
       <a href="medien.html">Medien</a>
       <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
@@ -522,7 +524,11 @@
 </nav>
 
 <section class="subpage-hero">
-  <div class="subpage-hero-bg" style="background-image:url('Archivbilder/Was ist Agnihotra/imgi_3_a-was ist a.jpg')"></div>
+  <div class="subpage-hero-bg" style="background-image:url('Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg')"></div>
+  <video class="hero-video" autoplay muted loop playsinline poster="images/stills/agnihotra-flamme-sonnenuntergang-04.png">
+    <source src="videos/Loop_HomaHof_Agnihotra_Pavillion.webm" type="video/webm">
+    <source src="videos/Loop_HomaHof_Agnihotra_Pavillion.mp4" type="video/mp4">
+  </video>
   <div class="subpage-hero-overlay"></div>
   <div class="subpage-hero-content">
     <div class="hero-eyebrow">Vedische Feuerzeremonien</div>
@@ -538,11 +544,11 @@
       <div>
         <div class="eyebrow">Grundlagen</div>
         <h2 class="section-title">Die <em>Zeremonie</em></h2>
-        <p class="section-text">Agnihotra ist eine vedische Feuerzeremonie, die exakt zum Sonnenauf- und -untergang durchgeführt wird. In einer kleinen Kupferpyramide verbrennt man Kuhdung, Ghee und Reis – dazu wird ein kurzes Mantra gesungen. Die entstehende Asche hat heilende Eigenschaften für Mensch, Tier und Pflanze.</p>
+        <p class="section-text">Agnihotra ist eine vedische Feuerzeremonie, die exakt zu Sonnenauf- und -untergang durchgeführt wird. In einer kleinen Kupferpyramide verbrennt man Kuhdung, Ghee und Reis – dazu wird ein kurzes Mantra gesungen. Die entstehende Asche hat heilsame Eigenschaften für Mensch, Tier und Pflanze.</p>
         <a href="#agnihotra-praxis" class="btn btn-outline-dark">Wie sie geht →</a>
       </div>
       <div class="col-img fade-in" style="transition-delay:0.15s">
-        <img src="Archivbilder/Was ist Agnihotra/imgi_4_Agnihotra-Winter.jpg" alt="Agnihotra im Winter" loading="lazy">
+        <img src="images/Agnihotra Bild neu.png" alt="Agnihotra – Feuerzeremonie exakt beim Sonnenuntergang" loading="lazy">
       </div>
     </div>
   </div>
@@ -554,8 +560,19 @@
     <div class="section-header fade-in">
       <div class="eyebrow">Praxis</div>
       <h2 class="section-title">So wird Agnihotra <em>durchgeführt</em></h2>
-      <div class="col-img" style="width:100%;height:280px;margin-top:32px;border-radius:12px;overflow:hidden;">
-        <img src="Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg" alt="Agnihotra Praxis" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;">
+        <div style="border-radius:12px;overflow:hidden;background:rgba(139,90,43,0.06);border:1px dashed rgba(139,90,43,0.25);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;min-height:200px;">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(192,120,24,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:14px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          <div style="font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Video 1</div>
+          <div style="font-family:var(--serif);font-size:17px;color:var(--brown1);margin-bottom:6px;">Die Zutaten</div>
+          <div style="font-family:var(--sans);font-size:13px;color:var(--brown3);">Video folgt in Kürze</div>
+        </div>
+        <div style="border-radius:12px;overflow:hidden;background:rgba(139,90,43,0.06);border:1px dashed rgba(139,90,43,0.25);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;min-height:200px;">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(192,120,24,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:14px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          <div style="font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Video 2</div>
+          <div style="font-family:var(--serif);font-size:17px;color:var(--brown1);margin-bottom:6px;">Die Durchführung</div>
+          <div style="font-family:var(--sans);font-size:13px;color:var(--brown3);">Video folgt in Kürze</div>
+        </div>
       </div>
     </div>
     <div class="steps-grid">
@@ -572,7 +589,7 @@
       <div class="step-card fade-in" style="transition-delay:0.2s">
         <div class="step-number">3</div>
         <div class="step-title">Das Feuer</div>
-        <p class="step-text">Feuer entzünden, Ghee und Reis genau zum Zeitpunkt des Sonnenauf- oder -untergangs auflegen.</p>
+        <p class="step-text">Feuer entzünden, Ghee und Reis genau zum Zeitpunkt des Sonnenauf- oder -untergangs dazugeben.</p>
       </div>
       <div class="step-card fade-in" style="transition-delay:0.3s">
         <div class="step-number">4</div>
@@ -593,11 +610,11 @@
     <div class="fivefold-grid">
       <div class="card fade-in">
         <div class="card-img">
-          <img src="Archivbilder/Der Fünffache Pfad/imgi_4_Agnihotra.jpg" alt="Yajnya" loading="lazy">
+          <img src="Archivbilder/Der Fünffache Pfad/imgi_4_Agnihotra.jpg" alt="Yagna" loading="lazy">
         </div>
         <div class="card-body">
-          <h3 class="card-title">Yajnya</h3>
-          <p class="card-text">Feueropfer zur Reinigung der Atmosphäre.</p>
+          <h3 class="card-title">Yagna</h3>
+          <p class="card-text">Feuerzeremonie zur Reinigung der Atmosphäre.</p>
         </div>
       </div>
       <div class="card fade-in" style="transition-delay:0.1s">
@@ -624,7 +641,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Karma</h3>
-          <p class="card-text">Rechtes Handeln im Alltag.</p>
+          <p class="card-text">Rechtes, selbstloses Handeln.</p>
         </div>
       </div>
       <div class="card fade-in" style="transition-delay:0.2s">
@@ -633,7 +650,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Swadhyaya</h3>
-          <p class="card-text">Selbststudium und Reflexion.</p>
+          <p class="card-text">Selbststudium und Selbsterkenntnis.</p>
         </div>
       </div>
     </div>
@@ -647,28 +664,19 @@
       <div class="eyebrow">Vertiefung</div>
       <h2 class="section-title">Weitere <em>Heilige Feuer</em></h2>
     </div>
-    <div class="three-col">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:760px;margin:0 auto;">
       <div class="card fade-in">
         <div class="card-img" style="height:180px;aspect-ratio:unset;">
-          <img src="Archivbilder/Weitere Feuer/imgi_4_Yajna.jpg" alt="Tryambakam Homa" loading="lazy">
+          <img src="images/stills/zeremonie-innen-gruppe-sitzen.png" alt="Tryambakam Homa – Zeremonie im Innenraum" loading="lazy">
         </div>
         <div class="card-body">
           <h3 class="card-title">Tryambakam Homa</h3>
           <p class="card-text">Kraftvolles Reinigungsfeuer für tiefe energetische Klärung.</p>
         </div>
       </div>
-      <div class="card fade-in" style="transition-delay:0.1s">
-        <div class="card-img" style="height:180px;aspect-ratio:unset;">
-          <img src="Archivbilder/Weitere Feuer/imgi_4_Yajna.jpg" alt="Om Tryambakam" loading="lazy">
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Om Tryambakam</h3>
-          <p class="card-text">Schutz und Heilung – das Feuer des dreifachen Shiva.</p>
-        </div>
-      </div>
       <div class="card fade-in" style="transition-delay:0.2s">
         <div class="card-img" style="height:180px;aspect-ratio:unset;">
-          <img src="Archivbilder/Weitere Feuer/imgi_4_Yajna.jpg" alt="Vyahruti Homa" loading="lazy">
+          <img src="images/stills/agnihotra-zwei-gefaesse-sonnenuntergang.png" alt="Vyahruti Homa – Zwei heilige Feuer beim Sonnenuntergang" loading="lazy">
         </div>
         <div class="card-body">
           <h3 class="card-title">Vyahruti Homa</h3>
@@ -746,10 +754,15 @@
   <div class="kinder-content fade-in">
     <div class="eyebrow">Für Kinder</div>
     <h2 class="section-title" style="color:white;">Agnihotra für <em style="color:var(--gold-light)">Kinder</em></h2>
-    <p class="section-text">„Aganos" ist die Welt der Agnihotra-Kinder. Mit Büchern, Spielen und Geschichten lernen Kinder die Kraft des heiligen Feuers kennen.</p>
+    <p class="section-text">„Aganos" ist die Welt der Agnihotra-Kinder. In spannenden Geschichten lernen Kinder die Heiligen Feuer kennen.</p>
   </div>
 </section>
 
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:#2A1505;display:block">
+  <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
+    <path d="M0,54 L0,30 C360,54 720,6 1080,30 C1260,42 1370,36 1440,28 L1440,54 Z" fill="#2A1505"/>
+  </svg>
+</div>
 <footer>
   <div class="footer-inner">
     <div>
@@ -768,6 +781,7 @@
         <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
         <li><a href="wissen.html">Wissen & Nutzen</a></li>
         <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
         <li><a href="mitmachen.html">Mitmachen</a></li>
         <li><a href="medien.html">Medien</a></li>
         <li><a href="https://homa-hof-shop.de" target="_blank">Shop</a></li>
@@ -797,7 +811,7 @@
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
         <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
       </div>
-      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.45)">Hofladen<br>täglich 12 – 14:30 Uhr</div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.65)">Hofladen<br>Fr. und Sa. 15 – 18 Uhr</div>
     </div>
   </div>
   <div class="footer-divider"></div>
