@@ -170,8 +170,11 @@
     .badge-wiederkehrend { background: rgba(192,120,24,0.08); color: var(--gold); border: 1px solid rgba(192,120,24,0.25); }
     .badge-ausserhalb    { background: rgba(42,21,5,0.06);   color: var(--brown2); border: 1px solid rgba(42,21,5,0.15); }
 
-    .event-detail { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; padding: 0 0 0 100px; }
-    .event-detail.open { max-height: 900px; padding: 12px 0 24px 100px; }
+    .event-detail { max-height: 0; overflow: hidden; transition: max-height 0.55s ease, padding 0.45s ease; padding: 0 0 0 100px; scroll-margin-top: 100px; }
+    .event-detail.open { max-height: 3000px; padding: 12px 0 24px 100px; }
+    .newsletter-opt { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; }
+    .newsletter-opt input[type=checkbox] { width: auto; accent-color: var(--copper); cursor: pointer; flex-shrink: 0; }
+    .newsletter-opt label { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--brown2); cursor: pointer; line-height: 1.4; }
     .anmelde-form { margin-top: 20px; border-top: 1px solid var(--border2); padding-top: 18px; width: 100%; }
     .anmelde-form h4 { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--brown); margin-bottom: 14px; }
     .anmelde-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
@@ -510,6 +513,7 @@
         html += '<div class="anmelde-field"><label>E-Mail</label><input type="email" name="email" required placeholder="deine@email.de"></div></div>';
         html += '<div class="anmelde-row"><div class="anmelde-field"><label>Teilnehmerzahl</label><select name="teilnehmer"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>';
         html += '<div class="anmelde-field"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen, Hinweise..."></textarea></div></div>';
+        html += '<div class="newsletter-opt"><input type="checkbox" id="nl-' + formId + '" name="newsletter" value="ja"><label for="nl-' + formId + '">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label></div>';
         html += '<button class="anmelde-submit" onclick="submitAnmeldung(event, \'' + ev.title.replace(/'/g,"\\'"  ) + '\', \'' + formId + '\')">Jetzt anmelden</button>';
         html += '<div class="anmelde-success" id="success-' + formId + '">✓ Anmeldung gesendet – wir melden uns bald bei dir.</div>';
         html += '</div>';
@@ -562,7 +566,10 @@
     if (!wasOpen) {
       detail.classList.add('open');
       btn.textContent = 'Weniger ↑';
-      setTimeout(function() { detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+      setTimeout(function() {
+        var rect = row.getBoundingClientRect();
+        window.scrollTo({ top: window.scrollY + rect.top - 100, behavior: 'smooth' });
+      }, 50);
     }
   }
 
@@ -607,13 +614,15 @@
     var teilnehmer = form.querySelector('[name=teilnehmer]').value;
     var nachricht = form.querySelector('[name=nachricht]').value;
     if (!name || !email) return;
+    var newsletterEl = form.querySelector('[name=newsletter]');
     var body = new URLSearchParams({
       'form-name': 'veranstaltung-anmeldung',
       'veranstaltung': title,
       'name': name,
       'email': email,
       'teilnehmer': teilnehmer,
-      'nachricht': nachricht
+      'nachricht': nachricht,
+      'newsletter': newsletterEl && newsletterEl.checked ? 'ja' : 'nein'
     });
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
       .then(function() {
@@ -675,7 +684,7 @@
     });
 </script>
 <form name="veranstaltung-anmeldung" netlify hidden>
-  <input name="veranstaltung"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea>
+  <input name="veranstaltung"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea><input type="checkbox" name="newsletter">
 </form>
 </body>
 </html>

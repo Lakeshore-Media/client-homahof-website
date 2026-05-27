@@ -96,8 +96,11 @@
     .event-time { font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--brown3); }
     .event-cta { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--gold); white-space: nowrap; transition: color 0.2s; background: none; border: none; cursor: pointer; padding: 0; }
     .event-cta:hover { color: var(--copper); }
-    .am-event-detail { max-height: 0; overflow: hidden; transition: max-height 0.45s ease, padding 0.35s ease; padding: 0; }
-    .am-event-detail.open { max-height: 1200px; padding: 12px 0 24px; }
+    .am-event-detail { max-height: 0; overflow: hidden; transition: max-height 0.55s ease, padding 0.45s ease; padding: 0; scroll-margin-top: 100px; }
+    .am-event-detail.open { max-height: 3000px; padding: 12px 0 24px; }
+    .newsletter-opt { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; }
+    .newsletter-opt input[type=checkbox] { width: auto; accent-color: var(--copper); cursor: pointer; flex-shrink: 0; }
+    .newsletter-opt label { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--brown2); cursor: pointer; line-height: 1.4; }
     .am-anmelde-form { background: var(--cream); border: 1px solid var(--border2); border-radius: 12px; padding: 24px; margin-top: 16px; }
     .am-anmelde-form h4 { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--brown); margin-bottom: 16px; }
     .am-anmelde-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
@@ -314,7 +317,11 @@
         <label class="form-label" for="nachricht">Nachricht (optional)</label>
         <textarea class="form-textarea" id="nachricht" name="nachricht" placeholder="Deine Fragen oder Hinweise …"></textarea>
       </div>
-      <button type="submit" class="btn btn-gold">Anmeldung absenden</button>
+      <div class="newsletter-opt" style="margin-bottom:4px;">
+        <input type="checkbox" id="nl-main" name="newsletter" value="ja">
+        <label for="nl-main">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label>
+      </div>
+      <button type="submit" class="btn btn-gold" style="margin-top:16px;">Anmeldung absenden</button>
       <p id="main-anmeldung-success" style="display:none;font-family:var(--sans);font-size:14px;color:#2A7A2A;margin-top:12px;">Danke! Wir melden uns innerhalb von 2 Werktagen.</p>
       <p class="form-note">Wir melden uns innerhalb von 2 Werktagen.</p>
     </form>
@@ -551,7 +558,10 @@
     if (!wasOpen) {
       detail.classList.add('open');
       btn.textContent = 'Weniger ↑';
-      setTimeout(function() { detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+      setTimeout(function() {
+        var rect = row.getBoundingClientRect();
+        window.scrollTo({ top: window.scrollY + rect.top - 100, behavior: 'smooth' });
+      }, 50);
     }
   }
 
@@ -562,6 +572,7 @@
     var email = form.querySelector('[name=email]').value.trim();
     if (!vorname || !email) { alert('Bitte Vorname und E-Mail ausfüllen.'); return; }
     btn.disabled = true;
+    var nlEl = form.querySelector('[name=newsletter]');
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -571,7 +582,8 @@
         nachname: form.querySelector('[name=nachname]').value.trim(),
         email: email,
         veranstaltung: title,
-        nachricht: form.querySelector('[name=nachricht]').value.trim()
+        nachricht: form.querySelector('[name=nachricht]').value.trim(),
+        newsletter: nlEl && nlEl.checked ? 'ja' : 'nein'
       }).toString()
     })
     .then(function() {
@@ -590,6 +602,7 @@
     if (!vorname || !email) { alert('Bitte Vorname und E-Mail ausfüllen.'); return; }
     var btn = form.querySelector('[type=submit]');
     if (btn) btn.disabled = true;
+    var nlEl = form.querySelector('[name=newsletter]');
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -599,7 +612,8 @@
         nachname: form.querySelector('[name=nachname]').value.trim(),
         email: email,
         veranstaltung: form.querySelector('[name=veranstaltung]').value,
-        nachricht: form.querySelector('[name=nachricht]').value.trim()
+        nachricht: form.querySelector('[name=nachricht]').value.trim(),
+        newsletter: nlEl && nlEl.checked ? 'ja' : 'nein'
       }).toString()
     })
     .then(function() {
@@ -682,6 +696,7 @@
         html += '<div class="am-anmelde-field"><label>Nachname</label><input type="text" name="nachname" placeholder="Nachname"></div></div>';
         html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>E-Mail</label><input type="email" name="email" placeholder="deine@email.de"></div></div>';
         html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen oder Hinweise …"></textarea></div></div>';
+        html += '<div class="newsletter-opt"><input type="checkbox" id="nl-' + formId + '" name="newsletter" value="ja"><label for="nl-' + formId + '">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label></div>';
         html += '<button type="button" class="am-anmelde-submit" onclick="submitAmAnmeldung(this,\'' + ev.title.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\',\'' + formId + '\')">Anmeldung absenden</button>';
         html += '<p class="am-anmelde-success" id="' + formId + '-success">Danke! Wir melden uns bald.</p>';
         html += '</div>';
@@ -716,6 +731,7 @@
   <input type="email" name="email">
   <input type="text" name="veranstaltung">
   <textarea name="nachricht"></textarea>
+  <input type="checkbox" name="newsletter">
 </form>
 
 </body>
