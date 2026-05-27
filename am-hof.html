@@ -82,15 +82,33 @@
     .event-date-block { text-align: center; }
     .event-day { font-family: var(--serif); font-size: 38px; font-weight: 300; color: var(--gold); line-height: 1; }
     .event-month { font-family: var(--sans); font-size: 11.5px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown2); margin-top: 4px; }
-    .event-badge { display: inline-block; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: rgba(192,120,24,0.08); padding: 4px 10px; border-radius: 50px; margin-bottom: 8px; }
+    .event-badge { display: inline-block; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: rgba(192,120,24,0.08); padding: 4px 10px; border-radius: 50px; margin-bottom: 8px; margin-right: 4px; }
+    .badge-kostenlos { color: #2A7A2A; background: rgba(42,122,42,0.08); }
+    .badge-spende { color: var(--gold); background: rgba(192,120,24,0.1); }
+    .badge-kostenpflichtig { color: var(--copper); background: rgba(184,64,16,0.08); }
+    .badge-wiederkehrend { color: var(--brown2); background: rgba(90,58,24,0.07); }
+    .badge-seminar { color: var(--brown2); background: rgba(90,58,24,0.07); }
+    .badge-hof { color: #2A6A8A; background: rgba(42,106,138,0.08); }
+    .badge-online { color: #6A2A8A; background: rgba(106,42,138,0.08); }
     .event-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brown); margin-bottom: 4px; }
     .event-desc { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
     .event-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
     .event-time { font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--brown3); }
-    .event-cta { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--gold); white-space: nowrap; transition: color 0.2s; }
+    .event-cta { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--gold); white-space: nowrap; transition: color 0.2s; background: none; border: none; cursor: pointer; padding: 0; }
     .event-cta:hover { color: var(--copper); }
-    .am-event-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0; }
-    .am-event-detail.open { max-height: 400px; padding: 12px 0 20px; }
+    .am-event-detail { max-height: 0; overflow: hidden; transition: max-height 0.45s ease, padding 0.35s ease; padding: 0; }
+    .am-event-detail.open { max-height: 1200px; padding: 12px 0 24px; }
+    .am-anmelde-form { background: var(--cream); border: 1px solid var(--border2); border-radius: 12px; padding: 24px; margin-top: 16px; }
+    .am-anmelde-form h4 { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--brown); margin-bottom: 16px; }
+    .am-anmelde-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .am-anmelde-field { display: flex; flex-direction: column; gap: 4px; }
+    .am-anmelde-field label { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brown3); }
+    .am-anmelde-field input, .am-anmelde-field select, .am-anmelde-field textarea { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown); background: white; border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px; outline: none; width: 100%; transition: border-color 0.2s; }
+    .am-anmelde-field input:focus, .am-anmelde-field textarea:focus { border-color: var(--gold); }
+    .am-anmelde-field textarea { resize: none; height: 70px; }
+    .am-anmelde-submit { margin-top: 12px; padding: 10px 24px; background: var(--copper); color: white; border: none; border-radius: 50px; font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+    .am-anmelde-submit:hover { background: #8A2A08; }
+    .am-anmelde-success { display: none; margin-top: 10px; font-family: var(--sans); font-size: 14px; color: #2A7A2A; }
     .am-event-detail-inner { font-family: var(--sans); font-size: 14px; color: var(--brown2); border-top: 1px solid var(--border2); padding-top: 14px; display: flex; flex-wrap: wrap; gap: 24px; }
     .event-detail-item { display: flex; flex-direction: column; gap: 3px; }
     .event-detail-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brown3); }
@@ -270,7 +288,7 @@
       <div class="eyebrow">Anmeldung</div>
       <h2 class="section-title">Online <em>anmelden</em></h2>
     </div>
-    <form style="max-width:680px;" onsubmit="return false;" class="fade-in">
+    <form id="main-anmeldung-form" style="max-width:680px;" onsubmit="submitMainAnmeldung(event)" class="fade-in">
       <div class="form-grid">
         <div class="form-group">
           <label class="form-label" for="vorname">Vorname</label>
@@ -286,13 +304,9 @@
         <input class="form-input" type="email" id="email" name="email" placeholder="deine@email.de">
       </div>
       <div class="form-group">
-        <label class="form-label" for="veranstaltung">Veranstaltung</label>
-        <select class="form-select" id="veranstaltung" name="veranstaltung">
-          <option value="">Bitte wählen …</option>
-          <option value="basisseminar">21.–22. Juni 2026 – Agnihotra-Basisseminar</option>
-          <option value="sommertreffen">18.–20. Juli 2026 – Internationales Sommertreffen</option>
-          <option value="agnihotraabend">9. August 2026 – Agnihotra-Abend</option>
-          <option value="vertiefungsseminar">13.–14. September 2026 – Vertiefungsseminar</option>
+        <label class="form-label" for="veranstaltung-select">Veranstaltung</label>
+        <select class="form-select" id="veranstaltung-select" name="veranstaltung">
+          <option value="">Wird geladen…</option>
         </select>
       </div>
       <div class="form-group">
@@ -300,6 +314,7 @@
         <textarea class="form-textarea" id="nachricht" name="nachricht" placeholder="Deine Fragen oder Hinweise …"></textarea>
       </div>
       <button type="submit" class="btn btn-gold">Anmeldung absenden</button>
+      <p id="main-anmeldung-success" style="display:none;font-family:var(--sans);font-size:14px;color:#2A7A2A;margin-top:12px;">Danke! Wir melden uns innerhalb von 2 Werktagen.</p>
       <p class="form-note">Wir melden uns innerhalb von 2 Werktagen.</p>
     </form>
   </div>
@@ -498,7 +513,6 @@
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
-  // Mobile nav
   (function() {
     var burger = document.querySelector('.nav-burger');
     var nav = document.getElementById('main-nav');
@@ -512,6 +526,7 @@
   });
 
   var MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  var CAT_LABELS = { seminar: 'Seminar', hof: 'Am Hof', online: 'Online' };
 
   var fadeObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
@@ -520,39 +535,160 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-in').forEach(function(el) { fadeObserver.observe(el); });
 
+  function closeAllAmDetails() {
+    document.querySelectorAll('#am-events-list .am-event-detail.open').forEach(function(d) { d.classList.remove('open'); });
+    document.querySelectorAll('#am-events-list button.event-cta').forEach(function(b) { b.textContent = 'Mehr Infos ↓'; });
+  }
+
+  function openAmDetail(btn, e) {
+    e.stopPropagation();
+    var row = btn.closest('.am-event-row');
+    var detail = row ? row.nextElementSibling : null;
+    if (!detail || !detail.classList.contains('am-event-detail')) return;
+    var wasOpen = detail.classList.contains('open');
+    closeAllAmDetails();
+    if (!wasOpen) {
+      detail.classList.add('open');
+      btn.textContent = 'Weniger ↑';
+      setTimeout(function() { detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+    }
+  }
+
+  function submitAmAnmeldung(btn, title, formId) {
+    var form = btn.closest('.am-anmelde-form');
+    if (!form) return;
+    var vorname = form.querySelector('[name=vorname]').value.trim();
+    var email = form.querySelector('[name=email]').value.trim();
+    if (!vorname || !email) { alert('Bitte Vorname und E-Mail ausfüllen.'); return; }
+    btn.disabled = true;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'am-hof-anmeldung',
+        vorname: vorname,
+        nachname: form.querySelector('[name=nachname]').value.trim(),
+        email: email,
+        veranstaltung: title,
+        nachricht: form.querySelector('[name=nachricht]').value.trim()
+      }).toString()
+    })
+    .then(function() {
+      var success = document.getElementById(formId + '-success');
+      if (success) success.style.display = 'block';
+      btn.style.display = 'none';
+    })
+    .catch(function() { btn.disabled = false; alert('Fehler beim Absenden. Bitte per E-Mail anmelden.'); });
+  }
+
+  function submitMainAnmeldung(e) {
+    e.preventDefault();
+    var form = document.getElementById('main-anmeldung-form');
+    var vorname = form.querySelector('[name=vorname]').value.trim();
+    var email = form.querySelector('[name=email]').value.trim();
+    if (!vorname || !email) { alert('Bitte Vorname und E-Mail ausfüllen.'); return; }
+    var btn = form.querySelector('[type=submit]');
+    if (btn) btn.disabled = true;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'am-hof-anmeldung',
+        vorname: vorname,
+        nachname: form.querySelector('[name=nachname]').value.trim(),
+        email: email,
+        veranstaltung: form.querySelector('[name=veranstaltung]').value,
+        nachricht: form.querySelector('[name=nachricht]').value.trim()
+      }).toString()
+    })
+    .then(function() {
+      document.getElementById('main-anmeldung-success').style.display = 'block';
+      form.reset();
+      if (btn) btn.style.display = 'none';
+    })
+    .catch(function() { if (btn) btn.disabled = false; alert('Fehler beim Absenden. Bitte per E-Mail anmelden.'); });
+  }
+
   fetch('content/veranstaltungen.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
       var today = new Date().toISOString().slice(0, 10);
-      var upcoming = data.items
+      var twoMonthsLater = new Date();
+      twoMonthsLater.setMonth(twoMonthsLater.getMonth() + 2);
+      var cutoff = twoMonthsLater.toISOString().slice(0, 10);
+
+      var allUpcoming = data.items
         .filter(function(ev) { return ev.date >= today; })
-        .sort(function(a, b) { return a.date < b.date ? -1 : 1; })
-        .slice(0, 4);
+        .sort(function(a, b) { return a.date < b.date ? -1 : 1; });
+
+      var sel = document.getElementById('veranstaltung-select');
+      if (sel) {
+        sel.innerHTML = '<option value="">Bitte wählen …</option>' +
+          allUpcoming.map(function(ev) {
+            var d = new Date(ev.date + 'T12:00:00');
+            return '<option value="' + ev.title + '">' + d.getDate() + '. ' + MONTHS_DE[d.getMonth()] + ' – ' + ev.title + '</option>';
+          }).join('');
+      }
+
+      var twoMonthEvents = allUpcoming.filter(function(ev) { return ev.date <= cutoff; });
       var list = document.getElementById('am-events-list');
       if (!list) return;
-      if (!upcoming.length) { list.innerHTML = '<p style="font-family:var(--sans);font-size:15px;color:var(--brown2);padding:20px 0">Derzeit keine weiteren Veranstaltungen geplant.</p>'; return; }
+      if (!twoMonthEvents.length) {
+        list.innerHTML = '<p style="font-family:var(--sans);font-size:15px;color:var(--brown2);padding:20px 0">Derzeit keine Veranstaltungen in den nächsten zwei Monaten geplant.</p>';
+        return;
+      }
+
       var html = '';
-      upcoming.forEach(function(ev, i) {
+      twoMonthEvents.forEach(function(ev, i) {
         var d = new Date(ev.date + 'T12:00:00');
+        var formId = 'am-form-' + i;
         var delay = i === 0 ? '' : ' style="transition-delay:' + (i * 0.08).toFixed(2) + 's"';
+        var catKey = (ev.category || '').toLowerCase();
+        var catLabel = CAT_LABELS[catKey] || (ev.category || '');
+        var badgeHtml = '<span class="event-badge badge-' + catKey + '">' + catLabel + '</span>';
+        if (ev.badge === 'kostenlos') badgeHtml += '<span class="event-badge badge-kostenlos">Kostenlos</span>';
+        else if (ev.badge === 'spende') badgeHtml += '<span class="event-badge badge-spende">Spende</span>';
+        else if (ev.badge === 'kostenpflichtig') badgeHtml += '<span class="event-badge badge-kostenpflichtig">' + (ev.price || '') + '</span>';
+        if (ev.recurring) badgeHtml += '<span class="event-badge badge-wiederkehrend">Wiederkehrend</span>';
+
         html += '<div class="am-event-row fade-in"' + delay + '>';
         html += '<div class="event-date-block"><div class="event-day">' + d.getDate() + '</div><div class="event-month">' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear() + '</div></div>';
-        html += '<div class="event-info"><span class="event-badge">' + (ev.category || '') + '</span><h3 class="event-title">' + ev.title + '</h3><p class="event-desc">' + (ev.desc || '') + '</p></div>';
-        html += '<div class="event-actions"><span class="event-time">' + (ev.time || '') + '</span><a href="veranstaltungen.html" class="event-cta" onclick="event.stopPropagation()">Zur Übersicht →</a></div>';
+        html += '<div class="event-info">' + badgeHtml + '<h3 class="event-title">' + ev.title + '</h3><p class="event-desc">' + (ev.desc || '') + '</p></div>';
+        html += '<div class="event-actions"><span class="event-time">' + (ev.time || '') + '</span><button type="button" class="event-cta" onclick="openAmDetail(this,event)">Mehr Infos ↓</button></div>';
         html += '</div>';
-        html += '<div class="am-event-detail"><div class="am-event-detail-inner">';
+
+        html += '<div class="am-event-detail">';
+        if (ev.image) {
+          html += '<img src="' + ev.image + '" alt="' + ev.title + '" style="width:100%;max-height:280px;object-fit:cover;border-radius:10px;margin-bottom:16px;" loading="lazy">';
+        }
+        html += '<div class="am-event-detail-inner">';
         html += '<div class="event-detail-item"><span class="event-detail-label">Ort</span>' + (ev.location || '') + '</div>';
+        html += '<div class="event-detail-item"><span class="event-detail-label">Uhrzeit</span>' + (ev.time || '') + '</div>';
         html += '<div class="event-detail-item"><span class="event-detail-label">Beitrag</span>' + (ev.price || '') + '</div>';
-        if (ev.detail) html += '<div style="width:100%;white-space:pre-line;font-size:14px;color:var(--brown2);margin-top:8px;line-height:1.7">' + ev.detail + '</div>';
-        html += '</div></div>';
+        if (ev.details && ev.details.length) {
+          ev.details.forEach(function(item) {
+            html += '<div class="event-detail-item"><span class="event-detail-label">' + item.label + '</span>' + item.value + '</div>';
+          });
+        }
+        if (ev.detail) {
+          html += '<div style="width:100%;white-space:pre-line;font-size:14px;color:var(--brown2);margin-top:12px;line-height:1.75">' + ev.detail + '</div>';
+        }
+        html += '</div>';
+
+        html += '<div class="am-anmelde-form">';
+        html += '<h4>Anmelden: ' + ev.title + '</h4>';
+        html += '<div class="am-anmelde-row"><div class="am-anmelde-field"><label>Vorname</label><input type="text" name="vorname" placeholder="Vorname"></div>';
+        html += '<div class="am-anmelde-field"><label>Nachname</label><input type="text" name="nachname" placeholder="Nachname"></div></div>';
+        html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>E-Mail</label><input type="email" name="email" placeholder="deine@email.de"></div></div>';
+        html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen oder Hinweise …"></textarea></div></div>';
+        html += '<button type="button" class="am-anmelde-submit" onclick="submitAmAnmeldung(this,\'' + ev.title.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\',\'' + formId + '\')">Anmeldung absenden</button>';
+        html += '<p class="am-anmelde-success" id="' + formId + '-success">Danke! Wir melden uns bald.</p>';
+        html += '</div>';
+
+        html += '</div>';
       });
+
       list.innerHTML = html;
-      list.querySelectorAll('.am-event-row').forEach(function(row) {
-        row.addEventListener('click', function() {
-          var detail = row.nextElementSibling;
-          if (detail && detail.classList.contains('am-event-detail')) detail.classList.toggle('open');
-        });
-      });
       list.querySelectorAll('.fade-in').forEach(function(el) { fadeObserver.observe(el); });
     })
     .catch(function() {});
@@ -571,6 +707,15 @@
     })
     .catch(function() {});
 </script>
+
+
+<form name="am-hof-anmeldung" netlify hidden>
+  <input type="text" name="vorname">
+  <input type="text" name="nachname">
+  <input type="email" name="email">
+  <input type="text" name="veranstaltung">
+  <textarea name="nachricht"></textarea>
+</form>
 
 </body>
 </html>
