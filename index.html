@@ -1421,16 +1421,21 @@
   </div>
 </section>
 
+<form name="newsletter-anmeldung" netlify hidden>
+  <input type="email" name="email">
+</form>
+
 <!-- NEWSLETTER -->
 <section id="newsletter">
   <div class="newsletter-inner">
     <div class="eyebrow fade-in">Newsletter</div>
     <h2 class="section-title fade-in">Impulse vom <em>Homa-Hof</em></h2>
     <p class="fade-in">Veranstaltungen, Neuigkeiten und Impulse aus dem Homa-Hof – direkt in dein Postfach. Kostenlos und jederzeit kündbar.</p>
-    <form class="newsletter-form fade-in" onsubmit="return false;">
-      <input type="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse">
+    <form id="newsletter-form" class="newsletter-form fade-in" onsubmit="submitNewsletter(event)">
+      <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse" required>
       <button type="submit" class="btn btn-gold">Abonnieren</button>
     </form>
+    <p id="newsletter-msg" style="display:none;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--copper);margin-top:10px;text-align:center"></p>
     <p class="newsletter-note fade-in">Kein Spam. Jederzeit abmeldbar. Datenschutzkonform.</p>
   </div>
 </section>
@@ -1598,6 +1603,33 @@
       const hint = document.getElementById('iban-copy-hint');
       hint.textContent = '✓ kopiert';
       setTimeout(() => { hint.textContent = '📋 kopieren'; }, 2000);
+    });
+  }
+
+  function submitNewsletter(e) {
+    e.preventDefault();
+    var email = document.getElementById('newsletter-email').value.trim();
+    var msg = document.getElementById('newsletter-msg');
+    if (!email) return;
+    var form = document.getElementById('newsletter-form');
+    form.querySelector('button').disabled = true;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', email: email }).toString()
+    }).then(function(r) {
+      if (r.ok) {
+        form.style.display = 'none';
+        msg.textContent = 'Danke! Du erhältst bald eine Bestätigung.';
+        msg.style.display = 'block';
+      } else {
+        throw new Error();
+      }
+    }).catch(function() {
+      msg.textContent = 'Etwas ist schiefgelaufen. Bitte versuch es nochmal.';
+      msg.style.color = 'var(--copper)';
+      msg.style.display = 'block';
+      form.querySelector('button').disabled = false;
     });
   }
 
