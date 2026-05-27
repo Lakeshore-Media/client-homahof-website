@@ -1252,19 +1252,19 @@
 <section id="event">
   <div class="event-inner">
     <div class="eyebrow fade-in">Nächste Veranstaltung</div>
-    <div class="event-box fade-in">
+    <div class="event-box fade-in" id="next-event-box">
       <div class="event-date-block">
-        <div class="event-day">17</div>
-        <div class="event-month">Mai 2026</div>
+        <div class="event-day" id="next-event-day">–</div>
+        <div class="event-month" id="next-event-month"></div>
       </div>
       <div class="event-divider"></div>
       <div class="event-info">
-        <span class="event-type-badge">Agnihotra-Einführung</span>
-        <h3 class="event-title">Agnihotra-Einführungsabend</h3>
-        <p class="event-desc">Erlebe die vedische Feuerzeremonie live und lerne alles Wichtige für die eigene Praxis. Der Abend ist offen für alle – Vorkenntnisse sind nicht erforderlich.</p>
+        <span class="event-type-badge" id="next-event-badge"></span>
+        <h3 class="event-title" id="next-event-title"></h3>
+        <p class="event-desc" id="next-event-desc"></p>
       </div>
       <div class="event-actions">
-        <a href="am-hof.html" class="btn btn-gold">Jetzt anmelden</a>
+        <a href="veranstaltungen.html" class="btn btn-gold" id="next-event-cta">Mehr Infos</a>
         <a href="veranstaltungen.html" class="event-all-link">Alle Veranstaltungen →</a>
       </div>
     </div>
@@ -1582,6 +1582,28 @@
       ytIframe.style.display = 'block';
     });
   }
+
+  const MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  fetch('content/veranstaltungen.json')
+    .then(r => r.json())
+    .then(data => {
+      const today = new Date(); today.setHours(0,0,0,0);
+      const next = data.items
+        .filter(e => new Date(e.date) >= today)
+        .sort((a,b) => new Date(a.date) - new Date(b.date))[0];
+      if (!next) { document.getElementById('event').style.display = 'none'; return; }
+      const d = new Date(next.date);
+      document.getElementById('next-event-day').textContent = d.getDate();
+      document.getElementById('next-event-month').textContent = MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear();
+      document.getElementById('next-event-badge').textContent = next.category === 'seminar' ? 'Seminar' : next.category === 'online' ? 'Online' : 'Am Hof';
+      document.getElementById('next-event-title').textContent = next.title;
+      document.getElementById('next-event-desc').textContent = next.desc;
+      const cta = document.getElementById('next-event-cta');
+      if (next.link && !next.link.includes('homa-hof-heiligenberg.de')) {
+        cta.href = next.link;
+      }
+    })
+    .catch(() => {});
 </script>
 
 <script type="module">

@@ -10,7 +10,7 @@
       "category": "hof",
       "badge": "kostenlos",
       "recurring": false,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Mehr Info →",
       "details": []
     },
@@ -24,7 +24,7 @@
       "category": "seminar",
       "badge": "kostenlos",
       "recurring": true,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
       "details": []
     },
@@ -38,7 +38,7 @@
       "category": "seminar",
       "badge": "kostenlos",
       "recurring": false,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
       "details": []
     },
@@ -52,7 +52,7 @@
       "category": "seminar",
       "badge": "spende",
       "recurring": false,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
       "details": []
     },
@@ -69,9 +69,18 @@
       "link": "am-hof.html#anmeldung",
       "linkText": "Anmelden →",
       "details": [
-        { "label": "Ort", "value": "Homa-Hof Heiligenberg, Oberhaslach 6" },
-        { "label": "Dauer", "value": "Ganztägig" },
-        { "label": "Beitrag", "value": "Kostenlos / Spende" }
+        {
+          "label": "Ort",
+          "value": "Homa-Hof Heiligenberg, Oberhaslach 6"
+        },
+        {
+          "label": "Dauer",
+          "value": "Ganztägig"
+        },
+        {
+          "label": "Beitrag",
+          "value": "Kostenlos / Spende"
+        }
       ]
     },
     {
@@ -84,7 +93,7 @@
       "category": "seminar",
       "badge": "kostenlos",
       "recurring": true,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
       "details": []
     },
@@ -98,7 +107,7 @@
       "category": "hof",
       "badge": "kostenlos",
       "recurring": false,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Mehr Info →",
       "details": []
     },
@@ -112,7 +121,7 @@
       "category": "seminar",
       "badge": "kostenlos",
       "recurring": true,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
       "details": []
     },
@@ -129,9 +138,18 @@
       "link": "am-hof.html#anmeldung",
       "linkText": "Anmelden →",
       "details": [
-        { "label": "Ort", "value": "Homa-Hof Heiligenberg, Oberhaslach 6" },
-        { "label": "Dauer", "value": "Mehrere Tage" },
-        { "label": "Beitrag", "value": "Kostenlos / Spende" }
+        {
+          "label": "Ort",
+          "value": "Homa-Hof Heiligenberg, Oberhaslach 6"
+        },
+        {
+          "label": "Dauer",
+          "value": "Mehrere Tage"
+        },
+        {
+          "label": "Beitrag",
+          "value": "Kostenlos / Spende"
+        }
       ]
     },
     {
@@ -144,7 +162,7 @@
       "category": "online",
       "badge": "kostenlos",
       "recurring": false,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
       "details": []
     },
@@ -161,9 +179,18 @@
       "link": "am-hof.html#anmeldung",
       "linkText": "Mehr Info →",
       "details": [
-        { "label": "Ort", "value": "Homa-Hof Heiligenberg, Oberhaslach 6" },
-        { "label": "Dauer", "value": "1,5 Stunden" },
-        { "label": "Beitrag", "value": "Kostenlos" }
+        {
+          "label": "Ort",
+          "value": "Homa-Hof Heiligenberg, Oberhaslach 6"
+        },
+        {
+          "label": "Dauer",
+          "value": "1,5 Stunden"
+        },
+        {
+          "label": "Beitrag",
+          "value": "Kostenlos"
+        }
       ]
     },
     {
@@ -176,12 +203,21 @@
       "category": "seminar",
       "badge": "kostenlos",
       "recurring": true,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
       "details": [
-        { "label": "Kosten", "value": "Kostenlos" },
-        { "label": "Ort", "value": "Homa-Hof Heiligenberg, Oberhaslach 6" },
-        { "label": "Anmeldung", "value": "Erbeten" }
+        {
+          "label": "Kosten",
+          "value": "Kostenlos"
+        },
+        {
+          "label": "Ort",
+          "value": "Homa-Hof Heiligenberg, Oberhaslach 6"
+        },
+        {
+          "label": "Anmeldung",
+          "value": "Erbeten"
+        }
       ]
     },
     {
@@ -194,12 +230,21 @@
       "category": "seminar",
       "badge": "kostenpflichtig",
       "recurring": false,
-      "link": "https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen.html",
+      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
       "details": [
-        { "label": "Kosten", "value": "ab 280 € (Frühbucherrabatt möglich)" },
-        { "label": "Dauer", "value": "3 Tage (Fr–So)" },
-        { "label": "Anmeldung", "value": "Erforderlich – begrenzte Plätze" }
+        {
+          "label": "Kosten",
+          "value": "ab 280 € (Frühbucherrabatt möglich)"
+        },
+        {
+          "label": "Dauer",
+          "value": "3 Tage (Fr–So)"
+        },
+        {
+          "label": "Anmeldung",
+          "value": "Erforderlich – begrenzte Plätze"
+        }
       ]
     },
     {
@@ -215,9 +260,18 @@
       "link": "am-hof.html#anmeldung",
       "linkText": "Anmelden →",
       "details": [
-        { "label": "Ort", "value": "Homa-Hof Heiligenberg, Oberhaslach 6" },
-        { "label": "Dauer", "value": "Ganztägig" },
-        { "label": "Beitrag", "value": "Kostenlos / Spende" }
+        {
+          "label": "Ort",
+          "value": "Homa-Hof Heiligenberg, Oberhaslach 6"
+        },
+        {
+          "label": "Dauer",
+          "value": "Ganztägig"
+        },
+        {
+          "label": "Beitrag",
+          "value": "Kostenlos / Spende"
+        }
       ]
     }
   ]
