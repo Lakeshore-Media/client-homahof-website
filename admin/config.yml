@@ -4,8 +4,8 @@ backend:
 
 site_url: https://homahof-design-2026-website.netlify.app
 
-media_folder: images/uploads
-public_folder: /images/uploads
+media_folder: images
+public_folder: /images
 
 collections:
   - name: veranstaltungen
