@@ -488,7 +488,7 @@
         if (ev.link) html += '<a href="' + ev.link + '" class="event-cta"' + linkAttr + '>' + (ev.linkText || 'Mehr Info →') + '</a>';
         html += '</div></div>';
 
-        var formId = 'form-' + month + '-' + i;
+        var formId = 'form-' + key + '-' + i;
         html += '<div class="event-detail"><div class="event-detail-inner">';
         if (ev.image) html += '<div style="width:100%;margin-bottom:12px;border-radius:10px;overflow:hidden;max-height:280px"><img src="' + ev.image + '" alt="' + ev.title + '" style="width:100%;height:280px;object-fit:cover;display:block" loading="lazy"></div>';
         if (ev.detail) html += '<div style="width:100%;white-space:pre-line;margin-bottom:8px">' + ev.detail + '</div>';
