@@ -49,7 +49,7 @@
     .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
 
     /* HERO */
-    .subpage-hero { min-height: 380px; padding-top: 84px; position: relative; display: flex; align-items: center; overflow: hidden; }
+    .subpage-hero { min-height: 580px; padding-top: 84px; position: relative; display: flex; align-items: center; overflow: hidden; }
     .subpage-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center 30%; }
     .subpage-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(42,21,5,.75) 0%, rgba(42,21,5,.4) 55%, transparent 100%); }
     .subpage-hero-content { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; padding: 60px 48px; width: 100%; }
@@ -335,10 +335,10 @@
     <button class="filter-chip" data-filter="hof">Am Hof</button>
     <button class="filter-chip" data-filter="online">Online &amp; Welt</button>
     <div class="filter-bar-right">
-      <a href="https://www.homa-hof-heiligenberg.de/erleben/veranstaltungen/kalender-export.html" class="ical-link" target="_blank" rel="noopener">
+      <button class="ical-link" onclick="downloadIcal()" style="background:none;border:none;cursor:pointer;padding:0;">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         iCal Export
-      </a>
+      </button>
     </div>
   </div>
 </div>
@@ -589,6 +589,41 @@
         document.getElementById('success-' + formId).style.display = 'block';
       })
       .catch(function() { alert('Fehler beim Senden – bitte per E-Mail melden: info@homa-hof-heiligenberg.de'); });
+  }
+
+  function downloadIcal() {
+    fetch('content/veranstaltungen.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var lines = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Homa-Hof Heiligenberg//DE',
+          'CALSCALE:GREGORIAN',
+          'X-WR-CALNAME:Homa-Hof Heiligenberg',
+          'X-WR-CALDESC:Veranstaltungen des Homa-Hof Heiligenberg e.V.'
+        ];
+        data.items.forEach(function(ev) {
+          var uid = ev.date + '-' + ev.title.replace(/\s+/g,'-').toLowerCase() + '@homa-hof-heiligenberg.de';
+          var dtstart = ev.date.replace(/-/g,'');
+          lines.push(
+            'BEGIN:VEVENT',
+            'UID:' + uid,
+            'DTSTART;VALUE=DATE:' + dtstart,
+            'SUMMARY:' + ev.title,
+            'DESCRIPTION:' + (ev.desc || '').replace(/,/g,'\\,').replace(/\n/g,'\\n'),
+            'LOCATION:' + (ev.location || 'Homa-Hof Heiligenberg'),
+            'END:VEVENT'
+          );
+        });
+        lines.push('END:VCALENDAR');
+        var blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'homa-hof-veranstaltungen.ics';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
   }
 
   fetch('content/veranstaltungen.json')
