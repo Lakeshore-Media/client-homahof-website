@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutz – Homa-Hof Heiligenberg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--brown); background: var(--cream); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --cream: #FFFCF5;
+      --cream2: #FFF8EC;
+      --gold: #C07818;
+      --gold-light: #F5D88A;
+      --copper: #B84010;
+      --brown: #2A1505;
+      --brown2: #5A3A18;
+      --brown3: #8A6030;
+      --border: #EDD9A8;
+      --border2: #F5E8C0;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', system-ui, sans-serif;
+      --btn-radius: 50px;
+    }
+
+    /* NAV */
+    #main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,252,245,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border2);
+      transition: box-shadow 0.3s;
+    }
+    #main-nav.scrolled { box-shadow: 0 2px 24px rgba(42,21,5,0.1); }
+    .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: 72px; display: flex; align-items: center; gap: 40px; }
+    .nav-brand img { height: 44px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; margin-left: auto; }
+    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--brown2); letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--btn-radius); font-family: var(--sans); font-weight: 500; letter-spacing: 0.03em; cursor: pointer; transition: all 0.22s; border: none; }
+    .btn-gold { background: var(--gold); color: white; padding: 11px 26px; font-size: 14.5px; }
+    .btn-gold:hover { background: var(--copper); }
+    .nav-cta { font-size: 14.5px; padding: 10px 22px; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: all 0.3s; }
+
+    /* LEGAL PAGE */
+    .legal-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 40px 80px;
+    }
+    .legal-eyebrow {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .legal-title {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 48px;
+      line-height: 1.25;
+    }
+    .legal-section {
+      margin-bottom: 36px;
+    }
+    .legal-section h2 {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .legal-section h3 {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brown2);
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+    .legal-section p, .legal-section address {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.8;
+      font-style: normal;
+    }
+    .legal-section p + p { margin-top: 12px; }
+    .legal-section ul {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--brown2);
+      line-height: 1.8;
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+    .legal-section a { color: var(--gold); word-break: break-all; }
+    .legal-section a:hover { color: var(--copper); text-decoration: underline; }
+    .legal-divider {
+      border: none;
+      border-top: 1px solid var(--border2);
+      margin: 48px 0;
+    }
+    .legal-note {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--brown3);
+      line-height: 1.7;
+      padding: 20px 24px;
+      background: var(--cream2);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+    }
+    .legal-warning {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--brown);
+      line-height: 1.75;
+      padding: 20px 24px;
+      background: var(--cream2);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+    }
+
+    /* FOOTER */
+    footer { background: var(--brown); color: rgba(255,255,255,0.65); padding: 60px 0 0; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 48px; padding-bottom: 48px; }
+    .footer-tagline { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.65; margin-top: 8px; }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .social-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65); transition: all 0.2s; }
+    .social-icon:hover { background: rgba(255,255,255,0.1); color: white; }
+    .footer-col-title { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-family: var(--sans); font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-contact-item { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.65); margin-bottom: 10px; line-height: 1.5; }
+    .footer-contact-item a { color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--gold-light); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 0 48px; }
+    .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-copy { font-family: var(--sans); font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-family: var(--sans); font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--gold-light); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .nav-inner { padding: 0 20px; }
+      #main-nav.nav-open .nav-links {
+        display: flex; flex-direction: column; position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--cream); z-index: 98;
+        align-items: center; justify-content: center; gap: 32px; padding-bottom: 48px;
+      }
+      #main-nav.nav-open .nav-links a { font-size: 22px; color: var(--brown); font-weight: 300; }
+      #main-nav.nav-open .nav-cta { display: inline-flex !important; }
+      #main-nav.nav-open .nav-burger { position: relative; z-index: 99; }
+      #main-nav.nav-open .nav-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      #main-nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      #main-nav.nav-open .nav-burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+      .legal-wrap { padding: 100px 20px 60px; }
+      .legal-title { font-size: 32px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; padding: 0 20px 48px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
+      .footer-divider { margin: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="images/Logo-Schrift-2025-Juhu.webp" alt="Homa-Hof Heiligenberg Logo">
+    </a>
+    <div class="nav-links">
+      <a href="die-basis.html">Die Basis</a>
+      <a href="heilige-feuer.html">Heilige Feuer</a>
+      <a href="wissen.html">Wissen</a>
+      <a href="am-hof.html">Am Hof</a>
+      <a href="veranstaltungen.html">Veranstaltungen</a>
+      <a href="mitmachen.html">Mitmachen</a>
+      <a href="medien.html">Medien</a>
+      <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
+    </div>
+    <a href="mitmachen.html#spenden" class="btn btn-gold nav-cta">Spenden</a>
+    <div class="nav-burger" aria-label="Menü"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main>
+  <div class="legal-wrap">
+    <div class="legal-eyebrow">Rechtliches</div>
+    <h1 class="legal-title">Datenschutzerklärung</h1>
+
+    <div class="legal-section">
+      <h2>1. Verantwortlicher</h2>
+      <p>Verantwortlicher für die Datenverarbeitung auf dieser Website im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
+      <address style="margin-top:12px">
+        Homa-Hof Heiligenberg e.V.<br>
+        Oberhaslach 6<br>
+        88633 Heiligenberg<br>
+        Deutschland<br><br>
+        Tel.: <a href="tel:+4975529387600">+49 (0)7552 938760</a><br>
+        Fax: +49 (0)7552 938756<br>
+        E-Mail: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </address>
+      <p style="margin-top:16px">Der für die Verarbeitung von personenbezogenen Daten Verantwortliche ist diejenige natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
+      <p>Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung personenbezogener Daten eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie an der Zeichenfolge „https://" und dem Schloss-Symbol in Ihrer Browserzeile.</p>
+    </div>
+
+    <hr class="legal-divider">
+
+    <div class="legal-section">
+      <h2>2. Datenerfassung beim Besuch unserer Website</h2>
+      <p>Bei der bloß informatorischen Nutzung unserer Website erheben wir nur solche Daten, die Ihr Browser an unseren Server übermittelt (sog. „Server-Logfiles"). Wenn Sie unsere Website aufrufen, erheben wir folgende technisch erforderliche Daten:</p>
+      <ul>
+        <li>Unsere besuchte Website</li>
+        <li>Datum und Uhrzeit zum Zeitpunkt des Zugriffes</li>
+        <li>Menge der gesendeten Daten in Byte</li>
+        <li>Quelle/Verweis, von welchem Sie auf die Seite gelangten</li>
+        <li>Verwendeter Browser</li>
+        <li>Verwendetes Betriebssystem</li>
+        <li>Verwendete IP-Adresse (ggf. in anonymisierter Form)</li>
+      </ul>
+      <p>Die Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. f DSGVO auf Basis unseres berechtigten Interesses an der Verbesserung der Stabilität und Funktionalität unserer Website. Eine Weitergabe oder anderweitige Verwendung der Daten findet nicht statt. Wir behalten uns allerdings vor, die Server-Logfiles nachträglich zu überprüfen, sollten konkrete Anhaltspunkte auf eine rechtswidrige Nutzung hinweisen.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>3. Cookies</h2>
+      <p>Um den Besuch unserer Website attraktiv zu gestalten und die Nutzung bestimmter Funktionen zu ermöglichen, verwenden wir auf verschiedenen Seiten sogenannte Cookies. Hierbei handelt es sich um kleine Textdateien, die auf Ihrem Endgerät abgelegt werden. Einige der von uns verwendeten Cookies werden nach dem Ende der Browser-Sitzung wieder gelöscht (sog. Sitzungs-Cookies). Andere Cookies verbleiben auf Ihrem Endgerät und ermöglichen uns oder unseren Partnerunternehmen, Ihren Browser beim nächsten Besuch wiederzuerkennen (persistente Cookies).</p>
+      <p>Sofern durch einzelne von uns implementierte Cookies auch personenbezogene Daten verarbeitet werden, erfolgt die Verarbeitung gemäß Art. 6 Abs. 1 lit. b DSGVO zur Durchführung des Vertrages oder gemäß Art. 6 Abs. 1 lit. f DSGVO zur Wahrung unserer berechtigten Interessen an der bestmöglichen Funktionalität der Website.</p>
+      <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und einzeln über deren Annahme entscheiden oder die Annahme von Cookies für bestimmte Fälle oder generell ausschließen können. Bitte beachten Sie, dass bei Nichtannahme von Cookies die Funktionalität unserer Website eingeschränkt sein kann.</p>
+      <p>Informationen zu Cookie-Einstellungen Ihres Browsers:</p>
+      <ul>
+        <li><a href="https://support.microsoft.com/de-de/microsoft-edge" target="_blank" rel="noopener">Microsoft Edge</a></li>
+        <li><a href="https://support.mozilla.org/de/kb/cookies-erlauben-und-ablehnen" target="_blank" rel="noopener">Firefox</a></li>
+        <li><a href="http://support.google.com/chrome/bin/answer.py?hl=de&answer=95647" target="_blank" rel="noopener">Chrome</a></li>
+        <li><a href="https://support.apple.com/de-de/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a></li>
+        <li><a href="http://help.opera.com/Windows/10.20/de/cookies.html" target="_blank" rel="noopener">Opera</a></li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>4. Kontaktaufnahme</h2>
+      <h3>4.1 Online-Terminvereinbarung / Anmeldeformular</h3>
+      <p>Wir verarbeiten Ihre personenbezogenen Daten im Rahmen der zur Verfügung gestellten Online-Anmeldefunktion. Welche Daten wir erheben, können Sie aus dem jeweiligen Eingabeformular ersehen. Ihre mitgeteilten Daten werden ausschließlich zum Zweck der Terminvereinbarung bzw. Anmeldung gespeichert und verwendet.</p>
+      <p>Bei der Verarbeitung von personenbezogenen Daten, die zur Erfüllung eines Vertrages mit Ihnen erforderlich sind, dient Art. 6 Abs. 1 lit. b DSGVO als Rechtsgrundlage. Haben Sie uns eine Einwilligung für die Verarbeitung Ihrer Daten erteilt, erfolgt die Verarbeitung auf Grundlage des Art. 6 Abs. 1 lit. a DSGVO. Eine erteilte Einwilligung kann jederzeit durch eine Nachricht an den zu Beginn dieser Erklärung genannten Verantwortlichen widerrufen werden.</p>
+      <h3>4.2 Kontaktformular / E-Mail</h3>
+      <p>Im Rahmen der Kontaktaufnahme mit uns (z.B. per Kontaktformular oder E-Mail) werden personenbezogene Daten erhoben. Diese Daten werden ausschließlich zum Zweck der Beantwortung Ihres Anliegens bzw. für die Kontaktaufnahme und die damit verbundene technische Administration gespeichert und verwendet.</p>
+      <p>Rechtsgrundlage für die Verarbeitung dieser Daten ist unser berechtigtes Interesse an der Beantwortung Ihres Anliegens gemäß Art. 6 Abs. 1 lit. f DSGVO. Zielt Ihre Kontaktierung auf den Abschluss eines Vertrages ab, so ist zusätzliche Rechtsgrundlage für die Verarbeitung Art. 6 Abs. 1 lit. b DSGVO. Ihre Daten werden nach abschließender Bearbeitung Ihrer Anfrage gelöscht.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>5. Datenverarbeitung zur Abwicklung von Spenden</h2>
+      <p>Für die Abwicklung von Spenden verarbeiten wir in der Regel folgende personenbezogene Daten: Vor- und Zuname, Adresse, E-Mail-Adresse.</p>
+      <p>Ihre Daten werden zusammen mit den Angaben zu Spendenhöhe, Spendenrhythmus und Spendenzweck von uns gespeichert und zehn Jahre aufbewahrt. Je nach ausgewählter Zahlungsweise werden die oben genannten Daten auch an den von Ihnen ausgewählten Zahlungsdienstleister weitergeleitet.</p>
+      <p>Die Verarbeitungen erfolgen auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO. Die Speicherung über einen Zeitraum von 10 Jahren hinweg fußt auf Art. 6 Abs. 1 lit. c DSGVO in Verbindung mit § 147 AO.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>6. Newsletter</h2>
+      <p>Wenn Sie sich zu unserem E-Mail-Newsletter anmelden, übersenden wir Ihnen regelmäßig Informationen zu unseren Angeboten. Pflichtangabe für die Übersendung des Newsletters ist allein Ihre E-Mail-Adresse. Die Angabe weiterer Daten ist freiwillig und wird verwendet, um Sie persönlich ansprechen zu können.</p>
+      <p>Für den Versand des Newsletters verwenden wir das sog. Double-Opt-in-Verfahren. Dies bedeutet, dass wir Ihnen erst dann einen E-Mail-Newsletter übermitteln werden, wenn Sie uns ausdrücklich bestätigt haben, dass Sie in den Empfang von Newslettern einwilligen.</p>
+      <p>Mit der Aktivierung des Bestätigungslinks erteilen Sie uns Ihre Einwilligung für die Nutzung Ihrer personenbezogenen Daten gemäß Art. 6 Abs. 1 lit. a DSGVO. Bei der Anmeldung zum Newsletter speichern wir Ihre vom Internet-Service-Provider eingetragene IP-Adresse sowie das Datum und die Uhrzeit der Anmeldung, um einen möglichen Missbrauch Ihrer E-Mail-Adresse zu einem späteren Zeitpunkt nachvollziehen zu können.</p>
+      <p>Sie können den Newsletter jederzeit über den dafür vorgesehenen Link im Newsletter oder durch entsprechende Nachricht an den eingangs genannten Verantwortlichen abbestellen. Nach erfolgter Abmeldung wird Ihre E-Mail-Adresse unverzüglich in unserem Newsletter-Verteiler gelöscht.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>7. YouTube-Videos</h2>
+      <p>Diese Website nutzt die YouTube-Einbettungsfunktion zur Anzeige und Wiedergabe von Videos des Anbieters „YouTube", der zu der Google Ireland Limited, Gordon House, 4 Barrow St, Dublin, D04 E5W5, Irland gehört.</p>
+      <p>Hierbei wird der erweiterte Datenschutzmodus verwendet, der nach Anbieterangaben eine Speicherung von Nutzerinformationen erst bei Wiedergabe des/der Videos in Gang setzt. Wird die Wiedergabe eingebetteter YouTube-Videos gestartet, setzt der Anbieter Cookies ein, um Informationen über das Nutzerverhalten zu sammeln.</p>
+      <p>Wenn Sie bei Google eingeloggt sind, werden Ihre Daten direkt Ihrem Konto zugeordnet, wenn Sie ein Video anklicken. Wenn Sie die Zuordnung mit Ihrem Profil bei YouTube nicht wünschen, müssen Sie sich vor Aktivierung des Buttons ausloggen. Im Rahmen der Nutzung von YouTube kann es auch zu einer Übermittlung von personenbezogenen Daten an die Server der Google LLC. in den USA kommen.</p>
+      <p>Alle oben beschriebenen Verarbeitungen werden nur dann vollzogen, wenn Sie uns gemäß Art. 6 Abs. 1 lit. a DSGVO dazu Ihre ausdrückliche Einwilligung erteilt haben. Sie können Ihre erteilte Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+      <p>Weitere Informationen: <a href="https://www.youtube.com/static?template=terms" target="_blank" rel="noopener">YouTube-Nutzungsbedingungen</a> und <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>8. Tools und Sonstiges</h2>
+      <h3>8.1 Cookie-Consent-Tool</h3>
+      <p>Diese Website nutzt zur Einholung wirksamer Nutzereinwilligungen für einwilligungspflichtige Cookies und cookie-basierte Anwendungen ein sog. „Cookie-Consent-Tool". Das Tool setzt technisch notwendige Cookies, um Ihre Cookie-Präferenzen zu speichern. Personenbezogene Nutzerdaten werden hierbei grundsätzlich nicht verarbeitet.</p>
+      <p>Kommt es im Einzelfall zur Verarbeitung personenbezogener Daten (wie etwa der IP-Adresse), erfolgt diese gemäß Art. 6 Abs. 1 lit. f DSGVO auf Basis unseres berechtigten Interesses an einem rechtskonformen Einwilligungsmanagement für Cookies.</p>
+      <h3>8.2 Google Maps</h3>
+      <p>Auf unserer Website verwenden wir Google Maps (API) von Google Ireland Limited, Gordon House, 4 Barrow St, Dublin, D04 E5W5, Irland, zur Darstellung von interaktiven (Land-)Karten, um geographische Informationen visuell darzustellen.</p>
+      <p>Bereits beim Aufrufen derjenigen Unterseiten, in die die Karte von Google Maps eingebunden ist, werden Informationen über Ihre Nutzung unserer Website (wie z.B. Ihre IP-Adresse) an Server von Google übertragen und dort gespeichert.</p>
+      <p>Wenn Sie bei Google eingeloggt sind, werden Ihre Daten direkt Ihrem Konto zugeordnet. Wenn Sie die Zuordnung mit Ihrem Profil bei Google nicht wünschen, müssen Sie sich vor Aktivierung des Buttons ausloggen.</p>
+      <p>Wenn Sie mit der künftigen Übermittlung Ihrer Daten an Google im Rahmen der Nutzung von Google Maps nicht einverstanden sind, besteht auch die Möglichkeit, den Webdienst von Google Maps vollständig zu deaktivieren, indem Sie die Anwendung JavaScript in Ihrem Browser ausschalten. Weitere Informationen: <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
+    </div>
+
+    <hr class="legal-divider">
+
+    <div class="legal-section">
+      <h2>9. Rechte des Betroffenen</h2>
+      <p>Das geltende Datenschutzrecht gewährt Ihnen gegenüber dem Verantwortlichen hinsichtlich der Verarbeitung Ihrer personenbezogenen Daten die nachstehenden Betroffenenrechte:</p>
+      <ul>
+        <li>Auskunftsrecht gemäß Art. 15 DSGVO</li>
+        <li>Recht auf Berichtigung gemäß Art. 16 DSGVO</li>
+        <li>Recht auf Löschung gemäß Art. 17 DSGVO</li>
+        <li>Recht auf Einschränkung der Verarbeitung gemäß Art. 18 DSGVO</li>
+        <li>Recht auf Unterrichtung gemäß Art. 19 DSGVO</li>
+        <li>Recht auf Datenübertragbarkeit gemäß Art. 20 DSGVO</li>
+        <li>Recht auf Widerruf erteilter Einwilligungen gemäß Art. 7 Abs. 3 DSGVO</li>
+        <li>Recht auf Beschwerde gemäß Art. 77 DSGVO</li>
+      </ul>
+      <div class="legal-warning">
+        WIDERSPRUCHSRECHT: WENN WIR IM RAHMEN EINER INTERESSENABWÄGUNG IHRE PERSONENBEZOGENEN DATEN AUFGRUND UNSERES ÜBERWIEGENDEN BERECHTIGTEN INTERESSES VERARBEITEN, HABEN SIE DAS JEDERZEITIGE RECHT, AUS GRÜNDEN, DIE SICH AUS IHRER BESONDEREN SITUATION ERGEBEN, GEGEN DIESE VERARBEITUNG WIDERSPRUCH MIT WIRKUNG FÜR DIE ZUKUNFT EINZULEGEN. MACHEN SIE VON IHREM WIDERSPRUCHSRECHT GEBRAUCH, BEENDEN WIR DIE VERARBEITUNG DER BETROFFENEN DATEN. EINE WEITERVERARBEITUNG BLEIBT ABER VORBEHALTEN, WENN WIR ZWINGENDE SCHUTZWÜRDIGE GRÜNDE FÜR DIE VERARBEITUNG NACHWEISEN KÖNNEN.
+        <br><br>
+        WERDEN IHRE PERSONENBEZOGENEN DATEN VON UNS VERARBEITET, UM DIREKTWERBUNG ZU BETREIBEN, HABEN SIE DAS RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE VERARBEITUNG SIE BETREFFENDER PERSONENBEZOGENER DATEN ZUM ZWECKE DERARTIGER WERBUNG EINZULEGEN.
+      </div>
+    </div>
+
+    <div class="legal-section">
+      <h2>10. Dauer der Speicherung personenbezogener Daten</h2>
+      <p>Die Dauer der Speicherung von personenbezogenen Daten bemisst sich anhand der jeweiligen Rechtsgrundlage, am Verarbeitungszweck und – sofern einschlägig – zusätzlich anhand der jeweiligen gesetzlichen Aufbewahrungsfrist (z.B. handels- und steuerrechtliche Aufbewahrungsfristen).</p>
+      <p>Bei der Verarbeitung von personenbezogenen Daten auf Grundlage einer ausdrücklichen Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO werden diese Daten so lange gespeichert, bis der Betroffene seine Einwilligung widerruft.</p>
+      <p>Existieren gesetzliche Aufbewahrungsfristen für Daten, die im Rahmen rechtsgeschäftlicher Verpflichtungen auf der Grundlage von Art. 6 Abs. 1 lit. b DSGVO verarbeitet werden, werden diese Daten nach Ablauf der Aufbewahrungsfristen routinemäßig gelöscht, sofern sie nicht mehr zur Vertragserfüllung oder Vertragsanbahnung erforderlich sind.</p>
+      <p>Bei der Verarbeitung von personenbezogenen Daten auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO werden diese Daten so lange gespeichert, bis der Betroffene sein Widerspruchsrecht nach Art. 21 Abs. 1 DSGVO ausübt, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen.</p>
+      <p>Sofern sich aus den sonstigen Informationen dieser Erklärung über spezifische Verarbeitungssituationen nichts anderes ergibt, werden gespeicherte personenbezogene Daten dann gelöscht, wenn sie für die Zwecke, für die sie erhoben wurden, nicht mehr notwendig sind.</p>
+    </div>
+
+    <hr class="legal-divider">
+
+    <div class="legal-note">
+      Bei Fragen zum Datenschutz wenden Sie sich bitte an: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+    </div>
+  </div>
+</main>
+
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:var(--cream);display:block">
+  <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
+    <path d="M0,54 L0,30 C360,54 720,6 1080,30 C1260,42 1370,36 1440,28 L1440,54 Z" fill="#2A1505"/>
+  </svg>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="images/Logo-Schrift-2025-Juhu.webp" alt="Homa-Hof Heiligenberg" style="height:58px;width:auto;margin-bottom:16px;opacity:0.92;display:block">
+      <p class="footer-tagline">Europäisches Zentrum für Agnihotra –<br>ein Ort des heiligen Feuers und der Stille.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-icon">f</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">YT</a>
+        <a href="https://www.instagram.com/agnihotraforfuture/" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">IG</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="die-basis.html">Die Basis</a></li>
+        <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
+        <li><a href="wissen.html">Wissen &amp; Nutzen</a></li>
+        <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
+        <li><a href="mitmachen.html">Mitmachen</a></li>
+        <li><a href="medien.html">Medien</a></li>
+        <li><a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Erleben</div>
+      <ul class="footer-links">
+        <li><a href="am-hof.html#veranstaltungen">Veranstaltungen</a></li>
+        <li><a href="am-hof.html#seminare">Seminare</a></li>
+        <li><a href="am-hof.html#besucherhinweise">Besucherhinweise</a></li>
+        <li><a href="am-hof.html#anfahrt">Anfahrt</a></li>
+        <li><a href="am-hof.html#uebernachtung">Übernachtung</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <div class="footer-contact-item" style="display:flex;align-items:flex-start;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:4px;opacity:.55"><path d="M8 1C5.5 1 3.5 3 3.5 5.5c0 3.5 4.5 9 4.5 9s4.5-5.5 4.5-9C12.5 3 10.5 1 8 1z"/><circle cx="8" cy="5.5" r="1.5"/></svg>
+        <span>Oberhaslach 6<br>88633 Heiligenberg</span>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;opacity:.55"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
+        <a href="tel:+4975529387600">+49 (0)7552 938760</a>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.65)">Hofladen<br>Fr. und Sa. 15 – 18 Uhr</div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
+    <div class="footer-legal">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html" style="color:var(--gold-light)">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+  (function() {
+    var burger = document.querySelector('.nav-burger');
+    if (!burger) return;
+    burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
+    document.addEventListener('click', function(e) {
+      if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
+    });
+  })();
+</script>
+</body>
+</html>
