@@ -1,73 +1,62 @@
 {
   "items": [
     {
-      "title": "Geburtstag von Shree",
-      "date": "2026-05-17",
-      "time": "14:00 – 21:15",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Ein besonderer Tag der Gemeinschaft und Freude am Hof – alle sind herzlich willkommen.",
-      "price": "Eintritt frei",
-      "category": "hof",
+      "details": [],
       "badge": "kostenlos",
-      "recurring": false,
-      "link": "veranstaltungen.html",
       "linkText": "Mehr Info →",
-      "details": []
+      "price": "Eintritt frei",
+      "time": "14:00 – 21:15",
+      "date": "2026-05-17",
+      "desc": "Ein besonderer Tag der Gemeinschaft und Freude am Hof – alle sind herzlich willkommen.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Geburtstag von Shree",
+      "link": "veranstaltungen.html",
+      "recurring": false,
+      "category": "hof"
     },
     {
-      "title": "Agnihotra erlernen",
-      "date": "2026-05-23",
+      "details": [],
+      "badge": "kostenlos",
+      "linkText": "Anmelden →",
+      "price": "Kostenlos",
       "time": "18:50 – 21:10",
-      "location": "Homa-Hof Heiligenberg",
+      "date": "2026-05-23",
       "desc": "Einführungsabend für alle, die die vedische Feuerzeremonie kennenlernen möchten. Keine Vorkenntnisse erforderlich.",
-      "price": "Kostenlos",
-      "category": "seminar",
-      "badge": "kostenlos",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Agnihotra erlernen",
+      "link": "veranstaltungen.html",
       "recurring": true,
-      "link": "veranstaltungen.html",
-      "linkText": "Anmelden →",
-      "details": []
+      "category": "seminar"
     },
     {
-      "title": "Agnihotra-Einführungsabend",
-      "date": "2026-05-30",
-      "time": "18:50 – 21:00",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Regelmäßiger Einführungsabend – Feuerzeremonie live erleben und alle Fragen stellen.",
+      "details": [],
+      "badge": "kostenlos",
+      "linkText": "Anmelden →",
       "price": "Kostenlos",
-      "category": "seminar",
-      "badge": "kostenlos",
-      "recurring": false,
+      "time": "18:50 – 21:00",
+      "date": "2026-05-30",
+      "desc": "Regelmäßiger Einführungsabend – Feuerzeremonie live erleben und alle Fragen stellen.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Agnihotra-Einführungsabend",
       "link": "veranstaltungen.html",
-      "linkText": "Anmelden →",
-      "details": []
+      "recurring": false,
+      "category": "seminar"
     },
     {
-      "title": "Agnihotra-Seminar am Homa-Hof",
-      "date": "2026-06-20",
-      "time": "16:00 – 21:30",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Intensiveres Seminar rund um Agnihotra – Praxis, Hintergrundwissen und Gemeinschaft. Anmeldung erbeten.",
-      "price": "Spendenempfehlung ~40 €",
-      "category": "seminar",
+      "details": [],
       "badge": "spende",
-      "recurring": false,
-      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
-      "details": []
+      "price": "Spendenempfehlung ~40 €",
+      "time": "16:00 – 21:30",
+      "date": "2026-06-20",
+      "desc": "Intensiveres Seminar rund um Agnihotra – Praxis, Hintergrundwissen und Gemeinschaft. Anmeldung erbeten.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Agnihotra-Seminar am Homa-Hof",
+      "link": "veranstaltungen.html",
+      "recurring": false,
+      "category": "seminar"
     },
     {
-      "title": "Agnihotra-Basisseminar",
-      "date": "2026-06-21",
-      "time": "09:00 – 17:00",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Einführung in Theorie und Praxis der vedischen Feuerzeremonie. Für alle Interessierten offen – keine Vorkenntnisse nötig.",
-      "price": "Kostenlos / Spende",
-      "category": "seminar",
-      "badge": "kostenlos",
-      "recurring": false,
-      "link": "am-hof.html#anmeldung",
-      "linkText": "Anmelden →",
       "details": [
         {
           "label": "Ort",
@@ -81,62 +70,62 @@
           "label": "Beitrag",
           "value": "Kostenlos / Spende"
         }
-      ]
-    },
-    {
-      "title": "Agnihotra erlernen",
-      "date": "2026-06-27",
-      "time": "18:50 – 21:10",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Einführungsabend für alle Interessierten – Vorkenntnisse nicht erforderlich.",
-      "price": "Kostenlos",
-      "category": "seminar",
+      ],
       "badge": "kostenlos",
-      "recurring": true,
-      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
-      "details": []
-    },
-    {
-      "title": "Sommerfest am Homa-Hof",
-      "date": "2026-07-05",
-      "time": "14:00 – 21:00",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Gemeinsames Feiern mit Agnihotra, Musik und Begegnung. Alle sind willkommen.",
-      "price": "Eintritt frei",
-      "category": "hof",
-      "badge": "kostenlos",
-      "recurring": false,
-      "link": "veranstaltungen.html",
-      "linkText": "Mehr Info →",
-      "details": []
-    },
-    {
-      "title": "Agnihotra erlernen",
-      "date": "2026-07-18",
-      "time": "18:50 – 21:10",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.",
-      "price": "Kostenlos",
-      "category": "seminar",
-      "badge": "kostenlos",
-      "recurring": true,
-      "link": "veranstaltungen.html",
-      "linkText": "Anmelden →",
-      "details": []
-    },
-    {
-      "title": "Internationales Sommertreffen",
-      "date": "2026-07-18",
-      "time": "Ganztägig",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Das jährliche Herzstück am Homa-Hof: Gemeinschaft, Feuer, Vorträge und Begegnungen aus aller Welt. Mehrere Tage voller Inspiration, Heilung und Verbundenheit.",
       "price": "Kostenlos / Spende",
-      "category": "hof",
-      "badge": "kostenlos",
-      "recurring": false,
+      "time": "09:00 – 17:00",
+      "date": "2026-06-21",
+      "desc": "Einführung in Theorie und Praxis der vedischen Feuerzeremonie. Für alle Interessierten offen – keine Vorkenntnisse nötig.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Agnihotra-Basisseminar",
       "link": "am-hof.html#anmeldung",
+      "recurring": false,
+      "category": "seminar"
+    },
+    {
+      "details": [],
+      "badge": "kostenlos",
       "linkText": "Anmelden →",
+      "price": "Kostenlos",
+      "time": "18:50 – 21:10",
+      "date": "2026-06-27",
+      "desc": "Einführungsabend für alle Interessierten – Vorkenntnisse nicht erforderlich.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Agnihotra erlernen",
+      "link": "veranstaltungen.html",
+      "recurring": true,
+      "category": "seminar"
+    },
+    {
+      "details": [],
+      "badge": "kostenlos",
+      "linkText": "Mehr Info →",
+      "price": "Eintritt frei",
+      "time": "14:00 – 21:00",
+      "date": "2026-07-05",
+      "desc": "Gemeinsames Feiern mit Agnihotra, Musik und Begegnung. Alle sind willkommen.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Sommerfest am Homa-Hof",
+      "link": "veranstaltungen.html",
+      "recurring": false,
+      "category": "hof"
+    },
+    {
+      "details": [],
+      "badge": "kostenlos",
+      "linkText": "Anmelden →",
+      "price": "Kostenlos",
+      "time": "18:50 – 21:10",
+      "date": "2026-07-18",
+      "desc": "Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Agnihotra erlernen",
+      "link": "veranstaltungen.html",
+      "recurring": true,
+      "category": "seminar"
+    },
+    {
       "details": [
         {
           "label": "Ort",
@@ -150,34 +139,34 @@
           "label": "Beitrag",
           "value": "Kostenlos / Spende"
         }
-      ]
-    },
-    {
-      "title": "Agnihotra-Vortrag online",
-      "date": "2026-07-25",
-      "time": "19:00 – 21:00",
-      "location": "Zoom",
-      "desc": "Online-Vortrag über die Wirkung von Agnihotra – mit Fragen und Antworten.",
-      "price": "Kostenlos",
-      "category": "online",
+      ],
       "badge": "kostenlos",
-      "recurring": false,
-      "link": "veranstaltungen.html",
       "linkText": "Anmelden →",
-      "details": []
+      "price": "Kostenlos / Spende",
+      "time": "Ganztägig",
+      "date": "2026-07-18",
+      "desc": "Das jährliche Herzstück am Homa-Hof: Gemeinschaft, Feuer, Vorträge und Begegnungen aus aller Welt. Mehrere Tage voller Inspiration, Heilung und Verbundenheit.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Internationales Sommertreffen",
+      "link": "am-hof.html#anmeldung",
+      "recurring": false,
+      "category": "hof"
     },
     {
-      "title": "Agnihotra-Abend",
-      "date": "2026-08-09",
-      "time": "20:00 – 21:30",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Offene Feuerzeremonie für alle – erlebe Agnihotra live ohne Voranmeldung. Der genaue Zeitpunkt richtet sich nach dem Sonnenuntergang.",
-      "price": "Kostenlos",
-      "category": "hof",
+      "details": [],
       "badge": "kostenlos",
+      "linkText": "Anmelden →",
+      "price": "Kostenlos",
+      "time": "19:00 – 21:00",
+      "date": "2026-07-25",
+      "desc": "Online-Vortrag über die Wirkung von Agnihotra – mit Fragen und Antworten.",
+      "location": "Zoom",
+      "title": "Agnihotra-Vortrag online",
+      "link": "veranstaltungen.html",
       "recurring": false,
-      "link": "am-hof.html#anmeldung",
-      "linkText": "Mehr Info →",
+      "category": "online"
+    },
+    {
       "details": [
         {
           "label": "Ort",
@@ -191,20 +180,20 @@
           "label": "Beitrag",
           "value": "Kostenlos"
         }
-      ]
+      ],
+      "badge": "kostenlos",
+      "linkText": "Mehr Info →",
+      "price": "Kostenlos",
+      "time": "20:00 – 21:30",
+      "date": "2026-08-09",
+      "desc": "Offene Feuerzeremonie für alle – erlebe Agnihotra live ohne Voranmeldung. Der genaue Zeitpunkt richtet sich nach dem Sonnenuntergang.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Agnihotra-Abend",
+      "link": "am-hof.html#anmeldung",
+      "recurring": false,
+      "category": "hof"
     },
     {
-      "title": "Agnihotra erlernen",
-      "date": "2026-08-15",
-      "time": "18:50 – 21:10",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.",
-      "price": "Kostenlos",
-      "category": "seminar",
-      "badge": "kostenlos",
-      "recurring": true,
-      "link": "veranstaltungen.html",
-      "linkText": "Anmelden →",
       "details": [
         {
           "label": "Kosten",
@@ -218,20 +207,20 @@
           "label": "Anmeldung",
           "value": "Erbeten"
         }
-      ]
+      ],
+      "badge": "kostenlos",
+      "linkText": "Anmelden →",
+      "price": "Kostenlos",
+      "time": "18:50 – 21:10",
+      "date": "2026-08-15",
+      "desc": "Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Agnihotra erlernen",
+      "link": "veranstaltungen.html",
+      "recurring": true,
+      "category": "seminar"
     },
     {
-      "title": "Permakultur Design Seminar",
-      "date": "2026-08-22",
-      "time": "Fr – So",
-      "location": "Außerhalb des Hofs",
-      "desc": "Dreitägiges Permakultur-Design-Seminar mit zertifiziertem Kurs-Abschluss. Begrenzte Teilnehmerzahl – frühzeitige Anmeldung empfohlen.",
-      "price": "ab 280 €",
-      "category": "seminar",
-      "badge": "kostenpflichtig",
-      "recurring": false,
-      "link": "veranstaltungen.html",
-      "linkText": "Anmelden →",
       "details": [
         {
           "label": "Kosten",
@@ -245,20 +234,20 @@
           "label": "Anmeldung",
           "value": "Erforderlich – begrenzte Plätze"
         }
-      ]
+      ],
+      "badge": "kostenpflichtig",
+      "linkText": "Anmelden →",
+      "price": "ab 280 €",
+      "time": "Fr – So",
+      "date": "2026-08-22",
+      "desc": "Dreitägiges Permakultur-Design-Seminar mit zertifiziertem Kurs-Abschluss. Begrenzte Teilnehmerzahl – frühzeitige Anmeldung empfohlen.",
+      "location": "Außerhalb des Hofs",
+      "title": "Permakultur Design Seminar",
+      "link": "veranstaltungen.html",
+      "recurring": false,
+      "category": "seminar"
     },
     {
-      "title": "Vertiefungsseminar Agnihotra",
-      "date": "2026-09-13",
-      "time": "09:00 – 17:00",
-      "location": "Homa-Hof Heiligenberg",
-      "desc": "Für Fortgeschrittene – Vertiefung der Praxis, Feinheiten des Fünffachen Pfads und Fragen aus der eigenen Praxis. Grundkenntnisse vorausgesetzt.",
-      "price": "Kostenlos / Spende",
-      "category": "seminar",
-      "badge": "kostenlos",
-      "recurring": false,
-      "link": "am-hof.html#anmeldung",
-      "linkText": "Anmelden →",
       "details": [
         {
           "label": "Ort",
@@ -272,7 +261,28 @@
           "label": "Beitrag",
           "value": "Kostenlos / Spende"
         }
-      ]
+      ],
+      "badge": "kostenlos",
+      "linkText": "Anmelden →",
+      "price": "Kostenlos / Spende",
+      "time": "09:00 – 17:00",
+      "date": "2026-09-13",
+      "desc": "Für Fortgeschrittene – Vertiefung der Praxis, Feinheiten des Fünffachen Pfads und Fragen aus der eigenen Praxis. Grundkenntnisse vorausgesetzt.",
+      "location": "Homa-Hof Heiligenberg",
+      "title": "Vertiefungsseminar Agnihotra",
+      "link": "am-hof.html#anmeldung",
+      "recurring": false,
+      "category": "seminar"
+    },
+    {
+      "location": "Homa-Hof Heiligenberg",
+      "badge": "spende",
+      "title": "test1",
+      "date": "2026-05-27",
+      "time": "19:00",
+      "desc": "test2",
+      "price": "Spende empfehlung 30 euro",
+      "category": "Seminar"
     }
   ]
 }
