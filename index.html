@@ -1235,7 +1235,7 @@
       </div>
       <div class="card fade-in" style="transition-delay:0.2s">
         <div class="card-img">
-          <img src="images/stills/gruppe-agnihotra-abenddaemmerung.png" alt="Veranstaltungen und Seminare am Homa-Hof">
+          <img src="images/stills/agnihotra-vorbereitung-tisch-wiese.png" alt="Veranstaltungen und Seminare am Homa-Hof">
         </div>
         <div class="card-body">
           <span class="card-tag">Erleben</span>
@@ -1391,11 +1391,11 @@
         <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
       </ul>
       <div class="spenden-buttons">
-        <a href="https://www.paypal.com/donate?token=1MHMFxSMzRT4OpxzvqDtVyehrzfJ_zi0qyjKyY9okUBJ-a1qcU87KHd3I95R8C1ZNNk_0QMMyuiLWHyr&locale.x=DE" target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
-        <a href="#spenden" class="btn btn-outline">Banküberweisung</a>
+        <a href="https://www.paypal.com/donate?token=G0rmFFZs2T8cDoxsRMbTK1hCT11U5C9xl6ZaGRKa8tnAAO9W_1mz9Qyg-4j96w0IDYhuoBvqaSi8K5HC&locale.x=DE" target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
+        <button onclick="scrollToBank()" class="btn btn-outline" type="button">Banküberweisung</button>
       </div>
     </div>
-    <div class="spenden-bank fade-in" style="transition-delay:0.15s">
+    <div class="spenden-bank fade-in" id="bankverbindung" style="transition-delay:0.15s">
       <div class="spenden-bank-title">Bankverbindung</div>
       <div class="bank-row">
         <span class="bank-label">Empfänger</span>
@@ -1403,7 +1403,7 @@
       </div>
       <div class="bank-row">
         <span class="bank-label">IBAN</span>
-        <span class="bank-value">DE39 6905 1725 0002 0423 56</span>
+        <span class="bank-value" id="iban-value" title="Klicken zum Kopieren" style="cursor:pointer" onclick="copyIBAN()">DE39 6905 1725 0002 0423 56 <span id="iban-copy-hint" style="font-size:11px;opacity:0.6;margin-left:6px">📋 kopieren</span></span>
       </div>
       <div class="bank-row">
         <span class="bank-label">BIC</span>
@@ -1581,6 +1581,23 @@
       ytIframe.querySelector('iframe').src = src;
       ytPlayer.style.display = 'none';
       ytIframe.style.display = 'block';
+    });
+  }
+
+  function scrollToBank() {
+    const bank = document.getElementById('bankverbindung');
+    if (!bank) return;
+    bank.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    bank.style.transition = 'box-shadow 0.3s, outline 0.3s';
+    bank.style.outline = '2px solid var(--gold)';
+    bank.style.boxShadow = '0 0 0 6px rgba(192,120,24,0.15)';
+    setTimeout(() => { bank.style.outline = ''; bank.style.boxShadow = ''; }, 2000);
+  }
+  function copyIBAN() {
+    navigator.clipboard.writeText('DE39690517250002042356').then(() => {
+      const hint = document.getElementById('iban-copy-hint');
+      hint.textContent = '✓ kopiert';
+      setTimeout(() => { hint.textContent = '📋 kopieren'; }, 2000);
     });
   }
 

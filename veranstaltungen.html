@@ -170,8 +170,19 @@
     .badge-wiederkehrend { background: rgba(192,120,24,0.08); color: var(--gold); border: 1px solid rgba(192,120,24,0.25); }
     .badge-ausserhalb    { background: rgba(42,21,5,0.06);   color: var(--brown2); border: 1px solid rgba(42,21,5,0.15); }
 
-    .event-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0 0 0 100px; }
-    .event-detail.open { max-height: 300px; padding: 12px 0 20px 100px; }
+    .event-detail { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; padding: 0 0 0 100px; }
+    .event-detail.open { max-height: 900px; padding: 12px 0 24px 100px; }
+    .anmelde-form { margin-top: 20px; border-top: 1px solid var(--border2); padding-top: 18px; width: 100%; }
+    .anmelde-form h4 { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--brown); margin-bottom: 14px; }
+    .anmelde-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .anmelde-field { display: flex; flex-direction: column; gap: 4px; }
+    .anmelde-field label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+    .anmelde-field input, .anmelde-field select, .anmelde-field textarea { font-family: var(--sans); font-size: 14px; color: var(--brown); background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; outline: none; transition: border-color 0.2s; }
+    .anmelde-field input:focus, .anmelde-field select:focus, .anmelde-field textarea:focus { border-color: var(--gold); }
+    .anmelde-field textarea { resize: vertical; min-height: 70px; }
+    .anmelde-submit { margin-top: 4px; font-family: var(--sans); font-size: 14px; font-weight: 500; background: var(--gold); color: #fff; border: none; border-radius: 6px; padding: 10px 24px; cursor: pointer; transition: background 0.2s; }
+    .anmelde-submit:hover { background: var(--copper); }
+    .anmelde-success { font-family: var(--sans); font-size: 14px; color: var(--gold); padding: 10px 0; display: none; }
     .event-detail-inner { font-family: var(--sans); font-size: 14px; color: var(--brown2); line-height: 1.7; border-top: 1px solid var(--border2); padding-top: 14px; display: flex; flex-wrap: wrap; gap: 20px; }
     .event-detail-item { display: flex; flex-direction: column; gap: 2px; }
     .event-detail-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
@@ -477,16 +488,23 @@
         if (ev.link) html += '<a href="' + ev.link + '" class="event-cta"' + linkAttr + '>' + (ev.linkText || 'Mehr Info →') + '</a>';
         html += '</div></div>';
 
-        var hasDetail = (ev.details && ev.details.length) || ev.detail || ev.image;
-        if (hasDetail) {
-          html += '<div class="event-detail"><div class="event-detail-inner">';
-          if (ev.image) html += '<div style="width:100%;margin-bottom:12px;border-radius:10px;overflow:hidden;max-height:280px"><img src="' + ev.image + '" alt="' + ev.title + '" style="width:100%;height:280px;object-fit:cover;display:block" loading="lazy"></div>';
-          if (ev.detail) html += '<div style="width:100%;white-space:pre-line">' + ev.detail + '</div>';
-          if (ev.details) ev.details.forEach(function(d) {
-            html += '<div class="event-detail-item"><div class="event-detail-label">' + d.label + '</div><div>' + d.value + '</div></div>';
-          });
-          html += '</div></div>';
-        }
+        var formId = 'form-' + month + '-' + i;
+        html += '<div class="event-detail"><div class="event-detail-inner">';
+        if (ev.image) html += '<div style="width:100%;margin-bottom:12px;border-radius:10px;overflow:hidden;max-height:280px"><img src="' + ev.image + '" alt="' + ev.title + '" style="width:100%;height:280px;object-fit:cover;display:block" loading="lazy"></div>';
+        if (ev.detail) html += '<div style="width:100%;white-space:pre-line;margin-bottom:8px">' + ev.detail + '</div>';
+        if (ev.details) ev.details.forEach(function(d) {
+          html += '<div class="event-detail-item"><div class="event-detail-label">' + d.label + '</div><div>' + d.value + '</div></div>';
+        });
+        html += '<div class="anmelde-form" id="' + formId + '">';
+        html += '<h4>Zur Veranstaltung anmelden</h4>';
+        html += '<div class="anmelde-row"><div class="anmelde-field"><label>Name</label><input type="text" name="name" required placeholder="Dein Name"></div>';
+        html += '<div class="anmelde-field"><label>E-Mail</label><input type="email" name="email" required placeholder="deine@email.de"></div></div>';
+        html += '<div class="anmelde-row"><div class="anmelde-field"><label>Teilnehmerzahl</label><select name="teilnehmer"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>';
+        html += '<div class="anmelde-field"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen, Hinweise..."></textarea></div></div>';
+        html += '<button class="anmelde-submit" onclick="submitAnmeldung(event, \'' + ev.title.replace(/'/g,"\\'"  ) + '\', \'' + formId + '\')">Jetzt anmelden</button>';
+        html += '<div class="anmelde-success" id="success-' + formId + '">✓ Anmeldung gesendet – wir melden uns bald bei dir.</div>';
+        html += '</div>';
+        html += '</div></div>';
       });
 
       html += '</div>';
@@ -549,6 +567,30 @@
     initFadeIn();
   }
 
+  function submitAnmeldung(e, title, formId) {
+    e.preventDefault();
+    var form = document.getElementById(formId);
+    var name = form.querySelector('[name=name]').value;
+    var email = form.querySelector('[name=email]').value;
+    var teilnehmer = form.querySelector('[name=teilnehmer]').value;
+    var nachricht = form.querySelector('[name=nachricht]').value;
+    if (!name || !email) return;
+    var body = new URLSearchParams({
+      'form-name': 'veranstaltung-anmeldung',
+      'veranstaltung': title,
+      'name': name,
+      'email': email,
+      'teilnehmer': teilnehmer,
+      'nachricht': nachricht
+    });
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+      .then(function() {
+        form.querySelector('.anmelde-submit').style.display = 'none';
+        document.getElementById('success-' + formId).style.display = 'block';
+      })
+      .catch(function() { alert('Fehler beim Senden – bitte per E-Mail melden: info@homa-hof-heiligenberg.de'); });
+  }
+
   fetch('content/veranstaltungen.json')
     .then(function(r) { return r.json(); })
     .then(function(data) { renderEvents(data.items); initAll(); })
@@ -557,6 +599,8 @@
       if (c) c.innerHTML = '<div style="font-family:var(--sans);font-size:15px;color:var(--brown3);padding:60px 0;text-align:center;">Veranstaltungen konnten nicht geladen werden.<br><small>Bitte über einen Webserver aufrufen (nicht file://).</small></div>';
     });
 </script>
-
+<form name="veranstaltung-anmeldung" netlify hidden>
+  <input name="veranstaltung"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea>
+</form>
 </body>
 </html>
