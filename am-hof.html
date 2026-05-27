@@ -113,6 +113,22 @@
     .info-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
     .info-text { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
 
+    /* Hofladen */
+    .hofladen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 8px; }
+    .hofladen-card { background: white; border: 1px solid var(--border2); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .hofladen-card-img { width: 100%; height: 200px; object-fit: cover; display: block; background: var(--cream3); }
+    .hofladen-card-img-placeholder { width: 100%; height: 140px; background: linear-gradient(135deg, var(--cream3) 0%, var(--cream2) 100%); display: flex; align-items: center; justify-content: center; }
+    .hofladen-card-img-placeholder svg { opacity: 0.25; }
+    .hofladen-card-body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .hofladen-card-name { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brown); }
+    .hofladen-card-desc { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: var(--brown2); line-height: 1.7; flex: 1; }
+    .hofladen-card-price { display: inline-block; margin-top: 8px; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--gold); background: rgba(192,120,24,0.08); padding: 4px 12px; border-radius: 50px; align-self: flex-start; }
+    .hofladen-hint { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border2); }
+    .hofladen-hint a { color: var(--gold); }
+    @media (max-width: 768px) {
+      .hofladen-grid { grid-template-columns: 1fr; }
+    }
+
     /* Map */
     .map-wrap { border-radius: 12px; overflow: hidden; margin-top: 32px; }
     .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
@@ -415,7 +431,23 @@
   </div>
 </section>
 
-<!-- D: ANFAHRT -->
+<!-- D: HOFLADEN -->
+<section class="section-wrap" id="hofladen" style="background:var(--cream2);">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="eyebrow">Direkt vom Hof</div>
+      <h2 class="section-title">Hofladen & <em>Produkte</em></h2>
+    </div>
+    <div id="hofladen-products" class="hofladen-grid fade-in"></div>
+    <p id="hofladen-hint" class="hofladen-hint fade-in">
+      Der Hofladen ist <strong>Freitag und Samstag von 15 bis 18 Uhr</strong> geöffnet sowie zu allen Veranstaltungen.<br>
+      Für Bestellungen und Fragen: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a> oder
+      <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Onlineshop →</a>
+    </p>
+  </div>
+</section>
+
+<!-- E: ANFAHRT -->
 <section class="section-wrap" id="anfahrt" style="background:var(--cream2);">
   <div class="section-inner">
     <div class="section-header fade-in">
@@ -497,6 +529,7 @@
         <li><a href="#veranstaltungen">Veranstaltungen</a></li>
         <li><a href="#anmeldung">Anmeldung</a></li>
         <li><a href="#besucherhinweise">Besucherhinweise</a></li>
+        <li><a href="#hofladen">Hofladen</a></li>
         <li><a href="#anfahrt">Anfahrt</a></li>
         <li><a href="#uebernachtung">Übernachtung</a></li>
       </ul>
@@ -544,6 +577,26 @@
     });
   })();
   });
+
+  fetch('content/hofladen.json')
+    .then(r => r.json())
+    .then(data => {
+      var grid = document.getElementById('hofladen-products');
+      if (!grid) return;
+      if (!data.items || !data.items.length) { grid.innerHTML = '<p style="color:var(--brown2)">Keine Produkte hinterlegt.</p>'; return; }
+      grid.innerHTML = data.items.map(function(p) {
+        var imgHtml = p.image
+          ? '<img class="hofladen-card-img" src="' + p.image + '" alt="' + p.name + '" loading="lazy">'
+          : '<div class="hofladen-card-img-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5A3A18" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-4 4 4"/><circle cx="8.5" cy="14" r="1.5"/></svg></div>';
+        return '<div class="hofladen-card">' + imgHtml +
+          '<div class="hofladen-card-body">' +
+          '<div class="hofladen-card-name">' + p.name + '</div>' +
+          '<div class="hofladen-card-desc">' + p.desc + '</div>' +
+          (p.price ? '<span class="hofladen-card-price">' + p.price + '</span>' : '') +
+          '</div></div>';
+      }).join('');
+    })
+    .catch(function() {});
 
   document.querySelectorAll('.am-event-row').forEach(row => {
     row.addEventListener('click', () => {
