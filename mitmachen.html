@@ -46,7 +46,7 @@
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,252,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border2); transition: box-shadow 0.3s ease; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,252,245,0.95); border-bottom: 1px solid var(--border2); transition: box-shadow 0.3s ease; }
     nav.scrolled { box-shadow: 0 2px 20px rgba(42,21,5,0.1); }
     .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; height: 84px; display: flex; align-items: center; gap: 32px; }
     .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
@@ -214,6 +214,7 @@
       .community-img { height: 300px !important; }
     }
   </style>
+  <script src="js/site-config.js"></script>
 </head>
 <body>
 
@@ -348,7 +349,7 @@
         <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
       </ul>
       <div class="spenden-buttons">
-        <a href="https://www.paypal.com/donate?token=1MHMFxSMzRT4OpxzvqDtVyehrzfJ_zi0qyjKyY9okUBJ-a1qcU87KHd3I95R8C1ZNNk_0QMMyuiLWHyr&locale.x=DE" target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
+        <a href="https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE" data-paypal target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
         <a href="#" class="btn btn-outline">Banküberweisung</a>
       </div>
     </div>

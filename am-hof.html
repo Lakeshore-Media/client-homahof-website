@@ -44,7 +44,7 @@
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,252,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border2); transition: box-shadow 0.3s ease; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,252,245,0.95); border-bottom: 1px solid var(--border2); transition: box-shadow 0.3s ease; }
     nav.scrolled { box-shadow: 0 2px 20px rgba(42,21,5,0.1); }
     .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; height: 84px; display: flex; align-items: center; gap: 32px; }
     .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
@@ -91,6 +91,7 @@
     .badge-hof { color: #2A6A8A; background: rgba(42,106,138,0.08); }
     .badge-online { color: #6A2A8A; background: rgba(106,42,138,0.08); }
     .event-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brown); margin-bottom: 4px; }
+    .event-meta { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--brown3); margin-bottom: 4px; }
     .event-desc { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown2); line-height: 1.7; }
     .event-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
     .event-time { font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--brown3); }
@@ -239,6 +240,7 @@
       .footer-divider { margin: 0 20px; }
     }
   </style>
+  <script src="js/site-config.js"></script>
 </head>
 <body>
 
@@ -594,7 +596,11 @@
 
         html += '<div class="am-event-row fade-in"' + delay + '>';
         html += '<div class="event-date-block"><div class="event-day">' + d.getDate() + '</div><div class="event-month">' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear() + '</div></div>';
-        html += '<div class="event-info">' + badgeHtml + '<h3 class="event-title">' + ev.title + '</h3><p class="event-desc">' + (ev.desc || '') + '</p></div>';
+        var metaParts = [];
+        if (ev.location) metaParts.push(ev.location);
+        if (ev.price) metaParts.push(ev.price);
+        var metaHtml = metaParts.length ? '<div class="event-meta">' + metaParts.join(' · ') + '</div>' : '';
+        html += '<div class="event-info">' + badgeHtml + '<h3 class="event-title">' + ev.title + '</h3>' + metaHtml + '<p class="event-desc">' + (ev.desc || '') + '</p></div>';
         html += '<div class="event-actions"><span class="event-time">' + (ev.time || '') + '</span><button type="button" class="event-cta" onclick="openAmDetail(this,event)">Mehr Infos ↓</button></div>';
         html += '</div>';
 

@@ -144,7 +144,6 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       background: rgba(255,252,245,0.95);
-      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border2);
       transition: box-shadow 0.3s ease;
     }
@@ -617,6 +616,10 @@
       display: inline-block;
       margin-bottom: 12px;
     }
+    .event-type-badge + .event-type-badge { margin-left: 6px; }
+    .badge-kostenlos { color: #2A7A2A !important; background: rgba(42,122,42,0.08) !important; }
+    .badge-spende { color: var(--gold) !important; background: rgba(192,120,24,0.1) !important; }
+    .badge-kostenpflichtig { color: var(--copper) !important; background: rgba(184,64,16,0.08) !important; }
     .event-title {
       font-family: var(--serif);
       font-size: 29px;
@@ -1200,6 +1203,7 @@
     }
 
   </style>
+  <script src="js/site-config.js"></script>
 </head>
 <body>
 
@@ -1337,7 +1341,7 @@
       </div>
       <div class="card fade-in" style="transition-delay:0.2s">
         <div class="card-img">
-          <img src="images/stills/agnihotra-vorbereitung-tisch-wiese.webp" alt="Veranstaltungen und Seminare am Homa-Hof">
+          <img src="images/sommertreffen-gruppe-2026.webp" alt="Sommertreffen am Homa-Hof 2026">
         </div>
         <div class="card-body">
           <span class="card-tag">Erleben</span>
@@ -1361,7 +1365,7 @@
       </div>
       <div class="event-divider"></div>
       <div class="event-info">
-        <span class="event-type-badge" id="next-event-badge"></span>
+        <div id="next-event-badges" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;"></div>
         <h3 class="event-title" id="next-event-title"></h3>
         <p class="event-desc" id="next-event-desc"></p>
         <p id="next-event-price" style="font-size:13px;color:var(--brown2);margin-top:6px;font-family:var(--sans)"></p>
@@ -1494,7 +1498,7 @@
         <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
       </ul>
       <div class="spenden-buttons">
-        <a href="https://www.paypal.com/donate?token=G0rmFFZs2T8cDoxsRMbTK1hCT11U5C9xl6ZaGRKa8tnAAO9W_1mz9Qyg-4j96w0IDYhuoBvqaSi8K5HC&locale.x=DE" target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
+        <a href="https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE" data-paypal target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
         <button onclick="scrollToBank()" class="btn btn-outline" type="button">Banküberweisung</button>
       </div>
     </div>
@@ -1789,7 +1793,13 @@
       const d = new Date(next.date);
       document.getElementById('next-event-day').textContent = d.getDate();
       document.getElementById('next-event-month').textContent = MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear();
-      document.getElementById('next-event-badge').textContent = next.category === 'seminar' ? 'Seminar' : next.category === 'online' ? 'Online' : 'Am Hof';
+      const catLabels = { seminar: 'Seminar', online: 'Online', hof: 'Am Hof', retreat: 'Retreat', workshop: 'Workshop' };
+      const catKey = (next.category || 'hof').toLowerCase();
+      let badgeHtml = '<span class="event-type-badge">' + (catLabels[catKey] || next.category) + '</span>';
+      if (next.badge === 'kostenlos') badgeHtml += '<span class="event-type-badge badge-kostenlos">Kostenlos</span>';
+      else if (next.badge === 'spende') badgeHtml += '<span class="event-type-badge badge-spende">Spende</span>';
+      else if (next.badge === 'kostenpflichtig' && next.price) badgeHtml += '<span class="event-type-badge badge-kostenpflichtig">' + next.price + '</span>';
+      document.getElementById('next-event-badges').innerHTML = badgeHtml;
       document.getElementById('next-event-title').textContent = next.title;
       document.getElementById('next-event-desc').textContent = next.desc;
       if (next.price) document.getElementById('next-event-price').textContent = 'Beitrag: ' + next.price;
