@@ -304,15 +304,15 @@
 <section class="section-wrap">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <div class="eyebrow">Presse</div>
-      <h2 class="section-title">Homa-Hof in den <em>Medien</em></h2>
+      <div class="eyebrow">Downloads & Materialien</div>
+      <h2 class="section-title">Aktuelle <em>Downloads</em></h2>
     </div>
     <div class="press-list fade-in" id="press-list">
       <!-- filled by JS from downloads.json (category: presse) -->
     </div>
     <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;" class="fade-in">
       <a href="mailto:info@homa-hof-heiligenberg.de" class="btn btn-outline-dark">Pressematerial anfragen →</a>
-      <a href="#downloads" onclick="setTimeout(function(){document.querySelector('[data-cat=presse]').click()},80)" class="btn btn-outline-dark" style="font-size:14px;">Alle Presseberichte als PDF →</a>
+      <a href="#downloads" onclick="setTimeout(function(){document.querySelector('[data-cat=presse]').click()},80)" class="btn btn-outline-dark" style="font-size:14px;">Alle Presseberichte →</a>
     </div>
   </div>
 </section>
@@ -552,7 +552,8 @@
       if (!list) return;
       var presseItems = items
         .filter(function(i) { return i.category === 'presse'; })
-        .sort(function(a, b) { return (b.year || '0') > (a.year || '0') ? 1 : -1; });
+        .sort(function(a, b) { return (b.year || '0') > (a.year || '0') ? 1 : -1; })
+        .slice(0, 5);
       if (!presseItems.length) return;
       list.innerHTML = presseItems.map(function(item) {
         var parts = item.title.split(' – ');
