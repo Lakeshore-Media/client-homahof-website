@@ -1135,7 +1135,7 @@
   <div id="fire-shader-wrap" aria-hidden="true"><canvas id="fire-c"></canvas></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Europäisches Zentrum für Agnihotra</div>
-    <h1 class="hero-title">Heilige Feuer zur <em>Heilung der <span class="hero-ticker" aria-live="polite"><span class="hero-ticker-word">Welt</span><span class="hero-ticker-word">Menschen</span><span class="hero-ticker-word">Natur</span><span class="hero-ticker-word">Erde</span></span></em></h1>
+    <h1 class="hero-title">Heilige Feuer zur <em>Heilwerdung der <span class="hero-ticker" aria-live="polite"><span class="hero-ticker-word">Welt</span><span class="hero-ticker-word">Menschen</span><span class="hero-ticker-word">Natur</span><span class="hero-ticker-word">Erde</span></span></em></h1>
     <p class="hero-sub">Vedische Feuerzeremonien am Bodensee – für Heilung, Stille und Wohlergehen aller Lebewesen. Kostenlos erlernen, für alle Menschen.</p>
     <div class="hero-buttons">
       <a href="#event" class="btn btn-gold">Nächste Veranstaltung</a>
@@ -1213,7 +1213,7 @@
     <div class="features-grid">
       <div class="card fade-in">
         <div class="card-img">
-          <img src="images/stills/agnihotra-vorbereitung-tisch-wiese.png" alt="Agnihotra – Heiliges Feuer, Vorbereitung">
+          <img src="images/stills/agnihotra-flamme-sonnenuntergang-01.png" alt="Agnihotra – Die Flamme bei Sonnenuntergang">
         </div>
         <div class="card-body">
           <span class="card-tag">Wissen</span>
@@ -1235,7 +1235,7 @@
       </div>
       <div class="card fade-in" style="transition-delay:0.2s">
         <div class="card-img">
-          <img src="Archivbilder/Veranstaltungen/imgi_3_a-seminar2017_1800x562.jpg" alt="Veranstaltungen und Seminare">
+          <img src="images/stills/gruppe-agnihotra-abenddaemmerung.png" alt="Veranstaltungen und Seminare am Homa-Hof">
         </div>
         <div class="card-body">
           <span class="card-tag">Erleben</span>
@@ -1262,6 +1262,7 @@
         <span class="event-type-badge" id="next-event-badge"></span>
         <h3 class="event-title" id="next-event-title"></h3>
         <p class="event-desc" id="next-event-desc"></p>
+        <p id="next-event-price" style="font-size:13px;color:var(--brown2);margin-top:6px;font-family:var(--sans)"></p>
       </div>
       <div class="event-actions">
         <a href="veranstaltungen.html" class="btn btn-gold" id="next-event-cta">Jetzt anmelden</a>
@@ -1598,6 +1599,7 @@
       document.getElementById('next-event-badge').textContent = next.category === 'seminar' ? 'Seminar' : next.category === 'online' ? 'Online' : 'Am Hof';
       document.getElementById('next-event-title').textContent = next.title;
       document.getElementById('next-event-desc').textContent = next.desc;
+      if (next.price) document.getElementById('next-event-price').textContent = 'Beitrag: ' + next.price;
       const cta = document.getElementById('next-event-cta');
       if (next.link && !next.link.includes('homa-hof-heiligenberg.de')) {
         cta.href = next.link;
