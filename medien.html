@@ -91,15 +91,15 @@
     .blog-readmore { font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--gold); margin-top: 14px; }
 
     /* Press list */
-    .press-list { display: flex; flex-direction: column; gap: 0; }
-    .press-item { display: flex; gap: 28px; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--border2); }
+    .press-list { display: flex; flex-direction: column; }
+    .press-item { display: flex; gap: 24px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border2); }
     .press-item:last-child { border-bottom: none; }
-    .press-img { width: 100px; height: 70px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: var(--cream2); }
-    .press-img img { width: 100%; height: 100%; object-fit: cover; }
-    .press-year { font-family: var(--serif); font-size: 28px; font-weight: 300; color: var(--gold); line-height: 1; flex-shrink: 0; min-width: 60px; }
-    .press-info { flex: 1; }
-    .press-source { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brown3); margin-bottom: 6px; }
-    .press-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brown); }
+    .press-year { font-family: var(--serif); font-size: 26px; font-weight: 300; color: var(--gold); line-height: 1; flex-shrink: 0; min-width: 54px; }
+    .press-info { flex: 1; min-width: 0; }
+    .press-source { font-family: var(--sans); font-size: 11.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brown3); margin-bottom: 5px; }
+    .press-title { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--brown); line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .press-dl-btn { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--gold); flex-shrink: 0; transition: color 0.2s; text-decoration: none; white-space: nowrap; }
+    .press-dl-btn:hover { color: var(--copper); }
 
     /* Accordion */
     .accordion { max-width: 800px; margin: 0 auto; }
@@ -307,50 +307,12 @@
       <div class="eyebrow">Presse</div>
       <h2 class="section-title">Homa-Hof in den <em>Medien</em></h2>
     </div>
-    <div class="press-list fade-in">
-      <div class="press-item">
-        <div class="press-year">2019</div>
-        <div class="press-img">
-          <img src="Archivbilder/Homa Hof Heiligenberg - Pressemitteilungen/imgi_7_2019-06_GartenWEden_Agnihotra.jpg" alt="GartenWEden" loading="lazy">
-        </div>
-        <div class="press-info">
-          <div class="press-source">GartenWEden</div>
-          <div class="press-title">„Agnihotra im Garten – vedisches Feuer für mehr Wachstum"</div>
-        </div>
-      </div>
-      <div class="press-item">
-        <div class="press-year">2018</div>
-        <div class="press-img" style="background:var(--cream2);display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:var(--serif);font-size:13px;color:var(--brown3);padding:8px;">Die Wurzel</span>
-        </div>
-        <div class="press-info">
-          <div class="press-source">Die Wurzel</div>
-          <div class="press-title">„Feuer für die Gesundheit – der Homa-Hof am Bodensee"</div>
-        </div>
-      </div>
-      <div class="press-item">
-        <div class="press-year">2018</div>
-        <div class="press-img" style="background:var(--cream2);display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:var(--serif);font-size:13px;color:var(--brown3);padding:8px;">Lebenskunst</span>
-        </div>
-        <div class="press-info">
-          <div class="press-source">Lebenskunst</div>
-          <div class="press-title">„Der Homa-Hof – ein Ort der Stille und Transformation"</div>
-        </div>
-      </div>
-      <div class="press-item">
-        <div class="press-year">2015</div>
-        <div class="press-img" style="background:var(--cream2);display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:var(--serif);font-size:13px;color:var(--brown3);padding:8px;">SALVE</span>
-        </div>
-        <div class="press-info">
-          <div class="press-source">SALVE</div>
-          <div class="press-title">„Vedisches Feuer am Bodensee – Agnihotra auf dem Homa-Hof"</div>
-        </div>
-      </div>
+    <div class="press-list fade-in" id="press-list">
+      <!-- filled by JS from downloads.json (category: presse) -->
     </div>
-    <div style="margin-top:36px;" class="fade-in">
+    <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;" class="fade-in">
       <a href="mailto:info@homa-hof-heiligenberg.de" class="btn btn-outline-dark">Pressematerial anfragen →</a>
+      <a href="#downloads" onclick="setTimeout(function(){document.querySelector('[data-cat=presse]').click()},80)" class="btn btn-outline-dark" style="font-size:14px;">Alle Presseberichte als PDF →</a>
     </div>
   </div>
 </section>
@@ -583,11 +545,37 @@
       }).join('');
     }
 
+    const DL_ARROW = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+
+    function renderPressList(items) {
+      var list = document.getElementById('press-list');
+      if (!list) return;
+      var presseItems = items
+        .filter(function(i) { return i.category === 'presse'; })
+        .sort(function(a, b) { return (b.year || '0') > (a.year || '0') ? 1 : -1; });
+      if (!presseItems.length) return;
+      list.innerHTML = presseItems.map(function(item) {
+        var parts = item.title.split(' – ');
+        var source = parts[0].trim();
+        var title = parts.length > 1 ? parts.slice(1).join(' – ').trim() : item.title;
+        return '<div class="press-item">'
+          + '<div class="press-year">' + (item.year || '') + '</div>'
+          + '<div class="press-info">'
+          + '<div class="press-source">' + source + '</div>'
+          + '<div class="press-title">' + title + '</div>'
+          + '</div>'
+          + '<a class="press-dl-btn" href="' + item.file + '" download target="_blank" rel="noopener">'
+          + DL_ARROW + ' PDF</a>'
+          + '</div>';
+      }).join('');
+    }
+
     fetch('content/downloads.json')
       .then(r => r.json())
       .then(data => {
         allItems = data.items || [];
         renderGrid('all');
+        renderPressList(allItems);
 
         document.getElementById('dl-filters').addEventListener('click', function(e) {
           const btn = e.target.closest('.dl-filter');
