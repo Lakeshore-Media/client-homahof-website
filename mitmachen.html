@@ -211,6 +211,7 @@
       .footer-inner > div:first-child { grid-column: 1 / -1; }
       .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
       .footer-divider { margin: 0 20px; }
+      .community-img { height: 300px !important; }
     }
   </style>
 </head>
@@ -253,8 +254,8 @@
       <div class="eyebrow">Mitglied werden</div>
       <h2 class="section-title">Teil der <em>Gemeinschaft</em></h2>
     </div>
-    <div style="border-radius:16px;overflow:hidden;margin-bottom:48px;max-height:420px;" class="fade-in">
-      <img src="images/gruppenbild-pfingsten-2026.webp" alt="Die Gemeinschaft des Homa-Hofs – Pfingsten 2026" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" loading="lazy">
+    <div style="border-radius:16px;overflow:hidden;margin-bottom:48px;height:520px;" class="fade-in community-img">
+      <img src="images/gruppenbild-pfingsten-2026.webp" alt="Die Gemeinschaft des Homa-Hofs – Pfingsten 2026" style="width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;" loading="lazy">
     </div>
     <div class="three-col">
       <div class="membership-card fade-in">
@@ -510,6 +511,8 @@
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
   // Mobile nav
   (function() {
     var burger = document.querySelector('.nav-burger');
@@ -521,8 +524,6 @@
       if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
     });
   })();
-  });
-
   const fadeEls = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

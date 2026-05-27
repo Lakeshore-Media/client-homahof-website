@@ -1624,6 +1624,8 @@
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
   // Mobile nav
   (function() {
     var burger = document.querySelector('.nav-burger');
@@ -1635,8 +1637,6 @@
       if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
     });
   })();
-  });
-
   // Scroll fade-in via IntersectionObserver
   const fadeEls = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver((entries) => {
@@ -1725,7 +1725,7 @@
         const d = new Date(item.date);
         const dateStr = d.getDate() + '. ' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear();
         const body = (item.body || '').replace(/\*([^*]+)\*/g, '<em>$1</em>').split('\n\n')[0];
-        return '<div class="aktuelles-card fade-in">'
+        return '<div class="aktuelles-card fade-in visible">'
           + '<div class="aktuelles-date">' + dateStr + '</div>'
           + '<div class="aktuelles-title">' + item.title + '</div>'
           + '<div class="aktuelles-body">' + body + '</div>'

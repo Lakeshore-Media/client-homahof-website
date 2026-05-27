@@ -779,6 +779,8 @@
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
   // Mobile nav
   (function() {
     var burger = document.querySelector('.nav-burger');
@@ -790,8 +792,6 @@
       if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
     });
   })();
-  });
-
   const fadeEls = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
