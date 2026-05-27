@@ -285,49 +285,6 @@
   </div>
 </section>
 
-<!-- B: ANMELDEFORMULAR -->
-<section class="section-wrap" id="anmeldung" style="background:var(--cream2);">
-  <div class="section-inner">
-    <div class="section-header fade-in">
-      <div class="eyebrow">Anmeldung</div>
-      <h2 class="section-title">Online <em>anmelden</em></h2>
-    </div>
-    <form id="main-anmeldung-form" style="max-width:680px;" onsubmit="submitMainAnmeldung(event)" class="fade-in">
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label" for="vorname">Vorname</label>
-          <input class="form-input" type="text" id="vorname" name="vorname" placeholder="Dein Vorname">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="nachname">Nachname</label>
-          <input class="form-input" type="text" id="nachname" name="nachname" placeholder="Dein Nachname">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="email">E-Mail</label>
-        <input class="form-input" type="email" id="email" name="email" placeholder="deine@email.de">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="veranstaltung-select">Veranstaltung</label>
-        <select class="form-select" id="veranstaltung-select" name="veranstaltung">
-          <option value="">Wird geladen…</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="nachricht">Nachricht (optional)</label>
-        <textarea class="form-textarea" id="nachricht" name="nachricht" placeholder="Deine Fragen oder Hinweise …"></textarea>
-      </div>
-      <div class="newsletter-opt" style="margin-bottom:4px;">
-        <input type="checkbox" id="nl-main" name="newsletter" value="ja">
-        <label for="nl-main">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label>
-      </div>
-      <button type="submit" class="btn btn-gold" style="margin-top:16px;">Anmeldung absenden</button>
-      <p id="main-anmeldung-success" style="display:none;font-family:var(--sans);font-size:14px;color:#2A7A2A;margin-top:12px;">Danke! Wir melden uns innerhalb von 2 Werktagen.</p>
-      <p class="form-note">Wir melden uns innerhalb von 2 Werktagen.</p>
-    </form>
-  </div>
-</section>
-
 <!-- C: BESUCHERHINWEISE -->
 <section class="section-wrap" id="besucherhinweise">
   <div class="section-inner">
@@ -483,7 +440,7 @@
       <div class="footer-col-title">Erleben</div>
       <ul class="footer-links">
         <li><a href="#veranstaltungen">Veranstaltungen</a></li>
-        <li><a href="#anmeldung">Anmeldung</a></li>
+        <li><a href="veranstaltungen.html#anmeldung-wrap">Anmeldung</a></li>
         <li><a href="#besucherhinweise">Besucherhinweise</a></li>
         <li><a href="#hofladen">Hofladen</a></li>
         <li><a href="#anfahrt">Anfahrt</a></li>
@@ -594,36 +551,6 @@
     .catch(function() { btn.disabled = false; alert('Fehler beim Absenden. Bitte per E-Mail anmelden.'); });
   }
 
-  function submitMainAnmeldung(e) {
-    e.preventDefault();
-    var form = document.getElementById('main-anmeldung-form');
-    var vorname = form.querySelector('[name=vorname]').value.trim();
-    var email = form.querySelector('[name=email]').value.trim();
-    if (!vorname || !email) { alert('Bitte Vorname und E-Mail ausfüllen.'); return; }
-    var btn = form.querySelector('[type=submit]');
-    if (btn) btn.disabled = true;
-    var nlEl = form.querySelector('[name=newsletter]');
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        'form-name': 'am-hof-anmeldung',
-        vorname: vorname,
-        nachname: form.querySelector('[name=nachname]').value.trim(),
-        email: email,
-        veranstaltung: form.querySelector('[name=veranstaltung]').value,
-        nachricht: form.querySelector('[name=nachricht]').value.trim(),
-        newsletter: nlEl && nlEl.checked ? 'ja' : 'nein'
-      }).toString()
-    })
-    .then(function() {
-      document.getElementById('main-anmeldung-success').style.display = 'block';
-      form.reset();
-      if (btn) btn.style.display = 'none';
-    })
-    .catch(function() { if (btn) btn.disabled = false; alert('Fehler beim Absenden. Bitte per E-Mail anmelden.'); });
-  }
-
   fetch('content/veranstaltungen.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -635,15 +562,6 @@
       var allUpcoming = data.items
         .filter(function(ev) { return ev.date >= today; })
         .sort(function(a, b) { return a.date < b.date ? -1 : 1; });
-
-      var sel = document.getElementById('veranstaltung-select');
-      if (sel) {
-        sel.innerHTML = '<option value="">Bitte wählen …</option>' +
-          allUpcoming.map(function(ev) {
-            var d = new Date(ev.date + 'T12:00:00');
-            return '<option value="' + ev.title + '">' + d.getDate() + '. ' + MONTHS_DE[d.getMonth()] + ' – ' + ev.title + '</option>';
-          }).join('');
-      }
 
       var thirtyDayEvents = allUpcoming.filter(function(ev) { return ev.date <= cutoff; });
       var list = document.getElementById('am-events-list');

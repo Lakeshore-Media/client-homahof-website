@@ -298,7 +298,29 @@
       .event-meta::after { content: attr(data-time); display: block; margin-top: 4px; font-size: 13px; opacity: 0.75; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; padding: 0 24px; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; padding: 0 24px; }
+      .form-grid { grid-template-columns: 1fr !important; }
+      #anmeldung-wrap { padding: 60px 24px; }
     }
+    #anmeldung-wrap {
+      background: var(--cream2);
+      border-top: 1px solid var(--border2);
+      padding: 80px 48px;
+    }
+    .anmeldung-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+    .form-label { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--brown2); }
+    .form-input, .form-textarea, .form-select {
+      font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown);
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 18px; outline: none; transition: border-color 0.2s; width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--gold); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-note { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: var(--brown3); margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -358,6 +380,50 @@
   </div>
   <div class="empty-state" id="empty-state" style="display:none">
     Keine Veranstaltungen in dieser Kategorie gefunden.
+  </div>
+</div>
+
+<!-- ANMELDUNG -->
+<div id="anmeldung-wrap">
+  <div class="anmeldung-inner">
+    <div class="section-header fade-in" style="margin-bottom:32px;">
+      <div class="eyebrow" style="font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:12px;">Anmeldung</div>
+      <h2 style="font-family:var(--serif);font-size:36px;font-weight:400;color:var(--brown);margin-bottom:10px;">Online <em>anmelden</em></h2>
+      <p style="font-family:var(--sans);font-size:15px;font-weight:300;color:var(--brown2);line-height:1.7;">Wähle eine Veranstaltung aus und melde dich direkt an – wir bestätigen innerhalb von 2 Werktagen.</p>
+    </div>
+    <form id="ver-anmeldung-form" onsubmit="submitVerAnmeldung(event)" class="fade-in">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="ver-vorname">Vorname</label>
+          <input class="form-input" type="text" id="ver-vorname" name="vorname" placeholder="Dein Vorname" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ver-nachname">Nachname</label>
+          <input class="form-input" type="text" id="ver-nachname" name="nachname" placeholder="Dein Nachname">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="ver-email">E-Mail</label>
+        <input class="form-input" type="email" id="ver-email" name="email" placeholder="deine@email.de" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="ver-select">Veranstaltung</label>
+        <select class="form-select" id="ver-select" name="veranstaltung">
+          <option value="">Wird geladen…</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="ver-nachricht">Nachricht (optional)</label>
+        <textarea class="form-textarea" id="ver-nachricht" name="nachricht" placeholder="Deine Fragen oder Hinweise …"></textarea>
+      </div>
+      <div class="newsletter-opt" style="margin-bottom:4px;">
+        <input type="checkbox" id="nl-ver" name="newsletter" value="ja">
+        <label for="nl-ver">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label>
+      </div>
+      <button type="submit" class="btn btn-gold" style="margin-top:20px;">Anmeldung absenden</button>
+      <p id="ver-anmeldung-success" style="display:none;font-family:var(--sans);font-size:14px;color:#2A7A2A;margin-top:12px;">Danke! Wir melden uns innerhalb von 2 Werktagen.</p>
+      <p class="form-note">Alle Angaben werden vertraulich behandelt.</p>
+    </form>
   </div>
 </div>
 
@@ -676,15 +742,58 @@
       if (!data || !Array.isArray(data.items)) throw new Error('JSON-Struktur unerwartet: ' + JSON.stringify(Object.keys(data)));
       renderEvents(data.items);
       initAll();
+
+      var today = new Date().toISOString().slice(0, 10);
+      var upcoming = data.items
+        .filter(function(ev) { return ev.date >= today; })
+        .sort(function(a, b) { return a.date < b.date ? -1 : 1; });
+      var sel = document.getElementById('ver-select');
+      if (sel) {
+        sel.innerHTML = '<option value="">Bitte wählen …</option>' +
+          upcoming.map(function(ev) {
+            var d = new Date(ev.date + 'T12:00:00');
+            return '<option value="' + ev.title + '">' + d.getDate() + '. ' + MONTHS_DE[d.getMonth()] + ' – ' + ev.title + '</option>';
+          }).join('');
+      }
     })
     .catch(function(err) {
       console.error('[Veranstaltungen] Ladefehler:', err);
       var c = document.getElementById('events-list');
       if (c) c.innerHTML = '<div style="font-family:var(--sans);font-size:15px;color:var(--brown3);padding:60px 0;text-align:center;">Veranstaltungen konnten nicht geladen werden.<br><small>' + (err && err.message ? err.message : 'Unbekannter Fehler') + '</small></div>';
     });
+
+  function submitVerAnmeldung(e) {
+    e.preventDefault();
+    var form = document.getElementById('ver-anmeldung-form');
+    var vorname = form.querySelector('[name=vorname]').value.trim();
+    var email = form.querySelector('[name=email]').value.trim();
+    if (!vorname || !email) { alert('Bitte Vorname und E-Mail ausfüllen.'); return; }
+    var btn = form.querySelector('[type=submit]');
+    if (btn) btn.disabled = true;
+    var nlEl = form.querySelector('[name=newsletter]');
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'veranstaltung-anmeldung',
+        vorname: vorname,
+        nachname: form.querySelector('[name=nachname]').value.trim(),
+        email: email,
+        veranstaltung: form.querySelector('[name=veranstaltung]').value,
+        nachricht: form.querySelector('[name=nachricht]').value.trim(),
+        newsletter: nlEl && nlEl.checked ? 'ja' : 'nein'
+      }).toString()
+    })
+    .then(function() {
+      document.getElementById('ver-anmeldung-success').style.display = 'block';
+      form.reset();
+      if (btn) btn.style.display = 'none';
+    })
+    .catch(function() { if (btn) btn.disabled = false; alert('Fehler beim Absenden. Bitte per E-Mail anmelden.'); });
+  }
 </script>
 <form name="veranstaltung-anmeldung" netlify hidden>
-  <input name="veranstaltung"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea><input type="checkbox" name="newsletter">
+  <input name="veranstaltung"><input name="vorname"><input name="nachname"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea><input type="checkbox" name="newsletter">
 </form>
 </body>
 </html>
