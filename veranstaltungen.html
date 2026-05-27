@@ -497,7 +497,10 @@
         var formId = 'form-' + key + '-' + i;
         html += '<div class="event-detail"><div class="event-detail-inner">';
         if (ev.image) html += '<div style="width:100%;margin-bottom:12px;border-radius:10px;overflow:hidden;max-height:280px"><img src="' + ev.image + '" alt="' + ev.title + '" style="width:100%;height:280px;object-fit:cover;display:block" loading="lazy"></div>';
-        if (ev.detail) html += '<div style="width:100%;white-space:pre-line;margin-bottom:8px">' + ev.detail + '</div>';
+        if (ev.location) html += '<div class="event-detail-item"><div class="event-detail-label">Ort</div><div>' + ev.location + '</div></div>';
+        if (ev.time) html += '<div class="event-detail-item"><div class="event-detail-label">Uhrzeit</div><div>' + ev.time + '</div></div>';
+        if (ev.price) html += '<div class="event-detail-item"><div class="event-detail-label">Beitrag</div><div>' + ev.price + '</div></div>';
+        if (ev.detail) html += '<div style="width:100%;white-space:pre-line;margin-top:4px;margin-bottom:8px">' + ev.detail + '</div>';
         if (ev.details) ev.details.forEach(function(d) {
           html += '<div class="event-detail-item"><div class="event-detail-label">' + d.label + '</div><div>' + d.value + '</div></div>';
         });

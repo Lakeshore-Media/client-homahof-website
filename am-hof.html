@@ -272,6 +272,7 @@
       <div class="eyebrow">Termine 2026</div>
       <h2 class="section-title">Veranstaltungen & <em>Seminare</em></h2>
     </div>
+    <p class="section-text fade-in" style="max-width:680px;margin-bottom:32px;">Die nächsten Veranstaltungen am Homa-Hof – Einführungsabende, Seminare und besondere Begegnungen. Klick auf einen Termin für mehr Infos und direkte Anmeldung. <a href="veranstaltungen.html" style="color:var(--gold)">Alle Termine 2026 →</a></p>
     <div class="am-event-list" id="am-events-list">
       <div style="font-family:var(--sans);font-size:15px;color:var(--brown3);padding:24px 0;">Veranstaltungen werden geladen…</div>
     </div>
@@ -613,9 +614,9 @@
     .then(function(r) { return r.json(); })
     .then(function(data) {
       var today = new Date().toISOString().slice(0, 10);
-      var twoMonthsLater = new Date();
-      twoMonthsLater.setMonth(twoMonthsLater.getMonth() + 2);
-      var cutoff = twoMonthsLater.toISOString().slice(0, 10);
+      var cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() + 30);
+      var cutoff = cutoffDate.toISOString().slice(0, 10);
 
       var allUpcoming = data.items
         .filter(function(ev) { return ev.date >= today; })
@@ -630,16 +631,16 @@
           }).join('');
       }
 
-      var twoMonthEvents = allUpcoming.filter(function(ev) { return ev.date <= cutoff; });
+      var thirtyDayEvents = allUpcoming.filter(function(ev) { return ev.date <= cutoff; });
       var list = document.getElementById('am-events-list');
       if (!list) return;
-      if (!twoMonthEvents.length) {
-        list.innerHTML = '<p style="font-family:var(--sans);font-size:15px;color:var(--brown2);padding:20px 0">Derzeit keine Veranstaltungen in den nächsten zwei Monaten geplant.</p>';
+      if (!thirtyDayEvents.length) {
+        list.innerHTML = '<p style="font-family:var(--sans);font-size:15px;color:var(--brown2);padding:20px 0">Derzeit keine Veranstaltungen in den nächsten 30 Tagen geplant.</p>';
         return;
       }
 
       var html = '';
-      twoMonthEvents.forEach(function(ev, i) {
+      thirtyDayEvents.forEach(function(ev, i) {
         var d = new Date(ev.date + 'T12:00:00');
         var formId = 'am-form-' + i;
         var delay = i === 0 ? '' : ' style="transition-delay:' + (i * 0.08).toFixed(2) + 's"';
