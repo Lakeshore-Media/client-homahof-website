@@ -299,14 +299,17 @@
       #main-nav.nav-open .nav-burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
       .nav-inner { padding: 0 20px; height: 64px; }
-      .nav-brand img { height: 40px; }
+      .nav-brand img { height: 48px; }
       .subpage-hero-content { padding: 40px 24px; }
       .subpage-hero-content h1 { font-size: 38px; }
       .filter-bar { padding: 0 20px; gap: 8px; overflow-x: auto; }
       .filter-bar-right { display: none; }
       .timeline-wrap { padding: 40px 24px 80px; }
       .event-row { grid-template-columns: 60px 1fr; }
-      .event-actions { display: none; }
+      .event-actions { display: flex; grid-column: 2; justify-content: flex-start; padding-top: 0; }
+      .event-time { display: none; }
+      .event-detail { padding: 0 !important; }
+      .event-detail.open { padding: 14px 16px 24px 16px !important; }
       .event-meta::after { content: attr(data-time); display: block; margin-top: 4px; font-size: 13px; opacity: 0.75; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 20px 48px; }
       .footer-inner > div:first-child { grid-column: 1 / -1; }
