@@ -131,6 +131,20 @@
       margin-bottom: 16px;
     }
 
+    /* Wissen detail expand */
+    .expand-toggle { display: inline-flex; align-items: center; gap: 7px; font-family: var(--sans); font-size: 14.5px; font-weight: 500; color: var(--gold); background: none; border: none; cursor: pointer; padding: 0; margin-top: 20px; letter-spacing: 0.02em; transition: color 0.2s; }
+    .expand-toggle:hover { color: var(--copper); }
+    .expand-arrow { display: inline-block; transition: transform 0.3s ease; font-size: 11px; }
+    .expand-toggle.open .expand-arrow { transform: rotate(180deg); }
+    .expand-body { max-height: 0; overflow: hidden; transition: max-height 0.52s ease; }
+    .expand-body.open { max-height: 2400px; }
+    .expand-content { padding-top: 20px; border-top: 1px solid var(--border); margin-top: 20px; }
+    .expand-detail-text { font-family: var(--sans); font-size: 15.5px; font-weight: 300; color: var(--brown2); line-height: 1.85; margin-bottom: 14px; }
+    .expand-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .expand-list li { font-family: var(--sans); font-size: 15.5px; font-weight: 300; color: var(--brown2); line-height: 1.7; padding-left: 18px; position: relative; }
+    .expand-list li::before { content: '–'; position: absolute; left: 0; color: var(--gold); }
+    .expand-quote { font-family: var(--serif); font-size: 16.5px; font-style: italic; color: var(--brown2); line-height: 1.7; border-left: 2px solid var(--gold-light); padding-left: 16px; margin: 14px 0 18px; }
+
     footer { background: #2A1505; padding: 72px 0 0; }
     .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px; }
     .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 24px; }
@@ -236,7 +250,19 @@
         <div class="eyebrow">Natur & Umwelt</div>
         <h2 class="section-title">Agnihotra und die <em>Ökologie</em></h2>
         <p class="section-text">Agnihotra reinigt die Atmosphäre. Studien zeigen eine messbare Reduktion von Schadstoffen im Umkreis der Feuerzeremonie. Pflanzen und Böden profitieren von den wertvollen Substanzen der Asche.</p>
-        <a href="heilige-feuer.html" class="btn btn-outline-dark">Mehr erfahren →</a>
+        <button class="expand-toggle" onclick="toggleExpand(this)"><span>Details</span> <span class="expand-arrow">↓</span></button>
+        <div class="expand-body">
+          <div class="expand-content">
+            <p class="expand-detail-text">Vier Wirkungsbereiche wurden dokumentiert:</p>
+            <ul class="expand-list">
+              <li><strong>Luft:</strong> Yagnas reduzieren bakterielle Belastung um bis zu 96 %. Messungen in Städten zeigten gesunkene CO₂- und Feinstaubwerte sowie verbesserte Ozon- und Sauerstoffkonzentrationen.</li>
+              <li><strong>Wasser:</strong> Bis zu 95 % Reduktion bakterieller Belastung – mit normalisiertem pH-Wert, verringerten Chloriden, Nitraten und Sulfaten.</li>
+              <li><strong>Boden:</strong> Regenwürmer nehmen zu, Bodenfeuchtigkeit verbessert sich, der pH-Wert normalisiert sich durch Anreicherung mit Magnesium, Phosphor und Kalium.</li>
+              <li><strong>Strahlung:</strong> Nach Tschernobyl entstanden strahlungsfreie Lebensmittel durch Homa-Feuer im Landbau; radioaktiv verseuchter Reis aus Fukushima zeigte Belastungsreduktion innerhalb zwei Wochen.</li>
+            </ul>
+            <a href="heilige-feuer.html" class="btn btn-outline-dark" style="margin-top:6px">Mehr erfahren →</a>
+          </div>
+        </div>
       </div>
       <div class="col-img fade-in" style="transition-delay:0.15s">
         <img src="Archivbilder/Ökologie/imgi_3_a-oekologie.jpg" alt="Ökologie und Agnihotra" loading="lazy">
@@ -257,7 +283,20 @@
         <div class="eyebrow">Heilkraft des Feuers</div>
         <h2 class="section-title">Agnihotra und die <em>Gesundheit</em></h2>
         <p class="section-text">Der Agnihotra-Rauch hat antibakterielle Eigenschaften. Erfahrungsberichte und Untersuchungen zeigen positive Wirkungen auf das Immunsystem und die Atemwege.</p>
-        <a href="wissen.html#wissenschaft" class="btn btn-outline-dark">Zur Forschung →</a>
+        <button class="expand-toggle" onclick="toggleExpand(this)"><span>Details</span> <span class="expand-arrow">↓</span></button>
+        <div class="expand-body">
+          <div class="expand-content">
+            <ul class="expand-list">
+              <li>Hemmung der Vermehrung von Krankheitserregern</li>
+              <li>Verbesserte Blutfließgeschwindigkeit und Sauerstoffversorgung</li>
+              <li>Gestärktes Immunsystem, beschleunigte Wundheilung</li>
+              <li>Stimmungsaufhellung und Stressreduktion</li>
+              <li>Ähnliche Wirkungen auch bei Tieren und Pflanzen dokumentiert</li>
+            </ul>
+            <p class="expand-detail-text">Historisches Beispiel: Bei der Bhopal-Katastrophe 1984 überlebten 14 Personen ohne Folgeschäden, die während des Giftgasunglücks Yagna durchführten.</p>
+            <a href="#wissenschaft" class="btn btn-outline-dark" style="margin-top:4px">Zur Forschung →</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -272,6 +311,19 @@
         <div class="eyebrow">Landwirtschaft</div>
         <h2 class="section-title">Homa-<em>Anbau</em></h2>
         <p class="section-text">Pflanzen, die im Umfeld von Agnihotra wachsen, zeigen bemerkenswerte Unterschiede in Qualität und Ertrag. Homa-Anbau ist eine Quelle für gesunde, energiereiche Lebensmittel.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)"><span>Details</span> <span class="expand-arrow">↓</span></button>
+        <div class="expand-body">
+          <div class="expand-content">
+            <ul class="expand-list">
+              <li>Beschleunigte Keimung und Chlorophyll-Bildung</li>
+              <li>Erhöhte Pflanzenimmunität mit minimalem Krankheitsbefall</li>
+              <li>Aktives Bodenleben mit Mikroorganismen und Regenwürmern</li>
+              <li>Reduzierter Schädlingsbefall, verstärkte Nützlingsaktivität</li>
+              <li>Harmonisierte Zellstrukturen und verbesserte Haltbarkeit der Ernte</li>
+            </ul>
+            <p class="expand-detail-text">Das Königsprinzip: Wenn der erste Pilz oder die erste Frucht stehen gelassen wird, wachsen alle weiteren Exemplare größer. Homa-Anbau beginnt beim Blumentopf und lässt sich auf jede Größe erweitern – mit minimalem finanziellem Aufwand und ohne Ressourcenzerstörung.</p>
+          </div>
+        </div>
       </div>
       <div class="col-img fade-in" style="transition-delay:0.15s">
         <img src="Archivbilder/Homa-Anbau/imgi_3_a-homa-anbau.jpg" alt="Homa-Anbau" loading="lazy">
@@ -292,6 +344,19 @@
         <div class="eyebrow">Bienenwelt</div>
         <h2 class="section-title">Agnihotra und <em>gesunde Bienen</em></h2>
         <p class="section-text">Agnihotra und die anfallende Asche kräftigen und harmonisieren die Bienen, wodurch sie allgemein gesünder und ruhiger sind – auch bei Varroamilben.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)"><span>Details</span> <span class="expand-arrow">↓</span></button>
+        <div class="expand-body">
+          <div class="expand-content">
+            <p class="expand-detail-text">Praktische Anwendung:</p>
+            <ul class="expand-list">
+              <li>Yagnas in der Nähe des Bienenstocks durchführen</li>
+              <li>Agnihotra-Asche auf Fluglöcher und Wabenflächen streuen</li>
+              <li>Aschewasser statt Rauch bei der Stockarbeit verwenden</li>
+              <li>Asche und Teekräuter dem Winterfutter beimischen</li>
+            </ul>
+            <p class="expand-detail-text">Varroamilben werden nicht als Feind betrachtet, sondern als Hinweis auf Ungleichgewicht – natürliche Resistenz entsteht durch die Stärkung der Bienengesundheit. Über 30 Jahre Erfahrung am Homa-Hof zeigen: Schädlinge und Krankheiten sind nahezu kein Thema mehr. Homa-Honig zeichnet sich durch intensiven, zarten Geschmack aus.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -306,6 +371,19 @@
         <div class="eyebrow">Forschung</div>
         <h2 class="section-title">Was die <em>Wissenschaft</em> sagt</h2>
         <p class="section-text">Internationale Forscher haben die Wirkung von Agnihotra und der anfallenden Asche untersucht. Ergebnisse zeigen messbare Veränderungen in Bodenproben, Luft und biologischem Gewebe.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)"><span>Details</span> <span class="expand-arrow">↓</span></button>
+        <div class="expand-body">
+          <div class="expand-content">
+            <ul class="expand-list">
+              <li>Negative-Ionen-Erzeugung und Wetterstabilisierung</li>
+              <li>Ökologisches Gleichgewicht und Strahlungsschutz</li>
+              <li>Epidemie-Prävention und Nährstoffanreicherung in Lebensmitteln</li>
+              <li>Harmonisierung von Stresszuständen und emotionale Stabilisierung</li>
+            </ul>
+            <p class="expand-detail-text">Das Ritual regt nach altvedischem Verständnis „die Intelligenz in der Natur" an: Schädliche Bakterien werden gehemmt, nützliche gefördert. Resonanz und Schwingungen spielen dabei zentrale Rollen.</p>
+            <p class="expand-detail-text">Hirnforscher Günter Haffelder dokumentierte 2015, dass Agnihotra Gehirnwellen in einen entspannten Theta-Zustand versetzt – eine tiefe meditative Bewusstseinsstufe.</p>
+          </div>
+        </div>
       </div>
       <div class="col-img fade-in" style="transition-delay:0.15s">
         <img src="Archivbilder/Wissenschaft/imgi_3_a-wissenschaft.jpg" alt="Wissenschaft und Agnihotra" loading="lazy">
@@ -326,7 +404,20 @@
         <div class="eyebrow">Innere Welt</div>
         <h2 class="section-title">Agnihotra und <em>Spiritualität</em></h2>
         <p class="section-text">Agnihotra schafft einen Raum der Stille. Viele Praktizierende berichten von tiefer innerer Ruhe, gesteigerter Konzentration und einem wachsenden Gefühl der Verbundenheit.</p>
-        <a href="mitmachen.html" class="btn btn-outline-dark">Selbst erleben →</a>
+        <button class="expand-toggle" onclick="toggleExpand(this)"><span>Details</span> <span class="expand-arrow">↓</span></button>
+        <div class="expand-body">
+          <div class="expand-content">
+            <ul class="expand-list">
+              <li>Verbindung mit höchstem Licht und tiefe innere Stille</li>
+              <li>Harmonisierung hinderlicher innerer Strukturen</li>
+              <li>Förderung positiven Denkens und Handelns</li>
+              <li>Innere Befreiung durch bewusstes Loslassen</li>
+            </ul>
+            <p class="expand-detail-text">Die Praxis ist religionsungebunden und unterstützt verschiedenste spirituelle Wege. An Orten regelmäßiger Praxis berichten Besucher von friedvollen Zuständen und entspannter Atmosphäre.</p>
+            <p class="expand-quote">„Man kann den höchsten Bewusstseinszustand durch das Praktizieren von Agnihotra erreichen." — Shree</p>
+            <a href="mitmachen.html" class="btn btn-outline-dark" style="margin-top:6px">Selbst erleben →</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -416,6 +507,12 @@
       if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
     });
   })();
+  function toggleExpand(btn) {
+    var body = btn.parentElement.querySelector('.expand-body');
+    btn.classList.toggle('open');
+    body.classList.toggle('open');
+  }
+
   const fadeEls = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
