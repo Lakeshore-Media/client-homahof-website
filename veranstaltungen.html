@@ -519,6 +519,7 @@
     var burger = document.querySelector('.nav-burger');
     if (!burger) return;
     burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    nav.querySelectorAll('.nav-links a, .nav-cta').forEach(function(a) { a.addEventListener('click', function() { nav.classList.remove('nav-open'); }); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
   })();
 

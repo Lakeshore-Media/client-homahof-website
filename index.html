@@ -1244,7 +1244,7 @@
   <div id="fire-shader-wrap" aria-hidden="true"><canvas id="fire-c"></canvas></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Europäisches Zentrum für Agnihotra</div>
-    <h1 class="hero-title">Heilige Feuer zur <em>Heilwerdung der <span class="hero-ticker" aria-live="polite"><span class="hero-ticker-word">Welt</span><span class="hero-ticker-word">Menschen</span><span class="hero-ticker-word">Natur</span><span class="hero-ticker-word">Erde</span></span></em></h1>
+    <h1 class="hero-title">Heilige Feuer zur <em>Stärkung der <span class="hero-ticker" aria-live="polite"><span class="hero-ticker-word">Welt</span><span class="hero-ticker-word">Menschen</span><span class="hero-ticker-word">Natur</span><span class="hero-ticker-word">Erde</span></span></em></h1>
     <p class="hero-sub">Vedische Feuerzeremonien am Bodensee – für Heilung, Stille und Wohlergehen aller Lebewesen. Kostenlos erlernen, für alle Menschen.</p>
     <div class="hero-buttons">
       <a href="#event" class="btn btn-gold">Nächste Veranstaltung</a>
@@ -1677,6 +1677,7 @@
     var nav = document.getElementById('main-nav');
     if (!burger || !nav) return;
     burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    nav.querySelectorAll('.nav-links a, .nav-cta').forEach(function(a) { a.addEventListener('click', function() { nav.classList.remove('nav-open'); }); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
     document.addEventListener('click', function(e) {
       if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');

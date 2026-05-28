@@ -872,6 +872,7 @@
     var nav = document.getElementById('main-nav');
     if (!burger || !nav) return;
     burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+    nav.querySelectorAll('.nav-links a, .nav-cta').forEach(function(a) { a.addEventListener('click', function() { nav.classList.remove('nav-open'); }); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
     document.addEventListener('click', function(e) {
       if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open');
