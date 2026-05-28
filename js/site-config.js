@@ -1,6 +1,6 @@
 // Shared site config — update here, applies everywhere
 var HOMAHOF = {
-  paypalUrl: 'https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE',
+  paypalUrl: 'https://www.paypal.com/donate?token=odLeAhP4jD14M9gNrZs5BjdVjXTxE46Ivlctw1Sl6zBK2_nrI6q-gkrecfLvFVapqgr6P_Tcags9D5Wm&locale.x=DE',
   iban: 'DE39690517250002042356',
   bic: 'SOLADES1KNZ',
   bank: 'Sparkasse Bodensee',
