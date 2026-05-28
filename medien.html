@@ -253,6 +253,7 @@
     .dl-link:hover { color: var(--copper); }
   </style>
   <script src="js/site-config.js"></script>
+  <script src="js/cookie-banner.js" defer></script>
 </head>
 <body>
 
@@ -283,9 +284,7 @@
       <div class="eyebrow">YouTube</div>
       <h2 class="section-title">Homa-Hof auf <em>YouTube</em></h2>
     </div>
-    <div class="youtube-embed-wrap fade-in">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YooTri0mQSc?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="Homa-Hof Heiligenberg – Agnihotra Feuerzeremonie"></iframe>
-    </div>
+    <div class="youtube-embed-wrap fade-in" data-yt-src="https://www.youtube-nocookie.com/embed/YooTri0mQSc?rel=0" data-yt-title="Homa-Hof Heiligenberg – Agnihotra Feuerzeremonie"></div>
     <a href="https://www.youtube.com/@HomaHofHeiligenberg" target="_blank" rel="noopener" class="btn btn-outline-dark fade-in">Alle Videos auf YouTube →</a>
   </div>
 </section>
@@ -469,6 +468,7 @@
     <div class="footer-legal">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
+      <a href="#" onclick="resetCookieConsent();return false;">Cookie-Einstellungen</a>
     </div>
   </div>
 </footer>
