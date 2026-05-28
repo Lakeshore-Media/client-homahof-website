@@ -167,6 +167,12 @@
     /* Map */
     .map-wrap { border-radius: 12px; overflow: hidden; margin-top: 32px; }
     .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+    .map-placeholder { width: 100%; height: 380px; background: #f5ede0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; cursor: pointer; transition: background 0.2s; }
+    .map-placeholder:hover { background: #ede3d4; }
+    .map-placeholder svg { opacity: 0.4; }
+    .map-placeholder p { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown2); text-align: center; line-height: 1.55; max-width: 280px; }
+    .map-placeholder button { font-family: var(--sans); font-size: 14px; font-weight: 500; color: white; background: var(--gold); border: none; border-radius: 50px; padding: 10px 24px; cursor: pointer; transition: background 0.2s; }
+    .map-placeholder button:hover { background: var(--copper); }
 
     /* Address block */
     .address-block { background: white; border: 1px solid var(--border2); border-radius: 12px; padding: 32px; margin-bottom: 24px; }
@@ -228,7 +234,7 @@
       .nav-brand img { height: 48px; }
       .map-wrap { margin-top: 20px; }
       .anfahrt-grid { grid-template-columns: 1fr !important; }
-      .map-wrap iframe { height: 340px; }
+      .map-wrap iframe, .map-placeholder { height: 340px; }
       .bank-row { flex-direction: column; gap: 3px; }
       .bank-value { text-align: left; }
       .two-col, .info-grid { grid-template-columns: 1fr !important; }
@@ -242,7 +248,7 @@
       .form-grid { grid-template-columns: 1fr; }
       .am-anmelde-row { grid-template-columns: 1fr; }
       .hofladen-cats, .hofladen-grid { grid-template-columns: 1fr !important; }
-      .map-wrap iframe { height: 280px; }
+      .map-wrap iframe, .map-placeholder { height: 280px; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 20px 48px; }
       .footer-inner > div:first-child { grid-column: 1 / -1; }
       .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
@@ -482,8 +488,12 @@
         </div>
         <a href="https://maps.google.com/?q=Oberhaslach+6,+88633+Heiligenberg" target="_blank" class="btn btn-outline-dark">In Google Maps öffnen →</a>
       </div>
-      <div class="map-wrap">
-        <iframe src="https://maps.google.com/maps?q=Homa-Hof+Heiligenberg,+Oberhaslach+6,+88633+Heiligenberg&z=15&output=embed" loading="lazy" title="Karte Homa-Hof Heiligenberg" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="map-wrap" id="map-wrap">
+        <div class="map-placeholder" onclick="loadMap()">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5A3A18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <p>Diese Karte wird von Google Maps bereitgestellt.<br>Zum Laden Google-Verbindung erlauben.</p>
+          <button>Karte laden</button>
+        </div>
       </div>
     </div>
   </div>
@@ -815,6 +825,17 @@
       hint.textContent = '✓ kopiert';
       setTimeout(function() { hint.textContent = '📋 kopieren'; }, 2000);
     });
+  }
+
+  function loadMap() {
+    var wrap = document.getElementById('map-wrap');
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://maps.google.com/maps?q=Homa-Hof+Heiligenberg,+Oberhaslach+6,+88633+Heiligenberg&z=15&output=embed';
+    iframe.title = 'Karte Homa-Hof Heiligenberg';
+    iframe.setAttribute('loading', 'lazy');
+    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+    wrap.innerHTML = '';
+    wrap.appendChild(iframe);
   }
 </script>
 
