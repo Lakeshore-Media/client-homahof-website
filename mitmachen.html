@@ -145,8 +145,8 @@
     .newsletter-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
     .newsletter-wrap .eyebrow { justify-content: center; }
     .newsletter-wrap .eyebrow::before { display: none; }
-    .newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto 14px; }
-    .newsletter-input { flex: 1; padding: 12px 20px; border: 1px solid var(--border); border-radius: var(--btn-radius); font-family: var(--sans); font-size: 15.5px; color: var(--brown); background: white; outline: none; transition: border-color 0.2s; }
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; max-width: 420px; margin: 0 auto 14px; }
+    .newsletter-input { width: 100%; padding: 12px 20px; border: 1px solid var(--border); border-radius: var(--btn-radius); font-family: var(--sans); font-size: 15.5px; color: var(--brown); background: white; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
     .newsletter-input:focus { border-color: var(--gold); }
     .newsletter-note { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: var(--brown3); }
 
@@ -399,6 +399,7 @@
       <h2 class="section-title">Bleib <em>informiert</em></h2>
       <p class="section-text" style="margin-bottom:32px;">Veranstaltungen, Neuigkeiten und Impulse aus dem Homa-Hof – direkt in dein Postfach.</p>
       <form class="newsletter-form" name="newsletter-anmeldung" netlify onsubmit="submitMitmachenNewsletter(event)">
+        <input type="text" name="name" class="newsletter-input" placeholder="Dein Name" required>
         <input type="email" name="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse" required>
         <button type="submit" class="btn btn-gold" id="nl-submit-btn">Abonnieren</button>
       </form>
@@ -409,6 +410,7 @@
 </section>
 
 <form name="newsletter-anmeldung" netlify hidden>
+  <input type="text" name="name">
   <input type="email" name="email">
 </form>
 
@@ -576,6 +578,7 @@
   function submitMitmachenNewsletter(e) {
     e.preventDefault();
     var form = e.target;
+    var nameVal = form.querySelector('[name=name]').value.trim();
     var emailVal = form.querySelector('[name=email]').value.trim();
     if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
       alert('Bitte eine gültige E-Mail-Adresse eingeben.');
@@ -586,10 +589,9 @@
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', email: emailVal }).toString()
-    }).then(function(res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      subscribeToBrevo(emailVal, '', '', 'Newsletter-Formular');
+      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', name: nameVal, email: emailVal }).toString()
+    }).then(function() {
+      subscribeToBrevo(emailVal, nameVal, '', 'Newsletter-Formular');
       form.style.display = 'none';
       document.getElementById('nl-success').style.display = 'block';
     }).catch(function(err) {
