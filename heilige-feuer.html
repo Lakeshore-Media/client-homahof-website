@@ -389,7 +389,7 @@
       color: var(--brown);
     }
     .calc-csv-btn { font-size: 13px; padding: 8px 16px; white-space: nowrap; }
-    .calc-table-wrap { overflow-x: auto; }
+    .calc-table-wrap { overflow-x: auto; max-height: 480px; overflow-y: auto; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); }
     .calc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
     .calc-table th {
       text-align: left;
@@ -765,7 +765,7 @@
         <input type="date" id="calc-from">
       </div>
       <div class="calc-group">
-        <label for="calc-to">Bis (max. 60 Tage)</label>
+        <label for="calc-to">Bis (max. 365 Tage / 1 Jahr)</label>
         <input type="date" id="calc-to">
       </div>
       <div class="calc-group">
@@ -992,9 +992,9 @@
   /* Default dates */
   var today = new Date();
   var todayStr = today.toISOString().slice(0,10);
-  var plus30 = new Date(today.getFullYear(), today.getMonth(), today.getDate()+30);
+  var plus365 = new Date(today.getFullYear()+1, today.getMonth(), today.getDate());
   fromEl.value = todayStr;
-  toEl.value = plus30.toISOString().slice(0,10);
+  toEl.value = plus365.toISOString().slice(0,10);
 
   /* Auto-select timezone from browser */
   try {
@@ -1068,7 +1068,7 @@
     }
     if (to < from) { hintEl.className = 'calc-hint err'; hintEl.textContent = 'Enddatum liegt vor dem Startdatum.'; return; }
     var diffDays = Math.round((to - from) / 86400000);
-    var days = Math.min(diffDays + 1, 60);
+    var days = Math.min(diffDays + 1, 365);
     var rows = [];
     for (var i = 0; i < days; i++) {
       var d = new Date(from.getTime() + i*86400000);
@@ -1080,22 +1080,27 @@
         sunset:  minsToTime(calcSunsetUTC(jd, lat, lon)  + tzOff*60),
       });
     }
-    renderResults(rows, lat, lon, tz, diffDays >= 60);
+    renderResults(rows, lat, lon, tz, diffDays >= 365);
   });
 
   function renderResults(rows, lat, lon, tz, truncated) {
     var label = cityEl.value.trim() || (lat.toFixed(3) + '° N, ' + lon.toFixed(3) + '° E');
+    var citySlug = (cityEl.value.trim() || 'standort').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    var yearFrom = rows[0].date.getFullYear();
+    var yearTo   = rows[rows.length-1].date.getFullYear();
+    var yearLabel = yearFrom === yearTo ? yearFrom : yearFrom + '-' + yearTo;
     var csv = 'Datum,Sonnenaufgang,Sonnenuntergang\n';
     rows.forEach(function(r) {
       csv += r.date.toISOString().slice(0,10) + ',' + r.sunrise + ',' + r.sunset + '\n';
     });
-    var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    var blob = new Blob(['﻿' + csv], {type:'text/csv;charset=utf-8;'});
     var url = URL.createObjectURL(blob);
+    var filename = 'agnihotrazeiten-' + yearLabel + '-' + citySlug + '.csv';
     var html = '<div class="calc-results-header">'
-             + '<div class="calc-results-title">Zeiten für <em>' + label + '</em></div>'
-             + '<a href="' + url + '" download="agnihotrazeiten.csv" class="btn btn-outline-dark calc-csv-btn">CSV herunterladen</a>'
+             + '<div class="calc-results-title">Zeiten für <em>' + label + '</em> (' + rows.length + ' Tage)</div>'
+             + '<a href="' + url + '" download="' + filename + '" class="btn btn-outline-dark calc-csv-btn">CSV herunterladen (' + rows.length + ' Tage)</a>'
              + '</div>';
-    if (truncated) html += '<p class="calc-trunc-note">Hinweis: Es werden maximal 60 Tage angezeigt.</p>';
+    if (truncated) html += '<p class="calc-trunc-note">Hinweis: Es werden maximal 365 Tage berechnet.</p>';
     html += '<div class="calc-table-wrap"><table class="calc-table"><thead><tr>'
           + '<th>Datum</th><th>Sonnenaufgang</th><th>Sonnenuntergang</th>'
           + '</tr></thead><tbody>';
