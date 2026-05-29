@@ -254,8 +254,9 @@
     .card-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
     .card-text { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); line-height: 1.75; }
     .card.expandable { cursor: pointer; }
-    .card.expandable .card-title { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-    .card.expandable .card-title::after { content: '+'; font-family: var(--sans); font-size: 40px; font-weight: 300; color: var(--gold); flex-shrink: 0; transition: transform 0.3s ease; line-height: 1; }
+    .card.expandable .card-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .card.expandable .card-title::after { content: '+'; font-family: var(--sans); font-size: 26px; font-weight: 300; color: white; background: var(--gold); width: 44px; height: 44px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.3s ease, background 0.2s; line-height: 1; }
+    .card.expandable:hover .card-title::after { background: var(--copper); }
     .card.expandable.open .card-title::after { transform: rotate(45deg); }
     .card-expand { max-height: 0; overflow: hidden; transition: max-height 0.45s ease, padding 0.35s ease; padding: 0 24px; }
     .card.open .card-expand { max-height: 400px; padding: 0 24px 20px; }
