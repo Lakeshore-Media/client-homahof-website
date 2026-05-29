@@ -45,8 +45,9 @@ collections:
             fields:
               - { label: Name,         name: name,  widget: string }
               - { label: Beschreibung, name: desc,  widget: text }
-              - { label: Preis,        name: price, widget: string }
-              - { label: Bild,         name: image, widget: image,  required: false }
+              - { label: Preis,        name: price,       widget: string,   required: false }
+              - { label: Bild,         name: image,       widget: image,    required: false }
+              - { label: Ausverkauft,  name: ausverkauft, widget: boolean,  default: false,   hint: "Wenn aktiviert, wird die Karte als ausverkauft angezeigt" }
 
   - name: aktuelles
     label: Aktuelles
