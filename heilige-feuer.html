@@ -1086,11 +1086,15 @@
 
   function renderResults(rows, lat, lon, tz, truncated) {
     var label = cityEl.value.trim() || (lat.toFixed(3) + '° N, ' + lon.toFixed(3) + '° E');
-    var citySlug = (cityEl.value.trim() || 'standort').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    var cityRaw = cityEl.value.trim() || 'Standort';
+    var citySlug = cityRaw.toLowerCase()
+      .replace(/ü/g,'ue').replace(/ö/g,'oe').replace(/ä/g,'ae').replace(/ß/g,'ss')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
     var yearFrom = rows[0].date.getFullYear();
     var yearTo   = rows[rows.length-1].date.getFullYear();
     var yearLabel = yearFrom === yearTo ? yearFrom : yearFrom + '-' + yearTo;
-    var csv = 'Datum,Sonnenaufgang,Sonnenuntergang\n';
+    var csv = 'Ort,' + label + '\n'
+            + 'Datum,Sonnenaufgang,Sonnenuntergang\n';
     rows.forEach(function(r) {
       csv += r.date.toISOString().slice(0,10) + ',' + r.sunrise + ',' + r.sunset + '\n';
     });
