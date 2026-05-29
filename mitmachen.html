@@ -576,17 +576,27 @@
   function submitMitmachenNewsletter(e) {
     e.preventDefault();
     var form = e.target;
+    var emailVal = form.querySelector('[name=email]').value.trim();
+    if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+      alert('Bitte eine gültige E-Mail-Adresse eingeben.');
+      return;
+    }
     var btn = document.getElementById('nl-submit-btn');
     btn.disabled = true;
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', email: form.querySelector('[name=email]').value }).toString()
-    }).then(function() {
-      subscribeToBrevo(form.querySelector('[name=email]').value, '', '', 'Newsletter-Formular');
+      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', email: emailVal }).toString()
+    }).then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      subscribeToBrevo(emailVal, '', '', 'Newsletter-Formular');
       form.style.display = 'none';
       document.getElementById('nl-success').style.display = 'block';
-    }).catch(function() { btn.disabled = false; });
+    }).catch(function(err) {
+      console.error('Newsletter submit error:', err);
+      btn.disabled = false;
+      alert('Fehler beim Absenden. Bitte versuche es erneut oder schreib uns direkt.');
+    });
   }
 </script>
 
