@@ -1,22 +1,3 @@
 {
-  "items": [
-    {
-      "name": "Agnihotra-Asche",
-      "desc": "Heilende Asche aus dem Agnihotra-Feuer. Für Garten, Gesundheit und spirituelle Anwendungen.",
-      "price": "Spende",
-      "image": ""
-    },
-    {
-      "name": "Agnihotra-Set (Einsteiger)",
-      "desc": "Kupferpyramide, Holzunterlage, Anleitung auf Deutsch – alles für den Start in die tägliche Praxis.",
-      "price": "Auf Anfrage",
-      "image": ""
-    },
-    {
-      "name": "Homa-Ghee",
-      "desc": "Geklärte Butter vom eigenen Hof – nach traditioneller Methode hergestellt.",
-      "price": "Auf Anfrage",
-      "image": ""
-    }
-  ]
+  "items": []
 }
