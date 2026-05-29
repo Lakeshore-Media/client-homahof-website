@@ -47,9 +47,15 @@ var HOMAHOF = {
         '<form id="newsletter-form" class="newsletter-form fade-in" onsubmit="HOMAHOF.submitNewsletter(event)">',
           '<input type="text" id="nl-name" name="name" class="newsletter-input" placeholder="Dein Name" required>',
           '<input type="email" id="nl-email" name="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse" required>',
-          '<button type="submit" class="btn btn-gold" id="nl-submit-btn">Abonnieren</button>',
+          '<div style="margin:14px 0 18px">',
+            '<p style="font-size:13px;opacity:0.65;margin-bottom:10px">Ich interessiere mich für:</p>',
+            '<label style="display:flex;align-items:center;gap:8px;margin-bottom:8px;cursor:pointer;font-size:15px"><input type="checkbox" name="interesse" value="seminare" style="accent-color:var(--gold);width:16px;height:16px;cursor:pointer"> Seminare &amp; Kurse</label>',
+            '<label style="display:flex;align-items:center;gap:8px;margin-bottom:8px;cursor:pointer;font-size:15px"><input type="checkbox" name="interesse" value="hof" style="accent-color:var(--gold);width:16px;height:16px;cursor:pointer"> Hof-Events &amp; Mitmachen</label>',
+            '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:15px"><input type="checkbox" name="interesse" value="agnihotra" style="accent-color:var(--gold);width:16px;height:16px;cursor:pointer"> Agnihotra-Praxis</label>',
+          '</div>',
+          '<button type="submit" class="btn btn-gold" id="nl-submit-btn">Jetzt anmelden</button>',
         '</form>',
-        '<p class="newsletter-note" id="nl-success" style="display:none;color:var(--gold);font-weight:500">✓ Danke! Du bist jetzt dabei.</p>',
+        '<p class="newsletter-note" id="nl-success" style="display:none;color:var(--gold);font-weight:500">✓ Fast geschafft! Bitte bestätige deine Anmeldung in deiner E-Mail.</p>',
         '<p class="newsletter-note" id="nl-error" style="display:none;color:var(--copper)">Fehler beim Absenden – bitte direkt schreiben: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></p>',
         '<p class="newsletter-note fade-in">Kein Spam. Jederzeit abmeldbar. Datenschutzkonform.</p>',
       '</div>',
@@ -83,14 +89,17 @@ var HOMAHOF = {
     if (!emailVal) return;
     var btn = document.getElementById('nl-submit-btn');
     btn.disabled = true;
+    var interests = [];
+    document.querySelectorAll('#newsletter-form input[name="interesse"]:checked').forEach(function(cb) {
+      interests.push(cb.value);
+    });
     fetch(window.location.pathname, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', name: nameVal, email: emailVal }).toString()
     }).then(function() {
-      try { subscribeToBrevo(emailVal, nameVal, '', 'Newsletter-Formular'); } catch(err) {}
-      document.getElementById('newsletter-form').style.display = 'none';
-      document.getElementById('nl-success').style.display = 'block';
+      try { subscribeToBrevo(emailVal, nameVal, '', 'Newsletter-Formular', interests); } catch(err) {}
+      window.location.href = '/danke-newsletter';
     }).catch(function() {
       btn.disabled = false;
       document.getElementById('nl-error').style.display = 'block';
@@ -119,8 +128,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Brevo newsletter opt-in — fires silently, never blocks form submit
-function subscribeToBrevo(email, firstName, lastName, source) {
+// Brevo DOI opt-in — fires silently, never blocks form submit
+function subscribeToBrevo(email, firstName, lastName, source, interests) {
   if (!email) return;
   fetch('/.netlify/functions/brevo-subscribe', {
     method: 'POST',
@@ -130,6 +139,7 @@ function subscribeToBrevo(email, firstName, lastName, source) {
       firstName: firstName || '',
       lastName: lastName || '',
       source: source || 'Website',
+      interests: interests || [],
     }),
   }).catch(function() {});
 }
