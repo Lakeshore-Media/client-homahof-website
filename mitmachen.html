@@ -361,7 +361,7 @@
         <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
       </ul>
       <div class="spenden-buttons">
-        <a href="https://www.paypal.com/donate?token=odLeAhP4jD14M9gNrZs5BjdVjXTxE46Ivlctw1Sl6zBK2_nrI6q-gkrecfLvFVapqgr6P_Tcags9D5Wm&locale.x=DE" data-paypal target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
+        <a href="https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE" data-paypal target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
         <button onclick="scrollToBank()" class="btn btn-outline" type="button">Banküberweisung</button>
       </div>
     </div>
@@ -404,6 +404,7 @@
         <button type="submit" class="btn btn-gold" id="nl-submit-btn">Abonnieren</button>
       </form>
       <p class="newsletter-note" id="nl-success" style="display:none;color:var(--gold);font-weight:500">✓ Danke! Du bist jetzt dabei.</p>
+      <p class="newsletter-note" id="nl-error" style="display:none;color:var(--copper);">Fehler beim Absenden – bitte direkt schreiben: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></p>
       <p class="newsletter-note">Kein Spam. Jederzeit abmeldbar. Datenschutzkonform.</p>
     </div>
   </div>
@@ -586,18 +587,18 @@
     }
     var btn = document.getElementById('nl-submit-btn');
     btn.disabled = true;
-    fetch('/', {
+    fetch(window.location.pathname, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', name: nameVal, email: emailVal }).toString()
     }).then(function() {
-      subscribeToBrevo(emailVal, nameVal, '', 'Newsletter-Formular');
+      try { subscribeToBrevo(emailVal, nameVal, '', 'Newsletter-Formular'); } catch(e) {}
       form.style.display = 'none';
       document.getElementById('nl-success').style.display = 'block';
     }).catch(function(err) {
       console.error('Newsletter submit error:', err);
       btn.disabled = false;
-      alert('Fehler beim Absenden. Bitte versuche es erneut oder schreib uns direkt.');
+      document.getElementById('nl-error').style.display = 'block';
     });
   }
 </script>
