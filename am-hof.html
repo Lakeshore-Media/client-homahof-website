@@ -43,6 +43,8 @@
     .btn-gold:hover { background: #8A2A08; border-color: #8A2A08; }
     .btn-outline-dark { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
     .btn-outline-dark:hover { background: var(--gold); color: white; }
+    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.6); }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -163,6 +165,16 @@
     .hofladen-card-price { display: inline-block; margin-top: 8px; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--gold); background: rgba(192,120,24,0.08); padding: 4px 12px; border-radius: 50px; align-self: flex-start; }
     .hofladen-hint { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border2); }
     .hofladen-hint a { color: var(--gold); }
+    .hofladen-angebot { margin-top: 8px; }
+    .hofladen-angebot-title { font-family: var(--sans); font-size: 16px; font-weight: 500; color: var(--brown); margin-bottom: 8px; }
+    .hofladen-stand { font-family: var(--sans); font-size: 12.5px; color: var(--brown3); margin-bottom: 28px; display: flex; align-items: center; gap: 8px; }
+    .hofladen-stand::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+    .hofladen-cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 40px; margin-bottom: 24px; }
+    .hofladen-cat-col-title { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--gold); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .hofladen-cat-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+    .hofladen-cat-items li { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--brown2); padding-left: 18px; position: relative; line-height: 1.5; }
+    .hofladen-cat-items li::before { content: '○'; position: absolute; left: 0; color: var(--gold); font-size: 10px; top: 4px; }
+    .hofladen-danke { font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--copper); margin-top: 8px; }
     .hofladen-card-sold-out { opacity: 0.55; pointer-events: none; }
     .hofladen-card-sold-out .hofladen-card-img { filter: grayscale(0.4); }
     .hofladen-sold-badge { display: inline-block; margin-top: 8px; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--brown3); background: rgba(90,58,24,0.08); padding: 4px 12px; border-radius: 50px; }
@@ -171,7 +183,7 @@
     .gallery-img { width: 100%; height: 260px; object-fit: cover; border-radius: 8px; transition: transform 0.3s ease, opacity 0.3s ease; }
     .gallery-img:hover { transform: scale(1.02); opacity: 0.9; }
     @media (max-width: 768px) {
-      .hofladen-grid, .hofladen-cats { grid-template-columns: 1fr; }
+      .hofladen-grid, .hofladen-cats, .hofladen-cat-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-img { height: 180px; }
     }
@@ -259,7 +271,7 @@
       .section-title { font-size: 34px; }
       .form-grid { grid-template-columns: 1fr; }
       .am-anmelde-row { grid-template-columns: 1fr; }
-      .hofladen-cats, .hofladen-grid { grid-template-columns: 1fr !important; }
+      .hofladen-cats, .hofladen-grid, .hofladen-cat-grid { grid-template-columns: 1fr !important; }
       .map-wrap iframe, .map-placeholder { height: 280px; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 20px 48px; }
       .footer-inner > div:first-child { grid-column: 1 / -1; }
@@ -396,10 +408,9 @@
 <section class="section-wrap" id="veranstaltungen">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <div class="eyebrow">Termine 2026</div>
-      <h2 class="section-title">Veranstaltungen & <em>Seminare</em></h2>
+      <div class="eyebrow">Nächster Termin</div>
+      <h2 class="section-title">Nächste <em>Veranstaltung</em></h2>
     </div>
-    <p class="section-text fade-in" style="max-width:680px;margin-bottom:32px;">Die nächsten Veranstaltungen am Homa-Hof. <a href="veranstaltungen.html" style="color:var(--gold)">Alle Termine 2026 →</a></p>
     <div class="am-event-list" id="am-events-list">
       <div style="font-family:var(--sans);font-size:15px;color:var(--brown3);padding:24px 0;">Veranstaltungen werden geladen…</div>
     </div>
@@ -497,7 +508,7 @@
       </div>
     </div>
 
-    <div id="hofladen-products" class="hofladen-grid fade-in"></div>
+    <div id="hofladen-angebot" class="hofladen-angebot fade-in"></div>
 
     <div class="hofladen-hint fade-in" style="margin-top:36px;padding-top:28px;border-top:1px solid var(--border2);">
       <p style="font-family:var(--sans);font-size:15px;font-weight:300;color:var(--brown2);margin-bottom:16px;">Agnihotra-Utensilien, Bücher und CDs sind auch online erhältlich:</p>
@@ -558,47 +569,7 @@
 </section>
 
 <!-- SPENDEN -->
-<section id="spenden">
-  <div class="spenden-inner">
-    <div class="fade-in">
-      <div class="spenden-eyebrow">Unterstütze uns</div>
-      <h2 class="spenden-title">Deine Spende hält das <em style="font-style:italic;color:var(--gold-light)">Feuer am Leben</em></h2>
-      <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein – ermöglicht durch Menschen, die diese Arbeit nicht nur von Herzen, sondern vor allem tatkräftig unterstützen.</p>
-      <ul class="spenden-bullets">
-        <li>Tägliche Agnihotra-Zeremonien am Hof</li>
-        <li>Einführungsabende und Seminare – nicht immer kostenlos</li>
-        <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
-      </ul>
-      <div class="spenden-buttons">
-        <a href="https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE" data-paypal target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
-        <button onclick="scrollToBank()" class="btn btn-outline-spenden" type="button">Banküberweisung</button>
-      </div>
-    </div>
-    <div class="spenden-bank fade-in" id="bankverbindung" style="transition-delay:0.15s">
-      <div class="spenden-bank-title">Bankverbindung</div>
-      <div class="bank-row">
-        <span class="bank-label">Empfänger</span>
-        <span class="bank-value">Homa-Hof Heiligenberg e.V.</span>
-      </div>
-      <div class="bank-row">
-        <span class="bank-label">IBAN</span>
-        <span class="bank-value" id="iban-value" title="Klicken zum Kopieren" style="cursor:pointer" onclick="copyIBAN()">DE39 6905 1725 0002 0423 56 <span id="iban-copy-hint" style="font-size:11px;opacity:0.6;margin-left:6px">📋 kopieren</span></span>
-      </div>
-      <div class="bank-row">
-        <span class="bank-label">BIC</span>
-        <span class="bank-value">SOLADES1SAL</span>
-      </div>
-      <div class="bank-row">
-        <span class="bank-label">Bank</span>
-        <span class="bank-value">Sparkasse Salem-Heiligenberg</span>
-      </div>
-      <div class="bank-row" style="margin-bottom:0">
-        <span class="bank-label">Verwendungszweck</span>
-        <span class="bank-value">Spende Homa-Hof</span>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="spenden"></section>
 
 <div aria-hidden="true" style="overflow:hidden;line-height:0;background:#2A1505;display:block">
   <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
@@ -694,6 +665,7 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-in').forEach(function(el) { fadeObserver.observe(el); });
+  window._fadeObserver = fadeObserver;
 
   function closeAllAmDetails() {
     document.querySelectorAll('#am-events-list .am-event-detail.open').forEach(function(d) { d.classList.remove('open'); });
@@ -788,69 +760,58 @@
         .filter(function(ev) { return ev.date >= today; })
         .sort(function(a, b) { return a.date < b.date ? -1 : 1; });
 
-      var thirtyDayEvents = allUpcoming.filter(function(ev) { return ev.date <= cutoff; });
       var list = document.getElementById('am-events-list');
       if (!list) return;
-      if (!thirtyDayEvents.length) {
-        list.innerHTML = '<p style="font-family:var(--sans);font-size:15px;color:var(--brown2);padding:20px 0">Derzeit keine Veranstaltungen in den nächsten 30 Tagen geplant.</p>';
+      var ev = allUpcoming[0];
+      if (!ev) {
+        list.innerHTML = '<p style="font-family:var(--sans);font-size:15px;color:var(--brown2);padding:20px 0">Derzeit keine weiteren Veranstaltungen geplant. <a href="veranstaltungen.html" style="color:var(--gold)">Alle Termine →</a></p>';
         return;
       }
 
-      var html = '';
-      thirtyDayEvents.forEach(function(ev, i) {
-        var d = new Date(ev.date + 'T12:00:00');
-        var formId = 'am-form-' + i;
-        var delay = i === 0 ? '' : ' style="transition-delay:' + (i * 0.08).toFixed(2) + 's"';
-        var catKey = (ev.category || '').toLowerCase();
-        var catLabel = CAT_LABELS[catKey] || (ev.category || '');
-        var badgeHtml = '<span class="event-badge badge-' + catKey + '">' + catLabel + '</span>';
-        if (ev.badge === 'kostenlos') badgeHtml += '<span class="event-badge badge-kostenlos">Kostenlos</span>';
-        else if (ev.badge === 'spende') badgeHtml += '<span class="event-badge badge-spende">Spende</span>';
-        else if (ev.badge === 'kostenpflichtig') badgeHtml += '<span class="event-badge badge-kostenpflichtig">' + (ev.price || '') + '</span>';
-        if (ev.recurring) badgeHtml += '<span class="event-badge badge-wiederkehrend">Wiederkehrend</span>';
+      var d = new Date(ev.date + 'T12:00:00');
+      var formId = 'am-form-0';
+      var catKey = (ev.category || '').toLowerCase();
+      var catLabel = CAT_LABELS[catKey] || (ev.category || '');
+      var badgeHtml = '<span class="event-badge badge-' + catKey + '">' + catLabel + '</span>';
+      if (ev.badge === 'kostenlos') badgeHtml += '<span class="event-badge badge-kostenlos">Kostenlos</span>';
+      else if (ev.badge === 'spende') badgeHtml += '<span class="event-badge badge-spende">Spende</span>';
+      else if (ev.badge === 'kostenpflichtig') badgeHtml += '<span class="event-badge badge-kostenpflichtig">' + (ev.price || '') + '</span>';
+      if (ev.recurring) badgeHtml += '<span class="event-badge badge-wiederkehrend">Wiederkehrend</span>';
 
-        html += '<div class="am-event-row fade-in"' + delay + '>';
-        html += '<div class="event-date-block"><div class="event-day">' + d.getDate() + '</div><div class="event-month">' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear() + '</div></div>';
-        var metaParts = [];
-        if (ev.location) metaParts.push(ev.location);
-        if (ev.price) metaParts.push(ev.price);
-        var metaHtml = metaParts.length ? '<div class="event-meta">' + metaParts.join(' · ') + '</div>' : '';
-        html += '<div class="event-info">' + badgeHtml + '<h3 class="event-title">' + ev.title + '</h3>' + metaHtml + '<p class="event-desc">' + (ev.desc || '') + '</p></div>';
-        html += '<div class="event-actions"><span class="event-time">' + (ev.time || '') + '</span><button type="button" class="event-cta" onclick="openAmDetail(this,event)">Mehr Infos ↓</button></div>';
-        html += '</div>';
+      var metaParts = [];
+      if (ev.location) metaParts.push(ev.location);
+      if (ev.price) metaParts.push(ev.price);
+      var metaHtml = metaParts.length ? '<div class="event-meta">' + metaParts.join(' · ') + '</div>' : '';
 
-        html += '<div class="am-event-detail">';
-        if (ev.image) {
-          html += '<img src="' + ev.image + '" alt="' + ev.title + '" style="width:100%;max-height:280px;object-fit:cover;border-radius:10px;margin-bottom:16px;" loading="lazy">';
-        }
-        html += '<div class="am-event-detail-inner">';
-        html += '<div class="event-detail-item"><span class="event-detail-label">Ort</span>' + (ev.location || '') + '</div>';
-        html += '<div class="event-detail-item"><span class="event-detail-label">Uhrzeit</span>' + (ev.time || '') + '</div>';
-        html += '<div class="event-detail-item"><span class="event-detail-label">Beitrag</span>' + (ev.price || '') + '</div>';
-        if (ev.details && ev.details.length) {
-          ev.details.forEach(function(item) {
-            html += '<div class="event-detail-item"><span class="event-detail-label">' + item.label + '</span>' + item.value + '</div>';
-          });
-        }
-        if (ev.detail) {
-          html += '<div style="width:100%;white-space:pre-line;font-size:14px;color:var(--brown2);margin-top:12px;line-height:1.75">' + ev.detail + '</div>';
-        }
-        html += '</div>';
+      var html = '<div class="am-event-row fade-in">';
+      html += '<div class="event-date-block"><div class="event-day">' + d.getDate() + '</div><div class="event-month">' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear() + '</div></div>';
+      html += '<div class="event-info">' + badgeHtml + '<h3 class="event-title">' + ev.title + '</h3>' + metaHtml + '<p class="event-desc">' + (ev.desc || '') + '</p></div>';
+      html += '<div class="event-actions"><span class="event-time">' + (ev.time || '') + '</span><button type="button" class="event-cta" onclick="openAmDetail(this,event)">Mehr Infos ↓</button></div>';
+      html += '</div>';
 
-        html += '<div class="am-anmelde-form">';
-        html += '<h4>Anmelden: ' + ev.title + '</h4>';
-        html += '<div class="am-anmelde-row"><div class="am-anmelde-field"><label>Vorname *</label><input type="text" name="vorname" placeholder="Vorname"><span class="am-field-err" data-err="vorname">Bitte Vorname eingeben</span></div>';
-        html += '<div class="am-anmelde-field"><label>Nachname</label><input type="text" name="nachname" placeholder="Nachname"></div></div>';
-        html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>E-Mail *</label><input type="email" name="email" placeholder="deine@email.de"><span class="am-field-err" data-err="email">Bitte gültige E-Mail-Adresse eingeben</span></div></div>';
-        html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen oder Hinweise …"></textarea></div></div>';
-        html += '<div class="newsletter-opt"><input type="checkbox" id="nl-' + formId + '" name="newsletter" value="ja"><label for="nl-' + formId + '">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label></div>';
-        html += '<button type="button" class="am-anmelde-submit" onclick="submitAmAnmeldung(this,\'' + ev.title.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\',\'' + formId + '\')">Anmeldung absenden</button>';
-        html += '<p class="am-anmelde-success" id="' + formId + '-success">✓ Danke! Wir melden uns bald.</p>';
-        html += '<p class="am-anmelde-error" id="' + formId + '-error" style="display:none;font-family:var(--sans);font-size:14px;color:var(--copper);margin-top:8px;">Fehler beim Absenden. Bitte schreib uns direkt: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></p>';
-        html += '</div>';
-
-        html += '</div>';
-      });
+      html += '<div class="am-event-detail">';
+      if (ev.image) {
+        html += '<img src="' + ev.image + '" alt="' + ev.title + '" style="width:100%;max-height:280px;object-fit:cover;border-radius:10px;margin-bottom:16px;" loading="lazy">';
+      }
+      html += '<div class="am-event-detail-inner">';
+      html += '<div class="event-detail-item"><span class="event-detail-label">Ort</span>' + (ev.location || '') + '</div>';
+      html += '<div class="event-detail-item"><span class="event-detail-label">Uhrzeit</span>' + (ev.time || '') + '</div>';
+      html += '<div class="event-detail-item"><span class="event-detail-label">Beitrag</span>' + (ev.price || '') + '</div>';
+      if (ev.detail) {
+        html += '<div style="width:100%;white-space:pre-line;font-size:14px;color:var(--brown2);margin-top:12px;line-height:1.75">' + ev.detail + '</div>';
+      }
+      html += '</div>';
+      html += '<div class="am-anmelde-form">';
+      html += '<h4>Anmelden: ' + ev.title + '</h4>';
+      html += '<div class="am-anmelde-row"><div class="am-anmelde-field"><label>Vorname *</label><input type="text" name="vorname" placeholder="Vorname"><span class="am-field-err" data-err="vorname">Bitte Vorname eingeben</span></div>';
+      html += '<div class="am-anmelde-field"><label>Nachname</label><input type="text" name="nachname" placeholder="Nachname"></div></div>';
+      html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>E-Mail *</label><input type="email" name="email" placeholder="deine@email.de"><span class="am-field-err" data-err="email">Bitte gültige E-Mail-Adresse eingeben</span></div></div>';
+      html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen oder Hinweise …"></textarea></div></div>';
+      html += '<div class="newsletter-opt"><input type="checkbox" id="nl-' + formId + '" name="newsletter" value="ja"><label for="nl-' + formId + '">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label></div>';
+      html += '<button type="button" class="am-anmelde-submit" onclick="submitAmAnmeldung(this,\'' + ev.title.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\',\'' + formId + '\')">Anmeldung absenden</button>';
+      html += '<p class="am-anmelde-success" id="' + formId + '-success">✓ Danke! Wir melden uns bald.</p>';
+      html += '<p class="am-anmelde-error" id="' + formId + '-error" style="display:none;font-family:var(--sans);font-size:14px;color:var(--copper);margin-top:8px;">Fehler beim Absenden. Bitte schreib uns direkt: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></p>';
+      html += '</div></div>';
 
       list.innerHTML = html;
       list.querySelectorAll('.fade-in').forEach(function(el) { fadeObserver.observe(el); });
@@ -860,38 +821,32 @@
   fetch('content/hofladen.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      var grid = document.getElementById('hofladen-products');
-      if (!grid || !data.items || !data.items.length) return;
-      grid.innerHTML = data.items.map(function(p) {
-        var soldOut = !!p.ausverkauft;
-        var imgHtml = p.image
-          ? '<img class="hofladen-card-img" src="' + p.image + '" alt="' + p.name + '" loading="lazy">'
-          : '<div class="hofladen-card-img-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5A3A18" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-4 4 4"/><circle cx="8.5" cy="14" r="1.5"/></svg></div>';
-        var priceOrBadge = soldOut
-          ? '<span class="hofladen-sold-badge">Ausverkauft</span>'
-          : (p.price ? '<span class="hofladen-card-price">' + p.price + '</span>' : '');
-        return '<div class="hofladen-card' + (soldOut ? ' hofladen-card-sold-out' : '') + '">' + imgHtml + '<div class="hofladen-card-body"><div class="hofladen-card-name">' + p.name + '</div><div class="hofladen-card-desc">' + p.desc + '</div>' + priceOrBadge + '</div></div>';
-      }).join('');
+      var container = document.getElementById('hofladen-angebot');
+      if (!container) return;
+      var cats = data.categories || [];
+      var nonEmpty = cats.filter(function(c) { return (c.items || '').trim().length > 0; });
+      if (!nonEmpty.length && !data.stand) return;
+
+      var standHtml = data.stand
+        ? '<div class="hofladen-stand">Stand: ' + data.stand + '</div>'
+        : '';
+      var catHtml = cats.map(function(cat) {
+        var items = (cat.items || '').split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
+        if (!items.length) return '';
+        return '<div class="hofladen-cat-col">'
+          + '<div class="hofladen-cat-col-title">' + cat.name + '</div>'
+          + '<ul class="hofladen-cat-items">' + items.map(function(it) { return '<li>' + it + '</li>'; }).join('') + '</ul>'
+          + '</div>';
+      }).filter(Boolean).join('');
+
+      if (!catHtml) return;
+
+      container.innerHTML = '<h3 class="hofladen-angebot-title">Unser aktuelles Angebot aus ökologischem Homa-Freilandanbau:</h3>'
+        + standHtml
+        + '<div class="hofladen-cat-grid">' + catHtml + '</div>'
+        + '<p class="hofladen-danke">Vielen Dank, dass du den Homa-Hof mit deinem Einkauf unterstützt.</p>';
     })
     .catch(function() {});
-
-  function scrollToBank() {
-    var bank = document.getElementById('bankverbindung');
-    if (!bank) return;
-    bank.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    bank.style.transition = 'box-shadow 0.3s, outline 0.3s';
-    bank.style.outline = '2px solid var(--gold)';
-    bank.style.boxShadow = '0 0 0 6px rgba(192,120,24,0.15)';
-    setTimeout(function() { bank.style.outline = ''; bank.style.boxShadow = ''; }, 2000);
-  }
-
-  function copyIBAN() {
-    navigator.clipboard.writeText('DE39690517250002042356').then(function() {
-      var hint = document.getElementById('iban-copy-hint');
-      hint.textContent = '✓ kopiert';
-      setTimeout(function() { hint.textContent = '📋 kopieren'; }, 2000);
-    });
-  }
 
   function loadMap() {
     var wrap = document.getElementById('map-wrap');

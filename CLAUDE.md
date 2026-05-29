@@ -46,8 +46,8 @@ Dynamische Inhalte werden per `fetch()` aus `content/` geladen und ins DOM geren
 |---|---|---|
 | `content/veranstaltungen.json` | `veranstaltungen.html`, `am-hof.html`, `index.html` | Termine, gefiltert nach `category` und `date >= today` |
 | `content/downloads.json` | `medien.html` | Downloadliste, gefiltert nach `category` |
-| `content/hofladen.json` | `am-hof.html` | Produktkarten im Hofladen-Grid |
-| `content/aktuelles.json` | `aktuelles-beitrag.html` | Blog/Neuigkeiten |
+| `content/hofladen.json` | `am-hof.html` | Kategorienlisten im Hofladen (`stand` + `categories[].{name, items}`) |
+| `content/aktuelles.json` | `aktuelles-beitrag.html`, `medien.html`, `index.html` | Blog/Neuigkeiten |
 
 Event-Kategorien: `seminar`, `hof`, `online`
 Download-Kategorien: `aktuell`, `anleitung`, `flyer`, `presse`, `wissenschaft`
@@ -58,8 +58,15 @@ Download-Kategorien: `aktuell`, `anleitung`, `flyer`, `presse`, `wissenschaft`
 - Aufgerufen aus `js/site-config.js` → `subscribeToBrevo()` — feuert still, blockiert nie den Formular-Submit
 
 ### Gemeinsame JS-Hilfsmittel (`js/site-config.js`)
-- `HOMAHOF.paypalUrl`, `HOMAHOF.iban`, `HOMAHOF.bic` — zentral pflegen, wirkt auf alle Seiten
+- `HOMAHOF.paypalUrl` — PayPal-Spendenlink (HIER und nur hier pflegen): `https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE`
+- `HOMAHOF.iban`, `HOMAHOF.bic`, `HOMAHOF.bank` — Bankdaten (HIER pflegen)
+- `HOMAHOF.spendenInner()` — rendert den kompletten Spenden-HTML-Block; `<section id="spenden">` auf jeder Seite wird beim DOMContentLoaded damit befüllt
+- `HOMAHOF.newsletterInner()` — rendert den Newsletter-Formular-Block; `<section id="newsletter">` wird damit befüllt
+- `HOMAHOF.scrollToBank()`, `HOMAHOF.copyIBAN()`, `HOMAHOF.submitNewsletter()` — zentrale Handlers, nicht mehr inline pro Seite
+- `window._fadeObserver` — jede Seite setzt `window._fadeObserver = observer` nach dem IntersectionObserver-Setup; site-config.js observiert damit dynamisch injizierte `.fade-in`-Elemente
 - `subscribeToBrevo(email, firstName, lastName, source)` — Newsletter-Opt-in aus Anmeldeformularen
+
+**Sync-Regel**: Spenden- und Newsletter-Abschnitt existieren als leere `<section id="spenden">` und `<section id="newsletter">` Tags in `index.html`, `mitmachen.html` und `am-hof.html`. Inhalt kommt ausschließlich aus `js/site-config.js`. Änderungen am Inhalt nur dort vornehmen.
 
 ### Formulare
 Netlify Forms (AJAX). Jede Seite mit Formular hat ein verstecktes `<form name="..." netlify hidden>` für die Registrierung. Submissions landen im Netlify Dashboard.

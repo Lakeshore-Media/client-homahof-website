@@ -35,19 +35,25 @@ collections:
     label: Hofladen
     files:
       - name: hofladen
-        label: Hofladen
+        label: Hofladen – Aktuelles Angebot
         file: content/hofladen.json
         format: json
         fields:
-          - label: Produkte
-            name: items
+          - label: "Stand (Datum)"
+            name: stand
+            widget: string
+            default: ""
+            hint: "z.B. Juni 2026 – erscheint auf der Website als 'Stand: ...' und zeigt an, wann das Angebot zuletzt aktualisiert wurde"
+          - label: Kategorien
+            name: categories
             widget: list
             fields:
-              - { label: Name,         name: name,  widget: string }
-              - { label: Beschreibung, name: desc,  widget: text }
-              - { label: Preis,        name: price,       widget: string,   required: false }
-              - { label: Bild,         name: image,       widget: image,    required: false }
-              - { label: Ausverkauft,  name: ausverkauft, widget: boolean,  default: false,   hint: "Wenn aktiviert, wird die Karte als ausverkauft angezeigt" }
+              - { label: Kategoriename, name: name, widget: string, hint: "z.B. Gemüse, Salate, Obst / Nüsse / Säfte / Honig" }
+              - label: "Produkte (eine pro Zeile)"
+                name: items
+                widget: text
+                default: ""
+                hint: "Jedes verfügbare Produkt in eine neue Zeile eingeben. Leere Kategorien werden nicht angezeigt."
 
   - name: aktuelles
     label: Aktuelles

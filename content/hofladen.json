@@ -1,3 +1,9 @@
 {
-  "items": []
+  "stand": "",
+  "categories": [
+    { "name": "Gemüse", "items": "" },
+    { "name": "Salate", "items": "" },
+    { "name": "Obst / Nüsse / Säfte / Honig", "items": "" },
+    { "name": "Weiteres Angebot in Bio-Qualität", "items": "" }
+  ]
 }

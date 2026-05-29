@@ -992,16 +992,16 @@
       border-top: 1px solid var(--border2);
       padding: 80px 0;
     }
-    .newsletter-inner {
+    .newsletter-wrap {
       max-width: 640px;
       margin: 0 auto;
       padding: 0 48px;
       text-align: center;
     }
-    .newsletter-inner .eyebrow { justify-content: center; }
-    .newsletter-inner .eyebrow::before { display: none; }
-    .newsletter-inner .section-title { font-size: 40px; margin-bottom: 14px; }
-    .newsletter-inner p {
+    .newsletter-wrap .eyebrow { justify-content: center; }
+    .newsletter-wrap .eyebrow::before { display: none; }
+    .newsletter-wrap .section-title { font-size: 40px; margin-bottom: 14px; }
+    .newsletter-wrap p {
       font-family: var(--sans);
       font-size: 17px;
       font-weight: 300;
@@ -1009,9 +1009,10 @@
       line-height: 1.75;
       margin-bottom: 32px;
     }
-    .newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto 14px; }
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; max-width: 420px; margin: 0 auto 24px; }
     .newsletter-input {
-      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
       padding: 12px 20px;
       border: 1px solid var(--border);
       border-radius: var(--btn-radius);
@@ -1205,7 +1206,7 @@
 
       .section-title { font-size: 34px; }
       .aktuelles-inner { padding: 0 20px; }
-      .newsletter-inner { padding: 0 20px; }
+      .newsletter-wrap { padding: 0 20px; }
     }
 
   </style>
@@ -1493,47 +1494,7 @@
     <path d="M0,80 L0,48 C280,8 560,78 840,42 C1060,16 1260,62 1440,34 L1440,80 Z" fill="#2A1505"/>
   </svg>
 </div>
-<section id="spenden">
-  <div class="spenden-inner">
-    <div class="fade-in">
-      <div class="spenden-eyebrow">Unterstütze uns</div>
-      <h2 class="spenden-title">Deine Spende hält das <em style="font-style:italic;color:var(--gold-light)">Feuer am Leben</em></h2>
-      <p class="spenden-text">Der Homa-Hof ist ein gemeinnütziger Verein – ermöglicht durch Menschen, die diese Arbeit nicht nur von Herzen, sondern vor allem tatkräftig unterstützen.</p>
-      <ul class="spenden-bullets">
-        <li>Tägliche Agnihotra-Zeremonien am Hof</li>
-        <li>Einführungsabende und Seminare – nicht immer kostenlos</li>
-        <li>Pflege und Erhalt des Kraftorts bei Heiligenberg</li>
-      </ul>
-      <div class="spenden-buttons">
-        <a href="https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE" data-paypal target="_blank" rel="noopener" class="btn btn-gold">Jetzt per PayPal spenden</a>
-        <button onclick="scrollToBank()" class="btn btn-outline" type="button">Banküberweisung</button>
-      </div>
-    </div>
-    <div class="spenden-bank fade-in" id="bankverbindung" style="transition-delay:0.15s">
-      <div class="spenden-bank-title">Bankverbindung</div>
-      <div class="bank-row">
-        <span class="bank-label">Empfänger</span>
-        <span class="bank-value">Homa-Hof Heiligenberg e.V.</span>
-      </div>
-      <div class="bank-row">
-        <span class="bank-label">IBAN</span>
-        <span class="bank-value" id="iban-value" title="Klicken zum Kopieren" style="cursor:pointer" onclick="copyIBAN()">DE39 6905 1725 0002 0423 56 <span id="iban-copy-hint" style="font-size:11px;opacity:0.6;margin-left:6px">📋 kopieren</span></span>
-      </div>
-      <div class="bank-row">
-        <span class="bank-label">BIC</span>
-        <span class="bank-value">SOLADES1SAL</span>
-      </div>
-      <div class="bank-row">
-        <span class="bank-label">Bank</span>
-        <span class="bank-value">Sparkasse Salem-Heiligenberg</span>
-      </div>
-      <div class="bank-row" style="margin-bottom:0">
-        <span class="bank-label">Verwendungszweck</span>
-        <span class="bank-value">Spende Homa-Hof</span>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="spenden"></section>
 
 <!-- AKTUELLES -->
 <section id="aktuelles">
@@ -1549,23 +1510,12 @@
 </section>
 
 <form name="newsletter-anmeldung" netlify hidden>
+  <input type="text" name="name">
   <input type="email" name="email">
 </form>
 
 <!-- NEWSLETTER -->
-<section id="newsletter">
-  <div class="newsletter-inner">
-    <div class="eyebrow fade-in">Newsletter</div>
-    <h2 class="section-title fade-in">Impulse vom <em>Homa-Hof</em></h2>
-    <p class="fade-in">Veranstaltungen, Neuigkeiten und Impulse aus dem Homa-Hof – direkt in dein Postfach. Kostenlos und jederzeit kündbar.</p>
-    <form id="newsletter-form" class="newsletter-form fade-in" onsubmit="submitNewsletter(event)">
-      <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse" required>
-      <button type="submit" class="btn btn-gold">Abonnieren</button>
-    </form>
-    <p id="newsletter-msg" style="display:none;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--copper);margin-top:10px;text-align:center"></p>
-    <p class="newsletter-note fade-in">Kein Spam. Jederzeit abmeldbar. Datenschutzkonform.</p>
-  </div>
-</section>
+<section id="newsletter"></section>
 
 <!-- FOOTER -->
 <div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFFCF5;display:block">
@@ -1699,6 +1649,7 @@
     });
   }, { threshold: 0.12 });
   fadeEls.forEach(el => observer.observe(el));
+  window._fadeObserver = observer;
 
   // YouTube player click
   const ytPlayer = document.getElementById('ytPlayer');
@@ -1707,7 +1658,7 @@
     ytPlayer.addEventListener('click', () => {
       // Video-ID eintragen sobald bekannt: z.B. 'dQw4w9WgXcQ'
       // Aktuell: Kanal-Playlist (Channel ID sobald verfügbar ersetzen)
-      const videoId = 'YooTri0mQSc';
+      const videoId = '_Fw14eBVK6A';
       const channelId = 'homahofheiligenberg';
       const src = videoId
         ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`
@@ -1715,50 +1666,6 @@
       ytIframe.querySelector('iframe').src = src;
       ytPlayer.style.display = 'none';
       ytIframe.style.display = 'block';
-    });
-  }
-
-  function scrollToBank() {
-    const bank = document.getElementById('bankverbindung');
-    if (!bank) return;
-    bank.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    bank.style.transition = 'box-shadow 0.3s, outline 0.3s';
-    bank.style.outline = '2px solid var(--gold)';
-    bank.style.boxShadow = '0 0 0 6px rgba(192,120,24,0.15)';
-    setTimeout(() => { bank.style.outline = ''; bank.style.boxShadow = ''; }, 2000);
-  }
-  function copyIBAN() {
-    navigator.clipboard.writeText('DE39690517250002042356').then(() => {
-      const hint = document.getElementById('iban-copy-hint');
-      hint.textContent = '✓ kopiert';
-      setTimeout(() => { hint.textContent = '📋 kopieren'; }, 2000);
-    });
-  }
-
-  function submitNewsletter(e) {
-    e.preventDefault();
-    var email = document.getElementById('newsletter-email').value.trim();
-    var msg = document.getElementById('newsletter-msg');
-    if (!email) return;
-    var form = document.getElementById('newsletter-form');
-    form.querySelector('button').disabled = true;
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', email: email }).toString()
-    }).then(function(r) {
-      if (r.ok) {
-        form.style.display = 'none';
-        msg.textContent = 'Danke! Du erhältst bald eine Bestätigung.';
-        msg.style.display = 'block';
-      } else {
-        throw new Error();
-      }
-    }).catch(function() {
-      msg.textContent = 'Etwas ist schiefgelaufen. Bitte versuch es nochmal.';
-      msg.style.color = 'var(--copper)';
-      msg.style.display = 'block';
-      form.querySelector('button').disabled = false;
     });
   }
 
