@@ -339,6 +339,9 @@
       padding: 12px 18px; outline: none; transition: border-color 0.2s; width: 100%;
     }
     .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--gold); }
+    .form-input.error, .form-select.error { border-color: var(--copper) !important; }
+    .field-err { display: none; font-family: var(--sans); font-size: 12.5px; color: var(--copper); margin-top: 2px; }
+    .field-err.show { display: block; }
     .form-textarea { resize: vertical; min-height: 120px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .form-note { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: var(--brown3); margin-top: 12px; }
@@ -417,8 +420,9 @@
     <form id="ver-anmeldung-form" onsubmit="submitVerAnmeldung(event)" class="fade-in">
       <div class="form-grid">
         <div class="form-group">
-          <label class="form-label" for="ver-vorname">Vorname</label>
-          <input class="form-input" type="text" id="ver-vorname" name="vorname" placeholder="Dein Vorname" required>
+          <label class="form-label" for="ver-vorname">Vorname *</label>
+          <input class="form-input" type="text" id="ver-vorname" name="vorname" placeholder="Dein Vorname">
+          <span class="field-err" id="err-vorname">Bitte Vorname eingeben</span>
         </div>
         <div class="form-group">
           <label class="form-label" for="ver-nachname">Nachname</label>
@@ -426,8 +430,9 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label" for="ver-email">E-Mail</label>
-        <input class="form-input" type="email" id="ver-email" name="email" placeholder="deine@email.de" required>
+        <label class="form-label" for="ver-email">E-Mail *</label>
+        <input class="form-input" type="email" id="ver-email" name="email" placeholder="deine@email.de">
+        <span class="field-err" id="err-email">Bitte gültige E-Mail-Adresse eingeben</span>
       </div>
       <div class="form-group">
         <label class="form-label" for="ver-select">Veranstaltung</label>
@@ -791,12 +796,33 @@
       if (c) c.innerHTML = '<div style="font-family:var(--sans);font-size:15px;color:var(--brown3);padding:60px 0;text-align:center;">Veranstaltungen konnten nicht geladen werden.<br><small>' + (err && err.message ? err.message : 'Unbekannter Fehler') + '</small></div>';
     });
 
+  function clearFieldError(inputEl, errId) {
+    inputEl.classList.remove('error');
+    var err = document.getElementById(errId);
+    if (err) { err.classList.remove('show'); }
+  }
+  function showFieldError(inputEl, errId) {
+    inputEl.classList.add('error');
+    var err = document.getElementById(errId);
+    if (err) { err.classList.add('show'); }
+  }
+
   function submitVerAnmeldung(e) {
     e.preventDefault();
     var form = document.getElementById('ver-anmeldung-form');
-    var vorname = form.querySelector('[name=vorname]').value.trim();
-    var email = form.querySelector('[name=email]').value.trim();
-    if (!vorname || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Bitte Vorname und gültige E-Mail ausfüllen.'); return; }
+    var vornameEl = form.querySelector('[name=vorname]');
+    var emailEl = form.querySelector('[name=email]');
+    var vorname = vornameEl.value.trim();
+    var email = emailEl.value.trim();
+    var valid = true;
+
+    clearFieldError(vornameEl, 'err-vorname');
+    clearFieldError(emailEl, 'err-email');
+
+    if (!vorname) { showFieldError(vornameEl, 'err-vorname'); valid = false; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFieldError(emailEl, 'err-email'); valid = false; }
+    if (!valid) { vornameEl.closest('form').querySelector('.error').focus(); return; }
+
     var btn = form.querySelector('[type=submit]');
     if (btn) btn.disabled = true;
     var nlEl = form.querySelector('[name=newsletter]');

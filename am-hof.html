@@ -113,6 +113,9 @@
     .am-anmelde-field label { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brown3); }
     .am-anmelde-field input, .am-anmelde-field select, .am-anmelde-field textarea { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown); background: white; border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px; outline: none; width: 100%; transition: border-color 0.2s; }
     .am-anmelde-field input:focus, .am-anmelde-field textarea:focus { border-color: var(--gold); }
+    .am-anmelde-field input.error { border-color: var(--copper) !important; }
+    .am-field-err { display: none; font-family: var(--sans); font-size: 12px; color: var(--copper); margin-top: 3px; }
+    .am-field-err.show { display: block; }
     .am-anmelde-field textarea { resize: none; height: 70px; }
     .am-anmelde-submit { margin-top: 12px; padding: 10px 24px; background: var(--copper); color: white; border: none; border-radius: 50px; font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
     .am-anmelde-submit:hover { background: #8A2A08; }
@@ -689,9 +692,32 @@
   function submitAmAnmeldung(btn, title, formId) {
     var form = btn.closest('.am-anmelde-form');
     if (!form) return;
-    var vorname = form.querySelector('[name=vorname]').value.trim();
-    var email = form.querySelector('[name=email]').value.trim();
-    if (!vorname || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Bitte Vorname und gültige E-Mail ausfüllen.'); return; }
+    var vornameEl = form.querySelector('[name=vorname]');
+    var emailEl = form.querySelector('[name=email]');
+    var vorname = vornameEl.value.trim();
+    var email = emailEl.value.trim();
+    var valid = true;
+
+    [vornameEl, emailEl].forEach(function(el) {
+      el.classList.remove('error');
+      var err = el.parentElement.querySelector('.am-field-err');
+      if (err) err.classList.remove('show');
+    });
+
+    if (!vorname) {
+      vornameEl.classList.add('error');
+      var e = vornameEl.parentElement.querySelector('.am-field-err');
+      if (e) e.classList.add('show');
+      valid = false;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailEl.classList.add('error');
+      var e2 = emailEl.parentElement.querySelector('.am-field-err');
+      if (e2) e2.classList.add('show');
+      valid = false;
+    }
+    if (!valid) { form.querySelector('.error').focus(); return; }
+
     btn.disabled = true;
     var nlEl = form.querySelector('[name=newsletter]');
     fetch('/', {
@@ -783,9 +809,9 @@
 
         html += '<div class="am-anmelde-form">';
         html += '<h4>Anmelden: ' + ev.title + '</h4>';
-        html += '<div class="am-anmelde-row"><div class="am-anmelde-field"><label>Vorname</label><input type="text" name="vorname" placeholder="Vorname"></div>';
+        html += '<div class="am-anmelde-row"><div class="am-anmelde-field"><label>Vorname *</label><input type="text" name="vorname" placeholder="Vorname"><span class="am-field-err" data-err="vorname">Bitte Vorname eingeben</span></div>';
         html += '<div class="am-anmelde-field"><label>Nachname</label><input type="text" name="nachname" placeholder="Nachname"></div></div>';
-        html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>E-Mail</label><input type="email" name="email" placeholder="deine@email.de"></div></div>';
+        html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>E-Mail *</label><input type="email" name="email" placeholder="deine@email.de"><span class="am-field-err" data-err="email">Bitte gültige E-Mail-Adresse eingeben</span></div></div>';
         html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen oder Hinweise …"></textarea></div></div>';
         html += '<div class="newsletter-opt"><input type="checkbox" id="nl-' + formId + '" name="newsletter" value="ja"><label for="nl-' + formId + '">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label></div>';
         html += '<button type="button" class="am-anmelde-submit" onclick="submitAmAnmeldung(this,\'' + ev.title.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\',\'' + formId + '\')">Anmeldung absenden</button>';
