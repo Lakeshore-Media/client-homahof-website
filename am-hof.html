@@ -691,7 +691,7 @@
     if (!form) return;
     var vorname = form.querySelector('[name=vorname]').value.trim();
     var email = form.querySelector('[name=email]').value.trim();
-    if (!vorname || !email) { alert('Bitte Vorname und E-Mail ausfüllen.'); return; }
+    if (!vorname || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Bitte Vorname und gültige E-Mail ausfüllen.'); return; }
     btn.disabled = true;
     var nlEl = form.querySelector('[name=newsletter]');
     fetch('/', {
