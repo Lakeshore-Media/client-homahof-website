@@ -579,7 +579,7 @@
       border-radius: 12px;
       padding: 40px;
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto auto 1fr auto;
       gap: 40px;
       align-items: center;
     }
@@ -1187,7 +1187,7 @@
       .event-date-block { display: flex; gap: 14px; align-items: baseline; }
       .event-day { font-size: 40px; }
       .event-actions { align-items: center; text-align: center; }
-      #next-event-img { margin: 0 auto; }
+      #next-event-img { width: 100% !important; height: 180px !important; margin-bottom: 8px; }
       .bank-row { flex-direction: column; gap: 3px; }
       .bank-value { text-align: left; }
 
@@ -1378,10 +1378,10 @@
         <p id="next-event-price" style="font-size:13px;color:var(--brown2);margin-top:6px;font-family:var(--sans)"></p>
       </div>
       <div class="event-actions">
+        <img id="next-event-img" src="" alt="" style="display:none;width:220px;height:150px;object-fit:cover;border-radius:10px;margin-bottom:4px">
         <a href="veranstaltungen.html" class="btn btn-gold" id="next-event-cta">Jetzt anmelden</a>
         <a href="veranstaltungen.html" class="event-all-link">Alle Veranstaltungen →</a>
       </div>
-      <img id="next-event-img" src="" alt="" style="display:none;width:220px;height:140px;object-fit:cover;border-radius:10px;flex-shrink:0;margin-left:auto">
     </div>
   </div>
 </section>
