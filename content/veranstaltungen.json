@@ -293,17 +293,6 @@
       "image": "images/agnihotra-feuer-2017.webp",
       "recurring": false,
       "category": "seminar"
-    },
-    {
-      "badge": "spende",
-      "price": "Spendenbasis",
-      "time": "9:00 - 17:00",
-      "date": "2026-05-29",
-      "desc": "Test 12456",
-      "location": "Homa-Hof Heiligenberg",
-      "title": "Test 123",
-      "image": "/images/hero.webp",
-      "category": "Seminar"
     }
   ]
 }
