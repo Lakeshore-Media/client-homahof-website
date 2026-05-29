@@ -444,7 +444,8 @@
         <label for="nl-ver">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label>
       </div>
       <button type="submit" class="btn btn-gold" style="margin-top:20px;">Anmeldung absenden</button>
-      <p id="ver-anmeldung-success" style="display:none;font-family:var(--sans);font-size:14px;color:#2A7A2A;margin-top:12px;">Danke! Wir melden uns innerhalb von 2 Werktagen.</p>
+      <p id="ver-anmeldung-success" style="display:none;font-family:var(--sans);font-size:14px;color:#2A7A2A;margin-top:12px;">✓ Danke! Wir melden uns innerhalb von 2 Werktagen.</p>
+      <p id="ver-anmeldung-error" style="display:none;font-family:var(--sans);font-size:14px;color:var(--copper);margin-top:12px;">Fehler beim Absenden. Bitte versuche es erneut oder schreib uns direkt: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></p>
       <p class="form-note">Alle Angaben werden vertraulich behandelt.</p>
     </form>
   </div>
@@ -818,7 +819,10 @@
       form.reset();
       if (btn) btn.style.display = 'none';
     })
-    .catch(function() { if (btn) btn.disabled = false; alert('Fehler beim Absenden. Bitte per E-Mail anmelden.'); });
+    .catch(function() {
+      if (btn) btn.disabled = false;
+      document.getElementById('ver-anmeldung-error').style.display = 'block';
+    });
   }
 </script>
 <form name="veranstaltung-anmeldung" netlify hidden>

@@ -713,7 +713,11 @@
       if (success) success.style.display = 'block';
       btn.style.display = 'none';
     })
-    .catch(function() { btn.disabled = false; alert('Fehler beim Absenden. Bitte per E-Mail anmelden.'); });
+    .catch(function() {
+      btn.disabled = false;
+      var errEl = document.getElementById(formId + '-error');
+      if (errEl) errEl.style.display = 'block';
+    });
   }
 
   fetch('content/veranstaltungen.json')
@@ -785,7 +789,8 @@
         html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen oder Hinweise …"></textarea></div></div>';
         html += '<div class="newsletter-opt"><input type="checkbox" id="nl-' + formId + '" name="newsletter" value="ja"><label for="nl-' + formId + '">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label></div>';
         html += '<button type="button" class="am-anmelde-submit" onclick="submitAmAnmeldung(this,\'' + ev.title.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\',\'' + formId + '\')">Anmeldung absenden</button>';
-        html += '<p class="am-anmelde-success" id="' + formId + '-success">Danke! Wir melden uns bald.</p>';
+        html += '<p class="am-anmelde-success" id="' + formId + '-success">✓ Danke! Wir melden uns bald.</p>';
+        html += '<p class="am-anmelde-error" id="' + formId + '-error" style="display:none;font-family:var(--sans);font-size:14px;color:var(--copper);margin-top:8px;">Fehler beim Absenden. Bitte schreib uns direkt: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></p>';
         html += '</div>';
 
         html += '</div>';
