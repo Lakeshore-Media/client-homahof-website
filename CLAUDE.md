@@ -1,17 +1,23 @@
-# Homahof Design 2026 – v3
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Projekt-Kontext
-Statische Webseite für den Homa-Hof Heiligenberg e.V. — Vanilla HTML/CSS/JS, kein Framework.
-GitHub: `Lakeshore-Media/client-homahof-website` (main branch)
-Netlify: Deployment aus main branch.
+
+Statische Website für den Homa-Hof Heiligenberg e.V.
+- GitHub: `Lakeshore-Media/client-homahof-website` (main branch)
+- Netlify: Auto-Deploy aus `main` — kein Build-Schritt, `publish = "."`
+- Decap CMS: `/admin/` (Netlify Identity muss im Dashboard aktiviert sein)
 
 ## Stack — STRIKT einhalten
+
 - **Kein React, kein Tailwind, kein Framework-Overhead**
 - Vanilla HTML5 + CSS Custom Properties + Vanilla JS
 - GSAP + ScrollTrigger für Scroll-Animationen
 - CSS-Transitions für Hover/einfache Interaktionen
 
-## Design-System (bestehend, nicht überschreiben)
+## Design-System
+
 ```css
 --cream:      #FFFCF5
 --cream2:     #FFF8EC
@@ -25,28 +31,59 @@ Netlify: Deployment aus main branch.
 --sans:       'Raleway', system-ui, sans-serif
 ```
 
-## Skills — was verwenden / was ignorieren
-- ✅ `gsap-scrolltrigger`, `gsap-core`, `gsap-timeline`, `gsap-plugins`, `gsap-performance` — aktiv nutzen
-- ✅ `full-output-enforcement` — bei langen Code-Outputs einsetzen
-- ❌ `design-taste-frontend` — ignorieren (setzt React/Tailwind voraus)
-- ❌ `gpt-taste`, `high-end-visual-design`, `minimalist-ui`, `industrial-brutalist-ui` — ignorieren (falsche Design-Sprache)
-- ❌ `gsap-react`, `gsap-frameworks` — nicht relevant
+## Architektur
 
-## Aktueller Plan
-Plan-Datei: `~/.claude/plans/proud-foraging-cupcake.md`
+### Seiten
+Jede Seite ist eine eigenständige HTML-Datei. Alle teilen:
+- Denselben Inline-CSS-Block im `<head>` (kein globales Stylesheet)
+- Denselben Footer-Markup
+- `js/site-config.js` und `js/cookie-banner.js` am Ende des `<body>`
 
-Offene Tasks (Runde 2):
-1. **A** – Footer-Kontrast: `rgba(255,255,255,0.3)` → `0.65`, `13.5px` → `14.5px` (alle 8 Seiten)
-2. **C** – am-hof.html Events: Click-to-Expand + Layout-Fix + Link zu veranstaltungen.html
-3. **D** – NAS-Bilder: Sichten, umbenennen, kopieren, einbinden (`/Volumes/RKB films/01_Projects/Homa Hof/97_Foto_export/`)
-4. **F** – Video-Hintergründe: 4 WebM-Loops vom NAS als Hero-Hintergrund einbinden
-5. **G** – Netlify + GitHub + Decap CMS: admin/ + content/ anlegen, veranstaltungen.html datenbankgetrieben
+### Content-Schicht (JSON → JS fetch → DOM)
+Dynamische Inhalte werden per `fetch()` aus `content/` geladen und ins DOM gerendert — kein serverseitiges Rendering:
 
-## NAS-Pfade
+| Datei | Genutzt von | Zweck |
+|---|---|---|
+| `content/veranstaltungen.json` | `veranstaltungen.html`, `am-hof.html`, `index.html` | Termine, gefiltert nach `category` und `date >= today` |
+| `content/downloads.json` | `medien.html` | Downloadliste, gefiltert nach `category` |
+| `content/hofladen.json` | `am-hof.html` | Produktkarten im Hofladen-Grid |
+| `content/aktuelles.json` | `aktuelles-beitrag.html` | Blog/Neuigkeiten |
+
+Event-Kategorien: `seminar`, `hof`, `online`
+Download-Kategorien: `aktuell`, `anleitung`, `flyer`, `presse`, `wissenschaft`
+
+### Netlify Function
+`netlify/functions/brevo-subscribe.js` — empfängt POST mit `{email, firstName, lastName}`, fügt Kontakt zur Brevo-Liste hinzu.
+- Env vars: `BREVO_API_KEY`, `BREVO_LIST_ID`
+- Aufgerufen aus `js/site-config.js` → `subscribeToBrevo()` — feuert still, blockiert nie den Formular-Submit
+
+### Gemeinsame JS-Hilfsmittel (`js/site-config.js`)
+- `HOMAHOF.paypalUrl`, `HOMAHOF.iban`, `HOMAHOF.bic` — zentral pflegen, wirkt auf alle Seiten
+- `subscribeToBrevo(email, firstName, lastName, source)` — Newsletter-Opt-in aus Anmeldeformularen
+
+### Formulare
+Netlify Forms (AJAX). Jede Seite mit Formular hat ein verstecktes `<form name="..." netlify hidden>` für die Registrierung. Submissions landen im Netlify Dashboard.
+
+### Decap CMS (`admin/config.yml`)
+Verwaltet: Veranstaltungen, Hofladen, Aktuelles, Downloads — alles über `content/*.json`.
+Aktivierung: Netlify Dashboard → Identity → Enable, dann Git Gateway aktivieren.
+
+## NAS-Pfade (Medien)
+
 - Videos: `/Volumes/RKB films/01_Projects/Homa Hof/99_Master_video/`
 - Fotos: `/Volumes/RKB films/01_Projects/Homa Hof/97_Foto_export/`
 
+Bilder im Repo: `images/stills/` (WebP), Archivbilder: `Archivbilder/`
+Videos: `videos/` (WebM + MP4), in Git LFS (`.gitattributes` beachten)
+
+## Skills
+
+- ✅ `gsap-scrolltrigger`, `gsap-core`, `gsap-timeline`, `gsap-plugins`, `gsap-performance`
+- ✅ `full-output-enforcement` — bei langen Code-Outputs
+- ❌ `design-taste-frontend`, `gpt-taste`, `high-end-visual-design`, `minimalist-ui`, `industrial-brutalist-ui` — falsche Design-Sprache oder setzt React/Tailwind voraus
+- ❌ `gsap-react`, `gsap-frameworks` — nicht relevant
+
 ## Arbeitsweise
+
 - Antworten auf Deutsch, Code auf Englisch
-- Kein unnötiger Kommentar im Code
 - Permissions sind bereits freigegeben — kein Warten auf Bestätigung
