@@ -119,6 +119,14 @@
     .checkbox-option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown3); line-height: 1.5; }
     .checkbox-option input { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
 
+    .mitglied-steps { display:flex; flex-direction:column; gap:16px; max-width:680px; margin-bottom:32px; }
+    .mitglied-step { display:flex; align-items:flex-start; gap:16px; font-size:15px; color:var(--brown2); line-height:1.5; }
+    .step-num { width:30px; height:30px; border-radius:50%; background:var(--gold); color:white; display:flex; align-items:center; justify-content:center; font-family:var(--sans); font-weight:600; font-size:14px; flex-shrink:0; margin-top:1px; }
+    .file-upload-area { border:2px dashed var(--border); border-radius:10px; padding:28px 24px; display:flex; flex-direction:column; align-items:center; cursor:pointer; transition:border-color 0.2s, background 0.2s; background:white; text-align:center; font-size:15px; color:var(--brown2); }
+    .file-upload-area:hover { border-color:var(--gold); background:var(--cream2); }
+    .file-upload-area.has-file { border-color:var(--gold); background:var(--cream2); color:var(--brown); }
+    .file-upload-area.drag-over { border-color:var(--gold); background:var(--cream3); }
+
     /* Dark/Spenden */
     .dark-section { background: var(--dark-bg); padding: 100px 0; position: relative; overflow: hidden; }
     .dark-section .eyebrow { color: var(--gold-light); }
@@ -301,49 +309,75 @@
       <div class="eyebrow">Beitreten</div>
       <h2 class="section-title">Jetzt <em>Förder</em>mitglied werden</h2>
     </div>
-    <form style="max-width:680px;" onsubmit="return false;" class="fade-in">
+    <div class="mitglied-steps fade-in">
+      <div class="mitglied-step">
+        <div class="step-num">1</div>
+        <div>
+          <strong>Antrag herunterladen, ausfüllen und unterschreiben</strong><br>
+          <a href="downloads/Foerdermitglieder-Antrag-2026.pdf" download style="color:var(--gold);font-weight:600;">Fördermitglieder-Antrag 2026 (PDF) →</a><br>
+          <span style="font-size:14px">Ausdrucken, ausfüllen, unterschreiben – dann einscannen oder abfotografieren.</span>
+        </div>
+      </div>
+      <div class="mitglied-step">
+        <div class="step-num">2</div>
+        <div><strong>Kontaktdaten eingeben und ausgefüllten Antrag hochladen</strong></div>
+      </div>
+    </div>
+    <!-- Hidden form for Netlify build detection -->
+    <form name="foerdermitglied" netlify netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+      <input name="vorname" type="text"><input name="nachname" type="text">
+      <input name="adresse" type="text"><input name="email" type="email">
+      <input name="telefon" type="tel"><input name="antrag-pdf" type="file">
+      <textarea name="nachricht"></textarea><input name="dsgvo" type="checkbox">
+    </form>
+    <form id="foerdermitglied-form" style="max-width:680px;" enctype="multipart/form-data" class="fade-in" onsubmit="submitMitgliedForm(event)">
+      <input type="hidden" name="form-name" value="foerdermitglied">
+      <p name="bot-field" style="display:none"><label>Nicht ausfüllen: <input name="bot-field"></label></p>
       <div class="form-grid">
         <div class="form-group">
-          <label class="form-label" for="m-vorname">Vorname</label>
-          <input class="form-input" type="text" id="m-vorname" placeholder="Dein Vorname">
+          <label class="form-label" for="m-vorname">Vorname *</label>
+          <input class="form-input" type="text" id="m-vorname" name="vorname" placeholder="Dein Vorname" required>
         </div>
         <div class="form-group">
-          <label class="form-label" for="m-nachname">Nachname</label>
-          <input class="form-input" type="text" id="m-nachname" placeholder="Dein Nachname">
+          <label class="form-label" for="m-nachname">Nachname *</label>
+          <input class="form-input" type="text" id="m-nachname" name="nachname" placeholder="Dein Nachname" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label" for="m-adresse">Adresse</label>
-        <input class="form-input" type="text" id="m-adresse" placeholder="Straße, PLZ, Ort">
+        <label class="form-label" for="m-adresse">Adresse *</label>
+        <input class="form-input" type="text" id="m-adresse" name="adresse" placeholder="Straße, PLZ, Ort" required>
       </div>
       <div class="form-grid">
         <div class="form-group">
-          <label class="form-label" for="m-email">E-Mail</label>
-          <input class="form-input" type="email" id="m-email" placeholder="deine@email.de">
+          <label class="form-label" for="m-email">E-Mail *</label>
+          <input class="form-input" type="email" id="m-email" name="email" placeholder="deine@email.de" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="m-telefon">Telefon (optional)</label>
-          <input class="form-input" type="tel" id="m-telefon" placeholder="+49 ...">
+          <input class="form-input" type="tel" id="m-telefon" name="telefon" placeholder="+49 ...">
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">Mitgliedschaftsart</label>
-        <div class="radio-group">
-          <label class="radio-option"><input type="radio" name="art" value="foerder" checked> Fördermitglied (ab 2,50 €/Monat)</label>
+        <label class="form-label" for="m-antrag">Ausgefüllter und unterschriebener Antrag *</label>
+        <div class="file-upload-area" id="file-upload-area" onclick="document.getElementById('m-antrag').click()" ondragover="fileDragOver(event)" ondragleave="fileDragLeave(event)" ondrop="fileDrop(event)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);margin-bottom:8px;pointer-events:none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span id="file-label" style="pointer-events:none">Datei auswählen oder hierher ziehen</span>
+          <span style="font-size:13px;color:var(--brown3);margin-top:4px;pointer-events:none">PDF, JPG oder PNG – max. 10 MB</span>
         </div>
-        <p style="margin-top:12px;font-size:15px;color:var(--brown2);">Den Mitgliedsantrag kannst du hier herunterladen und ausgefüllt einsenden: <a href="downloads/Foerdermitglieder-Antrag-2026.pdf" download style="color:var(--gold);font-weight:600;">Antrag herunterladen (PDF)</a></p>
+        <input type="file" id="m-antrag" name="antrag-pdf" accept=".pdf,.jpg,.jpeg,.png" required style="display:none" onchange="updateFileLabel(this)">
       </div>
       <div class="form-group">
         <label class="form-label" for="m-nachricht">Nachricht (optional)</label>
-        <textarea class="form-textarea" id="m-nachricht" placeholder="Deine Fragen oder Beweggründe …"></textarea>
+        <textarea class="form-textarea" id="m-nachricht" name="nachricht" placeholder="Deine Fragen oder Beweggründe …"></textarea>
       </div>
       <div class="form-group">
         <label class="checkbox-option">
-          <input type="checkbox" name="dsgvo">
-          Ich stimme der Verarbeitung meiner Daten gemäß Datenschutzerklärung zu. Die Daten werden ausschließlich für die Mitgliedschaftsverwaltung verwendet.
+          <input type="checkbox" name="dsgvo" required>
+          Ich stimme der Verarbeitung meiner Daten gemäß <a href="datenschutz.html" style="color:var(--gold)">Datenschutzerklärung</a> zu. Die Daten werden ausschließlich für die Mitgliedschaftsverwaltung verwendet.
         </label>
       </div>
-      <button type="submit" class="btn btn-gold">Mitgliedsantrag absenden</button>
+      <div id="foerdermitglied-msg" style="display:none;padding:14px 18px;border-radius:10px;font-size:15px;margin-bottom:16px"></div>
+      <button type="submit" class="btn btn-gold" id="foerdermitglied-btn">Mitgliedsantrag absenden</button>
     </form>
   </div>
 </section>
@@ -574,6 +608,59 @@
       hint.textContent = '✓ kopiert';
       setTimeout(function() { hint.textContent = '📋 kopieren'; }, 2000);
     });
+  }
+
+  function updateFileLabel(input) {
+    var area = document.getElementById('file-upload-area');
+    var label = document.getElementById('file-label');
+    if (input.files && input.files[0]) {
+      label.textContent = input.files[0].name;
+      area.classList.add('has-file');
+    }
+  }
+
+  function fileDragOver(e) {
+    e.preventDefault();
+    document.getElementById('file-upload-area').classList.add('drag-over');
+  }
+  function fileDragLeave(e) {
+    document.getElementById('file-upload-area').classList.remove('drag-over');
+  }
+  function fileDrop(e) {
+    e.preventDefault();
+    var area = document.getElementById('file-upload-area');
+    area.classList.remove('drag-over');
+    var input = document.getElementById('m-antrag');
+    if (e.dataTransfer.files.length) {
+      input.files = e.dataTransfer.files;
+      updateFileLabel(input);
+    }
+  }
+
+  async function submitMitgliedForm(e) {
+    e.preventDefault();
+    var form = document.getElementById('foerdermitglied-form');
+    var btn = document.getElementById('foerdermitglied-btn');
+    var msg = document.getElementById('foerdermitglied-msg');
+    btn.disabled = true;
+    btn.textContent = 'Wird gesendet…';
+    try {
+      var res = await fetch('/', { method: 'POST', body: new FormData(form) });
+      if (res.ok) {
+        msg.style.display = 'block';
+        msg.style.cssText = 'display:block;padding:14px 18px;border-radius:10px;font-size:15px;margin-bottom:16px;background:#F0FFF4;color:#276749;border:1px solid #B2DFDB';
+        msg.textContent = 'Danke! Dein Antrag ist bei uns angekommen. Wir melden uns bald per E-Mail.';
+        btn.style.display = 'none';
+        form.querySelectorAll('input:not([type=hidden]),textarea').forEach(function(f) { f.value = ''; });
+        document.getElementById('file-label').textContent = 'Datei auswählen oder hierher ziehen';
+        document.getElementById('file-upload-area').classList.remove('has-file');
+      } else { throw new Error(''); }
+    } catch(err) {
+      msg.style.cssText = 'display:block;padding:14px 18px;border-radius:10px;font-size:15px;margin-bottom:16px;background:#FFF5F5;color:#C53030;border:1px solid #FEB2B2';
+      msg.textContent = 'Leider gab es einen Fehler. Bitte schreib uns direkt an info@homa-hof-heiligenberg.de.';
+      btn.disabled = false;
+      btn.textContent = 'Mitgliedsantrag absenden';
+    }
   }
 
   function submitMitmachenNewsletter(e) {
