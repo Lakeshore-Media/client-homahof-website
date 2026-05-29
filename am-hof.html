@@ -708,6 +708,7 @@
       }).toString()
     })
     .then(function() {
+      if (nlEl && nlEl.checked) subscribeToBrevo(email, vorname, form.querySelector('[name=nachname]').value.trim(), 'Am-Hof-Anmeldung');
       var success = document.getElementById(formId + '-success');
       if (success) success.style.display = 'block';
       btn.style.display = 'none';

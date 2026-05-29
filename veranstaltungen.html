@@ -813,6 +813,7 @@
       }).toString()
     })
     .then(function() {
+      if (nlEl && nlEl.checked) subscribeToBrevo(email, vorname, form.querySelector('[name=nachname]').value.trim(), 'Veranstaltungsanmeldung');
       document.getElementById('ver-anmeldung-success').style.display = 'block';
       form.reset();
       if (btn) btn.style.display = 'none';

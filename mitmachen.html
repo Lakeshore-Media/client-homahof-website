@@ -583,6 +583,7 @@
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', email: form.querySelector('[name=email]').value }).toString()
     }).then(function() {
+      subscribeToBrevo(form.querySelector('[name=email]').value, '', '', 'Newsletter-Formular');
       form.style.display = 'none';
       document.getElementById('nl-success').style.display = 'block';
     }).catch(function() { btn.disabled = false; });
