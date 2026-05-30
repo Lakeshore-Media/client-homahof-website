@@ -53,9 +53,20 @@ Event-Kategorien: `seminar`, `hof`, `online`
 Download-Kategorien: `aktuell`, `anleitung`, `flyer`, `presse`, `wissenschaft`
 
 ### Netlify Function
-`netlify/functions/brevo-subscribe.js` — empfängt POST mit `{email, firstName, lastName}`, fügt Kontakt zur Brevo-Liste hinzu.
-- Env vars: `BREVO_API_KEY`, `BREVO_LIST_ID`
+`netlify/functions/brevo-subscribe.js` — empfängt POST mit `{email, firstName, lastName, interests[]}`, löst Brevo Double-Opt-In aus.
+- Endpoint: `POST /v3/contacts/doubleOptinConfirmation` (nicht `/v3/contacts`)
+- Pflichtfeld im Body: `includeListIds` (nicht `listIds`)
+- Env vars: `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_DOI_TEMPLATE_ID` (=1), `BREVO_DOI_REDIRECT_URL`
+- `BREVO_DOI_REDIRECT_URL` muss auf eine **erreichbare** Domain zeigen — sonst schlägt der DOI-Link fehl. Fallback: `homahof-design-2026-website.netlify.app/newsletter-bestaetigt`
+- Erfolg: HTTP 204. Kontakt ist erst nach Klick auf den DOI-Link in der Liste.
 - Aufgerufen aus `js/site-config.js` → `subscribeToBrevo()` — feuert still, blockiert nie den Formular-Submit
+- Interessen-Attribute in Brevo (boolean): `INT_SEMINARE`, `INT_HOF`, `INT_AGNIHOTRA`
+
+### Newsletter-Flow
+1. Formular-Submit → Netlify Forms (Backup) + `subscribeToBrevo()` → redirect auf `/danke-newsletter`
+2. Brevo sendet DOI-Mail (Template-ID 1) mit `{{ doubleoptin }}`-Link
+3. Klick → Brevo bestätigt → redirect auf `/newsletter-bestaetigt`
+- DOI-Template muss in Brevo aktiviert (nicht im Draft-Status) sein
 
 ### Gemeinsame JS-Hilfsmittel (`js/site-config.js`)
 - `HOMAHOF.paypalUrl` — PayPal-Spendenlink (HIER und nur hier pflegen): `https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE`
@@ -64,7 +75,7 @@ Download-Kategorien: `aktuell`, `anleitung`, `flyer`, `presse`, `wissenschaft`
 - `HOMAHOF.newsletterInner()` — rendert den Newsletter-Formular-Block; `<section id="newsletter">` wird damit befüllt
 - `HOMAHOF.scrollToBank()`, `HOMAHOF.copyIBAN()`, `HOMAHOF.submitNewsletter()` — zentrale Handlers, nicht mehr inline pro Seite
 - `window._fadeObserver` — jede Seite setzt `window._fadeObserver = observer` nach dem IntersectionObserver-Setup; site-config.js observiert damit dynamisch injizierte `.fade-in`-Elemente
-- `subscribeToBrevo(email, firstName, lastName, source)` — Newsletter-Opt-in aus Anmeldeformularen
+- `subscribeToBrevo(email, firstName, lastName, source, interests[])` — löst Brevo DOI aus; `interests` = Array mit Werten `'seminare'`, `'hof'`, `'agnihotra'`
 
 **Sync-Regel**: Spenden- und Newsletter-Abschnitt existieren als leere `<section id="spenden">` und `<section id="newsletter">` Tags in `index.html`, `mitmachen.html` und `am-hof.html`. Inhalt kommt ausschließlich aus `js/site-config.js`. Änderungen am Inhalt nur dort vornehmen.
 
