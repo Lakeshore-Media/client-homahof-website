@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Brevo DOI opt-in — fires silently, never blocks form submit
+// Brevo DOI opt-in — keepalive:true hält den Request am Leben auch wenn die Seite navigiert
 function subscribeToBrevo(email, firstName, lastName, source, interests) {
   if (!email) return;
   fetch('/.netlify/functions/brevo-subscribe', {
@@ -145,5 +145,6 @@ function subscribeToBrevo(email, firstName, lastName, source, interests) {
       source: source || 'Website',
       interests: interests || [],
     }),
+    keepalive: true,
   }).catch(function() {});
 }
