@@ -45,8 +45,11 @@ var HOMAHOF = {
         '<h2 class="section-title fade-in">Impulse vom <em>Homa-Hof</em></h2>',
         '<p class="fade-in">Veranstaltungen, Neuigkeiten und Impulse aus dem Homa-Hof – direkt in dein Postfach. Kostenlos und jederzeit kündbar.</p>',
         '<form id="newsletter-form" class="newsletter-form fade-in" onsubmit="HOMAHOF.submitNewsletter(event)">',
-          '<input type="text" id="nl-name" name="name" class="newsletter-input" placeholder="Dein Name" required>',
-          '<input type="email" id="nl-email" name="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse" required>',
+          '<div style="display:flex;gap:12px">',
+            '<input type="text" id="nl-firstname" name="firstname" class="newsletter-input" placeholder="Vorname (optional)" style="flex:1;min-width:0">',
+            '<input type="text" id="nl-lastname" name="lastname" class="newsletter-input" placeholder="Nachname (optional)" style="flex:1;min-width:0">',
+          '</div>',
+          '<input type="email" id="nl-email" name="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse *" required>',
           '<div style="margin:14px 0 18px">',
             '<p style="font-size:13px;opacity:0.65;margin-bottom:10px">Ich interessiere mich für:</p>',
             '<label style="display:flex;align-items:center;gap:8px;margin-bottom:8px;cursor:pointer;font-size:15px"><input type="checkbox" name="interesse" value="seminare" style="accent-color:var(--gold);width:16px;height:16px;cursor:pointer"> Seminare &amp; Kurse</label>',
@@ -84,8 +87,9 @@ var HOMAHOF = {
 
   submitNewsletter: function(e) {
     e.preventDefault();
-    var nameVal = document.getElementById('nl-name').value.trim();
-    var emailVal = document.getElementById('nl-email').value.trim();
+    var firstNameVal = (document.getElementById('nl-firstname').value || '').trim();
+    var lastNameVal  = (document.getElementById('nl-lastname').value  || '').trim();
+    var emailVal     = document.getElementById('nl-email').value.trim();
     if (!emailVal) return;
     var btn = document.getElementById('nl-submit-btn');
     btn.disabled = true;
@@ -96,9 +100,9 @@ var HOMAHOF = {
     fetch(window.location.pathname, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', name: nameVal, email: emailVal }).toString()
+      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', firstname: firstNameVal, lastname: lastNameVal, email: emailVal }).toString()
     }).then(function() {
-      try { subscribeToBrevo(emailVal, nameVal, '', 'Newsletter-Formular', interests); } catch(err) {}
+      try { subscribeToBrevo(emailVal, firstNameVal, lastNameVal, 'Newsletter-Formular', interests); } catch(err) {}
       window.location.href = '/danke-newsletter';
     }).catch(function() {
       btn.disabled = false;
