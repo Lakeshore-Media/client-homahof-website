@@ -182,6 +182,10 @@
     .newsletter-opt { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; }
     .newsletter-opt input[type=checkbox] { width: auto; accent-color: var(--copper); cursor: pointer; flex-shrink: 0; }
     .newsletter-opt label { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--brown2); cursor: pointer; line-height: 1.4; }
+    .anmelde-check { display: flex; align-items: flex-start; gap: 8px; margin: 14px 0 4px; }
+    .anmelde-check input[type=checkbox] { width: auto; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+    .anmelde-check label { font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--brown); cursor: pointer; line-height: 1.4; }
+    .anmelde-check.error { outline: 2px solid var(--copper); border-radius: 4px; padding: 2px 6px; }
     .anmelde-form { margin-top: 20px; border-top: 1px solid var(--border2); padding-top: 18px; width: 100%; }
     .anmelde-form h4 { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--brown); margin-bottom: 14px; }
     .anmelde-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
@@ -604,12 +608,15 @@
         if (ev.details) ev.details.forEach(function(d) {
           html += '<div class="event-detail-item"><div class="event-detail-label">' + d.label + '</div><div>' + d.value + '</div></div>';
         });
-        html += '<div class="anmelde-form" id="' + formId + '">';
+        var confirmKey = (ev.confirmKey || '').replace(/"/g,'&quot;') || ev.title.replace(/"/g,'&quot;');
+        html += '<div class="anmelde-form" id="' + formId + '" data-title="' + ev.title.replace(/"/g,'&quot;') + '" data-date="' + ev.date + '" data-time="' + (ev.time||'').replace(/"/g,'&quot;') + '" data-location="' + (ev.location||'').replace(/"/g,'&quot;') + '" data-confirm-key="' + confirmKey + '">';
         html += '<h4>Zur Veranstaltung anmelden</h4>';
+        html += '<input type="hidden" name="confirm-key" value="' + confirmKey + '">';
         html += '<div class="anmelde-row"><div class="anmelde-field"><label>Name</label><input type="text" name="name" required placeholder="Dein Name"></div>';
         html += '<div class="anmelde-field"><label>E-Mail</label><input type="email" name="email" required placeholder="deine@email.de"></div></div>';
         html += '<div class="anmelde-row"><div class="anmelde-field"><label>Teilnehmerzahl</label><select name="teilnehmer"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>';
         html += '<div class="anmelde-field"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen, Hinweise..."></textarea></div></div>';
+        html += '<div class="anmelde-check" id="check-' + formId + '"><input type="checkbox" id="confirm-' + formId + '" name="bestaetigung"><label for="confirm-' + formId + '">Ich melde mich verbindlich an und stimme zu, eine Bestätigungsmail zu erhalten.</label></div>';
         html += '<div class="newsletter-opt"><input type="checkbox" id="nl-' + formId + '" name="newsletter" value="ja"><label for="nl-' + formId + '">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label></div>';
         html += '<button class="anmelde-submit" onclick="submitAnmeldung(event, \'' + ev.title.replace(/'/g,"\\'"  ) + '\', \'' + formId + '\')">Jetzt anmelden</button>';
         html += '<div class="anmelde-success" id="success-' + formId + '">✓ Anmeldung gesendet – wir melden uns bald bei dir.</div>';
@@ -714,7 +721,14 @@
     var teilnehmer = form.querySelector('[name=teilnehmer]').value;
     var nachricht = form.querySelector('[name=nachricht]').value;
     if (!name || !email) return;
+    var bestaetigungEl = form.querySelector('[name=bestaetigung]');
+    if (!bestaetigungEl || !bestaetigungEl.checked) {
+      var checkWrap = document.getElementById('check-' + formId);
+      if (checkWrap) { checkWrap.classList.add('error'); setTimeout(function() { checkWrap.classList.remove('error'); }, 2500); }
+      return;
+    }
     var newsletterEl = form.querySelector('[name=newsletter]');
+    var confirmKey = form.dataset.confirmKey || title;
     var body = new URLSearchParams({
       'form-name': 'veranstaltung-anmeldung',
       'veranstaltung': title,
@@ -722,10 +736,25 @@
       'email': email,
       'teilnehmer': teilnehmer,
       'nachricht': nachricht,
+      'confirm-key': confirmKey,
       'newsletter': newsletterEl && newsletterEl.checked ? 'ja' : 'nein'
     });
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
       .then(function() {
+        fetch('/.netlify/functions/event-confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            vorname: name.split(' ')[0],
+            eventTitle: form.dataset.title || title,
+            eventDate: form.dataset.date || '',
+            eventTime: form.dataset.time || '',
+            eventLocation: form.dataset.location || '',
+            confirmKey: confirmKey,
+            newsletter: newsletterEl && newsletterEl.checked ? 'ja' : 'nein'
+          })
+        }).catch(function() {});
         form.querySelector('.anmelde-submit').style.display = 'none';
         document.getElementById('success-' + formId).style.display = 'block';
       })
@@ -852,7 +881,7 @@
   }
 </script>
 <form name="veranstaltung-anmeldung" netlify hidden>
-  <input name="veranstaltung"><input name="vorname"><input name="nachname"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea><input type="checkbox" name="newsletter">
+  <input name="veranstaltung"><input name="vorname"><input name="nachname"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea><input name="confirm-key"><input type="checkbox" name="bestaetigung"><input type="checkbox" name="newsletter">
 </form>
 </body>
 </html>

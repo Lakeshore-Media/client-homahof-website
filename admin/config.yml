@@ -30,6 +30,12 @@ collections:
               - { label: Badge-Farbe,  name: badge,    widget: select,   options: [kostenlos, spende, kostenpflichtig], default: kostenlos }
               - { label: Detailtext,   name: detail,   widget: text,     required: false, hint: "Optionaler Langtext im aufgeklappten Bereich" }
               - { label: Bild,         name: image,    widget: image,    required: false, hint: "Optionales Bild im aufgeklappten Bereich" }
+              - label: "Bestätigungs-Schlüssel"
+                name: confirmKey
+                widget: string
+                required: false
+                default: ""
+                hint: "Wird beim Duplizieren mitgenommen. Leer = Titel wird als Segmentierungsschlüssel in Brevo verwendet."
 
   - name: hofladen
     label: Hofladen
