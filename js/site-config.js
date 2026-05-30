@@ -102,7 +102,8 @@ var HOMAHOF = {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', firstname: firstNameVal, lastname: lastNameVal, email: emailVal }).toString()
     }).then(function() {
-      try { subscribeToBrevo(emailVal, firstNameVal, lastNameVal, 'Newsletter-Formular', interests); } catch(err) {}
+      return subscribeToBrevo(emailVal, firstNameVal, lastNameVal, 'Newsletter-Formular', interests);
+    }).then(function() {
       window.location.href = '/danke-newsletter';
     }).catch(function() {
       btn.disabled = false;
@@ -132,10 +133,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Brevo DOI opt-in — keepalive:true hält den Request am Leben auch wenn die Seite navigiert
+// Brevo DOI opt-in — gibt Promise zurück damit submitNewsletter warten kann
 function subscribeToBrevo(email, firstName, lastName, source, interests) {
-  if (!email) return;
-  fetch('/.netlify/functions/brevo-subscribe', {
+  if (!email) return Promise.resolve();
+  return fetch('/.netlify/functions/brevo-subscribe', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -145,6 +146,5 @@ function subscribeToBrevo(email, firstName, lastName, source, interests) {
       source: source || 'Website',
       interests: interests || [],
     }),
-    keepalive: true,
   }).catch(function() {});
 }
