@@ -52,21 +52,41 @@ Dynamische Inhalte werden per `fetch()` aus `content/` geladen und ins DOM geren
 Event-Kategorien: `seminar`, `hof`, `online`
 Download-Kategorien: `aktuell`, `anleitung`, `flyer`, `presse`, `wissenschaft`
 
-### Netlify Function
-`netlify/functions/brevo-subscribe.js` — empfängt POST mit `{email, firstName, lastName, interests[]}`, löst Brevo Double-Opt-In aus.
+### Netlify Functions
+
+**`netlify/functions/brevo-subscribe.js`** — Newsletter DOI
+- Empfängt POST `{email, firstName, lastName, source, interests[]}`
 - Endpoint: `POST /v3/contacts/doubleOptinConfirmation` (nicht `/v3/contacts`)
 - Pflichtfeld im Body: `includeListIds` (nicht `listIds`)
 - Env vars: `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_DOI_TEMPLATE_ID` (=1), `BREVO_DOI_REDIRECT_URL`
 - `BREVO_DOI_REDIRECT_URL` muss auf eine **erreichbare** Domain zeigen — sonst schlägt der DOI-Link fehl. Fallback: `homahof-design-2026-website.netlify.app/newsletter-bestaetigt`
 - Erfolg: HTTP 204. Kontakt ist erst nach Klick auf den DOI-Link in der Liste.
-- Aufgerufen aus `js/site-config.js` → `subscribeToBrevo()` — feuert still, blockiert nie den Formular-Submit
+- Aufgerufen aus `js/site-config.js` → `subscribeToBrevo()` — muss Promise zurückgeben damit Navigation wartet
 - Interessen-Attribute in Brevo (boolean): `INT_SEMINARE`, `INT_HOF`, `INT_AGNIHOTRA`
 
+**`netlify/functions/event-confirm.js`** — Veranstaltungs-Bestätigungsmail (transaktional, kein DOI)
+- Empfängt POST `{email, vorname, eventTitle, eventDate, eventTime, eventLocation, confirmKey, newsletter}`
+- Führt drei Brevo-Calls aus:
+  1. `POST /v3/smtp/email` — transaktionale Bestätigungsmail (Template-ID aus `BREVO_EVENT_TEMPLATE_ID`, aktuell 6). Params: `EVENT_TITLE`, `EVENT_DATE`, `EVENT_TIME`, `EVENT_LOCATION`, `VORNAME`. Antwort 201 = Erfolg.
+  2. `POST /v3/contacts` mit `updateEnabled: true` — setzt Kontaktattribut `LETZTE_VERANSTALTUNG` auf `confirmKey` (oder Fallback auf `eventTitle`). Funktioniert auch wenn Kontakt schon existiert (überschreibt nur das Attribut, lässt Newsletter-Abo unberührt).
+  3. Nur wenn `newsletter === 'ja'`: `POST /v3/contacts/doubleOptinConfirmation` — DOI-Flow wie oben
+- `confirmKey` im CMS-Feld pro Event — beim Duplizieren mitgenommen. Leer = Titel als Segmentierungsschlüssel.
+- Env vars: `BREVO_API_KEY`, `BREVO_EVENT_TEMPLATE_ID`, `BREVO_LIST_ID`, `BREVO_DOI_TEMPLATE_ID`, `BREVO_DOI_REDIRECT_URL`
+- Fire-and-forget aus `submitAnmeldung()` — Fehler blockieren die Navigation nicht
+- Danke-Seite: `/danke-anmeldung`
+
 ### Newsletter-Flow
-1. Formular-Submit → Netlify Forms (Backup) + `subscribeToBrevo()` → redirect auf `/danke-newsletter`
+1. Formular-Submit → Netlify Forms (Backup) + `return subscribeToBrevo()` → `.then(() => window.location.href = '/danke-newsletter')`
 2. Brevo sendet DOI-Mail (Template-ID 1) mit `{{ doubleoptin }}`-Link
 3. Klick → Brevo bestätigt → redirect auf `/newsletter-bestaetigt`
 - DOI-Template muss in Brevo aktiviert (nicht im Draft-Status) sein
+- `subscribeToBrevo()` MUSS `return fetch(...)` haben — fehlendes `return` bricht die Promise-Chain
+
+### Event-Anmeldungs-Flow (`veranstaltungen.html`)
+1. Formular-Submit → Netlify Forms (Backup) → `event-confirm` Function (fire-and-forget) → redirect `/danke-anmeldung`
+2. Pflichtfelder: Name + E-Mail (mit visueller Fehleranzeige), Bestätigungs-Checkbox
+3. Formular hat `data-*`-Attribute: `data-title`, `data-date`, `data-time`, `data-location`, `data-confirm-key`
+4. Brevo-Segmentierung: `LETZTE_VERANSTALTUNG` wird bei **jeder** Anmeldung gesetzt — unabhängig vom Newsletter-Opt-in
 
 ### Gemeinsame JS-Hilfsmittel (`js/site-config.js`)
 - `HOMAHOF.paypalUrl` — PayPal-Spendenlink (HIER und nur hier pflegen): `https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE`
