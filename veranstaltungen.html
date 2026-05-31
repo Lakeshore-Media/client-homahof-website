@@ -193,6 +193,9 @@
     .anmelde-field label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
     .anmelde-field input, .anmelde-field select, .anmelde-field textarea { font-family: var(--sans); font-size: 14px; color: var(--brown); background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; outline: none; transition: border-color 0.2s; }
     .anmelde-field input:focus, .anmelde-field select:focus, .anmelde-field textarea:focus { border-color: var(--gold); }
+    .anmelde-field input.error { border-color: var(--copper) !important; }
+    .anmelde-field .field-err { display: none; font-family: var(--sans); font-size: 12px; color: var(--copper); margin-top: 2px; }
+    .anmelde-field .field-err.show { display: block; }
     .anmelde-field textarea { resize: vertical; min-height: 70px; }
     .anmelde-submit { margin-top: 4px; font-family: var(--sans); font-size: 14px; font-weight: 500; background: var(--gold); color: #fff; border: none; border-radius: 6px; padding: 10px 24px; cursor: pointer; transition: background 0.2s; }
     .anmelde-submit:hover { background: var(--copper); }
@@ -612,8 +615,8 @@
         html += '<div class="anmelde-form" id="' + formId + '" data-title="' + ev.title.replace(/"/g,'&quot;') + '" data-date="' + ev.date + '" data-time="' + (ev.time||'').replace(/"/g,'&quot;') + '" data-location="' + (ev.location||'').replace(/"/g,'&quot;') + '" data-confirm-key="' + confirmKey + '">';
         html += '<h4>Zur Veranstaltung anmelden</h4>';
         html += '<input type="hidden" name="confirm-key" value="' + confirmKey + '">';
-        html += '<div class="anmelde-row"><div class="anmelde-field"><label>Name</label><input type="text" name="name" required placeholder="Dein Name"></div>';
-        html += '<div class="anmelde-field"><label>E-Mail</label><input type="email" name="email" required placeholder="deine@email.de"></div></div>';
+        html += '<div class="anmelde-row"><div class="anmelde-field"><label>Name</label><input type="text" name="name" id="inp-name-' + formId + '" placeholder="Dein Name"><span class="field-err" id="err-name-' + formId + '">Bitte Name eingeben</span></div>';
+        html += '<div class="anmelde-field"><label>E-Mail</label><input type="email" name="email" id="inp-email-' + formId + '" placeholder="deine@email.de"><span class="field-err" id="err-email-' + formId + '">Bitte gültige E-Mail-Adresse eingeben</span></div></div>';
         html += '<div class="anmelde-row"><div class="anmelde-field"><label>Teilnehmerzahl</label><select name="teilnehmer"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>';
         html += '<div class="anmelde-field"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen, Hinweise..."></textarea></div></div>';
         html += '<div class="anmelde-check" id="check-' + formId + '"><input type="checkbox" id="confirm-' + formId + '" name="bestaetigung"><label for="confirm-' + formId + '">Ich melde mich verbindlich an und stimme zu, eine Bestätigungsmail zu erhalten.</label></div>';
@@ -716,11 +719,22 @@
   function submitAnmeldung(e, title, formId) {
     e.preventDefault();
     var form = document.getElementById(formId);
-    var name = form.querySelector('[name=name]').value;
-    var email = form.querySelector('[name=email]').value;
+    var nameInput  = form.querySelector('[name=name]');
+    var emailInput = form.querySelector('[name=email]');
+    var name  = nameInput.value.trim();
+    var email = emailInput.value.trim();
     var teilnehmer = form.querySelector('[name=teilnehmer]').value;
     var nachricht = form.querySelector('[name=nachricht]').value;
-    if (!name || !email) return;
+
+    var valid = true;
+    var nameErr  = document.getElementById('err-name-'  + formId);
+    var emailErr = document.getElementById('err-email-' + formId);
+    nameInput.classList.remove('error');  emailInput.classList.remove('error');
+    if (nameErr)  nameErr.classList.remove('show');
+    if (emailErr) emailErr.classList.remove('show');
+    if (!name)  { nameInput.classList.add('error');  if (nameErr)  nameErr.classList.add('show');  valid = false; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { emailInput.classList.add('error'); if (emailErr) emailErr.classList.add('show'); valid = false; }
+    if (!valid) { (nameInput.classList.contains('error') ? nameInput : emailInput).focus(); return; }
     var bestaetigungEl = form.querySelector('[name=bestaetigung]');
     if (!bestaetigungEl || !bestaetigungEl.checked) {
       var checkWrap = document.getElementById('check-' + formId);
