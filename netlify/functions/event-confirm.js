@@ -24,6 +24,8 @@ exports.handler = async (event) => {
   const segmentKey = confirmKey || eventTitle;
   const displayDate = eventDate ? eventDate.split('-').reverse().join('.') : '';
 
+  const debug = {};
+
   // 1 — Transaktionale Bestätigungsmail (immer, kein DOI nötig)
   if (templateId) {
     try {
@@ -42,11 +44,15 @@ exports.handler = async (event) => {
           },
         }),
       });
-      console.log('Brevo transactional:', res.status, await res.text());
+      const body = await res.text();
+      debug.email = { status: res.status, body };
+      console.log('Brevo transactional:', res.status, body);
     } catch (e) {
+      debug.email = { error: e.message };
       console.error('Transactional email failed:', e.message);
     }
   } else {
+    debug.email = { skipped: 'BREVO_EVENT_TEMPLATE_ID not set', templateId };
     console.warn('BREVO_EVENT_TEMPLATE_ID not set – confirmation email skipped');
   }
 
@@ -61,8 +67,11 @@ exports.handler = async (event) => {
         attributes: { LETZTE_VERANSTALTUNG: segmentKey },
       }),
     });
-    console.log('Brevo contact update:', res.status);
+    const body = await res.text();
+    debug.contact = { status: res.status, body };
+    console.log('Brevo contact update:', res.status, body);
   } catch (e) {
+    debug.contact = { error: e.message };
     console.error('Contact update failed:', e.message);
   }
 
@@ -85,12 +94,17 @@ exports.handler = async (event) => {
             ...(vorname && { attributes: { FIRSTNAME: vorname } }),
           }),
         });
-        console.log('Brevo DOI:', res.status);
+        const body = await res.text();
+        debug.doi = { status: res.status, body };
+        console.log('Brevo DOI:', res.status, body);
       } catch (e) {
+        debug.doi = { error: e.message };
         console.error('DOI failed:', e.message);
       }
+    } else {
+      debug.doi = { skipped: 'BREVO_LIST_ID not set' };
     }
   }
 
-  return { statusCode: 200, body: JSON.stringify({ success: true }) };
+  return { statusCode: 200, body: JSON.stringify({ success: true, debug }) };
 };
