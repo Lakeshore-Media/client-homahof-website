@@ -122,6 +122,9 @@
     .am-anmelde-submit { margin-top: 12px; padding: 10px 24px; background: var(--copper); color: white; border: none; border-radius: 50px; font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
     .am-anmelde-submit:hover { background: #8A2A08; }
     .am-anmelde-success { display: none; margin-top: 10px; font-family: var(--sans); font-size: 14px; color: #2A7A2A; }
+    .anmelde-check { display: flex; align-items: flex-start; gap: 10px; margin: 12px 0 4px; font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--brown2); line-height: 1.5; }
+    .anmelde-check input[type=checkbox] { width: auto; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+    .anmelde-check.error { outline: 2px solid var(--copper); border-radius: 4px; padding: 2px 6px; }
     .am-event-detail-inner { font-family: var(--sans); font-size: 14px; color: var(--brown2); border-top: 1px solid var(--border2); padding-top: 14px; display: flex; flex-wrap: wrap; gap: 24px; }
     .event-detail-item { display: flex; flex-direction: column; gap: 3px; }
     .event-detail-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brown3); }
@@ -720,8 +723,16 @@
     }
     if (!valid) { form.querySelector('.error').focus(); return; }
 
+    var bestaetigungEl = form.querySelector('[name=bestaetigung]');
+    if (!bestaetigungEl || !bestaetigungEl.checked) {
+      var checkWrap = document.getElementById('check-' + formId);
+      if (checkWrap) { checkWrap.classList.add('error'); setTimeout(function() { checkWrap.classList.remove('error'); }, 2500); }
+      return;
+    }
+
     btn.disabled = true;
     var nlEl = form.querySelector('[name=newsletter]');
+    var confirmKey = form.dataset.confirmKey || title;
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -732,14 +743,26 @@
         email: email,
         veranstaltung: title,
         nachricht: form.querySelector('[name=nachricht]').value.trim(),
+        'confirm-key': confirmKey,
         newsletter: nlEl && nlEl.checked ? 'ja' : 'nein'
       }).toString()
     })
     .then(function() {
-      if (nlEl && nlEl.checked) subscribeToBrevo(email, vorname, form.querySelector('[name=nachname]').value.trim(), 'Am-Hof-Anmeldung');
-      var success = document.getElementById(formId + '-success');
-      if (success) success.style.display = 'block';
-      btn.style.display = 'none';
+      fetch('/.netlify/functions/event-confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          vorname: vorname,
+          eventTitle: form.dataset.title || title,
+          eventDate: form.dataset.date || '',
+          eventTime: form.dataset.time || '',
+          eventLocation: form.dataset.location || '',
+          confirmKey: confirmKey,
+          newsletter: nlEl && nlEl.checked ? 'ja' : 'nein'
+        })
+      }).catch(function() {});
+      window.location.href = '/danke-anmeldung';
     })
     .catch(function() {
       btn.disabled = false;
@@ -801,12 +824,14 @@
         html += '<div style="width:100%;white-space:pre-line;font-size:14px;color:var(--brown2);margin-top:12px;line-height:1.75">' + ev.detail + '</div>';
       }
       html += '</div>';
-      html += '<div class="am-anmelde-form">';
+      var amConfirmKey = (ev.confirmKey || '').replace(/"/g, '&quot;') || ev.title.replace(/"/g, '&quot;');
+      html += '<div class="am-anmelde-form" id="' + formId + '" data-title="' + ev.title.replace(/"/g,'&quot;') + '" data-date="' + ev.date + '" data-time="' + (ev.time||'').replace(/"/g,'&quot;') + '" data-location="' + (ev.location||'').replace(/"/g,'&quot;') + '" data-confirm-key="' + amConfirmKey + '">';
       html += '<h4>Anmelden: ' + ev.title + '</h4>';
       html += '<div class="am-anmelde-row"><div class="am-anmelde-field"><label>Vorname *</label><input type="text" name="vorname" placeholder="Vorname"><span class="am-field-err" data-err="vorname">Bitte Vorname eingeben</span></div>';
       html += '<div class="am-anmelde-field"><label>Nachname</label><input type="text" name="nachname" placeholder="Nachname"></div></div>';
       html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>E-Mail *</label><input type="email" name="email" placeholder="deine@email.de"><span class="am-field-err" data-err="email">Bitte gültige E-Mail-Adresse eingeben</span></div></div>';
       html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>Nachricht (optional)</label><textarea name="nachricht" placeholder="Fragen oder Hinweise …"></textarea></div></div>';
+      html += '<div class="anmelde-check" id="check-' + formId + '"><input type="checkbox" id="confirm-' + formId + '" name="bestaetigung"><label for="confirm-' + formId + '">Ich melde mich verbindlich an und stimme zu, eine Bestätigungsmail zu erhalten.</label></div>';
       html += '<div class="newsletter-opt"><input type="checkbox" id="nl-' + formId + '" name="newsletter" value="ja"><label for="nl-' + formId + '">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label></div>';
       html += '<button type="button" class="am-anmelde-submit" onclick="submitAmAnmeldung(this,\'' + ev.title.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\',\'' + formId + '\')">Anmeldung absenden</button>';
       html += '<p class="am-anmelde-success" id="' + formId + '-success">✓ Danke! Wir melden uns bald.</p>';
@@ -867,6 +892,8 @@
   <input type="email" name="email">
   <input type="text" name="veranstaltung">
   <textarea name="nachricht"></textarea>
+  <input type="text" name="confirm-key">
+  <input type="checkbox" name="bestaetigung">
   <input type="checkbox" name="newsletter">
 </form>
 
