@@ -769,8 +769,7 @@
             newsletter: newsletterEl && newsletterEl.checked ? 'ja' : 'nein'
           })
         }).catch(function() {});
-        form.querySelector('.anmelde-submit').style.display = 'none';
-        document.getElementById('success-' + formId).style.display = 'block';
+        window.location.href = '/danke-anmeldung';
       })
       .catch(function() { alert('Fehler beim Senden – bitte per E-Mail melden: info@homa-hof-heiligenberg.de'); });
   }
