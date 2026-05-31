@@ -106,5 +106,5 @@ exports.handler = async (event) => {
     }
   }
 
-  return { statusCode: 200, body: JSON.stringify({ success: true, debug }) };
+  return { statusCode: 200, body: JSON.stringify({ success: true }) };
 };
