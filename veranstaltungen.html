@@ -442,10 +442,11 @@
         <span class="field-err" id="err-email">Bitte gültige E-Mail-Adresse eingeben</span>
       </div>
       <div class="form-group">
-        <label class="form-label" for="ver-select">Veranstaltung</label>
+        <label class="form-label" for="ver-select">Veranstaltung *</label>
         <select class="form-select" id="ver-select" name="veranstaltung">
           <option value="">Wird geladen…</option>
         </select>
+        <span class="field-err" id="err-veranstaltung">Bitte eine Veranstaltung auswählen</span>
       </div>
       <div class="form-group">
         <label class="form-label" for="ver-nachricht">Nachricht (optional)</label>
@@ -864,11 +865,14 @@
     var email = emailEl.value.trim();
     var valid = true;
 
+    var selectEl = form.querySelector('[name=veranstaltung]');
     clearFieldError(vornameEl, 'err-vorname');
     clearFieldError(emailEl, 'err-email');
+    clearFieldError(selectEl, 'err-veranstaltung');
 
     if (!vorname) { showFieldError(vornameEl, 'err-vorname'); valid = false; }
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFieldError(emailEl, 'err-email'); valid = false; }
+    if (!selectEl.value) { showFieldError(selectEl, 'err-veranstaltung'); valid = false; }
     if (!valid) { vornameEl.closest('form').querySelector('.error').focus(); return; }
 
     var bestaetigungEl = form.querySelector('[name=bestaetigung]');
@@ -881,7 +885,7 @@
     var btn = form.querySelector('[type=submit]');
     if (btn) btn.disabled = true;
     var nlEl = form.querySelector('[name=newsletter]');
-    var selectedTitle = form.querySelector('[name=veranstaltung]').value;
+    var selectedTitle = selectEl.value;
     var evData = (window._verEvData && selectedTitle) ? window._verEvData[selectedTitle] : null;
     var confirmKey = evData ? (evData.confirmKey || evData.title) : selectedTitle;
     fetch('/', {
