@@ -1,9 +1,21 @@
 {
-  "stand": "",
+  "stand": "Juni 2026",
   "categories": [
-    { "name": "Gemüse", "items": "" },
-    { "name": "Salate", "items": "" },
-    { "name": "Obst / Nüsse / Säfte / Honig", "items": "" },
-    { "name": "Weiteres Angebot in Bio-Qualität", "items": "" }
+    {
+      "name": "Gemüse",
+      "items": "Lauch\nZwiebeln"
+    },
+    {
+      "name": "Salate",
+      "items": "Lauch\nZwiebeln"
+    },
+    {
+      "name": "Obst / Nüsse / Säfte / Honig",
+      "items": "Lauch\nZwiebeln"
+    },
+    {
+      "name": "Weiteres Angebot in Bio-Qualität",
+      "items": "Lauch\nZwiebeln"
+    }
   ]
 }
