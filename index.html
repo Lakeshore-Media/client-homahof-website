@@ -686,6 +686,15 @@
     }
     .about-body { padding: 24px; }
 
+    /* === GALERIE === */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .gallery-img { width: 100%; height: 260px; object-fit: cover; border-radius: 8px; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .gallery-img:hover { transform: scale(1.02); opacity: 0.9; }
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-img { height: 180px; }
+    }
+
     /* === TESTIMONIALS === */
     #testimonials {
       background: var(--cream3);
@@ -1435,6 +1444,20 @@
   </div>
 </section>
 
+<!-- IMPRESSIONEN -->
+<section id="impressionen" style="padding:80px 0;background:var(--cream2);">
+  <div style="max-width:1440px;margin:0 auto;padding:0 48px;">
+    <div class="testimonials-header" style="margin-bottom:40px;">
+      <div class="eyebrow" style="display:flex;align-items:center;justify-content:center;gap:10px;">Impressionen</div>
+      <h2 class="section-title">Der Hof in <em>Bildern</em></h2>
+    </div>
+    <div class="gallery-grid fade-in" id="start-gallery"></div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="am-hof.html#impressionen" class="btn btn-outline-dark">Mehr Bilder →</a>
+    </div>
+  </div>
+</section>
+
 <!-- TESTIMONIALS -->
 <div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFFCF5;display:block">
   <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
@@ -1726,6 +1749,18 @@
       }
       const img = document.getElementById('next-event-img');
       if (next.image && img) { img.src = next.image; img.alt = next.title; img.style.display = 'block'; }
+    })
+    .catch(() => {});
+
+  fetch('content/impressionen.json')
+    .then(r => r.json())
+    .then(data => {
+      const grid = document.getElementById('start-gallery');
+      if (!grid) return;
+      const items = (data.items || []).slice(0, 6);
+      grid.innerHTML = items.map(img =>
+        `<img class="gallery-img" src="${img.src}" alt="${img.alt}" loading="lazy">`
+      ).join('');
     })
     .catch(() => {});
 </script>

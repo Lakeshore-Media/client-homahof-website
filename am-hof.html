@@ -453,27 +453,6 @@
   </div>
 </section>
 
-<!-- D: GALERIE -->
-<section class="section-wrap" style="background:var(--cream);">
-  <div class="section-inner">
-    <div class="section-header fade-in">
-      <div class="eyebrow">Impressionen</div>
-      <h2 class="section-title">Der Hof in <em>Bildern</em></h2>
-    </div>
-    <div class="gallery-grid fade-in">
-      <img class="gallery-img" src="images/stills/drohne-hof-pavillon-solar.webp" alt="Homa-Hof – Pavillon aus der Vogelperspektive" loading="lazy">
-      <img class="gallery-img" src="images/stills/pavillon-gegenlicht-sonne.webp" alt="Yagna-Pavillon im Gegenlicht" loading="lazy">
-      <img class="gallery-img" src="images/stills/pavillon-innen-altar.webp" alt="Pavillon Innen – Altar" loading="lazy">
-      <img class="gallery-img" src="images/stills/drohne-gesamthof-fruehjahr.webp" alt="Homa-Hof Heiligenberg – Luftaufnahme Frühjahr" loading="lazy">
-      <img class="gallery-img" src="images/stills/statue-vasant-hofgebaeude.webp" alt="Statue Vasant – Hofgebäude" loading="lazy">
-      <img class="gallery-img" src="images/stills/gruppe-bank-abendrot.webp" alt="Gemeinschaft am Homa-Hof – Abendrot" loading="lazy">
-      <img class="gallery-img" src="images/stills/hofgelaende-pavillon-wiese.webp" alt="Hofgelände – Pavillon und Wiese" loading="lazy">
-      <img class="gallery-img" src="images/stills/drohne-feldarbeit-gruppe-01.webp" alt="Feldarbeit am Homa-Hof" loading="lazy">
-      <img class="gallery-img" src="images/stills/pavillon-rote-fahne-fruehling.webp" alt="Pavillon – Rote Fahne im Frühling" loading="lazy">
-    </div>
-  </div>
-</section>
-
 <!-- E: HOFLADEN -->
 <section class="section-wrap" id="hofladen" style="background:var(--cream2);">
   <div class="section-inner">
@@ -568,6 +547,17 @@
       </div>
     </div>
     <p class="section-text" style="margin-top:24px;">Für Anfragen zur Übernachtung bitte direkt Kontakt aufnehmen: <a href="mailto:willkommen@homa-hof-heiligenberg.de" style="color:var(--gold)">willkommen@homa-hof-heiligenberg.de</a></p>
+  </div>
+</section>
+
+<!-- IMPRESSIONEN -->
+<section class="section-wrap" id="impressionen" style="background:var(--cream);">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="eyebrow">Impressionen</div>
+      <h2 class="section-title">Der Hof in <em>Bildern</em></h2>
+    </div>
+    <div class="gallery-grid fade-in" id="am-hof-gallery"></div>
   </div>
 </section>
 
@@ -870,6 +860,20 @@
         + standHtml
         + '<div class="hofladen-cat-grid">' + catHtml + '</div>'
         + '<p class="hofladen-danke">Vielen Dank, dass du den Homa-Hof mit deinem Einkauf unterstützt.</p>';
+    })
+    .catch(function() {});
+
+  fetch('content/impressionen.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var grid = document.getElementById('am-hof-gallery');
+      if (!grid) return;
+      var items = data.items || [];
+      if (!items.length) return;
+      grid.innerHTML = items.map(function(img) {
+        return '<img class="gallery-img" src="' + img.src + '" alt="' + img.alt + '" loading="lazy">';
+      }).join('');
+      if (window._fadeObserver) grid.querySelectorAll('.gallery-img').forEach(function(el) { fadeObserver.observe(el); });
     })
     .catch(function() {});
 

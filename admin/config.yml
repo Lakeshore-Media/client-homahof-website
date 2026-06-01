@@ -61,6 +61,21 @@ collections:
                 default: ""
                 hint: "Jedes verfügbare Produkt in eine neue Zeile eingeben. Leere Kategorien werden nicht angezeigt."
 
+  - name: impressionen
+    label: Impressionen (Galerie)
+    files:
+      - name: impressionen
+        label: Galerie-Bilder
+        file: content/impressionen.json
+        format: json
+        fields:
+          - label: Bilder
+            name: items
+            widget: list
+            fields:
+              - { label: Bild,                 name: src, widget: image }
+              - { label: Bildbeschreibung,      name: alt, widget: string, hint: "Alt-Text für Barrierefreiheit und SEO" }
+
   - name: aktuelles
     label: Aktuelles
     files:
