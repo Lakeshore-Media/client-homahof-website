@@ -1,13 +1,40 @@
 {
   "items": [
-    { "src": "images/stills/drohne-hof-pavillon-solar.webp",       "alt": "Homa-Hof – Pavillon aus der Vogelperspektive" },
-    { "src": "images/stills/pavillon-gegenlicht-sonne.webp",        "alt": "Yagna-Pavillon im Gegenlicht" },
-    { "src": "images/stills/pavillon-innen-altar.webp",             "alt": "Pavillon Innen – Altar" },
-    { "src": "images/stills/drohne-gesamthof-fruehjahr.webp",       "alt": "Homa-Hof Heiligenberg – Luftaufnahme Frühjahr" },
-    { "src": "images/stills/statue-vasant-hofgebaeude.webp",        "alt": "Statue Vasant – Hofgebäude" },
-    { "src": "images/stills/gruppe-bank-abendrot.webp",             "alt": "Gemeinschaft am Homa-Hof – Abendrot" },
-    { "src": "images/stills/hofgelaende-pavillon-wiese.webp",       "alt": "Hofgelände – Pavillon und Wiese" },
-    { "src": "images/stills/drohne-feldarbeit-gruppe-01.webp",      "alt": "Feldarbeit am Homa-Hof" },
-    { "src": "images/stills/pavillon-rote-fahne-fruehling.webp",    "alt": "Pavillon – Rote Fahne im Frühling" }
+    {
+      "src": "images/stills/drohne-hof-pavillon-solar.webp",
+      "alt": "Homa-Hof – Pavillon aus der Vogelperspektive"
+    },
+    {
+      "src": "images/stills/pavillon-gegenlicht-sonne.webp",
+      "alt": "Yagna-Pavillon im Gegenlicht"
+    },
+    {
+      "src": "/images/seminar-bei-der-kapelle.jpg",
+      "alt": "Seminar bei der Kapelle"
+    },
+    {
+      "src": "images/stills/drohne-gesamthof-fruehjahr.webp",
+      "alt": "Homa-Hof Heiligenberg – Luftaufnahme Frühjahr"
+    },
+    {
+      "src": "images/stills/statue-vasant-hofgebaeude.webp",
+      "alt": "Statue Vasant – Hofgebäude"
+    },
+    {
+      "src": "images/stills/gruppe-bank-abendrot.webp",
+      "alt": "Gemeinschaft am Homa-Hof – Abendrot"
+    },
+    {
+      "src": "images/stills/hofgelaende-pavillon-wiese.webp",
+      "alt": "Hofgelände – Pavillon und Wiese"
+    },
+    {
+      "src": "images/stills/drohne-feldarbeit-gruppe-01.webp",
+      "alt": "Feldarbeit am Homa-Hof"
+    },
+    {
+      "src": "images/stills/pavillon-rote-fahne-fruehling.webp",
+      "alt": "Pavillon – Rote Fahne im Frühling"
+    }
   ]
 }
