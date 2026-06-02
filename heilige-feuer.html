@@ -261,6 +261,8 @@
     .card-expand { max-height: 0; overflow: hidden; transition: max-height 0.45s ease, padding 0.35s ease; padding: 0 24px; }
     .card.open .card-expand { max-height: 400px; padding: 0 24px 20px; }
     .card-expand-text { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: var(--brown2); line-height: 1.75; border-top: 1px solid var(--border2); padding-top: 14px; }
+    .card-video-link { display: inline-block; margin-top: 12px; font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--gold); letter-spacing: 0.03em; text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+    .card-video-link:hover { color: var(--copper); border-color: var(--copper); }
 
     /* Dark section */
     .dark-section { background: var(--dark-bg); padding: 100px 0; position: relative; overflow: hidden; }
@@ -417,34 +419,73 @@
       .calc-row, .calc-row-3 { grid-template-columns: 1fr; }
     }
 
-    /* Kinder teaser */
+    /* Kinder section */
     .kinder-section {
       position: relative;
-      min-height: 380px;
-      display: flex;
-      align-items: center;
       overflow: hidden;
+      background: #1a0b02;
     }
-    .kinder-bg { position: absolute; inset: 0; background-size: cover; background-position: center top; }
-    .kinder-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(42,21,5,.8) 0%, rgba(42,21,5,.45) 60%, transparent 100%); }
+    .kinder-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .kinder-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(42,21,5,.95) 0%, rgba(42,21,5,.85) 45%, rgba(42,21,5,.38) 100%); }
+    .kinder-dragon {
+      position: absolute;
+      right: -1%;
+      bottom: -5%;
+      height: 110%;
+      max-height: 660px;
+      width: auto;
+      z-index: 2;
+      pointer-events: none;
+    }
     .kinder-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       max-width: 1440px;
       margin: 0 auto;
-      padding: 60px 48px;
+      padding: 80px 48px;
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
     }
     .kinder-content .eyebrow { color: var(--gold-light); }
     .kinder-content .eyebrow::before { background: var(--gold-light); }
     .kinder-content .section-title { color: white; }
-    .kinder-content .section-text { color: rgba(255,255,255,0.82); max-width: 460px; }
-    .kinder-img-card { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.35); }
-    .kinder-img-card img { width: 100%; height: 300px; object-fit: cover; object-position: center top; display: block; }
+    .kinder-content .section-text { color: rgba(255,255,255,0.82); max-width: 520px; }
+    .kinder-books {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 44px;
+      max-width: 700px;
+    }
+    .kinder-book {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .kinder-book img {
+      width: 100%;
+      height: 130px;
+      object-fit: contain;
+      object-position: center;
+    }
+    .kinder-book-title {
+      font-family: var(--serif);
+      font-size: 14.5px;
+      font-weight: 400;
+      color: var(--gold-light);
+      line-height: 1.4;
+    }
+    .kinder-book-text {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.65;
+    }
+    .kinder-cta { margin-top: 36px; }
 
     /* Further fires */
     .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -515,8 +556,9 @@
       .section-wrap { padding: 60px 0; }
       .section-title { font-size: 34px; }
       .steps-grid { grid-template-columns: 1fr 1fr; }
-      .kinder-content { padding: 40px 20px; grid-template-columns: 1fr; }
-      .kinder-img-card { display: none; }
+      .kinder-dragon { display: none; }
+      .kinder-content { padding: 60px 20px; }
+      .kinder-books { grid-template-columns: 1fr; max-width: 100%; }
       .zeiten-calc-wrap { margin: 28px 0 0; padding: 28px 20px; }
       .video-grid, .two-fire-grid { grid-template-columns: 1fr !important; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 20px 48px; }
@@ -709,7 +751,7 @@
     <div class="two-fire-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:760px;margin:0 auto;">
       <div class="card expandable fade-in" onclick="toggleCard(this)">
         <div class="card-img" style="height:180px;aspect-ratio:unset;background:var(--cream2);">
-          <img src="images/stills/tryambakam-yajna.jpg" alt="Tryambakam Homa – Segensfeuer" loading="lazy" style="object-fit:contain;object-position:center;">
+          <img src="images/stills/tryambakam-yajna.jpg" alt="Tryambakam Homa – Segensfeuer" loading="lazy" style="object-fit:cover;object-position:top center;">
         </div>
         <div class="card-body">
           <h3 class="card-title">Tryambakam Homa</h3>
@@ -717,6 +759,7 @@
         </div>
         <div class="card-expand">
           <p class="card-expand-text">Das „Mantra der Befreiung" begleitet dieses Feuer. Es kann einzeln oder in der Gruppe praktiziert werden – für beliebige Dauer. In Homa-Zentren brennt es täglich mindestens vier Stunden; bei Voll- und Neumond oft 24 Stunden. Kein Ersatz für Agnihotra, sondern eine Vertiefung.</p>
+          <a href="https://www.youtube.com/watch?v=GvkruwNo6jo" target="_blank" rel="noopener" class="card-video-link">▶ Video ansehen</a>
         </div>
       </div>
       <div class="card expandable fade-in" style="transition-delay:0.2s" onclick="toggleCard(this)">
@@ -729,6 +772,7 @@
         </div>
         <div class="card-expand">
           <p class="card-expand-text">Die Mantras adressieren die drei vedischen Ebenen – Erde, Atmosphäre und den Raum darüber – und wirken harmonisierend auf diese Ebenen. Die Durchführung dauert etwa fünf Minuten und eignet sich besonders wenn man zeitenunabhängig ein vedisches Feuer durchführen möchte. Ideal auch für alle Neuanfänge, z. B. vor einer Reise, Festlichkeiten usw.</p>
+          <a href="https://www.youtube.com/watch?v=q3IaPuT4_6s" target="_blank" rel="noopener" class="card-video-link">▶ Video ansehen</a>
         </div>
       </div>
     </div>
@@ -796,17 +840,33 @@
 </section>
 
 <!-- F: KINDER -->
-<section class="kinder-section">
+<section class="kinder-section" id="aganos">
   <div class="kinder-bg" style="background-image:url('Archivbilder/Kinder-Seite Aganos Welt Titel/imgi_14_aganos-background.jpg')"></div>
   <div class="kinder-overlay"></div>
+  <img class="kinder-dragon" src="Archivbilder/Kinder-Seite Aganos Welt Titel/aganos-fliegt-bearbeitet.png" alt="Aganos der Feuerdrache" loading="lazy">
   <div class="kinder-content fade-in">
-    <div>
-      <div class="eyebrow">Für Kinder</div>
-      <h2 class="section-title" style="color:white;">Agnihotra für <em style="color:var(--gold-light)">Kinder</em></h2>
-      <p class="section-text">„Aganos" ist die Welt der Agnihotra-Kinder. In spannenden Geschichten lernen Kinder die Heiligen Feuer kennen.</p>
+    <div class="eyebrow">Für Kinder</div>
+    <h2 class="section-title" style="color:white;">Die Welt von <em style="color:var(--gold-light)">Aganos</em></h2>
+    <p class="section-text">Aganos ist ein Feuerdrache – und er liebt das Agnihotra. Mit seiner Familie, den Waldtrollen und dem kleinen heiligen Feuer zeigt er Kindern, wie Natur und Mensch wieder in Einklang kommen können.</p>
+    <div class="kinder-books">
+      <div class="kinder-book">
+        <img src="Archivbilder/Kinder-Seite Aganos Welt Titel/aganos-cover-1.jpg" alt="Aganos und das Geheimnis des kleinen Feuers" loading="lazy">
+        <div class="kinder-book-title">Aganos und das Geheimnis des kleinen Feuers</div>
+        <p class="kinder-book-text">Wie Aganos das Agnihotra entdeckt – und wie das heilige Feuer den Wald heilt und Mensch und Natur wieder verbindet.</p>
+      </div>
+      <div class="kinder-book">
+        <img src="Archivbilder/Kinder-Seite Aganos Welt Titel/aganos-cover-2.jpg" alt="Aganos und Wayu Wirbelwind" loading="lazy">
+        <div class="kinder-book-title">Aganos und Wayu Wirbelwind</div>
+        <p class="kinder-book-text">Aganos' Sohn Wayu entdeckt das Vyahruti-Feuer – eine Zeremonie, die Kinder tagsüber selbst durchführen können.</p>
+      </div>
+      <div class="kinder-book">
+        <img src="Archivbilder/Kinder-Seite Aganos Welt Titel/aganos-cover-3.jpg" alt="Aganos und die Friedensfeuer" loading="lazy">
+        <div class="kinder-book-title">Aganos und die Friedensfeuer</div>
+        <p class="kinder-book-text">Aganos' Tochter Feni stellt das OM Tryambakam vor – ein Feuer des Friedens und der Heilung für die ganze Familie.</p>
+      </div>
     </div>
-    <div class="kinder-img-card">
-      <img src="Archivbilder/Kinder-Seite Aganos Welt Titel/imgi_14_aganos-background.jpg" alt="Aganos – Agnihotra für Kinder" loading="lazy">
+    <div class="kinder-cta">
+      <a href="https://www.homa-hof-shop.de/buecher/" target="_blank" rel="noopener" class="btn btn-gold">Bücher im Shop →</a>
     </div>
   </div>
 </section>
@@ -958,7 +1018,7 @@
                  - 0.5*y*y*Math.sin(4*l0) - 1.25*e*e*Math.sin(2*m)) * 4;
   }
   function hourAngle(lat, dec) {
-    var cosH = (Math.cos(toRad(90.833)) - Math.sin(toRad(lat))*Math.sin(toRad(dec)))
+    var cosH = (Math.cos(toRad(90.0)) - Math.sin(toRad(lat))*Math.sin(toRad(dec)))
              / (Math.cos(toRad(lat))*Math.cos(toRad(dec)));
     return (cosH > 1 || cosH < -1) ? NaN : toDeg(Math.acos(cosH));
   }
@@ -979,9 +1039,12 @@
   }
   function minsToTime(m) {
     m = ((m % 1440) + 1440) % 1440;
-    var h = Math.floor(m/60), min = Math.round(m%60);
+    var h = Math.floor(m / 60);
+    var totalSecs = Math.round((m % 60) * 60);
+    var min = Math.floor(totalSecs / 60);
+    var sec = totalSecs % 60;
     if (min === 60) { h++; min = 0; }
-    return ('0'+h).slice(-2) + ':' + ('0'+min).slice(-2);
+    return ('0'+h).slice(-2) + ':' + ('0'+min).slice(-2) + ':' + ('0'+sec).slice(-2);
   }
   var WD = ['So','Mo','Di','Mi','Do','Fr','Sa'];
   function fmtDate(d) {
