@@ -89,7 +89,7 @@ Download-Kategorien: `aktuell`, `anleitung`, `flyer`, `presse`, `wissenschaft`
 4. Brevo-Segmentierung: `LETZTE_VERANSTALTUNG` wird bei **jeder** Anmeldung gesetzt — unabhängig vom Newsletter-Opt-in
 
 ### Gemeinsame JS-Hilfsmittel (`js/site-config.js`)
-- `HOMAHOF.paypalUrl` — PayPal-Spendenlink (HIER und nur hier pflegen): `https://www.paypal.com/donate?token=gz4U8careXbDl8W_N6fNKGuRi90bScKiMu5bZ9o7qAGFw0WwVKfDtkw0pfWKgF_OmPYle51z0ajAOr0b&locale.x=DE`
+- `HOMAHOF.paypalUrl` — PayPal-Spendenlink (HIER und nur hier pflegen): `https://www.paypal.com/donate/?hosted_button_id=KXFDM88VBHQKC`
 - `HOMAHOF.iban`, `HOMAHOF.bic`, `HOMAHOF.bank` — Bankdaten (HIER pflegen)
 - `HOMAHOF.spendenInner()` — rendert den kompletten Spenden-HTML-Block; `<section id="spenden">` auf jeder Seite wird beim DOMContentLoaded damit befüllt
 - `HOMAHOF.newsletterInner()` — rendert den Newsletter-Formular-Block; `<section id="newsletter">` wird damit befüllt
