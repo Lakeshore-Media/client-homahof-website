@@ -83,6 +83,11 @@
     .btn-calc:hover { background: #8A2A08; }
     .btn-calc:disabled { background: var(--border); cursor: not-allowed; }
     .calc-error { font-family: var(--sans); font-size: 13.5px; color: var(--copper); background: rgba(184,64,16,0.06); border: 1px solid rgba(184,64,16,0.2); border-radius: 8px; padding: 10px 14px; margin-top: 12px; display: none; }
+    .addr-row { display: flex; gap: 8px; }
+    .addr-row input { flex: 1; }
+    .addr-btn { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font-family: var(--sans); font-size: 14px; font-weight: 500; color: white; background: var(--brown2); border: none; border-radius: 8px; padding: 10px 18px; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+    .addr-btn:hover { background: var(--brown); }
+    .addr-btn:disabled { background: var(--border); cursor: not-allowed; }
 
     /* ERGEBNIS */
     .result-section { background: var(--cream2); padding: 72px 0 80px; }
@@ -190,7 +195,30 @@
   <div class="section-inner">
     <div class="calc-card fade-in">
       <h2 class="calc-title">Zeiten berechnen</h2>
-      <p class="calc-subtitle">Wähle dein Land, überprüfe die Koordinaten und klicke auf Berechnen. Für andere Orte kannst du Breitengrad und Längengrad manuell anpassen.</p>
+      <p class="calc-subtitle">Gib einen Ort oder eine Adresse ein — Koordinaten und Zeitzone werden automatisch erkannt.</p>
+
+      <!-- Adresssuche -->
+      <div class="form-group" style="margin-bottom:8px">
+        <label>Ort oder Adresse suchen</label>
+        <div class="addr-row">
+          <input type="text" id="addr-input" placeholder="z.B. Heiligenberg, Bodenseekreis" onkeydown="if(event.key==='Enter'){searchAddress();event.preventDefault();}">
+          <button class="addr-btn" id="addr-btn" onclick="searchAddress()">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
+            Suchen
+          </button>
+        </div>
+        <div id="addr-result" class="tz-info" style="display:none"></div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;margin:12px 0">
+        <button class="geo-btn" onclick="useGeolocation()" style="margin-top:0">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2"/></svg>
+          GPS-Standort
+        </button>
+        <span style="font-family:var(--sans);font-size:13px;color:var(--brown3)">oder Koordinaten unten manuell eingeben</span>
+      </div>
+
+      <div class="divider" style="margin:16px 0"></div>
 
       <div class="form-grid full" style="margin-bottom:20px">
         <div class="form-group">
@@ -212,11 +240,6 @@
           <input type="number" id="lon" step="0.0001" min="-180" max="180" placeholder="z.B. 9.1749" value="9.1749">
         </div>
       </div>
-
-      <button class="geo-btn" onclick="useGeolocation()">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2"/></svg>
-        Meinen Standort ermitteln
-      </button>
 
       <div class="divider"></div>
 
@@ -520,9 +543,126 @@ function useGeolocation() {
     pos => {
       document.getElementById('lat').value = pos.coords.latitude.toFixed(4);
       document.getElementById('lon').value = pos.coords.longitude.toFixed(4);
+      document.getElementById('addr-result').textContent = 'GPS: ' + pos.coords.latitude.toFixed(4) + ', ' + pos.coords.longitude.toFixed(4);
+      document.getElementById('addr-result').style.display = 'block';
     },
     () => showError('Standort konnte nicht ermittelt werden. Bitte Koordinaten manuell eingeben.')
   );
+}
+
+function searchAddress() {
+  const q = document.getElementById('addr-input').value.trim();
+  if (!q) { showError('Bitte einen Ort oder eine Adresse eingeben.'); return; }
+  hideError();
+  const btn = document.getElementById('addr-btn');
+  const resultEl = document.getElementById('addr-result');
+  btn.disabled = true; btn.textContent = '…';
+  resultEl.style.display = 'none';
+
+  fetch('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(q) + '&format=json&limit=1&addressdetails=1', {
+    headers: { 'Accept-Language': 'de,en', 'User-Agent': 'HomaHof-Agnitimer/1.0 (homa-hof-heiligenberg.de)' }
+  })
+  .then(r => r.json())
+  .then(data => {
+    btn.disabled = false; btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg> Suchen';
+    if (!data || data.length === 0) { showError('Kein Ort gefunden. Bitte anders formulieren.'); return; }
+    const place = data[0];
+    const lat = parseFloat(place.lat), lon = parseFloat(place.lon);
+    document.getElementById('lat').value = lat.toFixed(4);
+    document.getElementById('lon').value = lon.toFixed(4);
+    if (!document.getElementById('loc-name').value) {
+      const addr = place.address || {};
+      document.getElementById('loc-name').value = addr.city || addr.town || addr.village || addr.municipality || place.display_name.split(',')[0];
+    }
+    resultEl.textContent = '✓ ' + place.display_name;
+    resultEl.style.display = 'block';
+    // Try to auto-select country from Nominatim countrycode
+    const cc = (place.address && place.address.country_code) ? place.address.country_code.toUpperCase() : '';
+    autoSelectCountry(cc, place.address && place.address.country);
+  })
+  .catch(() => {
+    btn.disabled = false; btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg> Suchen';
+    showError('Adresssuche fehlgeschlagen. Bitte Internetverbindung prüfen.');
+  });
+}
+
+// Map ISO country codes to COUNTRIES array entries (best-effort)
+const CC_MAP = {
+  'DE': 'Deutschland', 'AT': 'Österreich', 'CH': 'Schweiz',
+  'AF': 'Afghanistan', 'AL': 'Albania', 'DZ': 'Algeria',
+  'AR': 'Argentina', 'AM': 'Armenia', 'AU': 'Australia New South Wales',
+  'AZ': 'Azerbaijan', 'BS': 'Bahamas', 'BH': 'Bahrain',
+  'BD': 'Bangladesh', 'BY': 'Belarus', 'BE': 'Belgium',
+  'BZ': 'Belize', 'BO': 'Bolivia', 'BA': 'Bosnia and Herzegovina',
+  'BW': 'Botswana', 'BR': 'Brazil coast', 'BN': 'Brunei Darussalam',
+  'BG': 'Bulgaria', 'BF': 'Burkina Faso', 'BI': 'Burundi',
+  'KH': 'Cambodia', 'CM': 'Cameroon', 'CA': 'Canada Eastern',
+  'CV': 'Cape Verde', 'CF': 'Central African Republic', 'TD': 'Chad',
+  'CL': 'Chile', 'CN': 'China VR', 'CO': 'Colombia',
+  'KM': 'Comoros', 'CR': 'Costa Rica', 'HR': 'Croatia',
+  'CU': 'Cuba', 'CY': 'Cyprus', 'CZ': 'Czech Republic',
+  'DK': 'Denmark', 'DJ': 'Djibouti', 'EC': 'Ecuador',
+  'EG': 'Egypt', 'SV': 'El Salvador', 'GQ': 'Equatorial Guinea',
+  'ER': 'Eritrea', 'EE': 'Estonia', 'ET': 'Ethiopia',
+  'FO': 'Faroe Islands', 'FJ': 'Fiji', 'FI': 'Finland',
+  'FR': 'France', 'GA': 'Gabon', 'GM': 'Gambia',
+  'GE': 'Georgia', 'DE': 'Deutschland', 'GH': 'Ghana',
+  'GI': 'Gibraltar', 'GB': 'United Kingdom', 'GR': 'Greece',
+  'GL': 'Greenland', 'GD': 'Grenada', 'GU': 'Guam',
+  'GT': 'Guatemala', 'GG': 'Guernsey', 'GN': 'Guinea',
+  'GW': 'Guinea-Bissau', 'GY': 'Guyana', 'HT': 'Haiti',
+  'HN': 'Honduras', 'HK': 'Hong Kong', 'HU': 'Hungary',
+  'IS': 'Iceland', 'IN': 'India', 'ID': 'Indonesia west',
+  'IR': 'Iran', 'IQ': 'Iraq', 'IE': 'Ireland', 'IL': 'Israel',
+  'IT': 'Italy', 'CI': 'Ivory Coast', 'JM': 'Jamaica',
+  'JP': 'Japan', 'JE': 'Jersey', 'JO': 'Jordan',
+  'KZ': 'Kazakhstan west', 'KE': 'Kenya', 'KR': 'Korea South',
+  'KW': 'Kuwait', 'KG': 'Kyrgyzstan', 'LA': 'Laos',
+  'LV': 'Latvia', 'LB': 'Lebanon', 'LS': 'Lesotho',
+  'LR': 'Liberia', 'LY': 'Libya', 'LI': 'Liechtenstein',
+  'LT': 'Lithuania', 'LU': 'Luxembourg', 'MG': 'Madagascar',
+  'MW': 'Malawi', 'MY': 'Malaysia', 'MV': 'Maldives',
+  'ML': 'Mali', 'MT': 'Malta', 'MQ': 'Martinique',
+  'MR': 'Mauritania', 'MU': 'Mauritius', 'MX': 'Mexico central and west',
+  'FM': 'Micronesia', 'MD': 'Moldova', 'MC': 'Monaco',
+  'MN': 'Mongolia east', 'ME': 'Montenegro', 'MA': 'Morocco',
+  'MZ': 'Mozambique', 'MM': 'Myanmar', 'NA': 'Namibia',
+  'NP': 'Nepal', 'NL': 'Netherlands', 'NZ': 'New Zealand',
+  'NI': 'Nicaragua', 'NE': 'Niger', 'NG': 'Nigeria',
+  'MK': 'North Macedonia', 'NO': 'Norway', 'OM': 'Oman',
+  'PK': 'Pakistan', 'PS': 'Palestinian Authority', 'PA': 'Panama',
+  'PG': 'Papua New Guinea', 'PY': 'Paraguay', 'PE': 'Peru',
+  'PH': 'Philippines', 'PL': 'Poland', 'PT': 'Portugal',
+  'PR': 'Puerto Rico', 'QA': 'Qatar', 'RO': 'Romania',
+  'RU': 'Russia European', 'RW': 'Rwanda',
+  'SA': 'Saudi Arabia', 'SN': 'Senegal', 'RS': 'Serbia',
+  'SC': 'Seychelles', 'SL': 'Sierra Leone', 'SG': 'Singapore',
+  'SK': 'Slovakia', 'SI': 'Slovenia', 'SB': 'Solomon Islands',
+  'SO': 'Somalia', 'ZA': 'South Africa', 'SS': 'South Sudan',
+  'ES': 'Spain', 'LK': 'Sri Lanka', 'SD': 'Sudan',
+  'SR': 'Suriname', 'SZ': 'Swaziland', 'SE': 'Sweden',
+  'SY': 'Syria', 'TW': 'Taiwan', 'TJ': 'Tajikistan',
+  'TZ': 'Tanzania', 'TH': 'Thailand', 'TL': 'Timor-Leste',
+  'TG': 'Togo', 'TT': 'Trinidad and Tobago', 'TN': 'Tunisia',
+  'TR': 'Turkey', 'TM': 'Turkmenistan', 'TV': 'Tuvalu',
+  'UG': 'Uganda', 'UA': 'Ukraine', 'AE': 'United Arab Emirates',
+  'US': 'United States Eastern', 'UY': 'Uruguay',
+  'UZ': 'Uzbekistan', 'VU': 'Vanuatu', 'VA': 'Vatican City',
+  'VE': 'Venezuela', 'VN': 'Vietnam', 'YE': 'Yemen',
+  'ZM': 'Zambia', 'ZW': 'Zimbabwe'
+};
+
+function autoSelectCountry(isoCode, countryName) {
+  const sel = document.getElementById('country-select');
+  let targetName = CC_MAP[isoCode] || null;
+  if (!targetName && countryName) {
+    const lcName = countryName.toLowerCase();
+    const match = COUNTRIES.find(c => c[0].toLowerCase() === lcName);
+    if (match) targetName = match[0];
+  }
+  if (!targetName) return;
+  const idx = COUNTRIES.findIndex(c => c[0] === targetName);
+  if (idx >= 0) { sel.value = idx; onCountryChange(); }
 }
 
 function showError(msg) {
