@@ -1004,6 +1004,7 @@ function downloadCSV(e) {
 
 // ─── PDF EXPORT ───────────────────────────────────────────────────────────────
 const MONTH_NAMES_PR = ['Jan','Feb','Mar','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+function fmtTimePr(h, m, s) { return h + ':' + fmt2(m) + ':' + fmt2(s); }
 
 function buildPrintTable(data, year, fromM, toM) {
   let html = '<thead><tr><th class="pt-tag">Tag</th>';
@@ -1016,7 +1017,7 @@ function buildPrintTable(data, year, fromM, toM) {
       if (day > daysInM) { html += '<td></td>'; continue; }
       const d = data[m][day];
       if (!d) { html += '<td></td>'; continue; }
-      html += '<td>' + fmtTime(d.sa.h, d.sa.m, d.sa.s) + '<br>' + fmtTime(d.su.h, d.su.m, d.su.s) + '</td>';
+      html += '<td>' + fmtTimePr(d.sa.h, d.sa.m, d.sa.s) + '<br>' + fmtTimePr(d.su.h, d.su.m, d.su.s) + '</td>';
     }
     html += '</tr>';
   }
