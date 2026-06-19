@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agnihotra-Zeiten Rechner – Homa-Hof Heiligenberg</title>
+  <meta name="description" content="Sonnenaufgangs- und Sonnenuntergangszeiten für Agnihotra – kostenloser Rechner für deinen Standort, für das gesamte Jahr.">
+  <link href="css/fonts.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--brown); background: var(--cream); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --cream: #FFFCF5; --cream2: #FFF8EC; --cream3: #FFF0D4;
+      --gold: #C07818; --gold2: #E8A020; --gold-light: #F5D88A;
+      --copper: #B84010; --brown: #2A1505; --brown2: #5A3A18; --brown3: #8A6030;
+      --border: #EDD9A8; --border2: #F5E8C0;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', system-ui, sans-serif;
+      --btn-radius: 50px;
+      --dark-bg: linear-gradient(135deg, #2A1505 0%, #4A2A0A 100%);
+    }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,252,245,0.95); border-bottom: 1px solid var(--border2); transition: box-shadow 0.3s ease; }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(42,21,5,0.1); }
+    .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; height: 84px; display: flex; align-items: center; gap: 32px; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-brand img { height: 68px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 30px; margin-left: auto; }
+    .nav-links a { font-family: var(--sans); font-size: 17px; font-weight: 400; color: var(--brown2); transition: color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { margin-left: 16px; }
+    .btn { display: inline-block; padding: 12px 28px; border-radius: var(--btn-radius); font-family: var(--sans); font-size: 15.5px; font-weight: 500; letter-spacing: 0.04em; cursor: pointer; transition: all 0.25s ease; }
+    .btn-gold { background: var(--copper); color: white; border: 2px solid var(--copper); }
+    .btn-gold:hover { background: #8A2A08; border-color: #8A2A08; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 4px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+
+    .subpage-hero { min-height: 380px; padding-top: 84px; position: relative; display: flex; align-items: center; overflow: hidden; }
+    .subpage-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .subpage-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(42,21,5,.78) 0%, rgba(42,21,5,.45) 55%, rgba(42,21,5,.2) 100%); }
+    .subpage-hero-content { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; padding: 60px 48px; width: 100%; }
+    .hero-eyebrow { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold-light); flex-shrink: 0; }
+    .subpage-hero-content h1 { font-family: var(--serif); font-size: 54px; font-weight: 300; line-height: 1.15; color: white; max-width: 580px; margin-bottom: 16px; }
+    .subpage-hero-content h1 em { font-style: italic; color: var(--gold-light); }
+    .subpage-hero-content p { font-family: var(--sans); font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.82); max-width: 460px; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+
+    /* RECHNER CARD */
+    .calc-section { background: var(--cream); padding: 80px 0 60px; }
+    .calc-card { background: white; border: 1px solid var(--border2); border-radius: 16px; padding: 48px; box-shadow: 0 4px 40px rgba(42,21,5,0.07); max-width: 780px; margin: 0 auto; }
+    .calc-title { font-family: var(--serif); font-size: 28px; font-weight: 300; color: var(--brown); margin-bottom: 8px; }
+    .calc-subtitle { font-family: var(--sans); font-size: 14.5px; color: var(--brown3); margin-bottom: 36px; line-height: 1.6; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-grid.full { grid-template-columns: 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brown3); }
+    .form-group input, .form-group select {
+      font-family: var(--sans); font-size: 15px; color: var(--brown);
+      background: var(--cream); border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; outline: none; transition: border-color 0.2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A3A18' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .tz-info { font-family: var(--sans); font-size: 12.5px; color: var(--brown3); background: var(--cream2); border-radius: 6px; padding: 6px 12px; margin-top: 4px; }
+    .geo-btn { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--gold); background: none; border: 1.5px solid var(--border); border-radius: 50px; padding: 7px 16px; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
+    .geo-btn:hover { border-color: var(--gold); background: rgba(192,120,24,0.05); }
+    .geo-btn svg { flex-shrink: 0; }
+    .divider { height: 1px; background: var(--border2); margin: 28px 0; }
+    .btn-calc { width: 100%; padding: 15px; background: var(--copper); color: white; border: none; border-radius: var(--btn-radius); font-family: var(--sans); font-size: 16.5px; font-weight: 500; letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .btn-calc:hover { background: #8A2A08; }
+    .btn-calc:disabled { background: var(--border); cursor: not-allowed; }
+    .calc-error { font-family: var(--sans); font-size: 13.5px; color: var(--copper); background: rgba(184,64,16,0.06); border: 1px solid rgba(184,64,16,0.2); border-radius: 8px; padding: 10px 14px; margin-top: 12px; display: none; }
+
+    /* ERGEBNIS */
+    .result-section { background: var(--cream2); padding: 72px 0 80px; }
+    .result-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 40px; }
+    .result-title { font-family: var(--serif); font-size: 30px; font-weight: 300; color: var(--brown); margin-bottom: 6px; }
+    .result-title em { font-style: italic; color: var(--gold); }
+    .result-meta { font-family: var(--sans); font-size: 13.5px; color: var(--brown3); line-height: 1.7; }
+    .btn-csv { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--brown); background: white; border: 1.5px solid var(--border); border-radius: 50px; padding: 9px 18px; cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
+    .btn-csv:hover { border-color: var(--gold); color: var(--gold); }
+
+    .tables-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .table-half h3 { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown3); margin-bottom: 12px; }
+    .table-scroll { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border2); }
+    .rt { border-collapse: collapse; width: 100%; min-width: 360px; background: white; }
+    .rt thead tr:first-child th { background: var(--brown); color: rgba(255,255,255,0.92); font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 6px; text-align: center; }
+    .rt thead tr:first-child th:first-child { background: var(--brown2); }
+    .rt tbody td { padding: 3px 5px; text-align: center; border-bottom: 1px solid #F5EDD5; font-size: 11px; line-height: 1.45; }
+    .rt tbody tr:last-child td { border-bottom: none; }
+    .rt tbody tr:nth-child(odd) td { background: rgba(255,248,236,0.5); }
+    .rt tbody td.td-day { background: var(--cream2) !important; font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--brown); width: 26px; min-width: 26px; }
+    .td-sa { color: var(--copper); display: block; font-family: var(--sans); }
+    .td-su { color: #7A5010; display: block; font-family: var(--sans); }
+    .td-empty { color: var(--border); font-size: 10px; }
+
+    /* FOOTER */
+    .footer-social { display: flex; gap: 14px; }
+    .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); font-family: var(--sans); font-size: 13px; font-weight: 500; transition: all 0.2s; }
+    .social-icon:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.4); }
+    footer { background: #2A1505; padding: 72px 0 0; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px; }
+    .footer-tagline { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 24px; }
+    .footer-col-title { font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-contact-item { font-family: var(--sans); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); line-height: 1.7; margin-bottom: 8px; }
+    .footer-contact-item a { transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--gold-light); }
+    .footer-divider { max-width: 1440px; margin: 56px auto 0; padding: 0 48px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-copy { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-family: var(--sans); font-size: 14.5px; font-weight: 300; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--gold-light); }
+
+    @media (max-width: 900px) {
+      .tables-wrap { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      #main-nav.nav-open { background: rgba(255,252,245,0.98); }
+      #main-nav.nav-open .nav-links { display: flex; flex-direction: column; position: absolute; top: 84px; left: 0; right: 0; background: rgba(255,252,245,0.98); padding: 24px 32px 32px; gap: 20px; border-bottom: 1px solid var(--border2); }
+      #main-nav.nav-open .nav-cta { display: none; }
+      #main-nav.nav-open .nav-links a { font-size: 20px; color: var(--brown); }
+      .nav-inner { padding: 0 24px; }
+      .subpage-hero-content { padding: 50px 24px; }
+      .subpage-hero-content h1 { font-size: 36px; }
+      .section-inner { padding: 0 20px; }
+      .calc-card { padding: 28px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .result-header { flex-direction: column; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 20px 48px; }
+      .footer-inner > div:first-child { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
+      .footer-divider { margin: 0 20px; }
+    }
+  </style>
+  <script src="js/site-config.js"></script>
+  <script src="js/cookie-banner.js" defer></script>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="images/Logo-Schrift-2025-Juhu.webp" alt="Homa-Hof Heiligenberg Logo">
+    </a>
+    <div class="nav-links">
+      <a href="die-basis.html">Die Basis</a>
+      <a href="heilige-feuer.html">Heilige Feuer</a>
+      <a href="wissen.html" style="color:var(--gold)">Wissen</a>
+      <a href="am-hof.html">Am Hof</a>
+      <a href="veranstaltungen.html">Veranstaltungen</a>
+      <a href="mitmachen.html">Mitmachen</a>
+      <a href="medien.html">Medien</a>
+      <a href="https://homa-hof-shop.de" target="_blank" rel="noopener">Shop</a>
+    </div>
+    <a href="mitmachen.html#spenden" class="btn btn-gold nav-cta" style="font-size:14.5px;padding:10px 22px;">Spenden</a>
+    <div class="nav-burger" aria-label="Menü"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<section class="subpage-hero">
+  <div class="subpage-hero-bg" style="background-image:url('Archivbilder/Agnihotra-Praxis/imgi_3_a-praxis.jpg')"></div>
+  <div class="subpage-hero-overlay"></div>
+  <div class="subpage-hero-content">
+    <div class="hero-eyebrow">Werkzeug für Praktizierende</div>
+    <h1>Agnihotra-<em>Zeiten</em></h1>
+    <p>Sonnenaufgang und Sonnenuntergang für deinen Standort — präzise Zeiten für das gesamte Jahr.</p>
+  </div>
+</section>
+
+<section class="calc-section">
+  <div class="section-inner">
+    <div class="calc-card fade-in">
+      <h2 class="calc-title">Zeiten berechnen</h2>
+      <p class="calc-subtitle">Wähle dein Land, überprüfe die Koordinaten und klicke auf Berechnen. Für andere Orte kannst du Breitengrad und Längengrad manuell anpassen.</p>
+
+      <div class="form-grid full" style="margin-bottom:20px">
+        <div class="form-group">
+          <label>Land &amp; Zeitzone</label>
+          <select id="country-select" onchange="onCountryChange()">
+            <option value="">— Bitte wählen —</option>
+          </select>
+          <div class="tz-info" id="tz-info" style="display:none"></div>
+        </div>
+      </div>
+
+      <div class="form-grid" style="margin-bottom:8px">
+        <div class="form-group">
+          <label>Breitengrad (Nord+, Süd−)</label>
+          <input type="number" id="lat" step="0.0001" min="-90" max="90" placeholder="z.B. 48.7749" value="48.7749">
+        </div>
+        <div class="form-group">
+          <label>Längengrad (Ost+, West−)</label>
+          <input type="number" id="lon" step="0.0001" min="-180" max="180" placeholder="z.B. 9.1749" value="9.1749">
+        </div>
+      </div>
+
+      <button class="geo-btn" onclick="useGeolocation()">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2"/></svg>
+        Meinen Standort ermitteln
+      </button>
+
+      <div class="divider"></div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Jahr</label>
+          <input type="number" id="year" value="2026" min="1800" max="2200">
+        </div>
+        <div class="form-group">
+          <label>Bezeichnung (optional)</label>
+          <input type="text" id="loc-name" placeholder="z.B. Mein Zuhause">
+        </div>
+      </div>
+
+      <div style="margin-top:28px">
+        <button class="btn-calc" id="calc-btn" onclick="runCalc()">Zeiten berechnen</button>
+        <div class="calc-error" id="calc-error"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="result-section" id="result-section" style="display:none">
+  <div class="section-inner">
+    <div class="result-header fade-in">
+      <div>
+        <h2 class="result-title" id="result-title">Agnihotra-Zeiten <em>2026</em></h2>
+        <p class="result-meta" id="result-meta"></p>
+      </div>
+      <a href="#" class="btn-csv" id="csv-btn" onclick="downloadCSV(event)">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 1v9M4 7l4 4 4-4"/><path d="M2 13h12"/></svg>
+        Als CSV herunterladen
+      </a>
+    </div>
+    <div class="tables-wrap">
+      <div class="table-half fade-in">
+        <h3>Januar – Juni</h3>
+        <div class="table-scroll"><div id="table1"></div></div>
+      </div>
+      <div class="table-half fade-in" style="transition-delay:0.1s">
+        <h3>Juli – Dezember</h3>
+        <div class="table-scroll"><div id="table2"></div></div>
+      </div>
+    </div>
+    <p style="font-family:var(--sans);font-size:12.5px;color:var(--brown3);margin-top:20px;text-align:center">
+      SA = Sonnenaufgang · SU = Sonnenuntergang · Berechnung nach astronomischem Algorithmus (© JR AgniTimer 2006–2023)
+    </p>
+  </div>
+</section>
+
+<div aria-hidden="true" style="overflow:hidden;line-height:0;background:var(--cream2);display:block">
+  <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:54px">
+    <path d="M0,54 L0,30 C360,54 720,6 1080,30 C1260,42 1370,36 1440,28 L1440,54 Z" fill="#2A1505"/>
+  </svg>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="images/Logo-Schrift-2025-Juhu.webp" alt="Homa-Hof Heiligenberg" style="height:58px;width:auto;margin-bottom:16px;opacity:0.92;display:block">
+      <p class="footer-tagline">Europäisches Zentrum für Agnihotra –<br>Heilige Feuer zur Heilung der Welt.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/agnihotra.homa.hof.heiligenberg" target="_blank" rel="noopener" class="social-icon">f</a>
+        <a href="https://www.youtube.com/c/homahofheiligenberg" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">YT</a>
+        <a href="https://www.instagram.com/agnihotraforfuture/" target="_blank" rel="noopener" class="social-icon" style="font-size:11px">IG</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="die-basis.html">Die Basis</a></li>
+        <li><a href="heilige-feuer.html">Heilige Feuer</a></li>
+        <li><a href="wissen.html">Wissen &amp; Nutzen</a></li>
+        <li><a href="am-hof.html">Am Hof</a></li>
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
+        <li><a href="mitmachen.html">Mitmachen</a></li>
+        <li><a href="medien.html">Medien</a></li>
+        <li><a href="https://homa-hof-shop.de" target="_blank">Shop</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Erleben</div>
+      <ul class="footer-links">
+        <li><a href="am-hof.html#veranstaltungen">Veranstaltungen</a></li>
+        <li><a href="am-hof.html#seminare">Seminare</a></li>
+        <li><a href="am-hof.html#besucherhinweise">Besucherhinweise</a></li>
+        <li><a href="am-hof.html#anfahrt">Anfahrt</a></li>
+        <li><a href="agnihotra-zeiten.html">Agnihotra-Zeiten Rechner</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <div class="footer-contact-item" style="display:flex;align-items:flex-start;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:4px;opacity:.55"><path d="M8 1C5.5 1 3.5 3 3.5 5.5c0 3.5 4.5 9 4.5 9s4.5-5.5 4.5-9C12.5 3 10.5 1 8 1z"/><circle cx="8" cy="5.5" r="1.5"/></svg>
+        <span>Oberhaslach 6<br>88633 Heiligenberg</span>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;opacity:.55"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
+        <a href="tel:+4975529387600">+49 (0)7552 938760</a>
+      </div>
+      <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
+      </div>
+      <div class="footer-contact-item" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.65)">Hofladen<br>Fr. und Sa. 15 – 18 Uhr</div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Homa-Hof Heiligenberg e.V.</span>
+    <div class="footer-legal">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="#" onclick="resetCookieConsent();return false;">Cookie-Einstellungen</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── NAV ─────────────────────────────────────────────────────────────────────
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+(function() {
+  var burger = document.querySelector('.nav-burger'), nav = document.getElementById('main-nav');
+  if (!burger) return;
+  burger.addEventListener('click', function() { nav.classList.toggle('nav-open'); });
+  nav.querySelectorAll('.nav-links a, .nav-cta').forEach(function(a) { a.addEventListener('click', function() { nav.classList.remove('nav-open'); }); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') nav.classList.remove('nav-open'); });
+  document.addEventListener('click', function(e) { if (nav.classList.contains('nav-open') && !nav.contains(e.target)) nav.classList.remove('nav-open'); });
+})();
+
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+}, { threshold: 0.08 });
+fadeEls.forEach(el => observer.observe(el));
+
+// ─── COUNTRIES DATA ──────────────────────────────────────────────────────────
+// Format: [name, utcOffset, dstCode] — dstCode '' = kein Sommerzeit
+const COUNTRIES = [
+['Deutschland',1,'0'],['Österreich',1,'0'],['Schweiz',1,'0'],
+['Afghanistan',4.5,''],['Albania',1,'1'],['Algeria',1,''],
+['American Samoa',-11,''],['Andorra',0,'1'],['Angola',1,''],
+['Anguilla',-4,''],['Antigua and Barbuda',-4,''],['Argentina',-3,''],
+['Armenia',4,''],['Aruba',-4,''],['Ascension',-4,''],
+['Australia west',8,'2'],['Australia northern territory',9.5,'2'],
+['Australia south',9.5,'2'],['Australia Queensland',10,'2'],
+['Australia New South Wales',10,'2'],['Australia capital territory',10,'2'],
+['Australia Victoria',10,'2'],['Australia Tasmania',10,'2'],
+['Austria',1,'1'],['Azerbaijan',4,''],['Bahamas',-5,'3'],
+['Bahrain',3,''],['Bangladesh',6,''],['Barbados',-4,''],
+['Belarus',2,''],['Belgium',1,'1'],['Belize',-6,''],
+['Benin',1,''],['Bhutan',6,''],['Bolivia',-4,''],
+['Bosnia and Herzegovina',1,'1'],['Botswana',2,''],['Bouvet Island',1,'1'],
+['Brazil west',-5,''],['Brazil central',-4,''],['Brazil coast',-3,''],
+['British Indian Ocean Territory',6,''],['Brunei Darussalam',8,''],
+['Bulgaria',2,'1'],['Burkina Faso',0,''],['Burundi',2,''],
+['Cambodia',7,''],['Cameroon',1,''],
+['Canada Pacific',-8,'3'],['Canada Mountain',-7,'3'],
+['Canada Central',-6,'3'],['Canada Eastern',-5,'3'],['Canada Atlantic',-4,'3'],
+['Canada Newfoundland',-3.5,''],['Cape Verde',-1,''],['Cayman Islands',-5,''],
+['Central African Republic',1,''],['Chad',1,''],['Chile',-4,'4'],
+['China VR',8,''],['Christmas Island',7,''],['Cocos Islands',6.5,''],
+['Colombia',-5,''],['Comoros',3,''],['Congo west',1,''],
+['Congo east',2,''],['Congo Republic',1,''],['Cook Islands',-10,''],
+['Costa Rica',-6,''],['Croatia',1,'1'],['Cuba',-5,'3'],
+['Cyprus',2,'1'],['Czech Republic',1,'1'],['Denmark',1,'1'],
+['Djibouti',3,''],['Dominica',-4,''],['Dominican Republic',-4,''],
+['Ecuador',-5,''],['Egypt',2,''],['El Salvador',-6,''],
+['Equatorial Guinea',1,''],['Eritrea',3,''],['Estonia',2,'1'],
+['Ethiopia',3,''],['Falkland Islands',-3,''],['Faroe Islands',0,'1'],
+['Fiji',12,'5'],['Finland',2,'1'],['France',1,'1'],
+['French Guiana',-3,''],['French Polynesia',-10,''],['French Southern Territories',5,''],
+['Gabon',1,''],['Gambia',0,''],['Georgia',4,''],
+['Germany',1,'1'],['Ghana',0,''],['Gibraltar',1,'1'],
+['Great Britain',0,'1'],['Greece',2,'1'],['Greenland',-3,'11'],
+['Grenada',-4,''],['Guadeloupe',-4,''],['Guam',10,''],
+['Guatemala',-6,''],['Guernsey',0,'1'],['Guinea',0,''],
+['Guinea-Bissau',0,''],['Guyana',-4,''],['Haiti',-5,'3'],
+['Honduras',-6,''],['Hong Kong',8,''],['Hungary',1,'1'],
+['Iceland',0,''],['India',5.5,''],
+['Indonesia west',7,''],['Indonesia central',8,''],['Indonesia east',9,''],
+['Iran',3.5,'12'],['Iraq',3,''],['Ireland',0,'1'],
+['Isle of Man',0,'1'],['Israel',2,'6'],['Italy',1,'1'],
+['Ivory Coast',0,''],['Jamaica',-5,''],['Japan',9,''],
+['Jersey',0,'1'],['Jordan',2,'7'],['Kazakhstan west',5,''],
+['Kazakhstan east',6,''],['Kenya',3,''],['Kiribati',-12,''],
+['Korea North',9,''],['Korea South',9,''],['Kuwait',3,''],
+['Kyrgyzstan',5,''],['Laos',7,''],['Latvia',2,'1'],
+['Lebanon',2,'1'],['Lesotho',2,''],['Liberia',0,''],
+['Libya',2,''],['Liechtenstein',1,'1'],['Lithuania',2,'1'],
+['Luxembourg',1,'1'],['Macao',8,''],['Madagascar',3,''],
+['Malawi',2,''],['Malaysia',8,''],['Maldives',5,''],
+['Mali',0,''],['Malta',1,'1'],['Marshall Islands',12,''],
+['Martinique',-4,''],['Mauritania',0,''],['Mauritius',4,''],
+['Mayotte',3,''],['Mexico Quintana Roo',-6,'8'],
+['Mexico Baja California Norte',-8,'8'],['Mexico Baja California Sur',-7,'8'],
+['Mexico central and west',-6,'8'],['Micronesia',11,''],
+['Moldova',2,'1'],['Monaco',1,'1'],
+['Mongolia west',7,''],['Mongolia east',8,''],
+['Montenegro',1,'1'],['Montserrat',-4,''],['Morocco',0,''],
+['Mozambique',2,''],['Myanmar',6.5,''],['Namibia',2,''],
+['Nauru',12,''],['Nepal',5.75,''],['Netherlands',1,'1'],
+['Netherlands Antilles',-4,''],['New Caledonia',11,''],
+['New Zealand',12,'9'],['Nicaragua',-6,''],['Niger',1,''],
+['Nigeria',1,''],['Niue',-11,''],['Norfolk Island',11,'2'],
+['North Macedonia',1,'1'],['Norway',1,'1'],['Oman',4,''],
+['Pakistan',5,''],['Palau',9,''],['Palestinian Authority',2,''],
+['Panama',-5,''],['Papua New Guinea',10,''],['Paraguay',-4,''],
+['Peru',-5,''],['Philippines',8,''],['Pitcairn Island',-8,''],
+['Poland',1,'1'],['Portugal',0,'1'],['Puerto Rico',-4,''],
+['Qatar',3,''],['Reunion Island',4,''],['Romania',2,'1'],
+['Russia Kaliningrad',3,''],['Russia European',4,''],
+['Russia Ekaterinburg',6,''],['Russia Omsk',7,''],
+['Russia Krasnoyarsk',7,''],['Russia Irkutsk',9,''],
+['Russia Yakutia',10,''],['Russia Vladivostok',11,''],
+['Russia Magadan',12,''],['Russia Kamchatka',11,''],
+['Rwanda',2,''],['Saint Helena',0,''],
+['Saint Kitts and Nevis',-4,''],['Saint Lucia',-4,''],
+['Saint Pierre and Miquelon',-2,'3'],['Saint Vincent',-4,''],
+['Samoa',-11,'9'],['San Marino',1,'1'],
+['Sao Tome and Principe',0,''],['Saudi Arabia',3,''],
+['Senegal',0,''],['Serbia',1,'1'],['Seychelles',4,''],
+['Sierra Leone',0,''],['Singapore',8,''],['Slovakia',1,'1'],
+['Slovenia',1,'1'],['Solomon Islands',11,''],['Somalia',3,''],
+['South Africa',2,''],['South Georgia',-2,''],['South Sudan',3,''],
+['Spain',1,'1'],['Spain Canary Islands',0,'1'],['Sri Lanka',5.5,''],
+['Sudan',2,''],['Suriname',-3,''],['Svalbard',1,'1'],
+['Swaziland',2,''],['Sweden',1,'1'],['Switzerland',1,'1'],
+['Syria',2,'7'],['Taiwan',8,''],['Tajikistan',5,''],
+['Tanzania',3,''],['Thailand',7,''],['Tibet',8,''],
+['Timor-Leste',9,''],['Togo',0,''],['Tonga',-12,''],
+['Trinidad and Tobago',-4,''],['Tunisia',1,''],['Turkey',2,''],
+['Turkmenistan',5,''],['Turks and Caicos Islands',-5,'3'],
+['Tuvalu',12,''],['Uganda',3,''],['Ukraine',2,'1'],
+['United Arab Emirates',4,''],['United Kingdom',0,'1'],
+['United States Hawaii',-10,'3'],['United States Alaska',-9,'3'],
+['United States Pacific',-8,'3'],['United States Mountain',-7,'3'],
+['United States Central',-6,'3'],['United States Eastern',-5,'3'],
+['Uruguay',-3,''],['Uzbekistan',5,''],['Vanuatu',11,''],
+['Vatican City',1,'1'],['Venezuela',-4.5,''],['Vietnam',7,''],
+['Virgin Islands (British)',-4,''],['Virgin Islands (US)',-4,''],
+['Wallis and Futuna',12,''],['Western Sahara',0,'13'],
+['Yemen',3,''],['Zambia',1,''],['Zimbabwe',2,'']
+];
+
+const DST_LABELS = {
+  '':'Keine Sommerzeit',
+  '0':'Europäisch (letzte So. März bis letzte So. Okt.)',
+  '1':'Europäisch (letzte So. März bis letzte So. Okt.)',
+  '2':'Australisch (1. So. Okt. bis 1. So. April)',
+  '3':'Nordamerika (2. So. März bis 1. So. Nov.)',
+  '4':'Chile (1. So. Sep. bis 1. So. April)',
+  '5':'Neuseeland/Fidschi (1. So. Nov. bis 3. So. Jan.)',
+  '6':'Israel',
+  '7':'Jordanien/Syrien (letzter Fr. März bis letzter Fr. Okt.)',
+  '8':'Mexiko (1. So. April bis letzte So. Okt.)',
+  '9':'Neuseeland alt (letzte So. Sep. bis 1. So. April)',
+  '10':'Frühjahr Okt bis Mrz',
+  '11':'Grönland',
+  '12':'Iran (22. März bis 22. Sep.)',
+  '13':'Westsahara'
+};
+
+// ─── FORM INIT ────────────────────────────────────────────────────────────────
+(function buildSelect() {
+  const sel = document.getElementById('country-select');
+  // DACH optgroup first
+  const dach = ['Deutschland','Österreich','Schweiz'];
+  const grp = document.createElement('optgroup');
+  grp.label = 'DACH';
+  dach.forEach(d => {
+    const c = COUNTRIES.find(c => c[0] === d);
+    if (c) { const o = new Option(c[0], COUNTRIES.indexOf(c)); grp.appendChild(o); }
+  });
+  sel.appendChild(grp);
+  const grpAll = document.createElement('optgroup');
+  grpAll.label = 'Alle Länder';
+  COUNTRIES.forEach((c, i) => {
+    if (!dach.includes(c[0])) { grpAll.appendChild(new Option(c[0], i)); }
+  });
+  sel.appendChild(grpAll);
+  // Default to Deutschland
+  sel.value = '0';
+  onCountryChange();
+})();
+
+function onCountryChange() {
+  const sel = document.getElementById('country-select');
+  const info = document.getElementById('tz-info');
+  if (sel.value === '') { info.style.display = 'none'; return; }
+  const c = COUNTRIES[parseInt(sel.value)];
+  const utcStr = c[1] >= 0 ? '+' + c[1] : '' + c[1];
+  const dstStr = DST_LABELS[c[2]] || 'Keine Sommerzeit';
+  info.textContent = 'Zeitzone: UTC' + utcStr + ' · ' + dstStr;
+  info.style.display = 'block';
+}
+
+function useGeolocation() {
+  if (!navigator.geolocation) { showError('Standortzugriff wird von diesem Browser nicht unterstützt.'); return; }
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      document.getElementById('lat').value = pos.coords.latitude.toFixed(4);
+      document.getElementById('lon').value = pos.coords.longitude.toFixed(4);
+    },
+    () => showError('Standort konnte nicht ermittelt werden. Bitte Koordinaten manuell eingeben.')
+  );
+}
+
+function showError(msg) {
+  const el = document.getElementById('calc-error');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideError() { document.getElementById('calc-error').style.display = 'none'; }
+
+// ─── ASTRONOMICAL ALGORITHM (port of PHP JR AgniTimer) ───────────────────────
+const RAD = 0.01745329252, H0 = 0.002444, P2 = 6.283185307;
+
+function jrsInt(x) { return x >= 0 ? Math.floor(x) : Math.ceil(x); }
+
+function computeMJD(day, month, year, ut) {
+  const a = 10000 * year + 100 * month + day;
+  let m = month, y = year;
+  if (m <= 2) { m += 12; y -= 1; }
+  const b = a <= 15821004.1
+    ? jrsInt((y + 4716.0) / 4.0) - 1179 + 2
+    : jrsInt(y / 400) - jrsInt(y / 100) + jrsInt(y / 4);
+  const aa = 365 * y - 679004;
+  return aa + b + jrsInt(30.6001 * (m + 1)) + day + ut / 24;
+}
+
+function computeWosz(mjd_c, lambda) {
+  const mjd0 = Math.floor(mjd_c);
+  const ut0 = (mjd_c - mjd0) * 24;
+  const t = (mjd0 - 51544.5) / 36525;
+  let hmst = 6.697374558 + 1.0027379093 * ut0;
+  hmst += (8640184.8129 + (0.093104 - 0.0000062 * t) * t) * t / 3600;
+  const n = 125.045 - 1934.136 * t;
+  const dt = -17.2 * Math.sin(n * RAD) * (0.91748 / 54000);
+  const x = (hmst + dt + lambda / 15) / 24;
+  return 24 * (x - Math.floor(x));
+}
+
+function computeSoko(t) {
+  const n = 125.045 - 1934.136 * t;
+  const eps = 23.43929111 + (-46.815 * t + 9.2 * Math.cos(n * RAD)) / 3600;
+  const coseps = Math.cos(eps * RAD), sineps = Math.sin(eps * RAD);
+  const t1 = t + 1.0; // PHP: $t = $t + 1.0 inside soko()
+  const dlp = (1.882 * Math.sin((57.24 + 150.27 * t1) * RAD) + 6.4 * Math.sin((231.19 + 20.2 * t1) * RAD)) / 3600;
+  let x = 279.6966 + 36000.7689 * t1 + 0.0003 * t1 * t1 + dlp;
+  const lo = x - 360 * Math.floor(x / 360);
+  x = 358.4758 + 35999.0497 * t1; const g = x - 360 * Math.floor(x / 360);
+  x = 212.45 + 58517.493 * t1; const g2 = x - 360 * Math.floor(x / 360);
+  x = 319.58 + 19139.977 * t1; const g4 = x - 360 * Math.floor(x / 360);
+  x = 225.28 + 3034.583 * t1 + 0.361 * Math.sin((133.775 + 39.804 * t1) * RAD); const g5 = x - 360 * Math.floor(x / 360);
+  x = 350.73 + 445267.114 * t1; const d = x - 360 * Math.floor(x / 360);
+  const dl = (6910.057 - 17.24 * t1) * Math.sin(g * RAD) + 72.338 * Math.sin(2 * g * RAD) + 1.054 * Math.sin(3 * g * RAD);
+  const dl2 = 4.838 * Math.cos((299.102 + g2 - g) * RAD) + 5.526 * Math.cos((148.313 + 2*g2 - 2*g) * RAD)
+    + 2.497 * Math.cos((315.943 + 2*g2 - 3*g) * RAD) + 1.559 * Math.cos((345.253 + 3*g2 - 4*g) * RAD)
+    + 1.024 * Math.cos((318.15 + 3*g2 - 5*g) * RAD);
+  const dl4 = 2.043 * Math.cos((343.888 - 2*g4 + 2*g) * RAD) + 1.77 * Math.cos((200.402 - 2*g4 + g) * RAD);
+  const dl5 = 7.208 * Math.cos((179.532 - g5 + g) * RAD) + 2.6 * Math.cos((263.217 - g5) * RAD)
+    + 2.731 * Math.cos((87.145 - 2*g5 + 2*g) * RAD) + 1.61 * Math.cos((109.493 - 2*g5 + g) * RAD);
+  const dlm = 6.454 * Math.sin(d * RAD);
+  x = lo + (dl + dl2 + dl4 + dl5 + dlm - 17.2 * Math.sin(n * RAD)) / 3600;
+  const l = x - 360 * Math.floor(x / 360);
+  const cx = Math.cos(l * RAD), y = coseps * Math.sin(l * RAD), z = sineps * Math.sin(l * RAD);
+  const rho = Math.sqrt(1 - z * z);
+  const dek = (360 / P2) * Math.atan(z / rho);
+  let ra = (48 / P2) * Math.atan(y / (cx + rho));
+  if (ra < 0) ra += 24;
+  return { dek, ra };
+}
+
+function computeTgb(phi, dek) {
+  const x = (Math.sin(H0 * RAD) - Math.sin(phi * RAD) * Math.sin(dek * RAD)) / (Math.cos(phi * RAD) * Math.cos(dek * RAD));
+  if (x <= -1 || x >= 1) return null;
+  return (90 - Math.atan(x / Math.sqrt(1 - x * x)) / RAD) / 15;
+}
+
+function computeDay(day, month, year, lambda, phi, dtz) {
+  let ut = 6.0 - dtz, hrise = 0, hset = 0, tgb_c = 0;
+  for (let i = 0; i < 3; i++) {
+    const mjd_c = computeMJD(day, month, year, ut);
+    const t = (mjd_c + 2400000.5 - 2451545.0) / 36525.0;
+    const { dek, ra } = computeSoko(t);
+    const wosz_c = computeWosz(mjd_c, lambda);
+    let ha = wosz_c - ra;
+    if (Math.abs(ha) > 12) ha += ha > 0 ? -24 : 24;
+    tgb_c = computeTgb(phi, dek);
+    if (tgb_c === null) return null;
+    ut += (-tgb_c) - ha;
+    hrise = ut + dtz;
+  }
+  ut += 2 * tgb_c;
+  for (let j = 0; j < 2; j++) {
+    const mjd_c = computeMJD(day, month, year, ut);
+    const t = (mjd_c + 2400000.5 - 2451545.0) / 36525.0;
+    const { dek, ra } = computeSoko(t);
+    const wosz_c = computeWosz(mjd_c, lambda);
+    let ha = wosz_c - ra;
+    if (Math.abs(ha) > 12) ha += ha > 0 ? -24 : 24;
+    tgb_c = computeTgb(phi, dek);
+    if (tgb_c === null) return null;
+    ut += tgb_c - ha;
+    hset = ut + dtz;
+  }
+  return { hrise, hset };
+}
+
+function decimalToHMS(hh) {
+  let h = jrsInt(hh);
+  const h1 = (hh - h) * 60;
+  let m = jrsInt(h1);
+  let s = Math.ceil((h1 - m) * 60);
+  if (s === 60) { m++; s = 0; }
+  if (m === 60) { h++; m = 0; }
+  return { h, m, s };
+}
+
+function fmt2(n) { return n < 10 ? '0' + n : '' + n; }
+function fmtTime(h, m, s) { return fmt2(h) + ':' + fmt2(m) + ':' + fmt2(s); }
+
+// ─── DST BOUNDARIES ──────────────────────────────────────────────────────────
+function lastSundayOf(year, month) {
+  const lastDay = new Date(year, month, 0).getDate();
+  return lastDay - new Date(year, month - 1, lastDay).getDay();
+}
+function firstSundayOf(year, month) {
+  const dw = new Date(year, month - 1, 1).getDay();
+  return dw === 0 ? 1 : 8 - dw;
+}
+function secondSundayOf(year, month) {
+  const dw = new Date(year, month - 1, 1).getDay();
+  return dw === 0 ? 8 : 15 - dw;
+}
+function lastFridayOf(year, month) {
+  const lastDay = new Date(year, month, 0).getDate();
+  const dw = new Date(year, month - 1, lastDay).getDay(); // 0=Sun,5=Fri
+  return dw >= 5 ? lastDay - (dw - 5) : lastDay - (dw + 2);
+}
+
+function getDSTBounds(year, dstType) {
+  switch (dstType) {
+    case '0': case '1':
+      return { bm:3, bd:lastSundayOf(year,3), em:10, ed:lastSundayOf(year,10) };
+    case '2':
+      return { bm:10, bd:firstSundayOf(year,10), em:4, ed:firstSundayOf(year,4) };
+    case '3':
+      return { bm:3, bd:secondSundayOf(year,3), em:11, ed:firstSundayOf(year,11) };
+    case '4':
+      return { bm:9, bd:firstSundayOf(year,9), em:4, ed:firstSundayOf(year,4) };
+    case '5': {
+      const dw = new Date(year, 0, 1).getDay();
+      return { bm:11, bd:firstSundayOf(year,11), em:1, ed:dw===0?15:22-dw };
+    }
+    case '6':
+      return { bm:3, bd:lastSundayOf(year,3)-2, em:10, ed:lastSundayOf(year,10) };
+    case '7':
+      return { bm:3, bd:lastFridayOf(year,3), em:10, ed:lastFridayOf(year,10) };
+    case '8':
+      return { bm:4, bd:firstSundayOf(year,4), em:10, ed:lastSundayOf(year,10) };
+    case '9':
+      return { bm:9, bd:lastSundayOf(year,9), em:4, ed:firstSundayOf(year,4) };
+    case '10': {
+      const dw = new Date(year, 2, 1).getDay();
+      return { bm:10, bd:firstSundayOf(year,10), em:3, ed:dw===0?29:29-dw };
+    }
+    case '11':
+      return { bm:3, bd:lastSundayOf(year,3)-1, em:10, ed:lastSundayOf(year,10)-1 };
+    case '12':
+      return { bm:3, bd:22, em:9, ed:22 };
+    case '13':
+      return { bm:5, bd:31, em:4, ed:19 };
+    default:
+      return null;
+  }
+}
+
+function isDSTActive(month, day, dstType, bounds) {
+  if (!bounds || dstType === '') return false;
+  const { bm, bd, em, ed } = bounds;
+  // Northern/standard (DST in summer, bm < em)
+  if (['0','1','3','6','7','8','11','12'].includes(dstType)) {
+    return (month > bm && month < em) || (month === bm && day >= bd) || (month === em && day < ed);
+  }
+  // Southern/inverse (DST in winter, bm > em) or wrap-around
+  return (month < em || month > bm) || (month === em && day < ed) || (month === bm && day >= bd);
+}
+
+// ─── MAIN CALCULATION ─────────────────────────────────────────────────────────
+let _calcData = null; // stored for CSV export
+
+function runCalc() {
+  hideError();
+  const sel = document.getElementById('country-select');
+  if (sel.value === '') { showError('Bitte wähle ein Land aus.'); return; }
+  const country = COUNTRIES[parseInt(sel.value)];
+  const lat = parseFloat(document.getElementById('lat').value);
+  const lon = parseFloat(document.getElementById('lon').value);
+  const year = parseInt(document.getElementById('year').value);
+  const locName = document.getElementById('loc-name').value.trim();
+  if (isNaN(lat) || lat < -90 || lat > 90) { showError('Ungültiger Breitengrad.'); return; }
+  if (isNaN(lon) || lon < -180 || lon > 180) { showError('Ungültiger Längengrad.'); return; }
+  if (isNaN(year) || year < 1800 || year > 2200) { showError('Ungültiges Jahr.'); return; }
+
+  const dtz = country[1];
+  const dstType = country[2];
+  const dstBounds = getDSTBounds(year, dstType);
+
+  const btn = document.getElementById('calc-btn');
+  btn.disabled = true; btn.textContent = 'Wird berechnet…';
+
+  // Run async to keep UI responsive
+  setTimeout(() => {
+    const data = []; // data[month][day] = {saH,saM,saS, suH,suM,suS} or null
+    for (let month = 1; month <= 12; month++) {
+      data[month] = [];
+      const daysInMonth = new Date(year, month, 0).getDate();
+      for (let day = 1; day <= daysInMonth; day++) {
+        const r = computeDay(day, month, year, lon, lat, dtz);
+        if (r === null) { data[month][day] = null; continue; }
+        const dst = isDSTActive(month, day, dstType, dstBounds) ? 1 : 0;
+        const sa = decimalToHMS(r.hrise); sa.h += dst;
+        if (sa.h >= 24) sa.h -= 24;
+        const su = decimalToHMS(r.hset); su.h += dst;
+        if (su.h >= 24) su.h -= 24;
+        data[month][day] = { sa, su };
+      }
+    }
+    _calcData = { data, year, lat, lon, dtz, dstType, country: country[0], locName };
+    renderResults(_calcData);
+    btn.disabled = false; btn.textContent = 'Zeiten berechnen';
+  }, 10);
+}
+
+function renderResults({ data, year, lat, lon, dtz, dstType, country, locName }) {
+  const utcStr = dtz >= 0 ? 'UTC+' + dtz : 'UTC' + dtz;
+  const titleEl = document.getElementById('result-title');
+  const metaEl = document.getElementById('result-meta');
+  const label = locName || country;
+  titleEl.innerHTML = 'Agnihotra-Zeiten <em>' + year + '</em>';
+  if (locName) titleEl.innerHTML += ' – ' + locName;
+  metaEl.innerHTML = country + ' · Breite: ' + lat + '° · Länge: ' + lon + '° · ' + utcStr
+    + (dstType ? ' · ' + (DST_LABELS[dstType] || '') : '');
+
+  document.getElementById('table1').innerHTML = buildTable(data, year, 1, 6);
+  document.getElementById('table2').innerHTML = buildTable(data, year, 7, 12);
+
+  const sec = document.getElementById('result-section');
+  sec.style.display = 'block';
+  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Re-observe new fade-in elements
+  sec.querySelectorAll('.fade-in').forEach(el => { observer.observe(el); });
+}
+
+const MONTH_NAMES = ['Jan','Feb','Mrz','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+
+function buildTable(data, year, fromM, toM) {
+  let html = '<table class="rt"><thead><tr><th>Tag</th>';
+  for (let m = fromM; m <= toM; m++) html += '<th>' + MONTH_NAMES[m-1] + '</th>';
+  html += '</tr></thead><tbody>';
+  for (let day = 1; day <= 31; day++) {
+    html += '<tr><td class="td-day">' + day + '</td>';
+    for (let m = fromM; m <= toM; m++) {
+      const daysInM = new Date(year, m, 0).getDate();
+      if (day > daysInM) { html += '<td></td>'; continue; }
+      const d = data[m][day];
+      if (!d) { html += '<td><span class="td-empty">—</span></td>'; continue; }
+      html += '<td><span class="td-sa">' + fmtTime(d.sa.h, d.sa.m, d.sa.s)
+            + '</span><span class="td-su">' + fmtTime(d.su.h, d.su.m, d.su.s) + '</span></td>';
+    }
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  return html;
+}
+
+// ─── CSV EXPORT ───────────────────────────────────────────────────────────────
+function downloadCSV(e) {
+  e.preventDefault();
+  if (!_calcData) return;
+  const { data, year, lat, lon, dtz, country, locName } = _calcData;
+  const rows = [['Datum','Sonnenaufgang','Sonnenuntergang',locName || country,dtz,lon,lat]];
+  for (let m = 1; m <= 12; m++) {
+    const daysInM = new Date(year, m, 0).getDate();
+    for (let d = 1; d <= daysInM; d++) {
+      const entry = data[m][d];
+      if (!entry) { rows.push([d+'.'+m+'.'+year,'—','—']); continue; }
+      rows.push([
+        d+'.'+m+'.'+year,
+        fmtTime(entry.sa.h,entry.sa.m,entry.sa.s),
+        fmtTime(entry.su.h,entry.su.m,entry.su.s)
+      ]);
+    }
+  }
+  const csv = rows.map(r => r.join(';')).join('\n');
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'Agnihotra-Zeiten-' + year + '.csv';
+  a.click(); URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
