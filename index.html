@@ -1710,13 +1710,16 @@
         const imgHtml = item.image
           ? '<div class="aktuelles-card-img"><img src="' + item.image + '" alt="' + item.title + '" loading="lazy"></div>'
           : '<div class="aktuelles-card-img"><div class="aktuelles-card-placeholder">🔥</div></div>';
-        return '<a href="aktuelles-beitrag.html?id=' + idx + '" class="aktuelles-card fade-in visible">'
+        const cardLink = item.url ? item.url : 'aktuelles-beitrag.html?id=' + idx;
+        const cardTarget = item.url ? ' target="_blank" rel="noopener"' : '';
+        const linkLabel = item.url ? 'Im Shop ansehen →' : 'Weiterlesen →';
+        return '<a href="' + cardLink + '"' + cardTarget + ' class="aktuelles-card fade-in visible">'
           + imgHtml
           + '<div class="aktuelles-card-body">'
           + '<div class="aktuelles-date">' + dateStr + '</div>'
           + '<div class="aktuelles-title">' + item.title + '</div>'
           + '<div class="aktuelles-body">' + body + '</div>'
-          + '<span class="aktuelles-link">Weiterlesen →</span>'
+          + '<span class="aktuelles-link">' + linkLabel + '</span>'
           + '</div>'
           + '</a>';
       }).join('');

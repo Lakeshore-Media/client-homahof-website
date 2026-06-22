@@ -34,27 +34,28 @@
 
     #main-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,252,245,0.92);
+      background: rgba(255,252,245,0.95);
       border-bottom: 1px solid var(--border2);
-      transition: box-shadow 0.3s;
+      transition: box-shadow 0.3s ease;
     }
-    #main-nav.scrolled { box-shadow: 0 2px 24px rgba(42,21,5,0.1); }
-    .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: 72px; display: flex; align-items: center; gap: 40px; }
-    .nav-brand img { height: 44px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 32px; margin-left: auto; }
-    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--brown2); letter-spacing: 0.02em; transition: color 0.2s; }
+    #main-nav.scrolled { box-shadow: 0 2px 20px rgba(42,21,5,0.1); }
+    .nav-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; height: 84px; display: flex; align-items: center; gap: 32px; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-brand img { height: 68px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 30px; margin-left: auto; }
+    .nav-links a { font-family: var(--sans); font-size: 17px; font-weight: 400; color: var(--brown2); transition: color 0.2s; white-space: nowrap; }
     .nav-links a:hover { color: var(--gold); }
     .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--btn-radius); font-family: var(--sans); font-weight: 500; letter-spacing: 0.03em; cursor: pointer; transition: all 0.22s; border: none; }
     .btn-gold { background: var(--gold); color: white; padding: 11px 26px; font-size: 14.5px; }
     .btn-gold:hover { background: var(--copper); }
-    .nav-cta { font-size: 14.5px; padding: 10px 22px; }
-    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
-    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: all 0.3s; }
+    .nav-cta { margin-left: 16px; font-size: 14.5px; padding: 10px 22px; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 4px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
 
     .article-wrap {
       max-width: 800px;
       margin: 0 auto;
-      padding: 120px 40px 100px;
+      padding: 124px 40px 100px;
     }
     .back-link {
       display: inline-flex;
@@ -116,6 +117,10 @@
     }
     .article-body strong { font-weight: 500; color: var(--brown); }
     .article-body em { font-style: italic; color: var(--brown); }
+    .article-body a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(192,120,24,0.4); transition: color 0.2s; }
+    .article-body a:hover { color: var(--copper); }
+    .article-shop-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; margin-bottom: 40px; font-family: var(--sans); font-size: 15px; font-weight: 500; color: white; background: var(--gold); padding: 12px 28px; border-radius: 50px; transition: background 0.2s; }
+    .article-shop-btn:hover { background: var(--copper); }
     .article-body h2 {
       font-family: var(--serif);
       font-size: 26px;
@@ -314,6 +319,7 @@
         var p = block
           .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
           .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+          .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
           .replace(/\n/g, '<br>');
         return '<p>' + p + '</p>';
       })
@@ -351,6 +357,7 @@
         + '<h1 class="article-title">' + item.title + '</h1>'
         + '<hr class="article-divider">'
         + '<div class="article-body">' + mdToHtml(item.body) + '</div>'
+        + (item.url ? '<a href="' + item.url + '" target="_blank" rel="noopener" class="article-shop-btn">Im Shop ansehen →</a>' : '')
         + '<div class="article-nav">' + prevLink + nextLink + '</div>';
 
       // populate footer aktuelles links
