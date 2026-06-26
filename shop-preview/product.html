@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agnihotra-Grundset – Homa-Hof Shop</title>
+  <title>Agnihotra-Schale aus Kupfer – Homa-Hof Shop</title>
   <link href="../css/fonts.css" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -86,12 +86,15 @@
 
     /* === GALLERY === */
     .product-gallery {}
+    .gallery-main img { width: 100%; height: 100%; object-fit: contain; padding: 28px; }
+    .gallery-thumb-inner img { width: 100%; height: 100%; object-fit: contain; padding: 8px; background: #fff; }
     .gallery-main {
       width: 100%;
       aspect-ratio: 1 / 1;
       border-radius: 16px;
       overflow: hidden;
-      background: linear-gradient(135deg, #4A2A0A 0%, #8A5020 100%);
+      background: #fff;
+      border: 1px solid var(--border2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -407,7 +410,8 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(42,21,5,0.10); }
-    .product-img { width: 100%; height: 180px; }
+    .product-img { width: 100%; height: 180px; background: #fff; border-bottom: 1px solid var(--border2); }
+    .related-grid .product-img img { width: 100%; height: 100%; object-fit: contain; padding: 14px; }
     .product-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
     .product-body { padding: 16px 18px 18px; }
     .product-cat { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brown3); margin-bottom: 5px; }
@@ -475,7 +479,7 @@
       <a href="../veranstaltungen.html">Veranstaltungen</a>
       <a href="../mitmachen.html">Mitmachen</a>
       <a href="../medien.html">Medien</a>
-      <a href="listing.html" class="active">Shop</a>
+      <a href="listing-zubehoer.html" class="active">Shop</a>
     </div>
     <a href="../am-hof.html#spenden" class="btn btn-gold nav-cta" style="font-size:14.5px;padding:10px 22px;">Spenden</a>
     <div class="nav-burger" aria-label="Menü">
@@ -490,11 +494,11 @@
     <div class="breadcrumb">
       <a href="../index.html">Startseite</a>
       <span class="breadcrumb-sep">›</span>
-      <a href="listing.html">Shop</a>
+      <a href="listing-zubehoer.html">Shop</a>
       <span class="breadcrumb-sep">›</span>
-      <a href="#">Agnihotra-Sets</a>
+      <a href="listing-zubehoer.html">Zubehör für Homa-Feuertechniken</a>
       <span class="breadcrumb-sep">›</span>
-      <span>Agnihotra-Grundset</span>
+      <span>Agnihotra-Schale aus Kupfer</span>
     </div>
   </div>
 </div>
@@ -505,68 +509,50 @@
   <!-- GALLERY -->
   <div class="product-gallery">
     <div class="gallery-main">
-      <div class="gallery-main-placeholder">
-        <svg width="96" height="96" viewBox="0 0 64 64" fill="none" opacity="0.5">
-          <path d="M32 8 C32 8 20 26 20 38 C20 45 25.4 50 32 50 C38.6 50 44 45 44 38 C44 26 32 8 32 8Z" fill="#F5D88A"/>
-          <path d="M32 30 C32 30 26 40 26 44 C26 47.3 28.7 50 32 50 C35.3 50 38 47.3 38 44 C38 40 32 30 32 30Z" fill="#E8A020"/>
-        </svg>
-        <span>Produktbild folgt</span>
-      </div>
+      <img src="img/schale.jpg" alt="Agnihotra-Schale aus Kupfer">
       <div class="gallery-badge">Beliebt</div>
     </div>
     <div class="gallery-thumbs">
       <div class="gallery-thumb">
-        <div class="gallery-thumb-inner" style="background:linear-gradient(135deg,#4A2A0A,#8A5020)">
-          <svg width="28" height="28" viewBox="0 0 64 64" fill="none" opacity="0.5"><path d="M32 10 C32 10 22 24 22 34 C22 40 26.5 45 32 45 C37.5 45 42 40 42 34 C42 24 32 10 32 10Z" fill="#F5D88A"/></svg>
-        </div>
+        <div class="gallery-thumb-inner"><img src="img/schale.jpg" alt=""></div>
       </div>
       <div class="gallery-thumb">
-        <div class="gallery-thumb-inner" style="background:linear-gradient(135deg,#3A2010,#7A4A18)">
-          <svg width="24" height="24" viewBox="0 0 64 64" fill="none" opacity="0.4"><path d="M20 44 L32 16 L44 44 Z" stroke="#F5D88A" stroke-width="3" stroke-linejoin="round"/></svg>
-        </div>
+        <div class="gallery-thumb-inner"><img src="img/schale-abdeckung.jpg" alt=""></div>
       </div>
       <div class="gallery-thumb">
-        <div class="gallery-thumb-inner" style="background:linear-gradient(135deg,#2A3010,#507828)">
-          <svg width="24" height="24" viewBox="0 0 64 64" fill="none" opacity="0.4"><circle cx="32" cy="32" r="16" stroke="#F5D88A" stroke-width="3"/></svg>
-        </div>
+        <div class="gallery-thumb-inner"><img src="img/staender.jpg" alt=""></div>
       </div>
       <div class="gallery-thumb">
-        <div class="gallery-thumb-inner" style="background:linear-gradient(135deg,#3A2A10,#6A4820)">
-          <svg width="24" height="24" viewBox="0 0 64 64" fill="none" opacity="0.4"><rect x="16" y="14" width="32" height="36" rx="3" stroke="#F5D88A" stroke-width="3"/></svg>
-        </div>
+        <div class="gallery-thumb-inner"><img src="img/koffer.jpg" alt=""></div>
       </div>
     </div>
   </div>
 
   <!-- INFO -->
   <div class="product-info">
-    <div class="product-cat">Agnihotra-Sets</div>
-    <h1 class="product-title">Agnihotra-<em>Grundset</em></h1>
-    <div class="product-rating">
-      <div class="stars">★★★★★</div>
-      <span class="rating-count">4,9 · 47 Bewertungen</span>
-    </div>
+    <div class="product-cat">Zubehör für Homa-Feuertechniken</div>
+    <h1 class="product-title">Agnihotra-Schale aus <em>Kupfer</em></h1>
 
     <div class="product-price-block">
-      <div class="price-main">89,00 €</div>
-      <div class="price-note">inkl. MwSt. · zzgl. Versandkosten (ab 60 € versandkostenfrei)</div>
+      <div class="price-main">35,50 €</div>
+      <div class="price-note">inkl. MwSt. · kostenloser Versand innerhalb Deutschlands (Porto &amp; Verpackung inklusive)</div>
       <div class="price-divider"></div>
       <div class="price-includes">
         <div class="price-includes-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Kupfer-Pyramide (handgefertigt, 8,5 × 8,5 cm)
+          Reines Kupfer, von Hand gefertigt
         </div>
         <div class="price-includes-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Agnihotra-Handbuch (deutsch, 120 S.)
+          Pyramidenform nach vedischen Proportionen
         </div>
         <div class="price-includes-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Bio-Ghee (100 ml) &amp; Bio-Agnihotra-Reis (250 g)
+          Für die tägliche Agnihotra-Zeremonie
         </div>
         <div class="price-includes-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Mantra-Karte (laminiert, Sonnenauf- &amp; -untergang)
+          Passend zu Ständer, Untersetzer &amp; Holzkoffer
         </div>
       </div>
     </div>
@@ -597,7 +583,7 @@
       </div>
       <div class="delivery-row">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>Ab <strong>60 € Bestellwert</strong> versandkostenfrei</span>
+        <span><strong>Kostenloser Versand</strong> innerhalb Deutschlands</span>
       </div>
     </div>
 
@@ -605,15 +591,15 @@
     <div class="product-tabs">
       <div class="tab-nav">
         <button class="tab-btn active" onclick="switchTab('beschreibung', this)">Beschreibung</button>
-        <button class="tab-btn" onclick="switchTab('inhalt', this)">Inhalt &amp; Maße</button>
+        <button class="tab-btn" onclick="switchTab('inhalt', this)">Details</button>
         <button class="tab-btn" onclick="switchTab('anwendung', this)">Anwendung</button>
       </div>
 
       <div id="tab-beschreibung" class="tab-content active">
         <div class="tab-text">
-          <p>Das Agnihotra-Grundset enthält alles, was du für deine ersten Zeremonien benötigst. Die handgefertigte Kupfer-Pyramide ist in traditionellen Proportionen hergestellt – exakt nach vedischen Angaben, damit die Resonanzwirkung des Feuers optimal entfaltet werden kann.</p>
-          <p>Das beigelegte Handbuch führt dich Schritt für Schritt in die Praxis ein: von den richtigen Zeiten (Sonnenauf- und -untergang nach deinem Standort) bis zur Mantra-Aussprache. Bio-Ghee und Bio-Reis für die ersten Wochen sind bereits enthalten.</p>
-          <p>Das Set eignet sich ideal als <strong>Geschenk für Einsteiger</strong> – liebevoll verpackt und mit einer persönlichen Notizmöglichkeit.</p>
+          <p>Die Agnihotra-Schale aus reinem Kupfer ist das Herzstück jeder Agnihotra-Praxis. Sie wird von Hand in der traditionellen Pyramidenform gefertigt – exakt nach vedischen Proportionen, damit sich die Resonanzwirkung des Feuers optimal entfalten kann.</p>
+          <p>Kupfer leitet die Wärme gleichmäßig und ist seit jeher das Material der Wahl für die täglichen Feuerzeremonien zu Sonnenauf- und Sonnenuntergang.</p>
+          <p>Die Schale lässt sich mit unserem <strong>Kupferständer</strong>, dem <strong>Untersetzer</strong> und dem <strong>Agnihotra-Koffer aus Holz</strong> zu einer kompletten Ausstattung ergänzen.</p>
         </div>
       </div>
 
@@ -621,55 +607,47 @@
         <div class="contents-list">
           <div class="contents-item">
             <div class="contents-icon">
+              <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><path d="M14 30 Q32 30 50 30 Q48 46 32 46 Q16 46 14 30Z" stroke="#C07818" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="contents-item-info">
+              <div class="contents-item-name">Material</div>
+              <div class="contents-item-note">Reines Kupfer · von Hand gefertigt</div>
+            </div>
+          </div>
+          <div class="contents-item">
+            <div class="contents-icon">
+              <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><rect x="18" y="18" width="28" height="28" stroke="#C07818" stroke-width="2.5"/></svg>
+            </div>
+            <div class="contents-item-info">
+              <div class="contents-item-name">Form</div>
+              <div class="contents-item-note">Pyramidenform nach vedischen Proportionen</div>
+            </div>
+          </div>
+          <div class="contents-item">
+            <div class="contents-icon">
               <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><path d="M20 44 L32 16 L44 44 Z" stroke="#C07818" stroke-width="2.5" stroke-linejoin="round"/></svg>
             </div>
             <div class="contents-item-info">
-              <div class="contents-item-name">Kupfer-Pyramide</div>
-              <div class="contents-item-note">8,5 × 8,5 cm · Wandstärke 1,5 mm · handgefertigt in Indien</div>
+              <div class="contents-item-name">Anwendung</div>
+              <div class="contents-item-note">Für die tägliche Agnihotra-Zeremonie geeignet</div>
             </div>
           </div>
           <div class="contents-item">
             <div class="contents-icon">
-              <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><rect x="14" y="10" width="36" height="44" rx="3" stroke="#C07818" stroke-width="2.5"/></svg>
+              <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><rect x="16" y="22" width="32" height="24" rx="3" stroke="#C07818" stroke-width="2.5"/></svg>
             </div>
             <div class="contents-item-info">
-              <div class="contents-item-name">Agnihotra-Handbuch</div>
-              <div class="contents-item-note">120 Seiten · Deutsch · Autor: Vasant V. Paranjpe</div>
-            </div>
-          </div>
-          <div class="contents-item">
-            <div class="contents-icon">
-              <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="14" stroke="#C07818" stroke-width="2.5"/></svg>
-            </div>
-            <div class="contents-item-info">
-              <div class="contents-item-name">Bio-Ghee</div>
-              <div class="contents-item-note">100 ml · zertifiziert biologisch · aus Weidehaltung</div>
-            </div>
-          </div>
-          <div class="contents-item">
-            <div class="contents-icon">
-              <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="36" rx="12" ry="7" stroke="#C07818" stroke-width="2.5"/></svg>
-            </div>
-            <div class="contents-item-info">
-              <div class="contents-item-name">Bio-Agnihotra-Reis</div>
-              <div class="contents-item-note">250 g · unpoliert · zertifiziert biologisch</div>
-            </div>
-          </div>
-          <div class="contents-item">
-            <div class="contents-icon">
-              <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><rect x="12" y="16" width="40" height="30" rx="2" stroke="#C07818" stroke-width="2.5"/></svg>
-            </div>
-            <div class="contents-item-info">
-              <div class="contents-item-name">Mantra-Karte (laminiert)</div>
-              <div class="contents-item-note">DIN A5 · beidseitig · Morgen- &amp; Abend-Mantra</div>
+              <div class="contents-item-name">Passendes Zubehör</div>
+              <div class="contents-item-note">Kupferständer, Untersetzer, Holzkoffer separat erhältlich</div>
             </div>
           </div>
         </div>
       </div>
+      </div>
 
       <div id="tab-anwendung" class="tab-content">
         <div class="tab-text">
-          <p>Die Agnihotra-Zeremonie findet täglich zu Sonnenauf- und Sonnenuntergang statt. Die genauen Zeiten für deinen Standort findest du unter <a href="https://homa-hof-heiligenberg.de/wissen.html" style="color:var(--gold);text-decoration:underline">homa-hof-heiligenberg.de/wissen</a>.</p>
+          <p>Die Agnihotra-Zeremonie findet täglich zu Sonnenauf- und Sonnenuntergang statt. Die genauen Zeiten für deinen Standort findest du unter <a href="https://homa-hof-heiligenberg.de/agnihotra-zeiten.html" style="color:var(--gold);text-decoration:underline">dem Agnihotra-Zeiten-Rechner</a>.</p>
           <ul>
             <li>Kupfer-Pyramide auf ein feuerfestes Untergestell stellen</li>
             <li>Wenige Körner trockenen Bio-Reis bereitstellen</li>
@@ -692,50 +670,42 @@
   <div class="related-grid">
     <a href="product.html" class="product-card">
       <div class="product-img">
-        <div class="product-img-placeholder" style="background:linear-gradient(135deg,#3A2810,#6A4820);height:180px">
-          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" opacity="0.4"><rect x="14" y="10" width="36" height="44" rx="3" stroke="#F5D88A" stroke-width="2.5"/><line x1="21" y1="22" x2="43" y2="22" stroke="#F5D88A" stroke-width="2" opacity="0.7"/><line x1="21" y1="30" x2="43" y2="30" stroke="#F5D88A" stroke-width="2" opacity="0.7"/></svg>
-        </div>
+        <img src="img/buch-agnihotra-de.jpg" alt="" loading="lazy">
       </div>
       <div class="product-body">
         <div class="product-cat">Bücher</div>
-        <div class="product-name">Agnihotra Handbuch</div>
-        <div class="product-price">18,50 €</div>
+        <div class="product-name">Agnihotra – Ursprung &amp; Praxis</div>
+        <div class="product-price">17,80 €</div>
       </div>
     </a>
     <a href="product.html" class="product-card">
       <div class="product-img">
-        <div class="product-img-placeholder" style="background:linear-gradient(135deg,#2A4020,#4A7830);height:180px">
-          <svg width="40" height="40" viewBox="0 0 64 64" fill="none" opacity="0.45"><circle cx="32" cy="32" r="18" stroke="#F5D88A" stroke-width="2.5"/><path d="M32 18 C32 18 24 26 24 32 C24 36.4 27.6 40 32 40 C36.4 40 40 36.4 40 32 C40 26 32 18 32 18Z" fill="#F5D88A" opacity="0.5"/></svg>
-        </div>
+        <img src="img/ghee-set.jpg" alt="" loading="lazy">
       </div>
       <div class="product-body">
-        <div class="product-cat">Bio-Lebensmittel</div>
-        <div class="product-name">Bio-Ghee (500 ml)</div>
-        <div class="product-price">16,90 €</div>
+        <div class="product-cat">Zubehör</div>
+        <div class="product-name">Ghee-Set, 2 Gläser à 480 g</div>
+        <div class="product-price">36,00 €</div>
       </div>
     </a>
     <a href="product.html" class="product-card">
       <div class="product-img">
-        <div class="product-img-placeholder" style="background:linear-gradient(135deg,#5A3010,#C07818);height:180px">
-          <svg width="40" height="40" viewBox="0 0 64 64" fill="none" opacity="0.4"><path d="M20 44 L32 16 L44 44 Z" stroke="#F5D88A" stroke-width="2.5" stroke-linejoin="round"/><line x1="20" y1="44" x2="44" y2="44" stroke="#F5D88A" stroke-width="2.5"/></svg>
-        </div>
+        <img src="img/staender.jpg" alt="" loading="lazy">
       </div>
       <div class="product-body">
-        <div class="product-cat">Kupfer</div>
-        <div class="product-name">Kupfer-Pyramide klein</div>
-        <div class="product-price">34,00 €</div>
+        <div class="product-cat">Zubehör</div>
+        <div class="product-name">Kupferständer</div>
+        <div class="product-price">10,90 €</div>
       </div>
     </a>
     <a href="product.html" class="product-card">
       <div class="product-img">
-        <div class="product-img-placeholder" style="background:linear-gradient(135deg,#3A1A08,#7A3A18);height:180px">
-          <svg width="38" height="38" viewBox="0 0 64 64" fill="none" opacity="0.4"><rect x="20" y="28" width="24" height="20" rx="3" stroke="#F5D88A" stroke-width="2.5"/><path d="M26 28 L26 24 C26 20 38 20 38 24 L38 28" stroke="#F5D88A" stroke-width="2.5" stroke-linejoin="round"/></svg>
-        </div>
+        <img src="img/kuhdung-1kg.jpg" alt="" loading="lazy">
       </div>
       <div class="product-body">
-        <div class="product-cat">Räucherwerk</div>
-        <div class="product-name">Homa-Räuchermischung</div>
-        <div class="product-price">12,80 €</div>
+        <div class="product-cat">Zubehör</div>
+        <div class="product-name">Getrockneter Kuhdung (ca. 1 kg)</div>
+        <div class="product-price">22,50 €</div>
       </div>
     </a>
   </div>
@@ -760,17 +730,17 @@
         <li><a href="../heilige-feuer.html">Heilige Feuer</a></li>
         <li><a href="../am-hof.html">Am Hof</a></li>
         <li><a href="../veranstaltungen.html">Veranstaltungen</a></li>
-        <li><a href="listing.html">Shop</a></li>
+        <li><a href="listing-zubehoer.html">Shop</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Shop</div>
       <ul class="footer-links">
-        <li><a href="#">Agnihotra-Sets</a></li>
-        <li><a href="#">Bücher &amp; Medien</a></li>
-        <li><a href="#">Kupfer &amp; Messing</a></li>
-        <li><a href="#">Bio-Lebensmittel</a></li>
-        <li><a href="#">Versand &amp; Rückgabe</a></li>
+        <li><a href="listing-zubehoer.html">Zubehör</a></li>
+        <li><a href="listing-buecher.html">Bücher</a></li>
+        <li><a href="#">Kinderbücher</a></li>
+        <li><a href="#">Audio-CDs</a></li>
+        <li><a href="#">Versand &amp; Zahlung</a></li>
       </ul>
     </div>
     <div>
@@ -781,7 +751,7 @@
       </div>
       <div class="footer-contact-item" style="display:flex;align-items:center;gap:9px;margin-top:4px">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.55"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 4l7 5 7-5"/></svg>
-        <a href="mailto:shop@homa-hof-heiligenberg.de">shop@homa-hof-heiligenberg.de</a>
+        <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a>
       </div>
     </div>
   </div>
