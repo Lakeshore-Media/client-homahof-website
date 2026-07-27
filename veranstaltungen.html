@@ -113,13 +113,14 @@
     .month-divider-line { flex: 1; height: 1px; background: var(--border); }
     .month-label {
       font-family: var(--sans);
-      font-size: 11.5px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gold);
       white-space: nowrap;
     }
+    .month-group.month-hidden { display: none !important; }
 
     .event-row {
       display: grid;
@@ -150,7 +151,8 @@
     }
     .event-weekday {
       font-family: var(--sans);
-      font-size: 11px;
+      font-size: 14px;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--brown2);
@@ -352,6 +354,11 @@
     .form-textarea { resize: vertical; min-height: 120px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .form-note { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: var(--brown3); margin-top: 12px; }
+  
+    /* Lesbarkeit (Feedback Birgitt 7/2026): Fliesstext kraeftiger */
+    .section-text, .card-text, .info-text, .step-text, .camp-text, .membership-text,
+    .event-desc, .event-meta, .expand-detail-text, .card-expand-text,
+    .timeline-content p, .subpage-hero-content p { font-weight: 400; }
   </style>
   <script src="js/site-config.js"></script>
   <script src="js/cookie-banner.js" defer></script>
@@ -556,7 +563,9 @@
     var container = document.getElementById('events-list');
     if (!container) return;
 
-    // Sort by date
+    // Only upcoming events, sorted by date
+    var today = new Date().toISOString().slice(0, 10);
+    items = items.filter(function(ev) { return ev.date >= today; });
     items.sort(function(a, b) { return a.date < b.date ? -1 : 1; });
 
     // Group by month
@@ -715,10 +724,34 @@
     fadeEls.forEach(function(el) { obs.observe(el); });
   }
 
+  function initMonthPager() {
+    var container = document.getElementById('events-list');
+    if (!container) return;
+    var groups = Array.prototype.slice.call(container.querySelectorAll('.month-group'));
+    var PAGE = 2;
+    if (groups.length <= PAGE) return;
+    var shown = PAGE;
+    groups.slice(PAGE).forEach(function(g) { g.classList.add('month-hidden'); });
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'text-align:center;margin-top:8px;margin-bottom:48px;';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn-outline-dark';
+    btn.textContent = 'Weitere Monate anzeigen →';
+    wrap.appendChild(btn);
+    container.parentNode.insertBefore(wrap, container.nextSibling);
+    btn.addEventListener('click', function() {
+      groups.slice(shown, shown + PAGE).forEach(function(g) { g.classList.remove('month-hidden'); });
+      shown += PAGE;
+      if (shown >= groups.length) wrap.remove();
+    });
+  }
+
   function initAll() {
     initFilter();
     initAccordion();
     initFadeIn();
+    initMonthPager();
   }
 
   function submitAnmeldung(e, title, formId) {
