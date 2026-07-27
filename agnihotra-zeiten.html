@@ -218,13 +218,13 @@
   <div class="section-inner">
     <div class="calc-card fade-in">
       <h2 class="calc-title">Zeiten berechnen</h2>
-      <p class="calc-subtitle">Gib einen Ort oder eine Adresse ein — Koordinaten und Zeitzone werden automatisch erkannt.</p>
+      <p class="calc-subtitle">Gib einen Ort oder eine Adresse ein — für genaue Zeiten am besten mit Straße und Hausnummer. Koordinaten und Zeitzone werden automatisch erkannt.</p>
 
       <!-- Adresssuche -->
       <div class="form-group" style="margin-bottom:8px">
         <label>Ort oder Adresse suchen</label>
         <div class="addr-row">
-          <input type="text" id="addr-input" placeholder="z.B. Heiligenberg, Bodenseekreis" onkeydown="if(event.key==='Enter'){searchAddress();event.preventDefault();}">
+          <input type="text" id="addr-input" placeholder="z.B. Musterstraße 1, 88633 Heiligenberg" onkeydown="if(event.key==='Enter'){searchAddress();event.preventDefault();}">
           <button class="addr-btn" id="addr-btn" onclick="searchAddress()">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
             Suchen

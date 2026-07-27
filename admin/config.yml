@@ -114,7 +114,7 @@ collections:
                   - { label: "Anleitung / Feuerpraxis",         value: anleitung }
                   - { label: "Flyer / Prospekt",                value: flyer }
                   - { label: "Pressebericht",                   value: presse }
-                  - { label: "Wissenschaftliche Studie",        value: wissenschaft }
+                  - { label: "Forschung",        value: wissenschaft }
               - { label: Jahr,        name: year,     widget: string,   required: false, hint: "z.B. 2024" }
               - label: Sprache
                 name: lang
