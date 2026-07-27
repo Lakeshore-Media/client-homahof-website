@@ -183,7 +183,15 @@
     .section-text, .card-text, .info-text, .step-text, .camp-text, .membership-text,
     .event-desc, .event-meta, .expand-detail-text, .card-expand-text,
     .timeline-content p, .subpage-hero-content p { font-weight: 400; }
+  
+    @media (max-width: 1400px) {
+      .nav-inner { gap: 20px; }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 15.5px; }
+    }
   </style>
+  <link href="js/leaflet/leaflet.css" rel="stylesheet">
+  <script src="js/leaflet/leaflet.js"></script>
   <script src="js/site-config.js"></script>
   <script src="js/cookie-banner.js" defer></script>
 </head>
@@ -197,7 +205,8 @@
     <div class="nav-links">
       <a href="die-basis.html">Die Basis</a>
       <a href="heilige-feuer.html">Heilige Feuer</a>
-      <a href="wissen.html" style="color:var(--gold)">Wissen</a>
+      <a href="agnihotra-zeiten.html" style="color:var(--gold)">Zeiten</a>
+      <a href="wissen.html">Wissen</a>
       <a href="am-hof.html">Am Hof</a>
       <a href="veranstaltungen.html">Veranstaltungen</a>
       <a href="mitmachen.html">Mitmachen</a>
@@ -244,6 +253,12 @@
           GPS-Standort
         </button>
         <span style="font-family:var(--sans);font-size:13px;color:var(--brown3)">oder Koordinaten unten manuell eingeben</span>
+      </div>
+
+      <div class="form-group" style="margin:14px 0 8px">
+        <label>Oder Standort auf der Karte wählen</label>
+        <div id="pick-map" style="height:320px;border-radius:10px;overflow:hidden;border:1px solid var(--border);cursor:crosshair;"></div>
+        <div class="tz-info" style="display:block;margin-top:6px;">Klicke auf die Karte, um deinen Standort zu setzen – Koordinaten und Ort werden automatisch übernommen.</div>
       </div>
 
       <div class="divider" style="margin:16px 0"></div>
@@ -573,12 +588,57 @@ function onCountryChange() {
   info.style.display = 'block';
 }
 
+// ─── KARTE (Leaflet / OpenStreetMap) ─────────────────────────────────────────
+let _pickMap = null, _pickMarker = null;
+(function initPickMap() {
+  const el = document.getElementById('pick-map');
+  if (!el || typeof L === 'undefined') return;
+  L.Icon.Default.prototype.options.imagePath = 'js/leaflet/images/';
+  _pickMap = L.map('pick-map', { scrollWheelZoom: false }).setView([47.8237, 9.3117], 6);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+  }).addTo(_pickMap);
+  _pickMap.on('click', e => setPickedLocation(e.latlng.lat, e.latlng.lng, true));
+})();
+
+function updateMapMarker(lat, lon, zoom) {
+  if (!_pickMap) return;
+  if (_pickMarker) { _pickMarker.setLatLng([lat, lon]); }
+  else { _pickMarker = L.marker([lat, lon]).addTo(_pickMap); }
+  _pickMap.setView([lat, lon], Math.max(_pickMap.getZoom(), zoom || 10));
+}
+
+function setPickedLocation(lat, lon, doReverse) {
+  document.getElementById('lat').value = lat.toFixed(4);
+  document.getElementById('lon').value = lon.toFixed(4);
+  updateMapMarker(lat, lon);
+  hideError();
+  if (!doReverse) return;
+  fetch('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json&zoom=10', {
+    headers: { 'Accept-Language': 'de,en' }
+  })
+  .then(r => r.json())
+  .then(place => {
+    const addr = place.address || {};
+    const name = addr.city || addr.town || addr.village || addr.municipality || '';
+    if (name) document.getElementById('loc-name').value = name;
+    const resultEl = document.getElementById('addr-result');
+    resultEl.textContent = '\u2713 ' + (place.display_name || lat.toFixed(4) + ', ' + lon.toFixed(4));
+    resultEl.style.display = 'block';
+    const cc = addr.country_code ? addr.country_code.toUpperCase() : '';
+    autoSelectCountry(cc, addr.country);
+  })
+  .catch(() => {});
+}
+
 function useGeolocation() {
   if (!navigator.geolocation) { showError('Standortzugriff wird von diesem Browser nicht unterstützt.'); return; }
   navigator.geolocation.getCurrentPosition(
     pos => {
       document.getElementById('lat').value = pos.coords.latitude.toFixed(4);
       document.getElementById('lon').value = pos.coords.longitude.toFixed(4);
+      updateMapMarker(pos.coords.latitude, pos.coords.longitude, 12);
       document.getElementById('addr-result').textContent = 'GPS: ' + pos.coords.latitude.toFixed(4) + ', ' + pos.coords.longitude.toFixed(4);
       document.getElementById('addr-result').style.display = 'block';
     },
@@ -606,6 +666,7 @@ function searchAddress() {
     const lat = parseFloat(place.lat), lon = parseFloat(place.lon);
     document.getElementById('lat').value = lat.toFixed(4);
     document.getElementById('lon').value = lon.toFixed(4);
+    updateMapMarker(lat, lon, 12);
     if (!document.getElementById('loc-name').value) {
       const addr = place.address || {};
       document.getElementById('loc-name').value = addr.city || addr.town || addr.village || addr.municipality || place.display_name.split(',')[0];
