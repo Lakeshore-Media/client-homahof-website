@@ -1437,26 +1437,13 @@
           <span class="card-tag">Ausblick</span>
           <h3 class="card-title">Unsere Vision</h3>
           <p class="card-text">Glück, Wohlergehen und Frieden für alle Lebewesen in einer gesunden Umwelt – durch die heilsame Kraft des Agnihotra-Feuers.</p>
-          <a href="die-basis.html" class="card-link">Die Vision lesen →</a>
+          <a href="die-basis.html#vision" class="card-link">Die Vision lesen →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- IMPRESSIONEN -->
-<section id="impressionen" style="padding:80px 0;background:var(--cream2);">
-  <div style="max-width:1440px;margin:0 auto;padding:0 48px;">
-    <div class="testimonials-header" style="margin-bottom:40px;">
-      <div class="eyebrow" style="display:flex;align-items:center;justify-content:center;gap:10px;">Impressionen</div>
-      <h2 class="section-title">Der Hof in <em>Bildern</em></h2>
-    </div>
-    <div class="gallery-grid fade-in" id="start-gallery"></div>
-    <div style="text-align:center;margin-top:32px;">
-      <a href="am-hof.html#impressionen" class="btn btn-outline-dark">Mehr Bilder →</a>
-    </div>
-  </div>
-</section>
 
 <!-- TESTIMONIALS -->
 <div aria-hidden="true" style="overflow:hidden;line-height:0;background:#FFF8EC;display:block">
@@ -1755,17 +1742,6 @@
     })
     .catch(() => {});
 
-  fetch('content/impressionen.json')
-    .then(r => r.json())
-    .then(data => {
-      const grid = document.getElementById('start-gallery');
-      if (!grid) return;
-      const items = (data.items || []).slice(0, 6);
-      grid.innerHTML = items.map(img =>
-        `<img class="gallery-img" src="${img.src}" alt="${img.alt}" loading="lazy">`
-      ).join('');
-    })
-    .catch(() => {});
 </script>
 
 <script type="module">
