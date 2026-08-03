@@ -183,63 +183,6 @@
       "category": "online"
     },
     {
-      "details": [
-        {
-          "label": "Ort",
-          "value": "Homa-Hof Heiligenberg, Oberhaslach 6"
-        },
-        {
-          "label": "Dauer",
-          "value": "1,5 Stunden"
-        },
-        {
-          "label": "Beitrag",
-          "value": "Kostenlos"
-        }
-      ],
-      "badge": "kostenlos",
-      "linkText": "Mehr Info →",
-      "price": "Kostenlos",
-      "time": "20:00 – 21:30",
-      "date": "2026-08-09",
-      "desc": "Offene Feuerzeremonie für alle – erlebe Agnihotra live ohne Voranmeldung. Der genaue Zeitpunkt richtet sich nach dem Sonnenuntergang.",
-      "location": "Homa-Hof Heiligenberg",
-      "title": "Agnihotra-Abend",
-      "link": "veranstaltungen.html",
-      "image": "images/agnihotra-feuer-2017.webp",
-      "recurring": false,
-      "category": "hof"
-    },
-    {
-      "details": [
-        {
-          "label": "Kosten",
-          "value": "Kostenlos"
-        },
-        {
-          "label": "Ort",
-          "value": "Homa-Hof Heiligenberg, Oberhaslach 6"
-        },
-        {
-          "label": "Anmeldung",
-          "value": "Erbeten"
-        }
-      ],
-      "badge": "kostenlos",
-      "linkText": "Anmelden →",
-      "price": "Kostenlos",
-      "time": "18:50 – 21:10",
-      "date": "2026-08-15",
-      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht über den Bodensee – an Regentagen treffen wir uns im Pavillon.\n\nKosten: Kostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.\nAnmeldung erforderlich: info@homa-hof-heiligenberg.de",
-      "desc": "Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.",
-      "location": "Homa-Hof Heiligenberg",
-      "title": "Agnihotra Erlernen",
-      "link": "veranstaltungen.html",
-      "image": "images/agnihotra-feuer-2017.webp",
-      "recurring": true,
-      "category": "seminar"
-    },
-    {
       "badge": "spende",
       "price": "Spende",
       "time": "15:00 - 20:00",
@@ -249,63 +192,40 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Der Fünffache Pfad",
       "image": "/images/agnihotra-mann-statue.jpg",
-      "category": "Seminar",
+      "category": "seminar",
       "confirmKey": ""
     },
     {
       "details": [
         {
-          "label": "Kosten",
-          "value": "ab 280 € (Frühbucherrabatt möglich)"
+          "label": "Zeitraum",
+          "value": "23. August – 6. September (14 Tage)"
         },
         {
-          "label": "Dauer",
-          "value": "3 Tage (Fr–So)"
+          "label": "Kursgebühr",
+          "value": "1.350 € Sozialpreis / 1.500 € Regelpreis"
+        },
+        {
+          "label": "Unterkunft & Verpflegung",
+          "value": "668 – 768 € (14 Tage, Vollverpflegung)"
         },
         {
           "label": "Anmeldung",
-          "value": "Erforderlich – begrenzte Plätze"
+          "value": "Erforderlich – 12 Plätze"
         }
       ],
       "badge": "kostenpflichtig",
       "linkText": "Anmelden →",
-      "price": "ab 280 €",
-      "time": "Fr – So",
-      "date": "2026-08-22",
-      "desc": "Dreitägiges Permakultur-Design-Seminar mit zertifiziertem Kurs-Abschluss. Begrenzte Teilnehmerzahl – frühzeitige Anmeldung empfohlen.",
-      "location": "Außerhalb des Hofs",
-      "title": "Permakultur Design Seminar",
-      "link": "veranstaltungen.html",
-      "recurring": false,
-      "category": "seminar"
-    },
-    {
-      "details": [
-        {
-          "label": "Ort",
-          "value": "Homa-Hof Heiligenberg, Oberhaslach 6"
-        },
-        {
-          "label": "Dauer",
-          "value": "Ganztägig"
-        },
-        {
-          "label": "Beitrag",
-          "value": "Kostenlos / Spende"
-        }
-      ],
-      "badge": "kostenlos",
-      "linkText": "Anmelden →",
-      "price": "Kostenlos / Spende",
-      "time": "09:00 – 17:00",
-      "date": "2026-09-13",
-      "desc": "Für Fortgeschrittene – Vertiefung der Praxis, Feinheiten des Fünffachen Pfads und Fragen aus der eigenen Praxis. Grundkenntnisse vorausgesetzt.",
+      "price": "1.350 – 1.500 €",
+      "time": "23. Aug – 6. Sep",
+      "date": "2026-08-23",
+      "desc": "14-tägiger 100-Stunden-Intensivkurs mit Christoff Schneider – zertifiziert durch das Permaculture Research Institute. Nur 12 Plätze.",
       "location": "Homa-Hof Heiligenberg",
-      "title": "Vertiefungsseminar Agnihotra",
+      "title": "Permakultur-Design Zertifikationskurs",
       "link": "veranstaltungen.html",
-      "image": "images/agnihotra-feuer-2017.webp",
       "recurring": false,
-      "category": "seminar"
+      "category": "seminar",
+      "detail": "Der 100-Stunden-Intensivkurs unter Leitung von Christoff Schneider ist durch das Permaculture Research Institute zertifiziert. Er verbindet theoretisches Wissen mit praktischer Anwendung – von Bodenaufbau, Wassermanagement und Waldgärten bis hin zu den vedischen Feuerzeremonien am Homa-Hof.\n\nKursgebühr: 1.350 € (Sozialpreis) / 1.500 € (Regelpreis)\nÜbernachtung & Vollverpflegung (14 Tage): 668 – 768 € zusätzlich\n\nAnmeldung erforderlich – begrenzte Teilnehmerzahl (12 Plätze): info@homa-hof-heiligenberg.de"
     },
     {
       "badge": "kostenlos",
@@ -317,7 +237,7 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Yagna zur Herbst-Tagundnachtgleiche mit OM Tryambakam-Erlernen",
       "image": "/images/yagna-teich.jpg",
-      "category": "Seminar",
+      "category": "seminar",
       "confirmKey": ""
     },
     {
@@ -330,7 +250,7 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra Erlernen",
       "image": "/images/agnihotra-feuer-2017.webp",
-      "category": "Seminar",
+      "category": "seminar",
       "confirmKey": ""
     },
     {
@@ -343,7 +263,7 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra-Abend",
       "image": "/images/agnihotra-feuer-2017.webp",
-      "category": "Abend",
+      "category": "hof",
       "confirmKey": ""
     },
     {
@@ -356,7 +276,7 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra Erlernen",
       "image": "/images/agnihotra-feuer-2017.webp",
-      "category": "Seminar",
+      "category": "seminar",
       "confirmKey": ""
     },
     {
@@ -369,7 +289,7 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra-Abend",
       "image": "/images/agnihotra-feuer-2017.webp",
-      "category": "Abend",
+      "category": "hof",
       "confirmKey": ""
     },
     {
@@ -382,7 +302,7 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra Erlernen",
       "image": "/images/agnihotra-feuer-2017.webp",
-      "category": "Seminar",
+      "category": "seminar",
       "confirmKey": ""
     },
     {
@@ -395,7 +315,7 @@
       "location": "Homa-Hof Heiligenberg",
       "title": "Agnihotra-Abend",
       "image": "/images/agnihotra-feuer-2017.webp",
-      "category": "Abend",
+      "category": "hof",
       "confirmKey": ""
     }
   ]
