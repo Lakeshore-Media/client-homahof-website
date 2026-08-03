@@ -447,6 +447,17 @@
       .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
       .footer-divider { margin: 0 20px; }
     }
+  
+    /* Lesbarkeit (Feedback Birgitt 7/2026): Fliesstext kraeftiger */
+    .section-text, .card-text, .info-text, .step-text, .camp-text, .membership-text,
+    .event-desc, .event-meta, .expand-detail-text, .card-expand-text,
+    .timeline-content p, .subpage-hero-content p { font-weight: 400; }
+  
+    @media (max-width: 1400px) {
+      .nav-inner { gap: 20px; }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 15.5px; }
+    }
   </style>
   <script src="js/site-config.js"></script>
   <script src="js/cookie-banner.js" defer></script>
@@ -461,6 +472,7 @@
     <div class="nav-links">
       <a href="die-basis.html">Die Basis</a>
       <a href="heilige-feuer.html" style="color:var(--gold)">Heilige Feuer</a>
+      <a href="agnihotra-zeiten.html">Zeiten</a>
       <a href="wissen.html">Wissen</a>
       <a href="am-hof.html">Am Hof</a>
       <a href="veranstaltungen.html">Veranstaltungen</a>
@@ -483,7 +495,7 @@
   <div class="subpage-hero-content">
     <div class="hero-eyebrow">Vedische Feuerzeremonien</div>
     <h1>Heilige <em>Feuer</em></h1>
-    <p>Agnihotra, der Fünffache Pfad und weitere Heilige Feuer – Wissen und Praxis aus der vedischen Tradition.</p>
+    <p>Agnihotra, der Fünffache Pfad und weitere Heilige Feuer – Wissen und Praxis aus der vedischen Tradition</p>
   </div>
 </section>
 
@@ -494,8 +506,7 @@
       <div>
         <div class="eyebrow">Grundlagen</div>
         <h2 class="section-title"><em>Agnihotra</em></h2>
-        <p class="section-text">Agnihotra ist eine vedische Feuerzeremonie, die exakt zu Sonnenauf- und -untergang durchgeführt wird. In einer kleinen Kupferpyramide verbrennt man Kuhdung, Ghee und Reis – dazu wird ein kurzes Mantra gesungen. Die entstehende Asche hat heilsame Eigenschaften für Mensch, Tier und Pflanze.</p>
-        <a href="#agnihotra-praxis" class="btn btn-outline-dark">Wie sie geht →</a>
+        <p class="section-text">Agnihotra ist eine vedische Feuerzeremonie, die exakt zu Sonnenauf- und -untergang durchgeführt wird. In einer kleinen Kupferpyramide verbrennt man Kuhdung, Ghee und Reis – dazu wird ein kurzes Mantra gesungen. Dabei entsteht eine hohe feinstoffliche Energie. Die entstehende Asche hat heilsame Eigenschaften für Mensch, Tier und Pflanze.</p>
       </div>
       <div class="col-img fade-in" style="transition-delay:0.15s">
         <img src="images/agnihotra-bild-neu.webp" alt="Agnihotra – Feuerzeremonie exakt beim Sonnenuntergang" loading="lazy">
@@ -550,8 +561,20 @@
   </div>
 </section>
 
+<!-- E: AGNIHOTRAZEITEN -->
+<section class="zeiten-section">
+  <div class="zeiten-bg" style="background-image:url('Archivbilder/Agnihotrazeiten Main - wichtig nur ohne editor oeffnen/imgi_3_sunrise.jpg')"></div>
+  <div class="zeiten-overlay"></div>
+  <div class="zeiten-content fade-in">
+    <div class="eyebrow">Zeiten</div>
+    <h2 class="section-title">Agnihotrazeiten <em>berechnen</em></h2>
+    <p class="section-text">Die Zeiten für Sonnenauf- und -untergang variieren täglich und ortsabhängig. Berechne sie für deinen Standort – mit Adresssuche, GPS und Export als PDF oder CSV.</p>
+    <a href="agnihotra-zeiten.html" class="btn btn-gold fade-in" style="transition-delay:0.2s">Zum Agnihotra-Zeiten-Rechner →</a>
+  </div>
+</section>
+
 <!-- C: DER FÜNFFACHE PFAD -->
-<section class="section-wrap">
+<section class="section-wrap" id="fuenffacher-pfad">
   <div class="section-inner">
     <div class="section-header center fade-in">
       <div class="eyebrow">Vertiefung</div>
@@ -564,7 +587,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Yagna</h3>
-          <p class="card-text">Feuerzeremonie zur Reinigung der Atmosphäre.</p>
+          <p class="card-text">Feuerzeremonien zur Reinigung der Atmosphäre</p>
         </div>
         <div class="card-expand">
           <p class="card-expand-text">Vedische Feuerzeremonien – allen voran Agnihotra – reinigen Atmosphäre, Wasser und Erde und wirken heilsam auf Körper, Seele und Geist. Sie verstärken die eigene Energie und Hingabe.</p>
@@ -576,7 +599,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Daan</h3>
-          <p class="card-text">Großzügiges Geben ohne Erwartung.</p>
+          <p class="card-text">Großzügiges Geben ohne Erwartung</p>
         </div>
         <div class="card-expand">
           <p class="card-expand-text">Wer großzügig gibt – zum Beispiel Zeit, Geld … – löst innere Bindungen an Besitz und schafft Raum für Empfangen. Daan lehrt: Nicht das Anhäufen, sondern das Weitergeben bringt dauerhaftes Wohlergehen.</p>
@@ -588,7 +611,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Tapa</h3>
-          <p class="card-text">Selbstdisziplin und innere Reinigung.</p>
+          <p class="card-text">Selbstdisziplin und innere Reinigung</p>
         </div>
         <div class="card-expand">
           <p class="card-expand-text">Liebevolles Handeln auch bei inneren Widerständen fördert die innere Stärke. Tapa beinhaltet sowohl körperliche Disziplinen wie gelegentliches Fasten als auch spirituelle Praktiken wie Yoga, Gebet und Meditation – sie unterstützen den Energiefluss und klären den Geist.</p>
@@ -600,7 +623,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Karma</h3>
-          <p class="card-text">Rechtes, selbstloses Handeln.</p>
+          <p class="card-text">Rechtes, selbstloses Handeln</p>
         </div>
         <div class="card-expand">
           <p class="card-expand-text">Jeder Gedanke, jedes Gefühl und jede Handlung zieht früher oder später eine entsprechende Reaktion nach sich. Wer selbstlos und wahrheitsgemäß handelt, gestaltet sein Schicksal bewusst und befreit sich aus dem Kreislauf der Folgen.</p>
@@ -612,25 +635,13 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Swadhyaya</h3>
-          <p class="card-text">Selbststudium und Selbsterkenntnis.</p>
+          <p class="card-text">Selbststudium und Selbsterkenntnis</p>
         </div>
         <div class="card-expand">
           <p class="card-expand-text">„Wer bin ich? Was ist die Wahrheit?" – diese Fragen führen zur tiefsten Erkenntnis. Meditation, Stille und die Beobachtung der eigenen Gedanken öffnen den Weg zu Verantwortung und innerer Befreiung.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- E: AGNIHOTRAZEITEN -->
-<section class="zeiten-section">
-  <div class="zeiten-bg" style="background-image:url('Archivbilder/Agnihotrazeiten Main - wichtig nur ohne editor oeffnen/imgi_3_sunrise.jpg')"></div>
-  <div class="zeiten-overlay"></div>
-  <div class="zeiten-content fade-in">
-    <div class="eyebrow">Zeiten</div>
-    <h2 class="section-title">Agnihotrazeiten <em>berechnen</em></h2>
-    <p class="section-text">Die Zeiten für Sonnenauf- und -untergang variieren täglich und ortsabhängig. Berechne sie für deinen Standort – mit Adresssuche, GPS und Export als PDF oder CSV.</p>
-    <a href="agnihotra-zeiten.html" class="btn btn-gold fade-in" style="transition-delay:0.2s">Zum Agnihotra-Zeiten-Rechner →</a>
   </div>
 </section>
 
@@ -648,7 +659,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Tryambakam Homa</h3>
-          <p class="card-text">Kraftvolles Segensfeuer für Mensch und Natur.</p>
+          <p class="card-text">Kraftvolles Segensfeuer für Mensch und Natur</p>
         </div>
         <div class="card-expand">
           <p class="card-expand-text">Das „Mantra der Befreiung" begleitet dieses Feuer. Es kann einzeln oder in der Gruppe praktiziert werden – für beliebige Dauer. In Homa-Zentren brennt es täglich mindestens vier Stunden, bei Voll- und Neumond oft 24 Stunden. Kein Ersatz für Agnihotra, sondern eine Vertiefung.</p>
@@ -661,7 +672,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-title">Vyahruti Homa</h3>
-          <p class="card-text">Harmonisierendes Feuer für Neuanfänge und besondere Anlässe.</p>
+          <p class="card-text">Harmonisierendes Feuer für Neuanfänge und besondere Anlässe</p>
         </div>
         <div class="card-expand">
           <p class="card-expand-text">Die Mantras adressieren die drei vedischen Ebenen – Erde, Atmosphäre und den Raum darüber – und wirken harmonisierend auf diese Ebenen. Die Durchführung dauert etwa fünf Minuten und eignet sich besonders, wenn man zeitenunabhängig ein vedisches Feuer durchführen möchte. Ideal auch für alle Neuanfänge, z. B. vor einer Reise, Festlichkeiten usw.</p>

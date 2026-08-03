@@ -135,18 +135,18 @@
 
     /* ─── PRINT / PDF ─────────────────────────────────────────────────────────── */
     #print-area { display: none; }
-    .print-page { font-family: Arial, Helvetica, sans-serif; font-size: 8.5pt; color: #000; }
-    .print-h1 { font-size: 9pt; font-weight: bold; margin-bottom: 2.5pt; }
-    .print-meta { display: flex; gap: 0; justify-content: flex-start; font-size: 8pt; margin-bottom: 1.5pt; }
+    .print-page { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color: #000; }
+    .print-h1 { font-size: 11pt; font-weight: bold; margin-bottom: 3pt; }
+    .print-meta { display: flex; gap: 0; justify-content: flex-start; font-size: 9pt; margin-bottom: 1.5pt; }
     .print-meta span { margin-right: 22pt; }
-    .print-table { border-collapse: collapse; width: 100%; margin-top: 5pt; font-size: 7pt; }
-    .print-table th { font-weight: bold; text-align: center; padding: 2.5pt 1.5pt; border-bottom: 0.75pt solid #000; border-top: 0.75pt solid #000; font-size: 7.5pt; }
+    .print-table { border-collapse: collapse; width: 100%; margin-top: 5pt; font-size: 9pt; }
+    .print-table th { font-weight: bold; text-align: center; padding: 2.5pt 1.5pt; border-bottom: 0.75pt solid #000; border-top: 0.75pt solid #000; font-size: 9.5pt; }
     .print-table th.pt-tag { text-align: center; font-style: italic; }
-    .print-table td { text-align: center; padding: 0.6pt 1.5pt; font-size: 6.8pt; line-height: 1.18; border-bottom: 0.2pt solid #ddd; }
+    .print-table td { text-align: center; padding: 0.5pt 1.5pt; font-size: 8.8pt; line-height: 1.15; border-bottom: 0.2pt solid #ddd; }
     .print-table td.pt-day { font-weight: bold; background: #e8e8e8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .print-table tr:nth-child(odd) td { background: #f6f6f6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .print-table tr:nth-child(even) td { background: #fff; }
-    .print-footer { display: flex; justify-content: space-between; font-size: 7pt; color: #555; margin-top: 7pt; font-style: italic; border-top: 0.2pt solid #bbb; padding-top: 3pt; }
+    .print-footer { display: flex; justify-content: space-between; font-size: 8pt; color: #555; margin-top: 7pt; font-style: italic; border-top: 0.2pt solid #bbb; padding-top: 3pt; }
 
     @media print {
       @page { size: A4 portrait; margin: 0.9cm 1.4cm; }
@@ -178,7 +178,20 @@
       .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
       .footer-divider { margin: 0 20px; }
     }
+  
+    /* Lesbarkeit (Feedback Birgitt 7/2026): Fliesstext kraeftiger */
+    .section-text, .card-text, .info-text, .step-text, .camp-text, .membership-text,
+    .event-desc, .event-meta, .expand-detail-text, .card-expand-text,
+    .timeline-content p, .subpage-hero-content p { font-weight: 400; }
+  
+    @media (max-width: 1400px) {
+      .nav-inner { gap: 20px; }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 15.5px; }
+    }
   </style>
+  <link href="js/leaflet/leaflet.css" rel="stylesheet">
+  <script src="js/leaflet/leaflet.js"></script>
   <script src="js/site-config.js"></script>
   <script src="js/cookie-banner.js" defer></script>
 </head>
@@ -192,7 +205,8 @@
     <div class="nav-links">
       <a href="die-basis.html">Die Basis</a>
       <a href="heilige-feuer.html">Heilige Feuer</a>
-      <a href="wissen.html" style="color:var(--gold)">Wissen</a>
+      <a href="agnihotra-zeiten.html" style="color:var(--gold)">Zeiten</a>
+      <a href="wissen.html">Wissen</a>
       <a href="am-hof.html">Am Hof</a>
       <a href="veranstaltungen.html">Veranstaltungen</a>
       <a href="mitmachen.html">Mitmachen</a>
@@ -218,13 +232,13 @@
   <div class="section-inner">
     <div class="calc-card fade-in">
       <h2 class="calc-title">Zeiten berechnen</h2>
-      <p class="calc-subtitle">Gib einen Ort oder eine Adresse ein — Koordinaten und Zeitzone werden automatisch erkannt.</p>
+      <p class="calc-subtitle">Gib einen Ort oder eine Adresse ein — für genaue Zeiten am besten mit Straße und Hausnummer. Koordinaten und Zeitzone werden automatisch erkannt.</p>
 
       <!-- Adresssuche -->
       <div class="form-group" style="margin-bottom:8px">
         <label>Ort oder Adresse suchen</label>
         <div class="addr-row">
-          <input type="text" id="addr-input" placeholder="z.B. Heiligenberg, Bodenseekreis" onkeydown="if(event.key==='Enter'){searchAddress();event.preventDefault();}">
+          <input type="text" id="addr-input" placeholder="z.B. Musterstraße 1, 88633 Heiligenberg" onkeydown="if(event.key==='Enter'){searchAddress();event.preventDefault();}">
           <button class="addr-btn" id="addr-btn" onclick="searchAddress()">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
             Suchen
@@ -239,6 +253,12 @@
           GPS-Standort
         </button>
         <span style="font-family:var(--sans);font-size:13px;color:var(--brown3)">oder Koordinaten unten manuell eingeben</span>
+      </div>
+
+      <div class="form-group" style="margin:14px 0 8px">
+        <label>Oder Standort auf der Karte wählen</label>
+        <div id="pick-map" style="height:320px;border-radius:10px;overflow:hidden;border:1px solid var(--border);cursor:crosshair;"></div>
+        <div class="tz-info" style="display:block;margin-top:6px;">Klicke auf die Karte, um deinen Standort zu setzen – Koordinaten und Ort werden automatisch übernommen.</div>
       </div>
 
       <div class="divider" style="margin:16px 0"></div>
@@ -568,12 +588,57 @@ function onCountryChange() {
   info.style.display = 'block';
 }
 
+// ─── KARTE (Leaflet / OpenStreetMap) ─────────────────────────────────────────
+let _pickMap = null, _pickMarker = null;
+(function initPickMap() {
+  const el = document.getElementById('pick-map');
+  if (!el || typeof L === 'undefined') return;
+  L.Icon.Default.prototype.options.imagePath = 'js/leaflet/images/';
+  _pickMap = L.map('pick-map', { scrollWheelZoom: false }).setView([47.8237, 9.3117], 6);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+  }).addTo(_pickMap);
+  _pickMap.on('click', e => setPickedLocation(e.latlng.lat, e.latlng.lng, true));
+})();
+
+function updateMapMarker(lat, lon, zoom) {
+  if (!_pickMap) return;
+  if (_pickMarker) { _pickMarker.setLatLng([lat, lon]); }
+  else { _pickMarker = L.marker([lat, lon]).addTo(_pickMap); }
+  _pickMap.setView([lat, lon], Math.max(_pickMap.getZoom(), zoom || 10));
+}
+
+function setPickedLocation(lat, lon, doReverse) {
+  document.getElementById('lat').value = lat.toFixed(4);
+  document.getElementById('lon').value = lon.toFixed(4);
+  updateMapMarker(lat, lon);
+  hideError();
+  if (!doReverse) return;
+  fetch('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json&zoom=10', {
+    headers: { 'Accept-Language': 'de,en' }
+  })
+  .then(r => r.json())
+  .then(place => {
+    const addr = place.address || {};
+    const name = addr.city || addr.town || addr.village || addr.municipality || '';
+    if (name) document.getElementById('loc-name').value = name;
+    const resultEl = document.getElementById('addr-result');
+    resultEl.textContent = '\u2713 ' + (place.display_name || lat.toFixed(4) + ', ' + lon.toFixed(4));
+    resultEl.style.display = 'block';
+    const cc = addr.country_code ? addr.country_code.toUpperCase() : '';
+    autoSelectCountry(cc, addr.country);
+  })
+  .catch(() => {});
+}
+
 function useGeolocation() {
   if (!navigator.geolocation) { showError('Standortzugriff wird von diesem Browser nicht unterstützt.'); return; }
   navigator.geolocation.getCurrentPosition(
     pos => {
       document.getElementById('lat').value = pos.coords.latitude.toFixed(4);
       document.getElementById('lon').value = pos.coords.longitude.toFixed(4);
+      updateMapMarker(pos.coords.latitude, pos.coords.longitude, 12);
       document.getElementById('addr-result').textContent = 'GPS: ' + pos.coords.latitude.toFixed(4) + ', ' + pos.coords.longitude.toFixed(4);
       document.getElementById('addr-result').style.display = 'block';
     },
@@ -601,6 +666,7 @@ function searchAddress() {
     const lat = parseFloat(place.lat), lon = parseFloat(place.lon);
     document.getElementById('lat').value = lat.toFixed(4);
     document.getElementById('lon').value = lon.toFixed(4);
+    updateMapMarker(lat, lon, 12);
     if (!document.getElementById('loc-name').value) {
       const addr = place.address || {};
       document.getElementById('loc-name').value = addr.city || addr.town || addr.village || addr.municipality || place.display_name.split(',')[0];

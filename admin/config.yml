@@ -26,7 +26,14 @@ collections:
               - { label: Ort,          name: location, widget: string,   default: "Homa-Hof Heiligenberg" }
               - { label: Beschreibung, name: desc,     widget: text }
               - { label: Beitrag,      name: price,    widget: string,   hint: "z.B. Kostenlos / Spende" }
-              - { label: Kategorie,    name: category, widget: select,   options: [Seminar, Sommertreffen, Abend, Retreat, Workshop] }
+              - label: Kategorie
+                name: category
+                widget: select
+                default: seminar
+                options:
+                  - { label: "Seminar / Workshop",       value: seminar }
+                  - { label: "Fest / Aktion am Hof",     value: hof }
+                  - { label: "Online / Welt",            value: online }
               - { label: Badge-Farbe,  name: badge,    widget: select,   options: [kostenlos, spende, kostenpflichtig], default: kostenlos }
               - { label: Detailtext,   name: detail,   widget: text,     required: false, hint: "Optionaler Langtext im aufgeklappten Bereich" }
               - { label: Bild,         name: image,    widget: image,    required: false, hint: "Optionales Bild im aufgeklappten Bereich" }
@@ -114,7 +121,7 @@ collections:
                   - { label: "Anleitung / Feuerpraxis",         value: anleitung }
                   - { label: "Flyer / Prospekt",                value: flyer }
                   - { label: "Pressebericht",                   value: presse }
-                  - { label: "Wissenschaftliche Studie",        value: wissenschaft }
+                  - { label: "Forschung",        value: wissenschaft }
               - { label: Jahr,        name: year,     widget: string,   required: false, hint: "z.B. 2024" }
               - label: Sprache
                 name: lang

@@ -141,7 +141,7 @@
     .form-note { font-family: var(--sans); font-size: 13.5px; font-weight: 300; color: var(--brown3); margin-top: 12px; }
 
     /* Info blocks */
-    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 40px; }
     .info-block { background: white; border: 1px solid var(--border2); border-radius: 12px; padding: 28px; }
     .info-icon { font-size: 28px; margin-bottom: 14px; }
     .info-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brown); margin-bottom: 8px; }
@@ -283,6 +283,17 @@
       .spenden-inner { grid-template-columns: 1fr !important; gap: 40px !important; padding: 0 20px !important; }
       .spenden-title { font-size: 36px !important; }
     }
+  
+    /* Lesbarkeit (Feedback Birgitt 7/2026): Fliesstext kraeftiger */
+    .section-text, .card-text, .info-text, .step-text, .camp-text, .membership-text,
+    .event-desc, .event-meta, .expand-detail-text, .card-expand-text,
+    .timeline-content p, .subpage-hero-content p { font-weight: 400; }
+  
+    @media (max-width: 1400px) {
+      .nav-inner { gap: 20px; }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 15.5px; }
+    }
   </style>
   <style>
     /* === SPENDEN === */
@@ -381,6 +392,7 @@
     <div class="nav-links">
       <a href="die-basis.html">Die Basis</a>
       <a href="heilige-feuer.html">Heilige Feuer</a>
+      <a href="agnihotra-zeiten.html">Zeiten</a>
       <a href="wissen.html">Wissen</a>
       <a href="am-hof.html" style="color:var(--gold)">Am Hof</a>
       <a href="veranstaltungen.html">Veranstaltungen</a>
@@ -403,13 +415,14 @@
   <div class="subpage-hero-content">
     <div class="hero-eyebrow">Besuchen & Erleben</div>
     <h1>Am <em>Hof</em></h1>
-    <p>Veranstaltungen, Besucherhinweise, Anfahrt und Übernachtungsmöglichkeiten auf dem Homa-Hof.</p>
+    <p>Hofladen, Veranstaltungen und Besucherhinweise</p>
   </div>
 </section>
 
 <!-- A: VERANSTALTUNGEN -->
 <section class="section-wrap" id="veranstaltungen">
   <div class="section-inner">
+    <p class="section-text fade-in" style="max-width:760px;margin-bottom:56px;">Wir laden euch herzlich ein, den Homa-Hof zu einer <a href="veranstaltungen.html" style="color:var(--gold);text-decoration:underline">Veranstaltung</a> oder zu den Ladenöffnungszeiten kennenzulernen. Ihr wollt für einige Tage zum Homa-Hof kommen und aktiv mithelfen? Dann nehmt gerne Kontakt mit uns auf über <a href="mailto:willkommen@homa-hof-heiligenberg.de" style="color:var(--gold);text-decoration:underline">willkommen@homa-hof-heiligenberg.de</a></p>
     <div class="section-header fade-in">
       <div class="eyebrow">Nächster Termin</div>
       <h2 class="section-title">Nächste <em>Veranstaltung</em></h2>
@@ -437,7 +450,7 @@
       <div class="info-block">
         <div class="info-icon">🕐</div>
         <div class="info-title">Öffnungszeiten</div>
-        <p class="info-text">Hofladen Freitag und Samstag von 15 bis 18 Uhr geöffnet. Zu Veranstaltungen zusätzliche Zeiten – bitte vorab anfragen. Außerhalb dieser Zeiten bitten wir um vorherige Kontaktaufnahme, am besten über E-Mail.</p>
+        <p class="info-text">Hofladen Freitag und Samstag von 15 bis 18 Uhr geöffnet. Zu Veranstaltungen zusätzliche Zeiten – bitte vorab anfragen. Außerhalb dieser Zeiten bitten wir um vorherige Kontaktaufnahme, am besten über <a href="mailto:willkommen@homa-hof-heiligenberg.de" style="color:var(--gold)">E-Mail</a>.</p>
       </div>
       <div class="info-block">
         <div class="info-icon">🚗</div>
@@ -448,6 +461,11 @@
         <div class="info-icon">🌿</div>
         <div class="info-title">Was mitbringen</div>
         <p class="info-text">Bequeme Kleidung und Schuhe für Feld und Wiese, eine zusätzliche Jacke und ein offenes Herz.</p>
+      </div>
+      <div class="info-block">
+        <div class="info-icon">🕊️</div>
+        <div class="info-title">Gut zu wissen</div>
+        <p class="info-text">Das gesamte Hofgelände ist Nichtraucherbereich. Bring bitte keine Haustiere mit. Vor Ort gibt es keine Bewirtung – sorge bitte selbst für Verpflegung (vegetarisch und alkoholfrei).</p>
       </div>
     </div>
   </div>
@@ -532,21 +550,7 @@
       <div class="eyebrow">Übernachten</div>
       <h2 class="section-title">Übernachtungs&shy;<em>möglichkeiten</em></h2>
     </div>
-    <div class="two-col fade-in">
-      <div class="camp-card">
-        <div class="camp-icon">🚐</div>
-        <h3 class="camp-title">Wohnwagen & Camper</h3>
-        <p class="camp-text">Stellplatz auf dem Hofgelände, direkt neben den Veranstaltungsflächen. Strom und Wasser nach Verfügbarkeit.</p>
-        <span class="camp-price">Preis auf Anfrage</span>
-      </div>
-      <div class="camp-card">
-        <div class="camp-icon">⛺</div>
-        <h3 class="camp-title">Zelt-Camping</h3>
-        <p class="camp-text">Naturnah auf der Hofwiese – einschlafen mit Blick in den Sternenhimmel über dem Bodensee.</p>
-        <span class="camp-price">Preis auf Anfrage</span>
-      </div>
-    </div>
-    <p class="section-text" style="margin-top:24px;">Für Anfragen zur Übernachtung bitte direkt Kontakt aufnehmen: <a href="mailto:willkommen@homa-hof-heiligenberg.de" style="color:var(--gold)">willkommen@homa-hof-heiligenberg.de</a></p>
+    <p class="section-text fade-in" style="max-width:760px;">Du möchtest für ein paar Tage oder länger an den Homa-Hof? Für Anfragen zur Übernachtung bitte direkt Kontakt aufnehmen: <a href="mailto:willkommen@homa-hof-heiligenberg.de" style="color:var(--gold)">willkommen@homa-hof-heiligenberg.de</a></p>
   </div>
 </section>
 
