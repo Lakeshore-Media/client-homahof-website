@@ -1,17 +1,17 @@
 {
-  "stand": "Juni 2026",
+  "stand": "August 2026",
   "categories": [
     {
       "name": "Gemüse",
-      "items": "Kohlrabi\nFenchel"
+      "items": "Rote Bete\nZucchini gelb\nZucchini grün\nBohnen\nTomaten gelb\nCocktail-Tomaten"
     },
     {
       "name": "Salate",
-      "items": "Kopfsalat\nBatavia\nLollo Rosso\n"
+      "items": "\n"
     },
     {
       "name": "Obst / Nüsse / Säfte / Honig",
-      "items": "Kirschen\nWalnüsse\nApfelsaft\nApfel-Birnensaft\nFrühtracht-Honig\nSommertracht-Honig"
+      "items": "Zwetschgen\nÄpfel (Fallobst)\nWalnüsse\nApfelsaft\nFrühtracht-Honig\nSommertracht-Honig\nDunkler Honig"
     },
     {
       "name": "Weiteres Angebot in Bio-Qualität",
