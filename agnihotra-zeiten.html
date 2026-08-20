@@ -139,10 +139,18 @@
     .print-h1 { font-size: 11pt; font-weight: bold; margin-bottom: 3pt; }
     .print-meta { display: flex; gap: 0; justify-content: flex-start; font-size: 9pt; margin-bottom: 1.5pt; }
     .print-meta span { margin-right: 22pt; }
+    .print-range { font-size: 10pt; font-weight: bold; margin-top: 4pt; }
     .print-table { border-collapse: collapse; width: 100%; margin-top: 5pt; font-size: 9pt; }
-    .print-table th { font-weight: bold; text-align: center; padding: 2.5pt 1.5pt; border-bottom: 0.75pt solid #000; border-top: 0.75pt solid #000; font-size: 9.5pt; }
+    .print-table th { font-weight: bold; text-align: center; padding: 2.5pt 1.5pt; border-bottom: 0.75pt solid #000; border-top: 0.75pt solid #000; font-size: 10.5pt; }
     .print-table th.pt-tag { text-align: center; font-style: italic; }
-    .print-table td { text-align: center; padding: 0.5pt 1.5pt; font-size: 8.8pt; line-height: 1.15; border-bottom: 0.2pt solid #ddd; }
+    .print-table td { text-align: center; padding: 0.3pt 1.5pt; font-size: 9.2pt; line-height: 1.06; border-bottom: 0.2pt solid #ddd; }
+
+    .print-page-wide .print-range { font-size: 12pt; }
+    .print-page-wide .print-table { margin-top: 6pt; }
+    .print-page-wide .print-table th { font-size: 12pt; padding: 3pt 2pt; }
+    .print-page-wide .print-table th.pt-sub { font-size: 9.5pt; font-weight: normal; font-style: italic; border-top: none; }
+    .print-page-wide .print-table td { font-size: 12.5pt; padding: 1.6pt 2pt; line-height: 1.2; }
+    .print-page-wide .print-table td.pt-day { font-size: 12.5pt; }
     .print-table td.pt-day { font-weight: bold; background: #e8e8e8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .print-table tr:nth-child(odd) td { background: #f6f6f6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .print-table tr:nth-child(even) td { background: #fff; }
@@ -151,7 +159,7 @@
     @media print {
       @page { size: A4 portrait; margin: 0.9cm 1.4cm; }
       nav, .subpage-hero, .calc-section, .result-section,
-      [aria-hidden="true"], footer, .cookie-banner { display: none !important; }
+      [aria-hidden="true"], footer, .cookie-banner, #priv-notice { display: none !important; }
       body { background: white !important; }
       #print-area { display: block !important; }
     }
@@ -199,6 +207,24 @@
     @media (max-width: 520px) {
       .steps-grid, .footer-inner { grid-template-columns: 1fr !important; }
       .footer-inner > div:first-child { grid-column: auto !important; }
+    }
+    @media (max-width: 700px) {
+      body { -webkit-hyphens: auto; hyphens: auto; }
+      .footer-bottom, .footer-legal, .footer-social, .event-actions, .event-date-block,
+      .eyebrow, .hero-eyebrow, .addr-row, .result-header, .anmelde-check, .newsletter-opt,
+      .pn-inner, .print-meta, .event-meta, .card-meta { flex-wrap: wrap; }
+    }
+    @media (max-width: 340px) {
+      * { min-width: 0 !important; }
+      [class*="grid"], [class*="-row"], .two-col, .three-col, .tables-wrap, .stats-inner,
+      .event-box, .kinder-books, .two-fire-grid { grid-template-columns: 1fr !important; }
+      input, select, textarea, button, .btn { max-width: 100% !important; }
+      .btn, .btn-gold, .btn-outline, .btn-outline-dark { padding-left: 14px !important; padding-right: 14px !important; }
+      .event-actions, .nav-links a, [class*="actions"] { white-space: normal !important; align-items: stretch !important; }
+      .about-img, .card-img, .am-card-img { height: auto !important; aspect-ratio: 2 / 1; }
+      .section-inner, .nav-inner, .footer-inner, .footer-bottom, .subpage-hero-content,
+      [class*="card"], [class*="-body"], [class*="-inner"] { padding-left: 14px !important; padding-right: 14px !important; }
+      [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
     }
   </style>
   <link href="js/leaflet/leaflet.css" rel="stylesheet">
@@ -328,9 +354,13 @@
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 1v9M4 7l4 4 4-4"/><path d="M2 13h12"/></svg>
           CSV
         </a>
-        <a href="#" class="btn-csv" id="pdf-btn" onclick="printPDF(event)">
+        <a href="#" class="btn-csv" id="pdf-btn" onclick="printPDF(event, 2)">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="9" height="12" rx="1"/><path d="M5 2v4h4"/><path d="M11 8h3M11 11h3M11 14h3" opacity=".5"/><path d="M11 6l3 0" opacity=".3"/></svg>
-          PDF
+          PDF · 2 Seiten
+        </a>
+        <a href="#" class="btn-csv" id="pdf-btn-large" onclick="printPDF(event, 4)">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="9" height="12" rx="1"/><path d="M5 2v4h4"/><path d="M11 8h3M11 11h3M11 14h3" opacity=".5"/><path d="M11 6l3 0" opacity=".3"/></svg>
+          PDF · 4 Seiten, große Schrift
         </a>
       </div>
     </div>
@@ -1102,7 +1132,26 @@ function buildPrintTable(data, year, fromM, toM) {
   return html;
 }
 
-function printPDF(e) {
+function buildPrintTableWide(data, year, fromM, toM) {
+  let html = '<thead><tr><th class="pt-tag" rowspan="2">Tag</th>';
+  for (let m = fromM; m <= toM; m++) html += '<th colspan="2">' + MONTH_NAMES_PR[m-1] + '</th>';
+  html += '</tr><tr>';
+  for (let m = fromM; m <= toM; m++) html += '<th class="pt-sub">auf</th><th class="pt-sub">unter</th>';
+  html += '</tr></thead><tbody>';
+  for (let day = 1; day <= 31; day++) {
+    html += '<tr><td class="pt-day">' + day + '</td>';
+    for (let m = fromM; m <= toM; m++) {
+      const daysInM = new Date(year, m, 0).getDate();
+      const d = day > daysInM ? null : data[m][day];
+      if (!d) { html += '<td></td><td></td>'; continue; }
+      html += '<td>' + fmtTimePr(d.sa.h, d.sa.m, d.sa.s) + '</td><td>' + fmtTimePr(d.su.h, d.su.m, d.su.s) + '</td>';
+    }
+    html += '</tr>';
+  }
+  return html + '</tbody>';
+}
+
+function printPDF(e, pages) {
   e.preventDefault();
   if (!_calcData) return;
   const { data, year, lat, lon, dtz, locName, country } = _calcData;
@@ -1122,21 +1171,22 @@ function printPDF(e) {
       <span><b>Längengrad:</b> ${lon}</span>
     </div>`;
 
-  document.getElementById('print-area').innerHTML = `
-    <div class="print-page">
+  const wide = pages === 4;
+  const ranges = wide ? [[1,3],[4,6],[7,9],[10,12]] : [[1,6],[7,12]];
+  const total = ranges.length;
+
+  document.getElementById('print-area').innerHTML = ranges.map(function (r, i) {
+    const table = wide ? buildPrintTableWide(data, year, r[0], r[1]) : buildPrintTable(data, year, r[0], r[1]);
+    return `
+    <div class="print-page${wide ? ' print-page-wide' : ''}"${i ? ' style="page-break-before:always"' : ''}>
       ${hdr}
-      <table class="print-table">${buildPrintTable(data, year, 1, 6)}</table>
+      <div class="print-range">${MONTH_NAMES_PR[r[0]-1]} – ${MONTH_NAMES_PR[r[1]-1]} ${year}</div>
+      <table class="print-table">${table}</table>
       <div class="print-footer">
-        <span>agnihotra-online.com</span><span>Seite 1/2</span><span>homa-hof-heiligenberg.de</span>
-      </div>
-    </div>
-    <div class="print-page" style="page-break-before:always">
-      ${hdr}
-      <table class="print-table">${buildPrintTable(data, year, 7, 12)}</table>
-      <div class="print-footer">
-        <span>agnihotra-online.com</span><span>Seite 2/2</span><span>homa-hof-heiligenberg.de</span>
+        <span>agnihotra-online.com</span><span>Seite ${i+1}/${total}</span><span>homa-hof-heiligenberg.de</span>
       </div>
     </div>`;
+  }).join('');
 
   window.print();
 }

@@ -112,6 +112,24 @@
       .steps-grid, .footer-inner { grid-template-columns: 1fr !important; }
       .footer-inner > div:first-child { grid-column: auto !important; }
     }
+    @media (max-width: 700px) {
+      body { -webkit-hyphens: auto; hyphens: auto; }
+      .footer-bottom, .footer-legal, .footer-social, .event-actions, .event-date-block,
+      .eyebrow, .hero-eyebrow, .addr-row, .result-header, .anmelde-check, .newsletter-opt,
+      .pn-inner, .print-meta, .event-meta, .card-meta { flex-wrap: wrap; }
+    }
+    @media (max-width: 340px) {
+      * { min-width: 0 !important; }
+      [class*="grid"], [class*="-row"], .two-col, .three-col, .tables-wrap, .stats-inner,
+      .event-box, .kinder-books, .two-fire-grid { grid-template-columns: 1fr !important; }
+      input, select, textarea, button, .btn { max-width: 100% !important; }
+      .btn, .btn-gold, .btn-outline, .btn-outline-dark { padding-left: 14px !important; padding-right: 14px !important; }
+      .event-actions, .nav-links a, [class*="actions"] { white-space: normal !important; align-items: stretch !important; }
+      .about-img, .card-img, .am-card-img { height: auto !important; aspect-ratio: 2 / 1; }
+      .section-inner, .nav-inner, .footer-inner, .footer-bottom, .subpage-hero-content,
+      [class*="card"], [class*="-body"], [class*="-inner"] { padding-left: 14px !important; padding-right: 14px !important; }
+      [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    }
   </style>
   <script src="js/site-config.js"></script>
   <script src="js/cookie-banner.js" defer></script>
