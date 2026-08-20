@@ -365,6 +365,17 @@
       .nav-links { gap: 18px; }
       .nav-links a { font-size: 15.5px; }
     }
+  
+    /* mobile overflow guard */
+    html { overflow-x: hidden; }
+    body { overflow-wrap: break-word; }
+    img, video, iframe { max-width: 100%; }
+    .leaflet-container img { max-width: none; }
+    .event-box > *, .steps-grid > *, .footer-inner > *, .three-col > * { min-width: 0; }
+    @media (max-width: 520px) {
+      .steps-grid, .footer-inner { grid-template-columns: 1fr !important; }
+      .footer-inner > div:first-child { grid-column: auto !important; }
+    }
   </style>
   <script src="js/site-config.js"></script>
   <script src="js/cookie-banner.js" defer></script>

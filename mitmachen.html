@@ -118,6 +118,7 @@
     .radio-option input { accent-color: var(--gold); width: 16px; height: 16px; }
     .checkbox-option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--brown3); line-height: 1.5; }
     .checkbox-option input { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+    .checkbox-option > span { flex: 1 1 auto; min-width: 0; }
 
     .mitglied-steps { display:flex; flex-direction:column; gap:16px; max-width:680px; margin-bottom:32px; }
     .mitglied-step { display:flex; align-items:flex-start; gap:16px; font-size:15px; color:var(--brown2); line-height:1.5; }
@@ -245,6 +246,17 @@
       .nav-inner { gap: 20px; }
       .nav-links { gap: 18px; }
       .nav-links a { font-size: 15.5px; }
+    }
+  
+    /* mobile overflow guard */
+    html { overflow-x: hidden; }
+    body { overflow-wrap: break-word; }
+    img, video, iframe { max-width: 100%; }
+    .leaflet-container img { max-width: none; }
+    .event-box > *, .steps-grid > *, .footer-inner > *, .three-col > * { min-width: 0; }
+    @media (max-width: 520px) {
+      .steps-grid, .footer-inner { grid-template-columns: 1fr !important; }
+      .footer-inner > div:first-child { grid-column: auto !important; }
     }
   </style>
   <script src="js/site-config.js"></script>
@@ -394,7 +406,7 @@
       <div class="form-group">
         <label class="checkbox-option">
           <input type="checkbox" name="dsgvo" required>
-          Ich stimme der Verarbeitung meiner Daten gemäß <a href="datenschutz.html" style="color:var(--gold)">Datenschutzerklärung</a> zu. Die Daten werden ausschließlich für die Mitgliedschaftsverwaltung verwendet.
+          <span>Ich stimme der Verarbeitung meiner Daten gemäß <a href="datenschutz.html" style="color:var(--gold)">Datenschutzerklärung</a> zu. Die Daten werden ausschließlich für die Mitgliedschaftsverwaltung verwendet.</span>
         </label>
       </div>
       <div id="foerdermitglied-msg" style="display:none;padding:14px 18px;border-radius:10px;font-size:15px;margin-bottom:16px"></div>
