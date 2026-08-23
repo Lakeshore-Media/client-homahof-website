@@ -106,6 +106,39 @@ Netlify Forms (AJAX). Jede Seite mit Formular hat ein verstecktes `<form name=".
 Verwaltet: Veranstaltungen, Hofladen, Aktuelles, Downloads — alles über `content/*.json`.
 Aktivierung: Netlify Dashboard → Identity → Enable, dann Git Gateway aktivieren.
 
+**Select-Felder brauchen `{label, value}`-Paare** — sonst schreibt das CMS den Anzeigetext (`Seminar`) statt des Frontend-Werts (`seminar`) und die Filter greifen nicht mehr.
+
+Der Verein pflegt Termine selbst übers CMS. Diese Commits landen direkt auf `main` → **vor jedem Push `git pull --rebase`**, sonst wird der Push abgelehnt.
+
+## Mobile-Robustheit
+
+Am Ende jedes `<style>`-Blocks steht ein Block `/* mobile overflow guard */`. **Nicht entfernen** — ohne ihn zoomt Android-Chrome bei horizontalem Überlauf die gesamte Seite heraus (shrink-to-fit); die Sektionen decken dann nur einen Teil der Bildschirmbreite ab und der Rest zeigt den Body-Hintergrund. iOS macht das nicht, deshalb fällt es beim Testen am iPhone nicht auf.
+
+Aufbau in drei Stufen:
+- **Immer:** `html { overflow-x: hidden }` (nur `html`, **nicht** `body` — sonst stirbt `position: sticky`, z. B. die Filterleiste auf `veranstaltungen.html`), `img/video/iframe { max-width: 100% }`, `min-width: 0` auf Grid-Kindern
+- **≤ 700px:** `hyphens: auto` + `overflow-wrap: break-word`, Flex-Zeilen dürfen umbrechen. Bewusst nicht global: am Desktop trennte `break-word` sonst „2000er" in der Jahresspalte der Timeline
+- **≤ 340px:** alles einspaltig, `* { min-width: 0 }`, Innenabstände auf 14px. Greift praktisch nur bei stark gezoomten Browsern (ein Kunde surft mit ~200 % Zoom → effektiver Viewport ~200px)
+
+**Testen:** Viewport auf 210px stellen — das reproduziert die Zoom-Situation. Elemente mit `scrollWidth > clientWidth` finden bzw. `width: min-content` messen, um Container zu finden, die nicht schrumpfen können.
+
+Bekannte Fallstricke:
+- Inline-`<a>` in einem `display: flex`-Label wird zu einem eigenen Flex-Item → der Text steht nebeneinander statt umzubrechen. **Fließtext in Flex-Containern immer in ein `<span>` wickeln.**
+- Karten-Innenabstände (36px) fressen bei schmalem Viewport die halbe Textbreite
+- `overflow-x: hidden` auf Leaflet-Bildern bricht die Karte → `.leaflet-container img { max-width: none }`
+
+### Bilder in Karten
+Aktuelles-/Blog-Karten schneiden Bilder **nicht** an: `object-fit: contain`, die freie Fläche füllt ein `::before` mit demselben Bild als unscharfer Hintergrund (`--card-bg` wird beim Rendern inline gesetzt). Unter 768px bekommt die Box `height: auto`, wächst also mit dem Bild mit — das Agnihotra-Aktuell-Cover (Hochformat) ist dadurch vollständig lesbar.
+
+## Agnihotra-Zeiten: PDF-Druck
+
+`printPDF(event, pages)` in `agnihotra-zeiten.html` erzeugt zwei Varianten:
+- **2 Seiten** — 6 Monate/Seite, Auf- und Untergangszeit zweizeilig übereinander, 9,2pt
+- **4 Seiten** — 3 Monate/Seite, Zeiten als zwei Spalten *nebeneinander* (`buildPrintTableWide`), dadurch nur eine Zeile pro Tag und 12,5pt Schrift
+
+Höhenbudget A4 hoch bei 0,9cm Rand: **1054px @96dpi**. 31 Zeilen sind das Limit — jede Änderung an `font-size`, `line-height` oder `padding` der `.print-table` muss dagegen geprüft werden (Höhe von `.print-page` messen), sonst rutscht der Druck auf eine Zusatzseite. Der alte 8,8pt-Stand lag mit 1071px bereits knapp darüber.
+
+Der Cookie-Banner heißt `#priv-notice` (nicht `.cookie-banner`) — muss in `@media print` mit ausgeblendet werden.
+
 ## NAS-Pfade (Medien)
 
 - Videos: `/Volumes/RKB films/01_Projects/Homa Hof/99_Master_video/`
@@ -113,6 +146,16 @@ Aktivierung: Netlify Dashboard → Identity → Enable, dann Git Gateway aktivie
 
 Bilder im Repo: `images/stills/` (WebP), Archivbilder: `Archivbilder/`
 Videos: `videos/` (WebM + MP4), in Git LFS (`.gitattributes` beachten)
+
+Die Hero-Loops lassen sich direkt aus den fertigen Mastern in `99_Master_video/` mit ffmpeg schneiden — kein DaVinci nötig. Zielgrößen: MP4 ~12 MB, WebM ~2,5 MB bei 1920×1080/25fps.
+
+**Hero-Videos werden am Desktop auf ca. 2,75:1 beschnitten** — Einstellungen mit Personen-Nahaufnahmen verlieren dabei die Köpfe. Für den Hero nur weite Einstellungen oder Drohnenflüge verwenden.
+
+## Screenshots / visuelle Prüfung
+
+- Headless Chrome mit `--virtual-time-budget` unterdrückt den IntersectionObserver → alle `.fade-in`-Elemente bleiben unsichtbar. **Ohne** Virtual-Time screenshotten, vorher einmal durch die Seite scrollen.
+- Puppeteer liegt in `~/Documents/GitHub/tool-showcase-remotion/node_modules/` (Import über `lib/puppeteer/puppeteer.js`)
+- Die Claude-in-Chrome-Extension kann `localhost` nicht laden — für lokale Vorschauen Headless Chrome oder Puppeteer nutzen
 
 ## Skills
 
