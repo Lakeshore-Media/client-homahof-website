@@ -938,10 +938,22 @@
       overflow: hidden;
       background: var(--cream3);
       flex-shrink: 0;
+      position: relative;
+    }
+    .aktuelles-card-img::before {
+      content: '';
+      position: absolute;
+      inset: -24px;
+      background-image: var(--card-bg);
+      background-size: cover;
+      background-position: center;
+      filter: blur(22px);
+      opacity: 0.5;
     }
     .aktuelles-card-img img {
+      position: relative;
       width: 100%; height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       transition: transform 0.5s ease;
     }
@@ -992,6 +1004,8 @@
     }
     @media (max-width: 900px) {
       .aktuelles-grid { grid-template-columns: 1fr; }
+      .aktuelles-card-img { height: auto; }
+      .aktuelles-card-img img { height: auto; max-height: 70vh; }
       .aktuelles-inner { padding: 0 20px; }
     }
 
@@ -1232,7 +1246,6 @@
   
     /* mobile overflow guard */
     html { overflow-x: hidden; }
-    body { overflow-wrap: break-word; }
     img, video, iframe { max-width: 100%; }
     .leaflet-container img { max-width: none; }
     .event-box > *, .steps-grid > *, .footer-inner > *, .three-col > * { min-width: 0; }
@@ -1241,7 +1254,7 @@
       .footer-inner > div:first-child { grid-column: auto !important; }
     }
     @media (max-width: 700px) {
-      body { -webkit-hyphens: auto; hyphens: auto; }
+      body { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
       .footer-bottom, .footer-legal, .footer-social, .event-actions, .event-date-block,
       .eyebrow, .hero-eyebrow, .addr-row, .result-header, .anmelde-check, .newsletter-opt,
       .pn-inner, .print-meta, .event-meta, .card-meta { flex-wrap: wrap; }
@@ -1736,7 +1749,7 @@
         const dateStr = d.getDate() + '. ' + MONTHS_DE[d.getMonth()] + ' ' + d.getFullYear();
         const body = (item.body || '').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>').split('\n\n')[0];
         const imgHtml = item.image
-          ? '<div class="aktuelles-card-img"><img src="' + item.image + '" alt="' + item.title + '" loading="lazy"></div>'
+          ? '<div class="aktuelles-card-img" style="--card-bg:url(&quot;' + item.image + '&quot;)"><img src="' + item.image + '" alt="' + item.title + '" loading="lazy"></div>'
           : '<div class="aktuelles-card-img"><div class="aktuelles-card-placeholder">🔥</div></div>';
         const cardLink = item.url ? item.url : 'aktuelles-beitrag.html?id=' + idx;
         const cardTarget = item.url ? ' target="_blank" rel="noopener"' : '';

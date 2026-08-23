@@ -368,7 +368,6 @@
   
     /* mobile overflow guard */
     html { overflow-x: hidden; }
-    body { overflow-wrap: break-word; }
     img, video, iframe { max-width: 100%; }
     .leaflet-container img { max-width: none; }
     .event-box > *, .steps-grid > *, .footer-inner > *, .three-col > * { min-width: 0; }
@@ -377,7 +376,7 @@
       .footer-inner > div:first-child { grid-column: auto !important; }
     }
     @media (max-width: 700px) {
-      body { -webkit-hyphens: auto; hyphens: auto; }
+      body { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
       .footer-bottom, .footer-legal, .footer-social, .event-actions, .event-date-block,
       .eyebrow, .hero-eyebrow, .addr-row, .result-header, .anmelde-check, .newsletter-opt,
       .pn-inner, .print-meta, .event-meta, .card-meta { flex-wrap: wrap; }
