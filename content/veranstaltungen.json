@@ -219,13 +219,13 @@
       "price": "1.350 – 1.500 €",
       "time": "23. Aug – 6. Sep",
       "date": "2026-08-23",
+      "detail": "Der 100-Stunden-Intensivkurs unter Leitung von Christoff Schneider ist durch das Permaculture Research Institute zertifiziert. Er verbindet theoretisches Wissen mit praktischer Anwendung – von Bodenaufbau, Wassermanagement und Waldgärten bis hin zu den vedischen Feuerzeremonien am Homa-Hof.\n\nKursgebühr: 1.350 € (Sozialpreis) / 1.500 € (Regelpreis)\nÜbernachtung & Vollverpflegung (14 Tage): 668 – 768 € zusätzlich\n\nAnmeldung erforderlich – begrenzte Teilnehmerzahl (12 Plätze): info@homa-hof-heiligenberg.de",
       "desc": "14-tägiger 100-Stunden-Intensivkurs mit Christoff Schneider – zertifiziert durch das Permaculture Research Institute. Nur 12 Plätze.",
       "location": "Homa-Hof Heiligenberg",
       "title": "Permakultur-Design Zertifikationskurs",
       "link": "veranstaltungen.html",
       "recurring": false,
-      "category": "seminar",
-      "detail": "Der 100-Stunden-Intensivkurs unter Leitung von Christoff Schneider ist durch das Permaculture Research Institute zertifiziert. Er verbindet theoretisches Wissen mit praktischer Anwendung – von Bodenaufbau, Wassermanagement und Waldgärten bis hin zu den vedischen Feuerzeremonien am Homa-Hof.\n\nKursgebühr: 1.350 € (Sozialpreis) / 1.500 € (Regelpreis)\nÜbernachtung & Vollverpflegung (14 Tage): 668 – 768 € zusätzlich\n\nAnmeldung erforderlich – begrenzte Teilnehmerzahl (12 Plätze): info@homa-hof-heiligenberg.de"
+      "category": "seminar"
     },
     {
       "badge": "kostenlos",
@@ -290,19 +290,6 @@
       "title": "Agnihotra-Abend",
       "image": "/images/agnihotra-feuer-2017.webp",
       "category": "hof",
-      "confirmKey": ""
-    },
-    {
-      "badge": "kostenlos",
-      "price": "Kostenlos / Spende",
-      "time": "16:15 - 18:30",
-      "date": "2026-10-17",
-      "detail": "Jeweils etwa 90 Minuten vor Sonnenuntergang vermitteln wir dir grundlegendes Wissen über Agnihotra: die Utensilien, das Mantra und die genaue Durchführung der Zeremonie.\n\nAnschließend kannst du Agnihotra selbst durchführen. Bei schönem Wetter genießen wir gemeinsam den Sonnenuntergang mit bis zu 100 km Weitsicht bis zu den Alpen – an Regentagen treffen wir uns im Pavillon.\n\nAgnihotra um 18:26 Uhr\n\nKostenlos – Spenden zur Unterstützung des Homa-Hofs sind willkommen.",
-      "desc": "Einführungsabend – die Feuerzeremonie live erleben und selbst durchführen lernen.",
-      "location": "Homa-Hof Heiligenberg",
-      "title": "Agnihotra Erlernen",
-      "image": "/images/agnihotra-feuer-2017.webp",
-      "category": "seminar",
       "confirmKey": ""
     },
     {
