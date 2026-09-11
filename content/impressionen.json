@@ -1,40 +1,40 @@
 {
   "items": [
     {
-      "src": "images/stills/drohne-hof-pavillon-solar.webp",
-      "alt": "Homa-Hof – Pavillon aus der Vogelperspektive"
+      "src": "images/stills/drohne-hof-totale-abend.webp",
+      "alt": "Abendliche Luftaufnahme – Gemeinschaft auf der Hofwiese"
     },
     {
-      "src": "images/stills/pavillon-gegenlicht-sonne.webp",
-      "alt": "Yagna-Pavillon im Gegenlicht"
+      "src": "images/stills/pavillon-innen-altar.webp",
+      "alt": "Yagna-Pavillon – Altar im Inneren"
     },
     {
       "src": "/images/seminar-bei-der-kapelle.jpg",
       "alt": "Seminar bei der Kapelle"
     },
     {
-      "src": "images/stills/drohne-gesamthof-fruehjahr.webp",
-      "alt": "Homa-Hof Heiligenberg – Luftaufnahme Frühjahr"
+      "src": "images/stills/mitmachen-feldpflege-gruppe.webp",
+      "alt": "Gemeinsame Feldpflege auf dem Homa-Acker"
+    },
+    {
+      "src": "images/stills/pavillon-sternfenster-detail.webp",
+      "alt": "Yagna-Pavillon – Sternfenster von innen"
+    },
+    {
+      "src": "images/stills/statue-vasant-agnihotra-flamme.webp",
+      "alt": "Statue von Vasant Paranjpe mit Agnihotra-Flamme"
+    },
+    {
+      "src": "images/stills/landschaft-obstbaum-wiese-fruehling.webp",
+      "alt": "Streuobstwiese im Frühling"
     },
     {
       "src": "/images/agnihotra-mann-statue.jpg",
       "alt": "Agnihotra-Mann, Statue"
     },
     {
-      "src": "images/stills/gruppe-bank-abendrot.webp",
-      "alt": "Gemeinschaft am Homa-Hof – Abendrot"
-    },
-    {
-      "src": "images/stills/hofgelaende-pavillon-wiese.webp",
-      "alt": "Hofgelände – Pavillon und Wiese"
-    },
-    {
-      "src": "images/stills/drohne-hof-totale-abend.webp",
-      "alt": "Abendliche Luftaufnahme – Gemeinschaft auf der Hofwiese"
-    },
-    {
-      "src": "images/stills/pavillon-rote-fahne-fruehling.webp",
-      "alt": "Pavillon – Rote Fahne im Frühling"
+      "src": "images/stills/pavillon-gegenlicht-sonne.webp",
+      "alt": "Yagna-Pavillon im Gegenlicht"
     }
   ]
 }
