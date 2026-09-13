@@ -52,9 +52,9 @@ exports.handler = async (event) => {
     const body = await res.text();
     console.log('Brevo DOI response:', res.status, body);
 
-    // 204 = DOI-Mail erfolgreich ausgelöst
-    if (res.status === 204) {
-      return { statusCode: 200, body: JSON.stringify({ success: true }) };
+    // Brevo antwortet je nach Kontakt-Status mit 201 (neu angelegt) oder 204
+    if (res.ok) {
+      return { statusCode: 200, body: JSON.stringify({ success: true, status: res.status }) };
     }
 
     return { statusCode: 200, body: JSON.stringify({ success: false, status: res.status, detail: body }) };
