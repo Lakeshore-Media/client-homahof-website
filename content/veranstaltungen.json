@@ -304,6 +304,18 @@
       "image": "/images/agnihotra-feuer-2017.webp",
       "category": "hof",
       "confirmKey": ""
+    },
+    {
+      "badge": "kostenlos",
+      "price": "Spendenbasis",
+      "time": "15:00 - 18:30",
+      "date": "2026-10-25",
+      "desc": "Agnihotra wird gemeinsam geübt und die Mantren in der exakten Aussprache und Bedeutung erklärt und gesungen.",
+      "location": "Barbarastrasse 69, 50735 Köln",
+      "title": "Agnihotra Lernen in Köln",
+      "image": "/images/agnihotra-vortrag-2026.jpg",
+      "category": "seminar",
+      "confirmKey": ""
     }
   ]
 }
