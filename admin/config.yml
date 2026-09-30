@@ -43,6 +43,12 @@ collections:
                 required: false
                 default: ""
                 hint: "Wird beim Duplizieren mitgenommen. Leer = Titel wird als Segmentierungsschlüssel in Brevo verwendet."
+              - label: "Zusatztext für die Anmeldebestätigung"
+                name: mailHinweis
+                widget: text
+                required: false
+                default: ""
+                hint: "Optional. Erscheint als eigener Absatz in der Bestätigungsmail, die Angemeldete sofort bekommen — z.B. „Bitte bring feste Schuhe und etwas für das gemeinsame Mittagessen mit.“ Leer lassen, wenn nichts Besonderes zu sagen ist."
 
   - name: hofladen
     label: Hofladen

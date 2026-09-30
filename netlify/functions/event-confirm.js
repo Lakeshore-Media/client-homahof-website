@@ -10,7 +10,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Invalid JSON' };
   }
 
-  const { email, vorname, eventTitle, eventDate, eventTime, eventLocation, confirmKey, newsletter } = data;
+  const { email, vorname, eventTitle, eventDate, eventTime, eventLocation, eventHinweis, confirmKey, newsletter } = data;
   if (!email || !eventTitle) return { statusCode: 400, body: 'email and eventTitle required' };
 
   const apiKey = process.env.BREVO_API_KEY;
@@ -40,6 +40,7 @@ exports.handler = async (event) => {
             EVENT_DATE:     displayDate,
             EVENT_TIME:     eventTime    || '',
             EVENT_LOCATION: eventLocation || '',
+            EVENT_HINWEIS:  eventHinweis  || '',
             VORNAME:        vorname       || '',
           },
         }),
