@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Anmeldebestätigung – {{ params.EVENT_TITLE }}</title>
+  <style type="text/css">
+    *{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    body{ margin:0; padding:0; width:100% !important; background:#ECE0CF; }
+    img{ border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; }
+    a{ text-decoration:none; }
+    table{ border-collapse:collapse; }
+    div,a,li,td{ -webkit-text-size-adjust:none; }
+    @media only screen and (max-width:620px){
+      table[class="container"]{ width:100% !important; }
+      td[class="pad"]{ padding-left:24px !important; padding-right:24px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background:#ECE0CF;">
+
+  <!-- Preheader -->
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#ECE0CF;">
+    Deine Anmeldung für {{ params.EVENT_TITLE }} ist eingegangen – wir freuen uns auf dich.
+    &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ECE0CF" style="background:#ECE0CF;">
+    <tr>
+      <td align="center" style="padding:40px 10px;">
+
+        <!-- Logo -->
+        <table role="presentation" class="container" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px; max-width:600px;">
+          <tr>
+            <td align="center" style="padding:0 0 22px 0;">
+              <img src="https://homa-hof-heiligenberg.de/images/Logo-Schrift-2025-Juhu.webp"
+                   alt="Homa-Hof Heiligenberg" width="190" style="display:block; width:190px; max-width:190px; height:auto;" />
+              <div style="font-family:Georgia,'Times New Roman',serif; font-size:12px; letter-spacing:1px; color:#9A8E7D; padding-top:10px; text-transform:uppercase;">
+                Europäisches Zentrum für Agnihotra
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Karte -->
+        <table role="presentation" class="container" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#FCF8F1" style="width:600px; max-width:600px; background:#FCF8F1; border:1px solid #E3D6C2; border-radius:14px;">
+
+          <!-- Eyebrow -->
+          <tr>
+            <td class="pad" align="center" style="padding:44px 56px 0 56px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#C0531D;">
+              &#10070;&nbsp;&nbsp;Anmeldebestätigung
+            </td>
+          </tr>
+
+          <!-- Headline -->
+          <tr>
+            <td class="pad" align="center" style="padding:14px 56px 0 56px; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:38px; font-weight:400; color:#33291F;">
+              {% if params.VORNAME %}Schön, {{ params.VORNAME }} –<br />{% endif %}wir freuen uns auf dich
+            </td>
+          </tr>
+
+          <!-- Intro -->
+          <tr>
+            <td class="pad" align="center" style="padding:20px 56px 0 56px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:26px; color:#5A4F43;">
+              Deine Anmeldung ist eingegangen. Hier nochmal alle Details auf einen Blick:
+            </td>
+          </tr>
+
+          <!-- Event-Details Box -->
+          <tr>
+            <td class="pad" style="padding:28px 56px 0 56px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#FFF4E6; border:1px solid #E3D6C2; border-left:4px solid #C0531D; border-radius:8px;">
+                <tr>
+                  <td style="padding:24px 28px;">
+
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <!-- Veranstaltung -->
+                      <tr>
+                        <td style="padding-bottom:14px;">
+                          <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#9A8E7D; padding-bottom:4px;">Veranstaltung</div>
+                          <div style="font-family:Georgia,'Times New Roman',serif; font-size:18px; font-weight:400; color:#33291F; line-height:1.3;">{{ params.EVENT_TITLE }}</div>
+                        </td>
+                      </tr>
+
+                      <!-- Trennlinie -->
+                      <tr><td style="height:1px; background:#E3D6C2; line-height:1px; font-size:1px; padding-bottom:14px;">&nbsp;</td></tr>
+
+                      <!-- Datum + Zeit nebeneinander -->
+                      <tr>
+                        <td style="padding-bottom:12px;">
+                          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                              <td width="50%" style="vertical-align:top; padding-right:12px;">
+                                <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#9A8E7D; padding-bottom:4px;">Datum</div>
+                                <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; color:#33291F;">{{ params.EVENT_DATE }}</div>
+                              </td>
+                              {% if params.EVENT_TIME %}
+                              <td width="50%" style="vertical-align:top;">
+                                <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#9A8E7D; padding-bottom:4px;">Uhrzeit</div>
+                                <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; color:#33291F;">{{ params.EVENT_TIME }}</div>
+                              </td>
+                              {% endif %}
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+
+                      <!-- Ort -->
+                      {% if params.EVENT_LOCATION %}
+                      <tr>
+                        <td>
+                          <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#9A8E7D; padding-bottom:4px;">Ort</div>
+                          <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; color:#33291F;">{{ params.EVENT_LOCATION }}</div>
+                        </td>
+                      </tr>
+                      {% endif %}
+
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Individueller Hinweis aus dem CMS (Feld "Zusatztext für die Anmeldebestätigung") -->
+          {% if params.EVENT_HINWEIS %}
+          <tr>
+            <td class="pad" style="padding:24px 56px 0 56px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#FCF8F1; border:1px dashed #E3D6C2; border-radius:8px;">
+                <tr>
+                  <td style="padding:20px 24px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; line-height:25px; color:#5A4F43;">
+                    {{ params.EVENT_HINWEIS }}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {% endif %}
+
+          <!-- Hinweistext -->
+          <tr>
+            <td class="pad" align="center" style="padding:28px 56px 0 56px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; line-height:26px; color:#5A4F43;">
+              Falls du Fragen hast oder dich abmelden möchtest, melde dich einfach bei uns.
+            </td>
+          </tr>
+
+          <!-- Button -->
+          <tr>
+            <td align="center" style="padding:28px 56px 0 56px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td align="center" bgcolor="#C0531D" style="background:#C0531D; border-radius:8px;">
+                    <a href="https://homa-hof-heiligenberg.de/veranstaltungen"
+                       target="_blank"
+                       style="display:inline-block; padding:14px 32px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; font-weight:700; letter-spacing:0.3px; color:#FFFFFF; line-height:20px;">
+                      Alle Veranstaltungen ansehen
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Trennlinie -->
+          <tr>
+            <td class="pad" style="padding:36px 56px 0 56px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr><td height="1" style="height:1px; background:#E3D6C2; line-height:1px; font-size:1px;">&nbsp;</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer-Text -->
+          <tr>
+            <td class="pad" align="center" style="padding:28px 56px 44px 56px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; line-height:22px; color:#9A8E7D;">
+              Du erhältst diese E-Mail, weil du dich für eine Veranstaltung des Homa-Hofs angemeldet hast.
+            </td>
+          </tr>
+
+        </table>
+
+        <!-- Footer -->
+        <table role="presentation" class="container" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px; max-width:600px;">
+          <tr>
+            <td class="pad" align="center" style="padding:28px 56px 0 56px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:20px; color:#9A8E7D;">
+              <strong style="color:#5A4F43;">Homa-Hof Heiligenberg e.&nbsp;V.</strong><br />
+              Oberhaslach 6 &middot; 88633 Heiligenberg<br />
+              <a href="tel:+4975529387600" style="color:#9A8E7D;">+49 (0)7552 938760</a> &middot;
+              <a href="mailto:info@homa-hof-heiligenberg.de" style="color:#9A8E7D;">info@homa-hof-heiligenberg.de</a>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding:14px 56px 0 56px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:20px; color:#9A8E7D;">
+              <a href="https://homa-hof-heiligenberg.de/datenschutz" target="_blank" style="color:#9A8E7D; text-decoration:underline;">Datenschutz</a>
+              &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+              <a href="https://homa-hof-heiligenberg.de/impressum" target="_blank" style="color:#9A8E7D; text-decoration:underline;">Impressum</a>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding:18px 56px 10px 56px; font-family:Georgia,'Times New Roman',serif; font-size:12px; letter-spacing:1px; color:#C0531D;">
+              &#10070;
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
