@@ -22,8 +22,23 @@ Preise direkt bei Brevo abgelesen:
 Bei ~2.600 Empfängern nach der Repermission wären das 303 €/Jahr im Paket
 gegen rund 100 €/Jahr über Guthaben. Empfehlung: 50.000 Credits für 150 €.
 
-**Offen:** Ob das „Sent with Brevo"-Logo mit gekauftem Guthaben verschwindet.
-Die Prepaid-Verkaufsseite sagt ja, die Free-FAQ sagt nein. Supportanfrage läuft.
+**Geklärt am 2026-10-02 (kein Supportticket nötig):** Das Logo verschwindet mit
+gekauftem Guthaben. Die Brevo-Hilfe sagt wörtlich: „Mit Prepaid-E-Mail-Guthaben hast
+du Zugriff auf alle Funktionen des Starter-Pakets sowie auf das Add-on Remove Brevo
+logo (Brevo-Logo entfernen)."
+(help.brevo.com/hc/de/articles/208589409 → Abschnitt „Prepaid-E-Mail-Guthaben")
+
+Der scheinbare Widerspruch war keiner: Die Free-FAQ („E-Mails aus dem Free-Paket haben
+**immer** das Sent-with-Brevo-Logo") beschreibt den Free-Plan **ohne** Guthaben. Mit
+Guthaben ist es kein Free-Versand mehr.
+
+**Mitgekauft wird damit auch das Wegfallen des 300-Mails-pro-Tag-Limits** — das ist der
+wichtigere Punkt. Ohne Guthaben erreicht eine Kampagne an 2.136 Kontakte nur 300 Leute
+pro Tag und muss sieben Mal von Hand per „Requeue" nachgeschoben werden.
+
+**Bleibt trotz Guthaben:** die Grenze von 2.000 eindeutigen Kontakten in Automatisierungen.
+Für die Anmeldebestätigungen unkritisch — die laufen über die Transactional-API, nicht
+über eine Automatisierung.
 
 ## Absenderadresse: news@, nicht info@ (2026-09-30, Susanne)
 `news@homa-hof-heiligenberg.de` ist seit Jahren die gewohnte Absenderadresse und
