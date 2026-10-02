@@ -1,8 +1,8 @@
 ---
 projekt: Homa-Hof Heiligenberg — Website, Shop, Newsletter
 stand: 2026-10-02
-status: Go-Live steht aus, Brevo-Migration läuft, Konto noch im Free-Tarif
-naechster_schritt: Guthaben kaufen (sonst nur 300 Mails/Tag), Dateien 04/05/02 importieren, dann Domains auf Netlify umstellen
+status: Go-Live technisch vorbereitet, wartet auf DNS-Umstellung
+naechster_schritt: Absender der Brevo-Templates auf news@ prüfen, Templates 1+5 auf die www-Domain ziehen, dann Domains auf Netlify umstellen
 ---
 
 ## Ziel
@@ -36,14 +36,32 @@ Dateien liegen in `~/Downloads/brevo-import/`.
 
 | seit | was | bei wem |
 |---|---|---|
-| 2026-10-01 | Go-Live-Termin verstrichen, kein neuer vereinbart | Raeto |
-| 2026-09-30 | **Guthaben noch nicht gekauft** — Konto im Free-Tarif, 300 Mails/Tag. Kostenmail vom 30.09. unbeantwortet | Susanne/Birgitt |
+| 2026-10-02 | **Alle 6 Brevo-Templates zeigen als Absender `Info@rkbfilms.de`** — Sender-ID 1 ist inzwischen `news@homa-hof-heiligenberg.de`, die Template-API liefert aber noch die alte Adresse. Vor dem Go-Live mit einer echten Testanmeldung prüfen, was beim Empfänger ankommt | Raeto |
+| 2026-10-02 | Templates **1** (DOI) und **5** (Automation) verlinken noch auf die Netlify-Vorschaudomain. Nur im Brevo-Editor änderbar — die API kann Templates nicht aktualisieren | Raeto |
+| 2026-10-02 | `BREVO_DOI_REDIRECT_URL` in den Netlify-Umgebungsvariablen auf `https://www.homa-hof-heiligenberg.de/newsletter-bestaetigt` ziehen | Raeto |
+| 2026-09-30 | **Guthaben noch nicht gekauft** — Konto im Free-Tarif, 300 Mails/Tag. Termin mit Birgitt für nächste Woche vorgeschlagen (Mailentwurf liegt) | Birgitt |
 | 2026-09-30 | Entscheidung Teilnehmerübersicht (geschützte Seite vs. Brevo) | Susanne/Peter |
-| 2026-09-30 | Birgitts Daumen zur Absenderadresse `news@` | Birgitt |
-| 2026-09-25 | Shop-Lieferländer: Versandseite passt nicht zur Einstellung — Mail unbeantwortet | Susanne |
 
-**Erledigt 2026-10-02:** Brevo-Logo-Frage — Guthaben schaltet Starter-Funktionen plus
-„Remove Brevo logo" frei, kein Supportticket nötig. Belege in `.handoff/decisions.md`.
+**Erledigt 2026-10-02:**
+- Brevo-Logo-Frage — Guthaben schaltet Starter-Funktionen plus „Remove Brevo logo" frei, kein Supportticket nötig. Belege in `.handoff/decisions.md`
+- Birgitts Okay zur Absenderadresse `news@` liegt vor
+- Shop-Lieferländer erledigt
+- Go-Live-Technik: `_redirects` (alle 99 alten Joomla-URLs), `robots.txt`, `sitemap.xml`, `site_url` im CMS und die Function-Fallbacks auf die www-Domain (Commit `ed8dcf3`)
+
+## Go-Live-Reihenfolge
+
+1. **Brevo zuerst, dann DNS.** Templates 1 und 5 im Brevo-Editor auf
+   `https://www.homa-hof-heiligenberg.de` ziehen, Absender aller Templates auf
+   `news@` kontrollieren. Beides geht nur von Hand — die API kann Templates nicht ändern
+2. `BREVO_DOI_REDIRECT_URL` in Netlify auf die www-Domain setzen
+3. DNS bei **Strato** auf Netlify zeigen lassen. Achtung: Die Domains liegen bei Strato,
+   die alte Website aber bei **All-Inkl** — die Mailrouting-Einträge (MX) dürfen dabei
+   nicht angefasst werden, sonst steht `news@` still
+4. Nach dem Deploy mit einer echten Testanmeldung prüfen: Kommt die Bestätigung von
+   `news@`? Stimmen die Links? Dann dasselbe für den Newsletter-DOI
+5. Stichproben auf die Redirects: `/die-basis/vision.html`, `/neues/presse.html`,
+   `/pyramiden-feuer/agnihotrazeiten.html` → müssen 301 liefern
+6. Sitemap in der Google Search Console neu einreichen
 
 ## Nicht verhandelbar
 
