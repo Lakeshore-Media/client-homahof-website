@@ -780,6 +780,7 @@
           eventDate: form.dataset.date || '',
           eventTime: form.dataset.time || '',
           eventLocation: form.dataset.location || '',
+          eventHinweis: form.dataset.mailHinweis || '',
           confirmKey: confirmKey,
           newsletter: nlEl && nlEl.checked ? 'ja' : 'nein'
         })
@@ -847,7 +848,7 @@
       }
       html += '</div>';
       var amConfirmKey = (ev.confirmKey || '').replace(/"/g, '&quot;') || ev.title.replace(/"/g, '&quot;');
-      html += '<div class="am-anmelde-form" id="' + formId + '" data-title="' + ev.title.replace(/"/g,'&quot;') + '" data-date="' + ev.date + '" data-time="' + (ev.time||'').replace(/"/g,'&quot;') + '" data-location="' + (ev.location||'').replace(/"/g,'&quot;') + '" data-confirm-key="' + amConfirmKey + '">';
+      html += '<div class="am-anmelde-form" id="' + formId + '" data-title="' + ev.title.replace(/"/g,'&quot;') + '" data-date="' + ev.date + '" data-time="' + (ev.time||'').replace(/"/g,'&quot;') + '" data-location="' + (ev.location||'').replace(/"/g,'&quot;') + '" data-confirm-key="' + amConfirmKey + '" data-mail-hinweis="' + (ev.mailHinweis||'').replace(/"/g,'&quot;') + '">';
       html += '<h4>Anmelden: ' + ev.title + '</h4>';
       html += '<div class="am-anmelde-row"><div class="am-anmelde-field"><label>Vorname *</label><input type="text" name="vorname" placeholder="Vorname"><span class="am-field-err" data-err="vorname">Bitte Vorname eingeben</span></div>';
       html += '<div class="am-anmelde-field"><label>Nachname</label><input type="text" name="nachname" placeholder="Nachname"></div></div>';
