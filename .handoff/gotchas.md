@@ -100,3 +100,43 @@ und damit an Birgitt — nicht an Raeto.** Birgitt muss wissen, dass eine Brevo-
 Für die SMTP-Schlüssel gilt dasselbe in strenger: Dort meldet Brevo schon nach
 3 Monaten ohne Nutzung die Deaktivierung an. Der Homa-Hof nutzt SMTP nicht,
 sondern die API — relevant wird das nur, falls jemand auf SMTP-Versand umstellt.
+
+## Benjamins Bildmaterial ist hochgerechnet, nicht nativ 4K (gemessen 02.10.2026)
+
+Die Dateien aus `~/Downloads/Homa-Hof Bildauswahl 22. September/` sind alle
+3840×2160 — aber die Auflösung ist nicht echt. Messung: Bild auf 50 % verkleinern,
+wieder auf 200 % vergrößern, Abweichung (RMSE) zum Original messen. Je weniger
+Abweichung, desto weniger echtes Detail war vorhanden.
+
+| Datei | echtes Detail |
+|---|---|
+| Echtes Foto (`Archivbilder/Mitmachen/imgi_3_a-mitmachen.jpg`) | 0,069 |
+| `43_Gruppe_im_Obstgarten` | 0,030 |
+| `46_Luftbild_Apfelernte` | 0,037 |
+| `48_Zu_zweit_im_Beet` | 0,011 |
+| `52_Haende_bei_der_Ernte` | 0,005 |
+
+Alle 18 Motive sind Video-Standbilder, kein einziges ist ein Foto. Das deckt sich
+mit der Commit-Notiz von `145da32`: „4K-Video-Stills, KI-hochskaliert — bei
+Nahaufnahmen sind die Upscale-Artefakte sichtbar."
+
+**Konsequenz: Nachträgliches Upscaling bringt nichts.** Getestet mit Higgsfield
+(bytedance, 2 Credits) — das Ergebnis ist kaum vom Original zu unterscheiden, weil
+ein bereits hochgerechnetes Bild erneut hochgerechnet wird. Magnific wäre stärker,
+kostet aber mindestens 90 Credits pro Bild; das Konto stand am 02.10. bei 7.
+
+Ein *kreativer* Upscaler würde Details erfinden. Für einen Verein, der echte
+Menschen und echte Beete zeigt, ist das keine Option.
+
+**Der einzige echte Weg:** Originaldateien bei Benjamin (benjamin@indiegene.studio)
+anfragen — entweder Fotos vom Drehtag oder die Original-Videoclips (C4873–C4928 vom
+22.09. plus Drohne). Vom April-Dreh liegen die Originale noch in
+`~/Downloads/swisstransfer_487d8dac-.../` mit rund 140 Mbit/s bei 4K — daraus lassen
+sich native Standbilder ziehen. Die September-Clips sind auf keinem Laufwerk
+auffindbar (geprüft 02.10., inkl. RKB films und Extreme SSD).
+
+**Was bei den vorhandenen Bildern hilft:** nur Helligkeit. Sie liegen im Mittel bei
+0,55–0,69 statt 0,50 und wirken deshalb ausgebrannt. `-modulate 85,100,100` plus
+`-sigmoidal-contrast 2,48%` reicht. Finger weg von Sättigung und Weißabgleich: Ein
+Grey-World-Abgleich kippt die Bäume ins Magenta und legt die Upscale-Artefakte frei,
+weil eine Wiese im Durchschnitt eben nicht neutralgrau ist.
