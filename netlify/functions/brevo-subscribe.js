@@ -16,7 +16,7 @@ exports.handler = async (event) => {
   const apiKey = process.env.BREVO_API_KEY;
   const listId = parseInt(process.env.BREVO_LIST_ID || '0', 10);
   const templateId = parseInt(process.env.BREVO_DOI_TEMPLATE_ID || '1', 10);
-  const redirectionUrl = process.env.BREVO_DOI_REDIRECT_URL || 'https://homahof-design-2026-website.netlify.app/newsletter-bestaetigt';
+  const redirectionUrl = process.env.BREVO_DOI_REDIRECT_URL || 'https://www.homa-hof-heiligenberg.de/newsletter-bestaetigt';
 
   if (!apiKey || !listId) {
     console.error('BREVO_API_KEY or BREVO_LIST_ID not set');

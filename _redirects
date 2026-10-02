@@ -1,0 +1,57 @@
+# Joomla -> neue Seite. Erste Treffer gewinnt, deshalb spezifisch vor allgemein.
+# Grundlage: sitemap.xml der alten Seite, abgerufen am 02.10.2026 (103 URLs).
+
+# --- Die Basis ---
+/die-basis/*                      /die-basis          301
+
+# --- Feuer & Praxis ---
+/pyramiden-feuer/agnihotrazeiten.html   /agnihotra-zeiten   301
+/pyramiden-feuer/*                /heilige-feuer      301
+/anleitungen-feuerpraxis.html     /heilige-feuer      301
+/anleitungen-feuerpraxis/*        /heilige-feuer      301
+
+# --- Wissen / Wirkung ---
+/universeller-nutzen/*            /wissen             301
+/untersuchungen.html              /wissen             301
+
+# --- Veranstaltungen (inkl. aller Kalender-Export-Seiten) ---
+/erleben/veranstaltungen/*        /veranstaltungen    301
+/erleben/veranstaltungen.html     /veranstaltungen    301
+/erleben/sommertreffen.html       /veranstaltungen    301
+
+# --- Mitmachen / Unterstuetzen ---
+/erleben/mitmachen.html           /mitmachen          301
+/erleben/spenden.html             /mitmachen          301
+/foerdermitgliedschaft.html       /mitmachen          301
+/foerdermitgliedschaft/*          /mitmachen          301
+
+# --- Am Hof ---
+/erleben/besucherhinweise.html    /am-hof             301
+/shop/hofladen.html               /am-hof             301
+
+# --- Aktuelles, Presse, Downloads ---
+/neues/neues.html                 /medien             301
+/neues/neues/*                    /medien             301
+/neues/presse.html                /medien             301
+/neues/downloads.html             /medien             301
+/neues/agnihotra-aktuell.html     /medien             301
+/agnihotra-aktuell.html           /medien             301
+/agnihotra-aktuell/*              /medien             301
+/informationen-flyer.html         /medien             301
+/programmheft.html                /medien             301
+/newsletterarchiv/*               /medien             301
+
+# --- FAQ ---
+/neues/faq.html                   /faq                301
+/faq.html                         /faq                301
+
+# --- Rechtliches ---
+/impressum.html                   /impressum          301
+/datenschutz.html                 /datenschutz        301
+
+# --- Ohne Entsprechung auf der neuen Seite ---
+/erleben/kinder-seite.html        /                   301
+/suche.html                       /                   301
+
+# --- Joomla-Reste ---
+/index.php                        /                   301

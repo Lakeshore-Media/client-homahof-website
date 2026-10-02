@@ -80,7 +80,7 @@ exports.handler = async (event) => {
   if (newsletter === 'ja') {
     const listId      = parseInt(process.env.BREVO_LIST_ID         || '0', 10);
     const doiTemplate = parseInt(process.env.BREVO_DOI_TEMPLATE_ID || '1', 10);
-    const redirectUrl = process.env.BREVO_DOI_REDIRECT_URL || 'https://homahof-design-2026-website.netlify.app/newsletter-bestaetigt';
+    const redirectUrl = process.env.BREVO_DOI_REDIRECT_URL || 'https://www.homa-hof-heiligenberg.de/newsletter-bestaetigt';
 
     if (listId) {
       try {

@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
-site_url: https://homahof-design-2026-website.netlify.app
+site_url: https://www.homa-hof-heiligenberg.de
 
 media_folder: images
 public_folder: /images

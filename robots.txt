@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /design-explorer
+Disallow: /index-v2
+Disallow: /danke-anmeldung
+Disallow: /danke-newsletter
+Disallow: /newsletter-bestaetigt
+
+Sitemap: https://www.homa-hof-heiligenberg.de/sitemap.xml
