@@ -23,7 +23,7 @@ erzeugen keine leeren Kästen.
 
 ## Nach dem Go-Live zu prüfen
 
-Beide Templates verlinken auf `https://homa-hof-heiligenberg.de` (Logo,
+Beide Templates verlinken auf `https://www.homa-hof-heiligenberg.de` (Logo,
 Datenschutz, Impressum, Veranstaltungs-Button). Vor dem Livegang stand dort
 die Netlify-Vorschaudomain. Falls die kanonische Domain `www.` trägt, hier
 und in Brevo nachziehen.
