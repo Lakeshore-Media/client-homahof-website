@@ -67,3 +67,36 @@ Totalen und Luftbilder bevorzugen, Kontrast an den Bestand angleichen
 **Claude-in-Chrome kann localhost und `file://` nicht laden.** Für lokale
 Vorschauen Headless Chrome oder Puppeteer nutzen, oder Zuschnitte mit
 ImageMagick simulieren.
+
+## Brevo-API-Schlüssel läuft nach 90 Tagen Inaktivität ab (geprüft 02.10.2026)
+
+Beim Erstellen lässt sich „keine Ablaufdauer" wählen, der Schlüssel hat dann kein
+Ablaufdatum. Das heißt aber nicht, dass er dauerhaft gilt. Brevo schreibt:
+
+> „Um die Sicherheit zu erhöhen und das Risiko durch ungenutzte Zugangsdaten zu
+> reduzieren, laufen inaktive API-Schlüssel nach 90 Tagen ab. Sie erhalten
+> E-Mail-Benachrichtigungen 7 Tage vor dem Ablauf und am Ablaufdatum."
+
+(help.brevo.com/hc/de/articles/209467485, Abschnitt „Best Practices für API-Schlüssel")
+
+**Warum das hier gefährlich ist:** In einer ruhigen Phase ohne Newsletter- und
+Veranstaltungsanmeldungen wird `BREVO_API_KEY` drei Monate lang nicht benutzt und
+verfällt. Danach schlagen beide Functions fehl — und `event-confirm` ist
+fire-and-forget: Der Fehler blockiert die Navigation nicht, die Besucherin sieht
+weiter die Danke-Seite, und die Bestätigungsmail kommt einfach nicht an. Das fällt
+niemandem auf.
+
+**Die Warnmails gehen an den Kontoinhaber, also an `info@homa-hof-heiligenberg.de`
+und damit an Birgitt — nicht an Raeto.** Birgitt muss wissen, dass eine Brevo-Mail mit
+„API-Schlüssel läuft ab" keine Werbung ist und sofort weitergeleitet gehört.
+
+**Gegenmittel, nach Aufwand:**
+1. Birgitt Bescheid geben (kostet nichts, hängt aber daran, dass sie die Mail erkennt)
+2. Einen Monatsping einrichten, der den Schlüssel wachhält — eine Netlify Scheduled
+   Function, die z. B. `GET /v3/account` aufruft. Setzt die 90 Tage zuverlässig zurück
+3. In beiden Functions einen fehlgeschlagenen Brevo-Call wenigstens protokollieren,
+   damit ein stiller Ausfall im Netlify-Log sichtbar wird
+
+Für die SMTP-Schlüssel gilt dasselbe in strenger: Dort meldet Brevo schon nach
+3 Monaten ohne Nutzung die Deaktivierung an. Der Homa-Hof nutzt SMTP nicht,
+sondern die API — relevant wird das nur, falls jemand auf SMTP-Versand umstellt.
