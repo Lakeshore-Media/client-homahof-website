@@ -24,8 +24,8 @@ exports.handler = async (event) => {
   }
 
   const attributes = {};
-  if (firstName) attributes.FIRSTNAME = firstName;
-  if (lastName)  attributes.LASTNAME  = lastName;
+  if (firstName) attributes.VORNAME  = firstName;
+  if (lastName)  attributes.NACHNAME = lastName;
   if (Array.isArray(interests)) {
     if (interests.includes('seminare'))  attributes.INT_SEMINARE  = true;
     if (interests.includes('hof'))       attributes.INT_HOF       = true;

@@ -92,7 +92,7 @@ exports.handler = async (event) => {
             includeListIds: [listId],
             templateId:     doiTemplate,
             redirectionUrl: redirectUrl,
-            ...(vorname && { attributes: { FIRSTNAME: vorname } }),
+            ...(vorname && { attributes: { VORNAME: vorname } }),
           }),
         });
         const body = await res.text();
