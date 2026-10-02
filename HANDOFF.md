@@ -48,6 +48,39 @@ Dateien liegen in `~/Downloads/brevo-import/`.
 - Shop-Lieferländer erledigt
 - Go-Live-Technik: `_redirects` (alle 99 alten Joomla-URLs), `robots.txt`, `sitemap.xml`, `site_url` im CMS und die Function-Fallbacks auf die www-Domain (Commit `ed8dcf3`)
 
+## ❌ GO-LIVE BLOCKIERT: Brevo stellt keine Mails zu (Test 02.10., 15:20)
+
+End-to-End-Test auf der Vorschauseite. Drei Versandwege, **null zugestellte Mails** —
+auch nicht im Spam oder Papierkorb:
+
+| Weg | API-Antwort | Mail angekommen |
+|---|---|---|
+| Veranstaltungsanmeldung → `event-confirm` → Template 6 | Function meldet Erfolg | **nein** |
+| Template 6 direkt über die Brevo-API als Testmail | `204 Success` | **nein** |
+| Newsletter → `brevo-subscribe` → DOI Template 1 | Seite leitet auf `/danke-newsletter` | **nein** |
+
+**Was dagegen funktioniert:**
+- Netlify Forms — Submission `veranstaltung-anmeldung` um 13:20:33 UTC angekommen.
+  Anmeldungen gehen also **nicht** verloren
+- Brevo-Kontaktattribut — `LETZTE_VERANSTALTUNG: "Agnihotra Erlernen"` wurde gesetzt.
+  Die API nimmt Schreibzugriffe an, der Schlüssel ist gültig
+
+**Der Fehler liegt also nicht im Code, sondern im Brevo-Konto.** Die API bestätigt den
+Versand mit 204 und stellt trotzdem nichts zu.
+
+**Wahrscheinlichste Ursache:** Brevo hält bei neuen, ungeprüften Konten den Versand
+zurück, bis Identität oder Zahlungsmethode hinterlegt sind. Dazu passt, dass im Konto
+weder eine Zahlungsmethode noch Guthaben hinterlegt ist. Zweite Möglichkeit: Die
+Templates tragen als Absender noch `Info@rkbfilms.de`, und diese Adresse steht nicht
+mehr in der Senderliste — Brevo nimmt solche Mails an und verwirft sie.
+
+**Nachsehen im Brevo-Konto unter Transaktional → Protokolle.** Dort steht je Mail der
+Grund (blocked, invalid sender, account under review). Das geht nur eingeloggt.
+
+**Vor dem Go-Live muss eine Testmail nachweislich ankommen.** Sonst bestätigt die
+Website jede Anmeldung mit „Danke", und niemand bekommt je eine Mail — der Fehler ist
+still, weil `event-confirm` fire-and-forget läuft und immer `success: true` zurückgibt.
+
 ## Go-Live-Reihenfolge
 
 1. **Brevo zuerst, dann DNS.** Templates 1 und 5 im Brevo-Editor auf
