@@ -2,7 +2,7 @@
 # Grundlage: sitemap.xml der alten Seite, abgerufen am 02.10.2026 (103 URLs).
 
 # --- Die Basis ---
-/die-basis/*                      /die-basis          301
+/die-basis/*                      /die-basis          301!
 
 # --- Feuer & Praxis ---
 /pyramiden-feuer/agnihotrazeiten.html   /agnihotra-zeiten   301
