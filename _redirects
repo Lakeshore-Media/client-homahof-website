@@ -2,7 +2,16 @@
 # Grundlage: sitemap.xml der alten Seite, abgerufen am 02.10.2026 (103 URLs).
 
 # --- Die Basis ---
-/die-basis/*                      /die-basis          301!
+# Einzeln statt per Splat: /die-basis existiert als eigene Seite, dadurch
+# behandelt Netlify /die-basis/... als deren Unterverzeichnis und lieferte
+# 404, bevor eine Splat-Regel greifen konnte. Auch 301! half nicht.
+/die-basis/vision.html                    /die-basis   301
+/die-basis/die-hof-gemeinschaft.html      /die-basis   301
+/die-basis/der-fuenffache-pfad.html       /die-basis   301
+/die-basis/der-homa-hof-ein-kraftort.html /die-basis   301
+/die-basis/horst-und-birgitt-initiatoren.html /die-basis 301
+/die-basis/shree-wiederbelebung-der-veden.html /die-basis 301
+/die-basis/*                              /die-basis   301
 
 # --- Feuer & Praxis ---
 /pyramiden-feuer/agnihotrazeiten.html   /agnihotra-zeiten   301
