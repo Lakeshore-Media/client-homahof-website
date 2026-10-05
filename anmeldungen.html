@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Anmeldungen – Homa-Hof Heiligenberg</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --cream:#FFFCF5; --cream2:#FFF8EC; --gold:#C07818; --gold-light:#F5D88A;
+      --copper:#B84010; --brown:#2A1505; --brown2:#5A3A18; --border:#EDD9A8;
+      --serif:'Playfair Display',Georgia,serif; --sans:'Raleway',system-ui,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{overflow-x:hidden}
+    body{margin:0;background:var(--cream);color:var(--brown);font-family:var(--sans);font-weight:300;line-height:1.7}
+    img,video{max-width:100%}
+
+    header{background:var(--cream2);border-bottom:1px solid var(--border);padding:22px 20px}
+    .kopf{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .kopf h1{font-family:var(--serif);font-size:24px;font-weight:400;margin:0}
+    .kopf .stand{font-size:13px;color:var(--brown2);opacity:.8}
+
+    main{max-width:1100px;margin:0 auto;padding:34px 20px 90px}
+
+    .karte{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px}
+    .login{max-width:420px;margin:60px auto}
+    .login h2{font-family:var(--serif);font-weight:400;font-size:22px;margin:0 0 6px}
+    .login p{font-size:14px;color:var(--brown2);margin:0 0 20px}
+    label{display:block;font-size:13px;font-weight:500;margin-bottom:6px}
+    input[type=password],input[type=search]{
+      width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;
+      font-family:var(--sans);font-size:15px;background:var(--cream);color:var(--brown)}
+    input:focus{outline:2px solid var(--gold-light);outline-offset:1px}
+    button{
+      font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;
+      background:var(--copper);color:#fff;border:0;border-radius:8px;padding:12px 24px}
+    button:hover{background:var(--gold)}
+    button[disabled]{opacity:.55;cursor:default}
+    .btn-klein{padding:7px 14px;font-size:13px;font-weight:500;background:transparent;color:var(--gold);border:1px solid var(--border)}
+    .btn-klein:hover{background:var(--cream2);color:var(--copper)}
+    .fehler{color:#9b2c0f;font-size:14px;margin-top:14px;min-height:20px}
+
+    .werkzeuge{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
+    .werkzeuge input{flex:1;min-width:220px}
+    .summe{font-size:14px;color:var(--brown2)}
+
+    .gruppe{background:#fff;border:1px solid var(--border);border-radius:14px;margin-bottom:18px;overflow:hidden}
+    .gruppe>summary{
+      cursor:pointer;padding:18px 22px;display:flex;align-items:baseline;gap:14px;
+      flex-wrap:wrap;list-style:none}
+    .gruppe>summary::-webkit-details-marker{display:none}
+    .gruppe>summary:hover{background:var(--cream2)}
+    .gruppe h3{font-family:var(--serif);font-weight:400;font-size:19px;margin:0;flex:1;min-width:200px}
+    .zahl{font-size:13px;font-weight:600;color:var(--copper);background:var(--cream2);
+      border:1px solid var(--border);border-radius:99px;padding:3px 12px;white-space:nowrap}
+
+    .tabelle{width:100%;border-collapse:collapse;font-size:14px}
+    .tabelle th{text-align:left;font-weight:600;font-size:12px;letter-spacing:.06em;
+      text-transform:uppercase;color:var(--brown2);padding:10px 22px;border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);background:var(--cream2)}
+    .tabelle td{padding:12px 22px;border-bottom:1px solid #F3E8D0;vertical-align:top}
+    .tabelle tr:last-child td{border-bottom:0}
+    .tabelle a{color:var(--gold)}
+    .nachricht{color:var(--brown2);font-style:italic}
+    .nl{font-size:11px;background:var(--gold-light);color:var(--brown);border-radius:99px;padding:2px 8px;white-space:nowrap}
+    .aktionen{padding:14px 22px;border-top:1px solid var(--border);background:var(--cream2);display:flex;gap:10px;flex-wrap:wrap}
+    .leer{text-align:center;color:var(--brown2);padding:50px 20px}
+    .hinweis{font-size:13px;color:var(--brown2);margin-top:30px;padding-top:18px;border-top:1px solid var(--border)}
+
+    @media (max-width:700px){
+      .tabelle, .tabelle tbody, .tabelle tr, .tabelle td{display:block;width:100%}
+      .tabelle thead{display:none}
+      .tabelle tr{border-bottom:1px solid var(--border);padding:6px 0}
+      .tabelle td{border:0;padding:4px 22px}
+      .tabelle td::before{content:attr(data-label);display:block;font-size:11px;
+        text-transform:uppercase;letter-spacing:.06em;color:var(--brown2);margin-bottom:2px}
+      body{hyphens:auto;overflow-wrap:break-word}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="kopf">
+    <h1>Anmeldungen</h1>
+    <div class="stand" id="stand"></div>
+  </div>
+</header>
+
+<main>
+  <section class="karte login" id="login">
+    <h2>Geschützter Bereich</h2>
+    <p>Hier siehst du alle Anmeldungen zu den Veranstaltungen.</p>
+    <form id="login-form">
+      <label for="pw">Passwort</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <div class="fehler" id="fehler"></div>
+      <button type="submit" id="login-btn" style="margin-top:14px">Anmeldungen anzeigen</button>
+    </form>
+  </section>
+
+  <section id="inhalt" hidden>
+    <div class="werkzeuge">
+      <input type="search" id="suche" placeholder="Nach Name, E-Mail oder Veranstaltung suchen …">
+      <span class="summe" id="summe"></span>
+      <button class="btn-klein" id="neu-laden">Aktualisieren</button>
+    </div>
+    <div id="liste"></div>
+    <p class="hinweis">
+      Die Anmeldungen werden bei jedem Aufruf frisch geladen und hier nicht gespeichert.
+      Wenn jemand die Löschung seiner Daten verlangt, geschieht das im Netlify-Dashboard
+      unter „Forms“ – dann verschwindet der Eintrag auch hier.
+    </p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var daten = null;
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  function escape(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function datum(iso){
+    try {
+      return new Date(iso).toLocaleDateString('de-DE',
+        { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    } catch(e){ return iso; }
+  }
+
+  function passtZumFilter(a, q){
+    if (!q) return true;
+    return (a.name + ' ' + a.email + ' ' + a.veranstaltung).toLowerCase().indexOf(q) > -1;
+  }
+
+  function zeichne(){
+    var q = $('suche').value.trim().toLowerCase();
+    var html = '', sichtbar = 0;
+
+    daten.gruppen.forEach(function(g, i){
+      var treffer = g.liste.filter(function(a){ return passtZumFilter(a, q); });
+      if (!treffer.length) return;
+      sichtbar += treffer.length;
+
+      var zeilen = treffer.map(function(a){
+        return '<tr>'
+          + '<td data-label="Name">' + escape(a.name || '—')
+            + (a.newsletter ? ' <span class="nl">Newsletter</span>' : '') + '</td>'
+          + '<td data-label="E-Mail"><a href="mailto:' + escape(a.email) + '">' + escape(a.email) + '</a></td>'
+          + '<td data-label="Personen">' + escape(a.teilnehmer) + '</td>'
+          + '<td data-label="Eingegangen">' + escape(datum(a.eingegangen)) + '</td>'
+          + '<td data-label="Nachricht" class="nachricht">' + escape(a.nachricht || '') + '</td>'
+          + '</tr>';
+      }).join('');
+
+      var mails = treffer.map(function(a){ return a.email; }).filter(Boolean).join('; ');
+
+      html += '<details class="gruppe"' + (i === 0 || q ? ' open' : '') + '>'
+        + '<summary><h3>' + escape(g.titel) + '</h3>'
+        + '<span class="zahl">' + treffer.length + ' Anmeldung' + (treffer.length === 1 ? '' : 'en') + '</span>'
+        + '<span class="zahl">' + g.personen + ' Person' + (g.personen === 1 ? '' : 'en') + '</span>'
+        + '</summary>'
+        + '<table class="tabelle"><thead><tr>'
+        + '<th>Name</th><th>E-Mail</th><th>Personen</th><th>Eingegangen</th><th>Nachricht</th>'
+        + '</tr></thead><tbody>' + zeilen + '</tbody></table>'
+        + '<div class="aktionen">'
+        + '<button class="btn-klein" data-mails="' + escape(mails) + '">Alle E-Mail-Adressen kopieren</button>'
+        + '<a class="btn-klein" style="text-decoration:none;display:inline-block"'
+        + ' href="mailto:?bcc=' + encodeURIComponent(mails) + '">Rundmail schreiben</a>'
+        + '</div></details>';
+    });
+
+    $('liste').innerHTML = html || '<p class="leer">Keine Anmeldungen gefunden.</p>';
+    $('summe').textContent = sichtbar + ' von ' + daten.gesamt + ' Anmeldungen';
+  }
+
+  function laden(passwort){
+    var btn = $('login-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Einen Moment …'; }
+    $('fehler').textContent = '';
+
+    return fetch('/.netlify/functions/anmeldungen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ passwort: passwort })
+    })
+    .then(function(r){
+      if (r.status === 401) throw new Error('Das Passwort stimmt nicht.');
+      if (!r.ok) throw new Error('Die Anmeldungen konnten nicht geladen werden.');
+      return r.json();
+    })
+    .then(function(j){
+      daten = j;
+      sessionStorage.setItem('hh_pw', passwort);
+      $('login').hidden = true;
+      $('inhalt').hidden = false;
+      $('stand').textContent = 'Stand: ' + datum(j.stand);
+      zeichne();
+    })
+    .catch(function(e){
+      $('fehler').textContent = e.message;
+      sessionStorage.removeItem('hh_pw');
+    })
+    .then(function(){
+      if (btn) { btn.disabled = false; btn.textContent = 'Anmeldungen anzeigen'; }
+    });
+  }
+
+  $('login-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    laden($('pw').value);
+  });
+
+  $('suche').addEventListener('input', function(){ if (daten) zeichne(); });
+
+  $('neu-laden').addEventListener('click', function(){
+    var pw = sessionStorage.getItem('hh_pw');
+    if (pw) laden(pw);
+  });
+
+  $('liste').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-mails]');
+    if (!b) return;
+    var txt = b.getAttribute('data-mails');
+    var fertig = function(){
+      var alt = b.textContent;
+      b.textContent = 'Kopiert ✓';
+      setTimeout(function(){ b.textContent = alt; }, 1800);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(fertig, function(){ window.prompt('Adressen kopieren:', txt); });
+    } else {
+      window.prompt('Adressen kopieren:', txt);
+    }
+  });
+
+  // innerhalb derselben Sitzung nicht erneut nach dem Passwort fragen
+  var gemerkt = sessionStorage.getItem('hh_pw');
+  if (gemerkt) laden(gemerkt);
+})();
+</script>
+
+</body>
+</html>
