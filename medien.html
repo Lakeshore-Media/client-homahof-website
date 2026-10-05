@@ -523,6 +523,7 @@
     });
   }, { threshold: 0.12 });
   fadeEls.forEach(el => observer.observe(el));
+  window._fadeObserver = observer;
 
   document.querySelectorAll('.accordion-trigger').forEach(trigger => {
     trigger.addEventListener('click', () => {
@@ -673,7 +674,11 @@
               buehne.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
             liste.appendChild(b);
-            if (window._fadeObserver) window._fadeObserver.observe(b);
+            if (window._fadeObserver) {
+              window._fadeObserver.observe(b);
+            } else {
+              b.classList.add('visible');
+            }
           });
         })
         .catch(function(){
