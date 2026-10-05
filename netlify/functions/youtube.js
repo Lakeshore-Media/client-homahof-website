@@ -18,12 +18,15 @@ function einzeln(block, tag) {
 }
 
 exports.handler = async (event) => {
-  const id = (event.queryStringParameters || {}).thumb;
+  const q = event.queryStringParameters || {};
+  const id = q.thumb;
 
-  // Vorschaubild durchreichen
+  // Vorschaubild durchreichen. Standard ist die kleine Variante (rund 17 kB);
+  // die grosse (rund 200 kB) lohnt nur fuer die Buehne, nicht fuer die Karten.
   if (id) {
     if (!/^[A-Za-z0-9_-]{11}$/.test(id)) return { statusCode: 400, body: 'ungueltige id' };
-    for (const name of ['maxresdefault', 'hqdefault']) {
+    const varianten = q.gross === '1' ? ['maxresdefault', 'hqdefault'] : ['hqdefault'];
+    for (const name of varianten) {
       try {
         const r = await fetch(`https://i.ytimg.com/vi/${id}/${name}.jpg`);
         if (!r.ok) continue;
@@ -59,6 +62,7 @@ exports.handler = async (event) => {
           datum: einzeln(e, 'published'),
           beschreibung: einzeln(e, 'media:description').split('\n')[0].slice(0, 180),
           bild: `/api/youtube?thumb=${vid}`,
+          bildGross: `/api/youtube?thumb=${vid}&gross=1`,
         };
       })
       .filter((v) => /^[A-Za-z0-9_-]{11}$/.test(v.id));

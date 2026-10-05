@@ -636,7 +636,7 @@
 
       function zeigeAufBuehne(v){
         aktuell = v;
-        bild.src = v.bild;
+        bild.src = v.bildGross || v.bild;
         bild.alt = v.titel;
         titelEl.textContent = v.titel;
       }
@@ -679,7 +679,7 @@
         .catch(function(){
           zeigeAufBuehne({ id: 'YooTri0mQSc',
                            titel: 'Agnihotra: Ein Rundgang am Homa-Hof Heiligenberg',
-                           bild: '/api/youtube?thumb=YooTri0mQSc' });
+                           bildGross: '/api/youtube?thumb=YooTri0mQSc&gross=1' });
         });
     })();
     var IMG_PLACEHOLDER = '<div class="blog-img" style="display:flex;align-items:center;justify-content:center;background:var(--cream2)">'
