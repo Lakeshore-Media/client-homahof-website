@@ -3,19 +3,19 @@
   "categories": [
     {
       "name": "Gemüse",
-      "items": "Rote Bete\nZucchini gelb\nZucchini grün\nWeißkohl\nRotkohl\nWirsing\nHokkaido\nCocktail-Tomaten"
+      "items": "Rote Bete\nZucchini gelb\nZucchini grün\nWeißkohl\nRotkohl\nKürbis Hokkaido\nKürbis Butternut\nCocktail-Tomaten"
     },
     {
       "name": "Salate",
-      "items": "\n"
+      "items": "Endivien\nRadicchio\n"
     },
     {
       "name": "Obst / Nüsse / Säfte / Honig",
-      "items": "Zwetschgen\nÄpfel (Fallobst)\nWalnüsse\nApfelsaft\nFrühtracht-Honig\nSommertracht-Honig\nDunkler Honig"
+      "items": "Äpfel \nWalnüsse\nApfelsaft\nFrühtracht-Honig\nSommertracht-Honig\nDunkler Honig"
     },
     {
       "name": "Weiteres Angebot in Bio-Qualität",
-      "items": "Fruchtaufstriche"
+      "items": "verschiedene Fruchtaufstriche"
     }
   ]
 }
