@@ -435,10 +435,11 @@
 <!-- D: NEWSLETTER -->
 <section class="section-wrap" id="newsletter" style="background:var(--cream2);border-top:1px solid var(--border2);"></section>
 
-<form name="newsletter-anmeldung" netlify hidden>
+<form name="newsletter-anmeldung" netlify netlify-honeypot="hp_ref" hidden>
   <input type="text" name="firstname">
   <input type="text" name="lastname">
   <input type="email" name="email">
+  <input type="text" name="hp_ref">
 </form>
 
 <!-- E: TESTIMONIALS -->

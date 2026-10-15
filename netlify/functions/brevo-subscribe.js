@@ -10,7 +10,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Invalid JSON' };
   }
 
-  const { email, firstName, lastName, interests } = data;
+  const { email, firstName, lastName, interests, source } = data;
   if (!email) return { statusCode: 400, body: 'Email required' };
 
   const apiKey = process.env.BREVO_API_KEY;
@@ -26,6 +26,7 @@ exports.handler = async (event) => {
   const attributes = {};
   if (firstName) attributes.VORNAME  = firstName;
   if (lastName)  attributes.NACHNAME = lastName;
+  if (source)    attributes.OPTIN_QUELLE = String(source).slice(0, 60);
   if (Array.isArray(interests)) {
     if (interests.includes('seminare'))  attributes.INT_SEMINARE  = true;
     if (interests.includes('hof'))       attributes.INT_HOF       = true;

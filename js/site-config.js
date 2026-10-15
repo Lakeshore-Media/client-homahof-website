@@ -51,6 +51,9 @@ var HOMAHOF = {
             '<input type="text" id="nl-lastname" name="lastname" class="newsletter-input" placeholder="Nachname (optional)" style="flex:1;min-width:0">',
           '</div>',
           '<input type="email" id="nl-email" name="email" class="newsletter-input" placeholder="Deine E-Mail-Adresse *" required>',
+          '<div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">',
+            '<label>Dieses Feld bitte leer lassen <input type="text" id="nl-ref" name="hp_ref" tabindex="-1" autocomplete="off"></label>',
+          '</div>',
           '<button type="submit" class="btn btn-gold" id="nl-submit-btn">Jetzt anmelden</button>',
         '</form>',
         '<p class="newsletter-note" id="nl-success" style="display:none;color:var(--gold);font-weight:500">✓ Fast geschafft! Bitte bestätige deine Anmeldung in deiner E-Mail.</p>',
@@ -80,12 +83,69 @@ var HOMAHOF = {
     });
   },
 
+  // Formular-Zeitpunkt, gegen Bots die sofort abschicken
+  _formOpened: Date.now(),
+
+  // true = menschlich. Honeypot gefuellt oder unter 3 s abgeschickt = Bot.
+  // Nimmt die id des Honeypot-Feldes oder das Formular, in dem es steckt.
+  passesBotCheck: function(target) {
+    var hp = typeof target === 'string'
+      ? document.getElementById(target)
+      : (target && target.querySelector ? target.querySelector('[name=hp_ref]') : null);
+    if (hp && hp.value.trim() !== '') return false;
+    if (Date.now() - HOMAHOF._formOpened < 3000) return false;
+    return true;
+  },
+
+  submitRepermission: function(e) {
+    e.preventDefault();
+    var emailVal = document.getElementById('rp-email').value.trim();
+    if (!emailVal) return;
+    var btn = document.getElementById('rp-submit');
+    var firstNameVal = (document.getElementById('rp-firstname').value || '').trim();
+    var lastNameVal  = (document.getElementById('rp-lastname').value  || '').trim();
+
+    // Bots sehen dieselbe Bestaetigung, es wird aber nichts gesendet
+    if (!HOMAHOF.passesBotCheck('rp-ref')) { HOMAHOF._repermissionDone(); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Einen Moment …';
+    fetch(window.location.pathname, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', firstname: firstNameVal, lastname: lastNameVal, email: emailVal }).toString()
+    }).then(function() {
+      return subscribeToBrevo(emailVal, firstNameVal, lastNameVal, 'Repermission 2026');
+    }).then(function() {
+      HOMAHOF._repermissionDone();
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Ja, ich bleibe dabei';
+      document.getElementById('rp-error').style.display = 'block';
+    });
+  },
+
+  _repermissionDone: function() {
+    var form = document.getElementById('rp-form');
+    if (form) form.style.display = 'none';
+    var hint = document.getElementById('rp-hint');
+    if (hint) hint.style.display = 'none';
+    var intro = document.getElementById('rp-intro');
+    if (intro) {
+      intro.innerHTML = 'Fast geschafft. Wir haben dir eine Mail geschickt \u2014 bitte klicke den ' +
+        'Bestätigungslink darin, dann bleibst du im Verteiler. Schau notfalls auch im Spam-Ordner nach.';
+    }
+    var title = document.querySelector('.thank-title');
+    if (title) title.innerHTML = 'Nur noch <em>ein Klick</em>';
+  },
+
   submitNewsletter: function(e) {
     e.preventDefault();
     var firstNameVal = (document.getElementById('nl-firstname').value || '').trim();
     var lastNameVal  = (document.getElementById('nl-lastname').value  || '').trim();
     var emailVal     = document.getElementById('nl-email').value.trim();
     if (!emailVal) return;
+    if (!HOMAHOF.passesBotCheck('nl-ref')) { window.location.href = '/danke-newsletter'; return; }
     var btn = document.getElementById('nl-submit-btn');
     btn.disabled = true;
     var interests = [];
@@ -117,6 +177,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var newsletterEl = document.getElementById('newsletter');
   if (newsletterEl) newsletterEl.innerHTML = HOMAHOF.newsletterInner();
+
+  // Repermission: Adresse kommt im Fragment, damit sie nicht in Server-Logs landet
+  var rpEmail = document.getElementById('rp-email');
+  if (rpEmail && window.location.hash) {
+    try {
+      var hp = new URLSearchParams(window.location.hash.slice(1));
+      if (hp.get('e')) {
+        rpEmail.value = hp.get('e').trim();
+        if (hp.get('v')) document.getElementById('rp-firstname').value = hp.get('v').trim();
+        if (hp.get('n')) document.getElementById('rp-lastname').value  = hp.get('n').trim();
+      }
+      history.replaceState(null, '', window.location.pathname);
+    } catch (err) {}
+  }
+  HOMAHOF._formOpened = Date.now();
 
   // Re-observe fade-in elements in dynamically injected sections
   if (window._fadeObserver) {

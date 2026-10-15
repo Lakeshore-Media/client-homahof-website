@@ -719,6 +719,7 @@
   function submitAmAnmeldung(btn, title, formId) {
     var form = btn.closest('.am-anmelde-form');
     if (!form) return;
+    if (!HOMAHOF.passesBotCheck(form)) { return; }
     var vornameEl = form.querySelector('[name=vorname]');
     var emailEl = form.querySelector('[name=email]');
     var vorname = vornameEl.value.trim();
@@ -850,6 +851,7 @@
       var amConfirmKey = (ev.confirmKey || '').replace(/"/g, '&quot;') || ev.title.replace(/"/g, '&quot;');
       html += '<div class="am-anmelde-form" id="' + formId + '" data-title="' + ev.title.replace(/"/g,'&quot;') + '" data-date="' + ev.date + '" data-time="' + (ev.time||'').replace(/"/g,'&quot;') + '" data-location="' + (ev.location||'').replace(/"/g,'&quot;') + '" data-confirm-key="' + amConfirmKey + '" data-mail-hinweis="' + (ev.mailHinweis||'').replace(/"/g,'&quot;') + '">';
       html += '<h4>Anmelden: ' + ev.title + '</h4>';
+      html += '<div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Dieses Feld bitte leer lassen <input type="text" name="hp_ref" tabindex="-1" autocomplete="off"></label></div>';
       html += '<div class="am-anmelde-row"><div class="am-anmelde-field"><label>Vorname *</label><input type="text" name="vorname" placeholder="Vorname"><span class="am-field-err" data-err="vorname">Bitte Vorname eingeben</span></div>';
       html += '<div class="am-anmelde-field"><label>Nachname</label><input type="text" name="nachname" placeholder="Nachname"></div></div>';
       html += '<div class="am-anmelde-row"><div class="am-anmelde-field" style="grid-column:1/-1"><label>E-Mail *</label><input type="email" name="email" placeholder="deine@email.de"><span class="am-field-err" data-err="email">Bitte gültige E-Mail-Adresse eingeben</span></div></div>';
@@ -923,7 +925,7 @@
 </script>
 
 
-<form name="am-hof-anmeldung" netlify hidden>
+<form name="am-hof-anmeldung" netlify netlify-honeypot="hp_ref" hidden>
   <input type="text" name="vorname">
   <input type="text" name="nachname">
   <input type="email" name="email">
@@ -932,6 +934,7 @@
   <input type="text" name="confirm-key">
   <input type="checkbox" name="bestaetigung">
   <input type="checkbox" name="newsletter">
+  <input type="text" name="hp_ref">
 </form>
 
 </body>

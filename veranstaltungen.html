@@ -502,6 +502,7 @@
         <input type="checkbox" id="nl-ver" name="newsletter" value="ja">
         <label for="nl-ver">Ich möchte den Newsletter des Homa-Hofs erhalten (optional)</label>
       </div>
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Dieses Feld bitte leer lassen <input type="text" name="hp_ref" tabindex="-1" autocomplete="off"></label></div>
       <button type="submit" class="btn btn-gold" style="margin-top:20px;">Anmeldung absenden</button>
       <p id="ver-anmeldung-success" style="display:none;font-family:var(--sans);font-size:14px;color:#2A7A2A;margin-top:12px;">✓ Danke! Du erhältst in Kürze eine Bestätigungs-E-Mail.</p>
       <p id="ver-anmeldung-error" style="display:none;font-family:var(--sans);font-size:14px;color:var(--copper);margin-top:12px;">Fehler beim Absenden. Bitte versuche es erneut oder schreib uns direkt: <a href="mailto:info@homa-hof-heiligenberg.de">info@homa-hof-heiligenberg.de</a></p>
@@ -665,6 +666,7 @@
         html += '<div class="anmelde-form" id="' + formId + '" data-title="' + ev.title.replace(/"/g,'&quot;') + '" data-date="' + ev.date + '" data-time="' + (ev.time||'').replace(/"/g,'&quot;') + '" data-location="' + (ev.location||'').replace(/"/g,'&quot;') + '" data-confirm-key="' + confirmKey + '" data-mail-hinweis="' + (ev.mailHinweis||'').replace(/"/g,'&quot;') + '">';
         html += '<h4>Zur Veranstaltung anmelden</h4>';
         html += '<input type="hidden" name="confirm-key" value="' + confirmKey + '">';
+        html += '<div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Dieses Feld bitte leer lassen <input type="text" name="hp_ref" tabindex="-1" autocomplete="off"></label></div>';
         html += '<div class="anmelde-row"><div class="anmelde-field"><label>Name</label><input type="text" name="name" id="inp-name-' + formId + '" placeholder="Dein Name"><span class="field-err" id="err-name-' + formId + '">Bitte Name eingeben</span></div>';
         html += '<div class="anmelde-field"><label>E-Mail</label><input type="email" name="email" id="inp-email-' + formId + '" placeholder="deine@email.de"><span class="field-err" id="err-email-' + formId + '">Bitte gültige E-Mail-Adresse eingeben</span></div></div>';
         html += '<div class="anmelde-row"><div class="anmelde-field"><label>Teilnehmerzahl</label><select name="teilnehmer"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>';
@@ -793,6 +795,7 @@
   function submitAnmeldung(e, title, formId) {
     e.preventDefault();
     var form = document.getElementById(formId);
+    if (!HOMAHOF.passesBotCheck(form)) { return; }
     var nameInput  = form.querySelector('[name=name]');
     var emailInput = form.querySelector('[name=email]');
     var name  = nameInput.value.trim();
@@ -929,6 +932,7 @@
   function submitVerAnmeldung(e) {
     e.preventDefault();
     var form = document.getElementById('ver-anmeldung-form');
+    if (!HOMAHOF.passesBotCheck(form)) { return; }
     var vornameEl = form.querySelector('[name=vorname]');
     var emailEl = form.querySelector('[name=email]');
     var vorname = vornameEl.value.trim();
@@ -996,8 +1000,8 @@
     });
   }
 </script>
-<form name="veranstaltung-anmeldung" netlify hidden>
-  <input name="veranstaltung"><input name="vorname"><input name="nachname"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea><input name="confirm-key"><input type="checkbox" name="bestaetigung"><input type="checkbox" name="newsletter">
+<form name="veranstaltung-anmeldung" netlify netlify-honeypot="hp_ref" hidden>
+  <input name="veranstaltung"><input name="vorname"><input name="nachname"><input name="name"><input name="email"><input name="teilnehmer"><textarea name="nachricht"></textarea><input name="confirm-key"><input type="checkbox" name="bestaetigung"><input type="checkbox" name="newsletter"><input type="text" name="hp_ref">
 </form>
 </body>
 </html>
