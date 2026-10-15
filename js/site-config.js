@@ -182,11 +182,18 @@ document.addEventListener('DOMContentLoaded', function() {
   var rpEmail = document.getElementById('rp-email');
   if (rpEmail && window.location.hash) {
     try {
-      var hp = new URLSearchParams(window.location.hash.slice(1));
-      if (hp.get('e')) {
-        rpEmail.value = hp.get('e').trim();
-        if (hp.get('v')) document.getElementById('rp-firstname').value = hp.get('v').trim();
-        if (hp.get('n')) document.getElementById('rp-lastname').value  = hp.get('n').trim();
+      // Nicht URLSearchParams: das macht aus "+" ein Leerzeichen und zerstoert
+      // Plus-Adressen wie anna+hof@gmx.de
+      var hp = {};
+      window.location.hash.slice(1).split('&').forEach(function(pair) {
+        var i = pair.indexOf('=');
+        if (i < 1) return;
+        try { hp[pair.slice(0, i)] = decodeURIComponent(pair.slice(i + 1)); } catch (e) {}
+      });
+      if (hp.e) {
+        rpEmail.value = hp.e.trim();
+        if (hp.v) document.getElementById('rp-firstname').value = hp.v.trim();
+        if (hp.n) document.getElementById('rp-lastname').value  = hp.n.trim();
       }
       history.replaceState(null, '', window.location.pathname);
     } catch (err) {}
