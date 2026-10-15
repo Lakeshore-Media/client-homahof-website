@@ -109,19 +109,27 @@ var HOMAHOF = {
     if (!HOMAHOF.passesBotCheck('rp-ref')) { HOMAHOF._repermissionDone(); return; }
 
     btn.disabled = true;
-    btn.textContent = 'Einen Moment …';
+    btn.textContent = 'Einen Moment \u2026';
+    document.getElementById('rp-error').style.display = 'none';
+
     fetch(window.location.pathname, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ 'form-name': 'newsletter-anmeldung', firstname: firstNameVal, lastname: lastNameVal, email: emailVal }).toString()
-    }).then(function() {
-      return subscribeToBrevo(emailVal, firstNameVal, lastNameVal, 'Repermission 2026');
-    }).then(function() {
-      HOMAHOF._repermissionDone();
+    }).catch(function() {}).then(function() {
+      return fetch('/.netlify/functions/repermission-confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailVal, firstName: firstNameVal, lastName: lastNameVal })
+      });
+    }).then(function(r) {
+      if (!r.ok) throw new Error('http ' + r.status);
+      return r.json();
+    }).then(function(res) {
+      if (res && res.success) { HOMAHOF._repermissionDone(); return; }
+      HOMAHOF._repermissionFailed(res && res.reason);
     }).catch(function() {
-      btn.disabled = false;
-      btn.textContent = 'Ja, ich bleibe dabei';
-      document.getElementById('rp-error').style.display = 'block';
+      HOMAHOF._repermissionFailed();
     });
   },
 
@@ -130,13 +138,31 @@ var HOMAHOF = {
     if (form) form.style.display = 'none';
     var hint = document.getElementById('rp-hint');
     if (hint) hint.style.display = 'none';
+    var err = document.getElementById('rp-error');
+    if (err) err.style.display = 'none';
+    var notice = document.querySelector('.spam-notice');
+    if (notice) notice.style.display = 'none';
     var intro = document.getElementById('rp-intro');
     if (intro) {
-      intro.innerHTML = 'Fast geschafft. Wir haben dir eine Mail geschickt \u2014 bitte klicke den ' +
-        'Bestätigungslink darin, dann bleibst du im Verteiler. Schau notfalls auch im Spam-Ordner nach.';
+      intro.innerHTML = 'Das war\u2019s \u2014 du bleibst im Verteiler und bekommst weiterhin Termine, ' +
+        'Seminare und Neues vom Hof. Etwa einmal im Monat, und abmelden kannst du dich ' +
+        'jederzeit mit einem Klick.';
     }
     var title = document.querySelector('.thank-title');
-    if (title) title.innerHTML = 'Nur noch <em>ein Klick</em>';
+    if (title) title.innerHTML = 'Sch\u00f6n, dass du <em>dabei bleibst</em>';
+  },
+
+  _repermissionFailed: function(reason) {
+    var btn = document.getElementById('rp-submit');
+    if (btn) { btn.disabled = false; btn.textContent = 'Ja, ich bleibe dabei'; }
+    var texts = {
+      unknown: 'Diese Adresse k\u00f6nnen wir nicht zuordnen \u2014 pr\u00fcf sie bitte kurz.',
+      blocked: 'Diese Adresse wurde bei uns abgemeldet und bleibt gesperrt.'
+    };
+    var span = document.getElementById('rp-error-text');
+    if (span) span.textContent = texts[reason] || 'Das hat gerade nicht funktioniert.';
+    var err = document.getElementById('rp-error');
+    if (err) err.style.display = 'block';
   },
 
   submitNewsletter: function(e) {
