@@ -1,5 +1,28 @@
 # Log
 
+## 2026-11-08
+Stand aufgenommen und Handoff neu geschrieben. **Die Website ist live** —
+www.homa-hof-heiligenberg.de antwortet über Netlify Edge. Brevo-Listen abgelesen:
+Liste 3 steht bei 2.647 (+16 seit dem 30.10., Nachläufer von Etappe 3).
+
+## 2026-10-28 bis 10-30
+Repermission-Etappe 3 (372 Altadressen) versandt, Kampagne 15. Ergebnis ist der
+Warnschuss des Projekts: 168 Softbounces (45 %), 5 Hardbounces (1,34 %),
+Öffnungsrate 17,6 % — gegen 2 % / 0,31 % / 60,5 % bei Etappe 2. Netto ~21
+Bestätigungen. Daraus die Entscheidung: **Etappe 4 (410 nie-Öffner) nicht ohne
+vorgeschaltete Adressvalidierung und nicht ohne Reputationspause.**
+
+Die Bounce-Gründe sind über den Brevo-MCP nicht zu holen —
+`campaign_analytics_get_email_event_report` deckt nur transaktionale Mails ab und
+gibt für Kampagnen `{}` zurück. Nur im Panel einsehbar.
+
+Nebenbei gelernt: `sender` nimmt entweder ID oder E-Mail, nie beides (HTTP 400);
+bei ID-only steht `[DEFAULT_FROM_NAME]` als Absendername in der Mail.
+
+## 2026-10-15 bis 10-16
+Etappen 1 (250) und 2 (1.278) versandt, Kampagne 14. Etappe 2 lief sauber:
+97,7 % zugestellt, 479 Klicks auf „Ja, ich bleibe dabei".
+
 ## 2026-10-02
 Brevo-Import begonnen. Fünf Import-Dateien aus dem AcyMailing-Rohexport gebaut
 und geprüft (`~/Downloads/brevo-import/`). Beim Mapping-Screenshot einen Fehler
