@@ -331,19 +331,6 @@
       "image": "/images/1000298165.jpg",
       "category": "hof",
       "confirmKey": ""
-    },
-    {
-      "badge": "kostenlos",
-      "price": "kostenlos",
-      "time": "14:00 - 17:00",
-      "date": "2026-11-25",
-      "mailHinweis": "Bitte bring feste Schuhe und etwas für das gemeinsame Mittagessen mit.",
-      "desc": "Test beschreibung xyz",
-      "location": "Homa-Hof Heiligenberg",
-      "title": "Testveranstaltung",
-      "image": "/images/agnihotra-feuer-2017.webp",
-      "category": "seminar",
-      "confirmKey": ""
     }
   ]
 }
