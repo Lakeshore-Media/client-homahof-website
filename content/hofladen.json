@@ -3,11 +3,11 @@
   "categories": [
     {
       "name": "Gemüse",
-      "items": "Rote Bete\nZucchini gelb\nZucchini grün\nWeißkohl\nRotkohl\nKürbis Hokkaido\nKürbis Butternut\nCocktail-Tomaten"
+      "items": "Rote Bete\nWeißkohl\nRotkohl\nKürbis Hokkaido\nKürbis Butternut"
     },
     {
       "name": "Salate",
-      "items": "Endivien\nRadicchio\n"
+      "items": "\n"
     },
     {
       "name": "Obst / Nüsse / Säfte / Honig",
